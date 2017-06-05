@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Page} from './page';
+
+/*
+ * The Comonent showing Aldo.
+ */
 
 const PAGES: Page[] = [
     {id: 1, name: "Meine Seite"},
@@ -11,30 +16,18 @@ const PAGES: Page[] = [
     {id: 8, name: "Noch eine Seite"}
 ];
 
-export class Page {
-    id: number;
-    name: string;
-}
-
 @Component({
-  selector: 'app',
-  template: `
+    selector: 'app',
+    template: `
     <h1>{{name}}</h1>
-    <div *ngIf='page'>
-        <h2>{{page.name}} – Detailansicht</h2>
-        <div><label>id: </label>{{page.id}}</div>
-        <div>
-            <label>name:</label>
-            <input [(ngModel)]='page.name' placeholder="Seitenname">
-        </div>
-    </div>
+    <page [page]='page'></page>
     <div>
         <h2>Seiten</h2>
         <ul class='pages'>
             <li
                     *ngFor='let e of pages'
                     (click)='select(e)'
-                    [class.selected]='e === this.page'>
+                    [class.selected]='e === page'>
                 <span class='badge'>{{e.id}}</span>{{e.name}}
             </li>
         </ul>
