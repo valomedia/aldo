@@ -1,43 +1,39 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 import {Page} from './page';
+import {PageService} from './page.service';
 
 /*
- * The Comonent showing Aldo.
+ * The Component showing Aldo.
  */
-
-const PAGES: Page[] = [
-    {id: 1, name: "Meine Seite"},
-    {id: 2, name: "Deine Seite"},
-    {id: 3, name: "Seine Seite"},
-    {id: 4, name: "Ihre Seite"},
-    {id: 5, name: "Andere Seite"},
-    {id: 6, name: "Unsere Seite"},
-    {id: 7, name: "Eure Seite"},
-    {id: 8, name: "Noch eine Seite"}
-];
 
 @Component({
     selector: 'app',
     template: `
-    <h1>{{name}}</h1>
+    <h1>{{title}}</h1>
     <page [page]='page'></page>
     <div>
         <h2>Seiten</h2>
         <ul class='pages'>
             <li
-                    *ngFor='let e of pages'
-                    (click)='select(e)'
-                    [class.selected]='e === page'>
-                <span class='badge'>{{e.id}}</span>{{e.name}}
+                    *ngFor='let page of pages'
+                    (click)='select(page)'
+                    [class.selected]='selectedPage === page'>
+                <span class='badge'>{{page.id}}</span>{{page.name}}
             </li>
         </ul>
     </div>
-    `
+    `,
+    providers: [PageService]
 })
-export class AppComponent  {
-    name = 'Aldo';
-    pages = PAGES;
-    page: Page;
-    select = (page: Page): Page => this.page = page;
+export class AppComponent implements OnInit {
+    constructor(private pageService: PageService) {};
+    ngOnInit(): void {
+        this.pageService.pages().then((pages) => this.pages = pages);
+    }
+    title = 'Aldo';
+    pages: Page[];
+    selectedPage: Page;
+    select(page: Page): void { this.selectedPage = page; }
 }
 
