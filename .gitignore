@@ -103,3 +103,19 @@ node_modules
 #
 jspm_packages
 
+#####################
+# Compile artifacts #
+#####################
+
+# Compile output.
+#
+*.js
+
+# Source maps.
+# 
+*.js.map
+
+# SystemJS.
+#
+!src/systemjs*.js
+
