@@ -6,7 +6,7 @@ export class Page {
 }
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   template: `
     <h1>{{name}}<br><small>{{page.name}}</small></h1>
     <div><label>id: </label>{{page.id}}</div>
