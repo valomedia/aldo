@@ -15,13 +15,12 @@ import {PageService} from './page.service';
     selector: 'page',
     template: `
         <div *ngIf='page'>
-            <h2>{{page.name}} – Detailansicht</h2>
-            <div><label>id: </label>{{page.id}}</div>
-            <div>
-                <label>name:</label>
-                <input [(ngModel)]='page.name' placeholder="Seitenname">
-            </div>
+            <h2>
+                {{page.name}}<br>
+                <small>Detailansicht</small>
+            </h2>
             <button (click)='this.locationService.back()'>Zurück</button>
+            <button (click)='post("Hello World!")'>Posting erstellen</button>
         </div>
         `
 })
@@ -31,13 +30,18 @@ export class PageComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private locationService: Location) {}
 
-    @Input() page: Page;
+    @Input()
+    page: Page;
 
     ngOnInit(): void {
         this.activatedRoute
             .params
             .switchMap((params: Params) => this.pageService.getPage(+params['id']))
             .subscribe(page => this.page = page);
+    }
+
+    post(text: String): void {
+        alert(text);
     }
 }
 
