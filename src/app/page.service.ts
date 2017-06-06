@@ -9,6 +9,13 @@ import {PAGES} from './mock-pages';
 
 @Injectable()
 export class PageService {
-    pages = (): Promise<Page[]> => new Promise(
-        resolve => setTimeout(() => resolve(PAGES), 400));
+    getPages(): Promise<Page[]> {
+        // Simulate loading time.
+        return new Promise(resolve => setTimeout(() => resolve(PAGES), 400));
+    }
+    getPage(id: number): Promise<Page> {
+        return this.getPages()
+            .then(pages => pages.find(page => page.id === id));
+    }
 }
+
