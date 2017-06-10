@@ -202,3 +202,12 @@ a.active {
     color: #039be5;
 }
 
+.hidden {
+    display: none;
+}
+
+#preload_content {
+    width: 35em;
+    margin: 0 auto;
+}
+

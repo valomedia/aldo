@@ -3,6 +3,13 @@
  * Bootstrap script.
  */
 
+// Set up the retry button.
+window.onload = function() {
+    document.getElementById('retry_auth_btn').onclick = function() {
+        window.location.reload();
+    };
+};
+
 /*
  * Facebook initialisation callback.
  *
@@ -20,21 +27,50 @@ window.fbAsyncInit = function() {
 
     // Ask the user to log in to Facebook.
     FB.login(function(res) {
+        // The user acted in the popup, hide the notice.
+        document.getElementById('login_notice').className = 'hidden';
+
         switch (res.status) {
             case 'connected':
                 // User is logged in and authorized the app, check permissions.
                 FB.api('/me/permissions', function(res) {
                     var errs = [];
-                    for (i = 0; i < res.data.length; i++) { 
+                    for (var i = 0; i < res.data.length; i++) {
                         if (res.data[i].status == 'declined') {
-                            errs.push(res.data[i].permission);
+                            errs.push(conf.perms[res.data[i].permission]);
                         }
                     }
-                    if (errs.toString()) {
+                    if (errs.length) {
                         // Some permissions were not granted, error out.
-                        alert(errs.toString());
+                        for (var i = 0; i < errs.length; i++) {
+                            // List all denied essential permissions.
+                            if (! errs[i].required) { continue; }
+                            var li = document.createElement('li');
+                            var strong = document.createElement('strong');
+                            strong.textContent = errs[i].desc;
+                            li.appendChild(strong);
+                            if (errs[i].msg) {
+                                var br = document.createElement('br');
+                                var em = document.createElement('em');
+                                em.textContent = errs[i].msg;
+                                li.appendChild(br);
+                                li.appendChild(em);
+                            }
+                            document
+                                .getElementById('denied_permissions')
+                                .appendChild(li);
+                        }
+                        document
+                            .getElementById('permission_denied')
+                            .className = '';
                     } else {
                         // Permissions granted, launch aldo.
+                        document
+                            .getElementById('preload_content')
+                            .className = 'hidden';
+                        document
+                            .getElementById('preload_spinner')
+                            .className = '';
                         System.import('main.js').catch(function(err) {
                             console.error(err);
                         });
@@ -43,11 +79,11 @@ window.fbAsyncInit = function() {
                 break;
             case 'not_authorized':
                 // User is logged in, but has not given permissions, error out.
-                alert('Auth failed');
+                document.getElementById('no_auth').className = '';
                 break;
            default:
-               // User is not logged in, error out.
-               alert('Not logged in');
+               // User is not logged in, or has aborted, error out.
+               document.getElementById('no_login').className = '';
         }
     }, {scope: Object.keys(conf.perms)});
 };

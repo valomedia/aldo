@@ -13,7 +13,7 @@ conf = {
         publish_pages: {
             required: true,
             desc: "Im Namen deiner Seiten posten",
-            msg: "für deine zu Seiten posten, liken und kommentieren."
+            msg: "für deine Seiten posten, liken und kommentieren"
         }
     }
 };
