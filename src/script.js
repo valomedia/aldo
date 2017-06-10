@@ -18,8 +18,11 @@ window.fbAsyncInit = function() {
     });
     FB.AppEvents.logPageView();
 
-    // Launch Aldo.
-    System.import('main.js').catch(function(err){ console.error(err); });
+    // Ask the user to log in to Facebook.
+    FB.login(function() {
+        // Launch Aldo.
+        System.import('main.js').catch(function(err){ console.error(err); });
+    }, {scope: 'publish_actions'});
 };
 
 // Initialize FacebookSDK and start Aldo.
