@@ -22,8 +22,24 @@ window.fbAsyncInit = function() {
     FB.login(function(res) {
         switch (res.status) {
             case 'connected':
-                // User is logged in and authorized the app, launch Aldo.
-                System.import('main.js').catch(function(err){ console.error(err); });
+                // User is logged in and authorized the app, check permissions.
+                FB.api('/me/permissions', function(res) {
+                    var errs = [];
+                    for (i = 0; i < res.data.length; i++) { 
+                        if (res.data[i].status == 'declined') {
+                            err.push(res.data[i].permission);
+                        }
+                    }
+                    if (err.toString()) {
+                        // Some permissions were not granted, error out.
+                        alert(err.toString());
+                    } else {
+                        // Permissions granted, launch aldo.
+                        System.import('main.js').catch(function(err) {
+                            console.error(err);
+                        });
+                    }
+                });
                 break;
             case 'not_authorized':
                 // User is logged in, but has not given permissions, error out.
