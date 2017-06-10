@@ -22,7 +22,13 @@ window.fbAsyncInit = function() {
     FB.login(function() {
         // Launch Aldo.
         System.import('main.js').catch(function(err){ console.error(err); });
-    }, {scope: 'publish_actions'});
+    },
+    {
+        scope: [
+            'manage_pages',
+            'publish_pages'
+        ]
+    });
 };
 
 // Initialize FacebookSDK and start Aldo.
@@ -31,7 +37,7 @@ window.fbAsyncInit = function() {
     if (d.getElementById(id)) { return; }
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/de_DE/sdk/debug.js";
+    js.src = '//connect.facebook.net/de_DE/sdk/debug.js';
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
