@@ -9,6 +9,7 @@
  * This function will be called after the FacebookSDK is fully set up.
  */
 window.fbAsyncInit = function() {
+    // Initialize the FacebookSDK with the correct parameters for Aldo.
     FB.init({
         appId            : '319585755122078',
         autoLogAppEvents : true,
@@ -16,12 +17,12 @@ window.fbAsyncInit = function() {
         version          : 'v2.9'
     });
     FB.AppEvents.logPageView();
+
+    // Launch Aldo.
+    System.import('main.js').catch(function(err){ console.error(err); });
 };
 
-// Load Aldo.
-System.import('main.js').catch(function(err){ console.error(err); });
-
-// Initialize FacebookSDK.
+// Initialize FacebookSDK and start Aldo.
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) { return; }
