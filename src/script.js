@@ -11,7 +11,7 @@
 window.fbAsyncInit = function() {
     // Initialize the FacebookSDK with the correct parameters for Aldo.
     FB.init({
-        appId            : '319585755122078',
+        appId            : conf.fbAppID,
         autoLogAppEvents : true,
         xfbml            : false,
         version          : 'v2.9'
