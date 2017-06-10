@@ -33,13 +33,7 @@ window.fbAsyncInit = function() {
                // User is not logged in, error out.
                alert('Not logged in');
         }
-    },
-    {
-        scope: [
-            'manage_pages',
-            'publish_pages'
-        ]
-    });
+    }, {scope: conf.perms});
 };
 
 // Initialize FacebookSDK and start Aldo.
