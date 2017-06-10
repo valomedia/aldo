@@ -27,12 +27,12 @@ window.fbAsyncInit = function() {
                     var errs = [];
                     for (i = 0; i < res.data.length; i++) { 
                         if (res.data[i].status == 'declined') {
-                            err.push(res.data[i].permission);
+                            errs.push(res.data[i].permission);
                         }
                     }
-                    if (err.toString()) {
+                    if (errs.toString()) {
                         // Some permissions were not granted, error out.
-                        alert(err.toString());
+                        alert(errs.toString());
                     } else {
                         // Permissions granted, launch aldo.
                         System.import('main.js').catch(function(err) {
