@@ -49,7 +49,7 @@ window.fbAsyncInit = function() {
                // User is not logged in, error out.
                alert('Not logged in');
         }
-    }, {scope: conf.perms});
+    }, {scope: conf.perms.map(function(x) { return x.name; })});
 };
 
 // Initialize FacebookSDK and start Aldo.

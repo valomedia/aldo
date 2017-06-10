@@ -6,8 +6,12 @@
 conf = {
     fbAppID: '319585755122078',
     perms: [
-        'manage_pages',
-        'publish_pages'
+        {
+            name: 'manage_pages'
+        },
+        {
+            name: 'publish_pages'
+        }
     ]
 };
 
