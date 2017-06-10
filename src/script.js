@@ -28,7 +28,7 @@ window.fbAsyncInit = function() {
     // Ask the user to log in to Facebook.
     FB.login(function(res) {
         // The user acted in the popup, hide the notice.
-        document.getElementById('login_notice').className = 'hidden';
+        document.getElementById('login_notice').classList.add('hidden');
 
         switch (res.status) {
             case 'connected':
@@ -62,15 +62,18 @@ window.fbAsyncInit = function() {
                         }
                         document
                             .getElementById('permission_denied')
-                            .className = '';
+                            .classList
+                            .remove('hidden');
                     } else {
                         // Permissions granted, launch aldo.
                         document
                             .getElementById('preload_content')
-                            .className = 'hidden';
+                            .classList
+                            .add('hidden');
                         document
                             .getElementById('preload_spinner')
-                            .className = '';
+                            .classList
+                            .remove('hidden');
                         System.import('main.js').catch(function(err) {
                             console.error(err);
                         });
