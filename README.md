@@ -2,7 +2,7 @@
 
 Collecting faces for fun and profit!
 
-Aldo is the development base for a new yet-to-be named projecto by valo.media UG 
+Aldo is the development base for a new yet-to-be named project by valo.media UG 
 (haftungsbeschränkt), whose purpose is to aid media agencies with the management 
 of their pages and advertising campaigns on Facebook.
 
