@@ -6,5 +6,6 @@
  */
 
 @import url('stylesheets/reset.css');
+@import url('stylesheets/preloader.css');
 @import url('stylesheets/style.css');
 

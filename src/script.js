@@ -98,3 +98,14 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+// Remove the loader.
+setTimeout(function() {
+    document.getElementById('preloader').className = 'fade';
+}, 1000);
+setTimeout(function() {
+    document.getElementById('preloader').className = 'fade invisible';
+}, 1250);
+setTimeout(function() {
+    document.getElementById('preloader').className = 'hidden';
+}, 1500);
+
