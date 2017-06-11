@@ -23,7 +23,7 @@ import {GraphApiError} from './graph-api-error';
                 <small>Detailansicht</small>
             </h2>
             <button (click)='locationService.back()'>Zurück</button>
-            <button (click)='post("Hello World!")'>Posting erstellen</button>
+            <button (click)='post("Hello World!")'>Post erstellen</button>
         </div>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
         `
@@ -53,7 +53,10 @@ export class PageComponent implements OnInit {
     }
 
     post(text: String): void {
-        alert(text);
+        this.pageService
+            .postMessage(this.page.id, text)
+            .then(id => console.log('PostID: ' + id))
+            .catch(err => { this.graphApiError = err; });
     }
 }
 
