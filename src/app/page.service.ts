@@ -10,14 +10,26 @@ import {FbService, HttpMethod} from './fb.service';
 @Injectable()
 export class PageService {
     constructor(private fbService: FbService) {}
+
+    /*
+     * Perform a get request for a Page on a given path.
+     */
     get(path: String): any {
         return this.fbService
             .call(path, HttpMethod.Get, {fields: Object.keys(EMPTY_PAGE)});
     }
+
+    /*
+     * Get all Pages of the user.
+     */
     getPages(): Promise<Page[]> {
         return this.get('me/accounts').then((res: {data: Page[]}) =>
             res.data.sort((a,b) => b.fan_count - a.fan_count));
     }
+
+    /*
+     * Get a Page by its ID.
+     */
     getPage(id: number): Promise<Page> {
         return this.get(id.toString());
     }
