@@ -3,6 +3,19 @@
  * Bootstrap script.
  */
 
+// Inject permissions into Aldo config.
+conf.perms = {
+    manage_pages: {
+        required: true,
+        desc: "Zugriff auf deine Seiten erlauben",
+    },
+    publish_pages: {
+        required: true,
+        desc: "Im Namen deiner Seiten posten",
+        msg: "für deine Seiten posten, liken und kommentieren"
+    }
+}
+
 // Set up the retry button.
 window.onload = function() {
     document.getElementById('retry_auth_btn').onclick = function() {
