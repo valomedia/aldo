@@ -123,7 +123,3 @@ jspm_packages
 #
 !src/script.js
 
-# Configuration file.
-#
-!src/aldo.conf.js
-
