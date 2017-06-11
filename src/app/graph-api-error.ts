@@ -87,11 +87,11 @@ export class GraphApiError {
         fbtrace_id
     }: {
         message: String,
-        type: String,
+        type?: String,
         code: number,
-        error_subcode: number,
-        error_user_title: String,
-        error_user_msg: String,
+        error_subcode?: number,
+        error_user_title?: String,
+        error_user_msg?: String,
         fbtrace_id: String
     }) {}
 
