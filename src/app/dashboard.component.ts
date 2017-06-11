@@ -11,7 +11,7 @@ import {PageService} from './page.service';
     selector: 'dashboard',
     template: `
         <h2>Dashboard</h2>
-        <h3>Meistgenutzte Seiten</h3>
+        <h3>Deine Seiten mit den meisten Likes</h3>
         <div class='grid grid-pad'>
             <a
                     *ngFor='let page of pages'

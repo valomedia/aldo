@@ -14,7 +14,10 @@ import {PageService} from './page.service';
             <h2>Seiten</h2>
             <ul class='pages'>
                 <a *ngFor='let page of pages' routerLink='/page/{{page.id}}'>
-                    <li><span class='badge'>{{page.id}}</span>{{page.name}}</li>
+                    <li>
+                        <span class='badge'>{{page.fan_count}}</span>
+                        {{page.name}}
+                    </li>
                 </a>
             </ul>
         </div>

@@ -16,7 +16,7 @@ import {PageService} from './page.service';
     template: `
         <div *ngIf='page'>
             <h2>
-                {{page.name}}<br>
+                {{page.name}} ({{page.fan_count}} Likes)<br>
                 <small>Detailansicht</small>
             </h2>
             <button (click)='this.locationService.back()'>Zurück</button>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {Page} from './page';
+import {Page, EMPTY_PAGE} from './page';
 import {FbService, HttpMethod} from './fb.service';
 
 /*
@@ -10,13 +10,16 @@ import {FbService, HttpMethod} from './fb.service';
 @Injectable()
 export class PageService {
     constructor(private fbService: FbService) {}
-    getPages(): Promise<Page[]> {
+    pageRequest(path: String): any {
         return this.fbService
-            .call('me/accounts', HttpMethod.Get, {fields: 'name'})
-            .then((res: {data: Page[]}) => res.data);
+            .call(path, HttpMethod.Get, {fields: Object.keys(EMPTY_PAGE)});
+    }
+    getPages(): Promise<Page[]> {
+        return this.pageRequest('me/accounts').then((res: {data: Page[]}) =>
+                res.data.sort((a,b) => b.fan_count - a.fan_count));
     }
     getPage(id: number): Promise<Page> {
-        return this.fbService.call(id.toString());
+        return this.pageRequest(id.toString());
     }
 }
 
