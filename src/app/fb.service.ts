@@ -57,7 +57,8 @@ export class FbService {
     ): Promise<GraphApiResponse> {
         return new Promise((resolve, reject) =>
             FB.api(path, HttpMethod[method], params, (res) => {
-                if (res.error) { reject(new GraphApiError(res)); }
+                console.log('GraphAPI: ' + JSON.stringify(res));
+                if (res.error) { reject(new GraphApiError(res.error)); }
                 resolve(res)
             }));
     }
