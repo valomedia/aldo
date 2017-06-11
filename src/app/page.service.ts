@@ -20,46 +20,21 @@ export class PageService {
     /*
      * Perform a get request for a Page on a given path.
      */
-    get(path: String, params = {}): any {
-        return this.fbService
-            .call(path, HttpMethod.Get, {fields: Object.keys(EMPTY_PAGE), ...params});
+    get(path: String, params = {}): Observable<Page> {
+        return this.fbService.call(path, HttpMethod.Get, {
+            fields: Object.keys(EMPTY_PAGE), 
+            ...params
+        });
     }
 
     /*
      * Get all Pages of the user.
      */
-    getPages(after?: String): Observable<Page> {
-        let result = Observable.create((observer: Observer<Page>) =>
-            this.get('me/accounts', {after: after})
-                .then((res: {
-                    data: Page[],
-                    paging: {
-                        cursors: {
-                            before: String,
-                            after: String
-                        },
-                        next?: String
-                    }
-                }) => {
-                    for (let e of res.data) {
-                        observer.next(e);
-                    }
-                    if (res.paging.next) {
-                        result.switchMap(
-                            this.getPages(res.paging.cursors.after));
-                    }
-                }).catch((err: GraphApiError) => {
-                    observer.error(err);
-                    observer.complete();
-                }));
-        return result;
-    }
+    getPages(after?: String) { return this.get('me/accounts'); }
 
     /*
      * Get a Page by its ID.
      */
-    getPage(id: number): Promise<Page> {
-        return this.get(id.toString());
-    }
+    getPage(id: number) { return this.get(id.toString()).first().toPromise(); }
 }
 
