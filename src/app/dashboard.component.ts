@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Page} from './page';
 import {PageService} from './page.service';
+import {GraphApiError} from './graph-api-error';
 
 /*
  * The Component showing the dashboard.
@@ -11,10 +12,10 @@ import {PageService} from './page.service';
     selector: 'dashboard',
     template: `
         <h2>Dashboard</h2>
-        <h3>Meistgenutzte Seiten</h3>
+        <h3>Deine Seiten mit den meisten Likes</h3>
         <div class='grid grid-pad'>
             <a
-                    *ngFor='let page of pages'
+                    *ngFor='let page of biggestPages'
                     routerLink='/page/{{page.id}}'
                     class='col-1-4'>
                 <div class='module page'>
@@ -22,15 +23,31 @@ import {PageService} from './page.service';
                 </div>
             </a>
         </div>
+        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
     `
 })
 export class DashboardComponent {
     constructor(private pageService: PageService) {}
 
-    pages: Page[];
+    /*
+     * The four pages with the most likes.
+     */
+    biggestPages: Page[] = [];
 
-    ngOnInit(): void {
-        this.pageService.getPages().then(pages => this.pages = pages.slice(0, 4));
+    /*
+     * The error, if an error occurs.
+     */
+    graphApiError: GraphApiError;
+
+    ngOnInit() {
+        this.pageService
+            .getPages()
+            .subscribe(
+                page => this.biggestPages = this.biggestPages
+                    .concat([page])
+                    .sort((a,b) => b.fan_count - a.fan_count)
+                    .slice(0, 4),
+                err => this.graphApiError = err);
     }
 }
 

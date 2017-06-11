@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
 
-import {Page} from './page';
-import {PAGES} from './mock-pages';
+import {Observable} from 'rxjs/Observable';
+
+import {Page, EMPTY_PAGE} from './page';
+import {FbService, HttpMethod} from './fb.service';
+import {GraphApiError} from './graph-api-error';
 
 /*
  * The Service providing the Pages.
@@ -9,13 +13,26 @@ import {PAGES} from './mock-pages';
 
 @Injectable()
 export class PageService {
-    getPages(): Promise<Page[]> {
-        // Simulate loading time.
-        return new Promise(resolve => setTimeout(() => resolve(PAGES), 400));
+    constructor(private fbService: FbService) {}
+
+    /*
+     * Perform a get request for a Page on a given path.
+     */
+    get(path: String, params = {}): Observable<Page> {
+        return this.fbService.call(path, HttpMethod.Get, {
+            fields: Object.keys(EMPTY_PAGE), 
+            ...params
+        });
     }
-    getPage(id: number): Promise<Page> {
-        return this.getPages()
-            .then(pages => pages.find(page => page.id === id));
-    }
+
+    /*
+     * Get all Pages of the user.
+     */
+    getPages(after?: String) { return this.get('me/accounts'); }
+
+    /*
+     * Get a Page by its ID.
+     */
+    getPage(id: number) { return this.get(id.toString()).first().toPromise(); }
 }
 
