@@ -10,6 +10,7 @@ import {PagesComponent} from './pages.component';
 import {PageService} from './page.service';
 import {DashboardComponent} from './dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
+import {FbService} from './fb.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -29,7 +30,10 @@ import {AppRoutingModule} from './app-routing.module';
         DashboardComponent
     ],
     bootstrap: [AppComponent],
-    providers: [PageService]
+    providers: [
+        PageService,
+        FbService
+    ]
 })
 export class AppModule {}
 

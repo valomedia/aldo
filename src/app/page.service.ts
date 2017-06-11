@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Page} from './page';
-import {PAGES} from './mock-pages';
+import {FbService, HttpMethod} from './fb.service';
 
 /*
  * The Service providing the Pages.
@@ -9,13 +9,14 @@ import {PAGES} from './mock-pages';
 
 @Injectable()
 export class PageService {
+    constructor(private fbService: FbService) {}
     getPages(): Promise<Page[]> {
-        // Simulate loading time.
-        return new Promise(resolve => setTimeout(() => resolve(PAGES), 400));
+        return this.fbService
+            .call('me/accounts', HttpMethod.Get, {fields: 'name'})
+            .then((res: {data: Page[]}) => res.data);
     }
     getPage(id: number): Promise<Page> {
-        return this.getPages()
-            .then(pages => pages.find(page => page.id === id));
+        return this.fbService.call(id.toString());
     }
 }
 
