@@ -11,6 +11,7 @@ import {PageService} from './page.service';
 import {DashboardComponent} from './dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FbService} from './fb.service';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -27,7 +28,8 @@ import {FbService} from './fb.service';
         AppComponent,
         PageComponent,
         PagesComponent,
-        DashboardComponent
+        DashboardComponent,
+        GraphApiErrorComponent
     ],
     bootstrap: [AppComponent],
     providers: [
