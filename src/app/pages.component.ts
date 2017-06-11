@@ -31,18 +31,19 @@ export class PagesComponent implements OnInit {
     /*
      * All pages of the user.
      */
-    pages: Page[];
+    pages: Page[] = [];
 
     /*
      * The error, if an error occurs.
      */
     graphApiError: GraphApiError;
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.pageService
             .getPages()
-            .then(pages => this.pages = pages)
-            .catch(err => this.graphApiError = new GraphApiError(err));
+            .subscribe(
+                page => this.pages.push(page),
+                err => this.graphApiError = err);
     }
 }
 

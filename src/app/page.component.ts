@@ -42,14 +42,14 @@ export class PageComponent implements OnInit {
      */
     graphApiError: GraphApiError;
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.activatedRoute
             .params
             .switchMap((params: Params) => 
                 this.pageService.getPage(+params['id']))
             .subscribe(
                 page => this.page = page,
-                err => this.graphApiError = new GraphApiError(err));
+                err => this.graphApiError = err);
     }
 
     post(text: String): void {

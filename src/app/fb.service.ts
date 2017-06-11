@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 
+import {GraphApiError} from './graph-api-error';
+
 /*
  * The Service providing the Facebook API.
  */
@@ -25,7 +27,7 @@ export class FbService {
     call(path: String, method = HttpMethod.Get, params = {}) {
             return new Promise((resolve, reject) =>
                 FB.api(path, HttpMethod[method], params, (res) => {
-                    if (res.error) { reject(res); }
+                    if (res.error) { reject(new GraphApiError(res)); }
                     resolve(res)
                 }));
     }
