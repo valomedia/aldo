@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
-import 'rxjs/add/operator/switchMap';
 
 import {Page, EMPTY_PAGE} from './page';
 import {FbService, HttpMethod} from './fb.service';
