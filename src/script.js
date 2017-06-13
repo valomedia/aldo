@@ -12,7 +12,12 @@ conf.perms = {
     publish_pages: {
         required: true,
         desc: "Im Namen deiner Seiten posten",
-        msg: "für deine Seiten posten, liken und kommentieren"
+        msg: "Für deine Seiten posten, liken und kommentieren."
+    },
+    pages_show_list: {
+        required: true,
+        desc: "Eine Liste mit deinen Seiten anzeigen",
+        mgs: "Deine Seiten anzeigen, damit du eine auswählen kannst."
     }
 }
 
