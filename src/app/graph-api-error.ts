@@ -93,7 +93,15 @@ export class GraphApiError {
         error_user_title?: String,
         error_user_msg?: String,
         fbtrace_id: String
-    }) {}
+    }) {
+        this.message = message;
+        this.type = type;
+        this.code = code;
+        this.error_subcode = error_subcode;
+        this.error_user_title = error_user_title;
+        this.error_user_msg = error_user_msg;
+        this.fbtrace_id = fbtrace_id;
+    }
 
     /*
      * Facebook's error message.
