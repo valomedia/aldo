@@ -8,8 +8,9 @@
  */
 export interface Page {
     id: number;
-    name: string;
+    name: String;
     fan_count: number;
+    access_token: String;
 };
 
 /*
@@ -22,6 +23,7 @@ export interface Page {
 export const EMPTY_PAGE = {
     id: 0,
     name: '',
-    fan_count: 0
+    fan_count: 0,
+    access_token: ''
 };
 
