@@ -52,11 +52,14 @@ export class PageComponent implements OnInit {
                 err => this.graphApiError = err);
     }
 
+    /*
+     * Post to a given String to this Page.
+     */
     post(text: String): void {
         this.pageService
-            .postMessage(this.page.id, text)
-            .then(id => console.log('PostID: ' + id))
-            .catch(err => { this.graphApiError = err; });
+            .postMessage(this.page, text)
+            .then(id => alert('Post erstellt: ' + id))
+            .catch(err => this.graphApiError = err);
     }
 }
 

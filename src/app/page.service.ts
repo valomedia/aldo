@@ -38,9 +38,12 @@ export class PageService {
     /*
      * Post a message as the page.
      */
-    postMessage(id: number, msg: String) {
+    postMessage(page: Page, msg: String) {
         return this.fbService
-            .call(id.toString() + '/feed', HttpMethod.Post, {message: msg})
+            .call(page.id.toString() + '/feed', HttpMethod.Post, {
+                message: msg,
+                access_token: page.access_token
+            })
             .map(({id}: {id: String}) => id)
             .first()
             .toPromise();
