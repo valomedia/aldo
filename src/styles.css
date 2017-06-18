@@ -1,5 +1,11 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
+
+/*
+ * Styling for Aldo.
+ *
+ * This is the master style for Aldo, all global stylesheets are loaded here.
+ */
+
+@import url('stylesheets/preloader.css');
+@import url('stylesheets/spinner.css');
+@import url('stylesheets/style.css');
+

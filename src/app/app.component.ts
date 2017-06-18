@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
+import {PageService} from './page.service';
+
+/*
+ * The main Component of Aldo.
+ */
 
 @Component({
-  selector: 'my-app',
-  template: `<h1>Hello {{name}}!</h1>`,
+    selector: 'app',
+    template: `
+        <h1>{{title}}</h1>
+        <nav>
+            <a routerLink='/dashboard'>Dashboard</a>
+            <a routerLink='/pages'>Seiten</a>
+        </nav>
+        <router-outlet></router-outlet>
+    `
 })
-
-export class AppComponent  { name = 'Aldo'; }
+export class AppComponent {
+    title = 'Aldo';
+}
 

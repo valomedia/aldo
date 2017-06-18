@@ -1,11 +1,41 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {HttpModule} from '@angular/http';
 
-import { AppComponent }  from './app.component';
+import {AppComponent} from './app.component';
+import {PageComponent} from './page.component';
+import {PagesComponent} from './pages.component';
+import {PageService} from './page.service';
+import {DashboardComponent} from './dashboard.component';
+import {AppRoutingModule} from './app-routing.module';
+import {FbService} from './fb.service';
+import {GraphApiErrorComponent} from './graph-api-error.component';
+
+/*
+ * The Module definitions for AppComponent.
+ */
 
 @NgModule({
-  imports:      [ BrowserModule ],
-  declarations: [ AppComponent ],
-  bootstrap:    [ AppComponent ]
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        HttpModule
+    ],
+    declarations: [
+        AppComponent,
+        PageComponent,
+        PagesComponent,
+        DashboardComponent,
+        GraphApiErrorComponent
+    ],
+    bootstrap: [AppComponent],
+    providers: [
+        PageService,
+        FbService
+    ]
 })
-export class AppModule { }
+export class AppModule {}
+

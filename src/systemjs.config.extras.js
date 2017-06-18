@@ -1,11 +1,11 @@
-/**
- * Add barrels and stuff
- * Adjust as necessary for your application needs.
+
+/*
+ * Nothing here so far.
  */
-// (function (global) {
-//   System.config({
-//     packages: {
-//       // add packages here
-//     }
-//   });
-// })(this);
+
+(function(global) {
+    System.config({
+        packages: {}
+    });
+})(this);
+

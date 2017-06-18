@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Angular QuickStart</title>
-    <base href="/">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <head>
+        <title>Aldo</title>
+        <base href='/'>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' href='styles.css'>
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+        <!-- Polyfill(s) for older browsers -->
+        <script src='node_modules/core-js/client/shim.min.js'></script>
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src='node_modules/zone.js/dist/zone.js'></script>
+        <script src='node_modules/systemjs/dist/system.src.js'></script>
 
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
-    </script>
-  </head>
-
-  <body>
-    <my-app>Loading AppComponent content here ...</my-app>
-  </body>
+        <script src='systemjs.config.js'></script>
+        <script src='aldo.conf.js'></script>
+        <script src='script.js'></script>
+    </head>
+    <body>
+        <div id="preloader"></div>
+        <app>
+            <div id='preload_spinner' class='hidden spinner'></div>
+            <div id='preload_content'>
+                <h1>Fast geschafft! :)</h1>
+                <div id='login_notice'>
+                    <p>
+                        Bitte melde dich mit deinem Facebook-Account an, um Aldo 
+                        zu nutzen.  Falls du einen Popupblocker verwendest, 
+                        musst du für Aldo eine Ausnahme hinzufügen.
+                    </p>
+                </div>
+                <div id='no_login' class='hidden'>
+                    <p>
+                        Du hast die Anmeldung abgebrochen.  Ohne Zugriff auf 
+                        deinen Facebook-Account kann Aldo leider deine Seiten 
+                        nicht verwalten.
+                    </p>
+                </div>
+                <div id='no_auth' class='hidden'>
+                    <p>
+                        Du hast Aldo nicht mit deinem Profil verbunden.  Aldo 
+                        benötigt Zugriff auf dein Profil, um deine Seiten 
+                        verwalten zu können.
+                    </p>
+                </div>
+                <div id='permission_denied' class='hidden'>
+                    <p>
+                        Du hast einige Berechtigungen nicht erteilt, ohne die 
+                        wir leider nicht viel für dich tun können.  Hier ist 
+                        eine Übersicht über alle zusätzlichen Berechtigungen, 
+                        die wir unbedingt brauchen:
+                    </p>
+                    <ul id='denied_permissions'></ul>
+                </div>
+                <div>
+                    <button id='retry_auth_btn'>Erneut versuchen</button>
+                </div>
+                <hr>
+                <div>
+                    <p>
+                        <em>
+                            Wir nehmen deine Privatsphäre sehr ernst.  Deshalb 
+                            fragen wir nur die Zugriffsrechte an, die wir 
+                            wirklich brauchen.  Aldo wird von 
+                            Facebook kontrolliert, um zu sicher zu stellen, dass 
+                            wir alle deine Informationen vertraulich behandeln.
+                        </em>
+                    </p>
+                    <p>
+                        <em>
+                            Deine Daten werden direkt von Facebook an deinen 
+                            Computer übertragen und nicht an unsere Server 
+                            weitergeleitet, außer dort, wo es für die von dir 
+                            genutzten Funktionen erforderlich ist.
+                        </em>
+                    </p>
+                </div>
+            </div>
+        </app>
+    </body>
 </html>

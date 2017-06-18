@@ -119,3 +119,7 @@ jspm_packages
 #
 !src/systemjs*.js
 
+# Bootstrap script.
+#
+!src/script.js
+
