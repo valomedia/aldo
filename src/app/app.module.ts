@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {PageComponent} from './page.component';
@@ -22,7 +23,8 @@ import {GraphApiErrorComponent} from './graph-api-error.component';
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpModule
+        HttpModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
