@@ -23,16 +23,8 @@ a {
     text-decoration: none;
 }
 
-a:visited, a:link, a.active {
-    color: inherit;
-}
-
-.hidden {
-    display: none;
-}
-
 button {
-    @include shade($primary-palette, $primary-shade);
+    @include shade($primary-palette, $primary-medium-shade);
     margin-top: 20px;
     font-family: Arial;
     border: none;
@@ -43,27 +35,23 @@ button {
 }
 
 button:hover {
-    @include shade($primary-palette, 100);
+    @include shade($primary-palette, $primary-dark-shade);
 }
 
 button:disabled {
-    background-color: #eee;
-    color: #ccc; 
+    @include shade($primary-palette, $primary-light-shade);
     cursor: auto;
 }
 
 h1 {
-    color: #369;
+    @include shade($primary-palette, $primary-medium-shade);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
-    color: #999;
-    margin-bottom: 0;
+    padding: 1em;
 }
 
 h2 {
     font-size: 2em;
-    margin-top: 0;
-    padding-top: 0;
 }
 
 h3 {
@@ -82,18 +70,19 @@ input {
 }
 
 nav {
+    float: right;
+
     a {
+        @include shade($accent-palette, $accent-medium-shade);
         padding: 5px 10px;
         text-decoration: none;
         margin-top: 10px;
         display: inline-block;
-        background-color: #eee;
         border-radius: 4px;
     }
 
     a:hover {
-        color: #039be5;
-        background-color: #CFD8DC;
+        @include shade($accent-palette, $accent-light-shade);
     }
 }
 
@@ -113,6 +102,10 @@ nav {
     padding-right: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .invisible {
     opacity: 0;
 }
@@ -124,22 +117,16 @@ nav {
     width: 15em;
 
     li {
+        @include shade($primary-palette, $primary-medium-shade);
         cursor: pointer;
         position: relative;
         left: 0;
-        background-color: #EEE;
         margin: .5em;
         border-radius: 4px;
     }
 
-    li.selected:hover {
-        background-color: #BBD8DC !important;
-        color: white;
-    }
-
     li:hover {
-        color: #607D8B;
-        background-color: #DDD;
+        @include shade($primary-palette, $primary-dark-shade);
         left: .1em;
     }
 
@@ -149,11 +136,10 @@ nav {
     }
 
     .badge {
+        @include shade($accent-palette, $accent-dark-shade);
         display: inline-block;
         font-size: small;
-        color: white;
         padding: 0.8em 0.7em;
-        background-color: #607D8B;
         left: -1px;
         top: -4px;
         margin-right: .8em;
@@ -162,24 +148,17 @@ nav {
 }
 
 .module {
+    @include shade($primary-palette, $primary-medium-shade);
     padding: 20px;
     text-align: center;
-    color: #eee;
     max-height: 120px;
     min-width: 120px;
-    background-color: #607D8B;
     border-radius: 2px;
 }
 
 .module:hover {
-    background-color: #EEE;
+    @include shade($primary-palette, $primary-light-shade);
     cursor: pointer;
-    color: #607d8b;
-}
-
-.selected {
-    background-color: #CFD8DC !important;
-    color: white;
 }
 
 #preload_content {
