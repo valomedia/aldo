@@ -1,3 +1,10 @@
+
+/*
+ * Misc styling.
+ *
+ * This includes all styles that fit nowhere else.
+ */
+
 *, *:after, *:before {
     @include box-sizing(border-box);
 }
