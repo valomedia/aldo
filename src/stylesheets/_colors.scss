@@ -83,11 +83,16 @@ $accent-bg: map-get($accent-palette, $accent-medium-shade);
 $accent-light-bg: map-get($accent-palette, $accent-light-shade);
 $accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
 
-$primary-fg-palette: map-get($primary-palette, contrast);
-$accent-fg-palette: mag-get($accent-palette, contrast);
-
-$primary-fg: map-get($primary-fg-palette, $primary-shade);
-$accent-fg: mag-get($accent-fg-palette, $accent-medium-shade);
-$accent-light-fg: map-get($accent-fg-palette, $accent-light-shade);
-$accent-dark-fg: map-get($accent-fg-palette, $accent-dark-shade);
+$primary-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-shade);
+$accent-fg: mag-get(
+    map-get($accent-palette, contrast),
+    $accent-medium-shade);
+$accent-light-fg: map-get(
+    map-get($accent-palette, contrast),
+    $accent-light-shade);
+$accent-dark-fg: map-get(
+    map-get($accent-palette, contrast),
+    $accent-dark-shade);
 

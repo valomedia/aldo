@@ -15,7 +15,7 @@
 .spinner::after {
     position: absolute;
     content: '';
-    background-color: #ffffff;
+    background-color: $primary-fg;
 }
 
 .spinner::before {
@@ -41,7 +41,7 @@
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
-    color: #ed5f6b;
+    color: $accent-bg;
 }
 
 .spinner::after {
