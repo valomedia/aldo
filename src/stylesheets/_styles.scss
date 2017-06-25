@@ -14,51 +14,43 @@ h1 {
     list-style-type: none;
     padding: 0;
     width: 15em;
-}
 
-.pages li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    border-radius: 4px;
-}
+    li {
+        cursor: pointer;
+        position: relative;
+        left: 0;
+        background-color: #EEE;
+        margin: .5em;
+        border-radius: 4px;
+    }
 
-.pages li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-}
+    li.selected:hover {
+        background-color: #BBD8DC !important;
+        color: white;
+    }
 
-.pages li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
-}
+    li:hover {
+        color: #607D8B;
+        background-color: #DDD;
+        left: .1em;
+    }
 
-.pages .text {
-    position: relative;
-    top: -3px;
-}
+    .text {
+        position: relative;
+        top: -3px;
+    }
 
-.pages .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em;
-    background-color: #607D8B;
-    left: -1px;
-    top: -4px;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-}
-
-label {
-    display: inline-block;
-    width: 3em;
-    margin: .5em 0;
-    color: #607D8B;
-    font-weight: bold;
+    .badge {
+        display: inline-block;
+        font-size: small;
+        color: white;
+        padding: 0.8em 0.7em;
+        background-color: #607D8B;
+        left: -1px;
+        top: -4px;
+        margin-right: .8em;
+        border-radius: 4px 0 0 4px;
+    }
 }
 
 input {
@@ -108,7 +100,8 @@ a {
 }
 
 h3 {
-    text-align: center; margin-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 h4 {
@@ -148,16 +141,13 @@ h4 {
 }
 
 @media (max-width: 600px) {
-
     .module {
         font-size: 10px;
         max-height: 75px;
     }
-
 }
 
 @media (max-width: 1024px) {
-
     .grid {
         margin: 0;
     }
@@ -165,7 +155,6 @@ h4 {
     .module {
         min-width: 60px;
     }
-
 }
 
 h1 {
@@ -180,22 +169,24 @@ h2 {
     padding-top: 0;
 }
 
-nav a {
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #eee;
-    border-radius: 4px;
+nav {
+    a {
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-top: 10px;
+        display: inline-block;
+        background-color: #eee;
+        border-radius: 4px;
+    }
+
+    a:hover {
+        color: #039be5;
+        background-color: #CFD8DC;
+    }
 }
 
 a:visited, a:link {
     color: #607D8B;
-}
-
-nav a:hover {
-    color: #039be5;
-    background-color: #CFD8DC;
 }
 
 a.active {
