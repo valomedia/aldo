@@ -96,3 +96,8 @@ $accent-dark-fg: map-get(
     map-get($accent-palette, contrast),
     $accent-dark-shade);
 
+@mixin shade($palette, $shade) {
+    color: map-get(map-get($palette, contrast), $shade);
+    background-color: map-get($palette, $shade);
+}
+
