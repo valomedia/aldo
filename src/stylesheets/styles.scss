@@ -5,6 +5,12 @@
  * This is the master style for Aldo, all global stylesheets are loaded here.
  */
 
+@mixin box-sizing($x) {
+    -webkit-box-sizing: $x;
+    -moz-box-sizing: $x;
+    box-sizing: $x;
+}
+
 @import '_spinner';
 @import '_styles';
 
