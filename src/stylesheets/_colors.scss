@@ -1,0 +1,93 @@
+
+/*
+ * Aldo color scheme.
+ *
+ * This defines the colors used by Aldo.  The color scheme is taken from 
+ * material design and is included in @angular/material, but it is repeated here 
+ * to allow showing colored things before the big stylesheet is loaded.
+ */
+
+$primary-palette: (
+    50: #e8eaf6,
+    100: #c5cae9,
+    200: #9fa8da,
+    300: #7986cb,
+    400: #5c6bc0,
+    500: #3f51b5,
+    600: #3949ab,
+    700: #303f9f,
+    800: #283593,
+    900: #1a237e,
+    A100: #8c9eff,
+    A200: #536dfe,
+    A400: #3d5afe,
+    A700: #304ffe,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        400: white,
+        500: rgba(white, 0.87),
+        600: rgba(white, 0.87),
+        700: rgba(white, 0.87),
+        800: rgba(white, 0.87),
+        900: rgba(white, 0.87),
+        A100: rgba(black, 0.87),
+        A200: white,
+        A400: white,
+        A700: rgba(white, 0.87),
+    )
+);
+
+$accent-palette: (
+    50: #fbe9e7,
+    100: #ffccbc,
+    200: #ffab91,
+    300: #ff8a65,
+    400: #ff7043,
+    500: #ff5722,
+    600: #f4511e,
+    700: #e64a19,
+    800: #d84315,
+    900: #bf360c,
+    A100: #ff9e80,
+    A200: #ff6e40,
+    A400: #ff3d00,
+    A700: #dd2c00,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: rgba(black, 0.87),
+        A200: rgba(black, 0.87),
+        A400: white,
+        A700: white,
+    )
+);
+
+$primary-shade: 500;
+$accent-medium-shade: A200;
+$accent-light-shade: A100;
+$accent-dark-shade: A400;
+
+$primary-bg: map-get($primary-palette, $primary-shade);
+$accent-bg: map-get($accent-palette, $accent-medium-shade);
+$accent-light-bg: map-get($accent-palette, $accent-light-shade);
+$accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
+
+$primary-fg-palette: map-get($primary-palette, contrast);
+$accent-fg-palette: mag-get($accent-palette, contrast);
+
+$primary-fg: map-get($primary-fg-palette, $primary-shade);
+$accent-fg: mag-get($accent-fg-palette, $accent-medium-shade);
+$accent-light-fg: map-get($accent-fg-palette, $accent-light-shade);
+$accent-dark-fg: map-get($accent-fg-palette, $accent-dark-shade);
+

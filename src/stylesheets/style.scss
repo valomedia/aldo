@@ -1,9 +1,11 @@
 
 /*
- * Preloader styling.
+ * Essential styles
  *
- * This styles the preloader that shows while the page is loading.
+ * This contains all styles necessary to show the preloader.
  */
+
+@import 'colors';
 
 #preloader {
     width: 100%;
@@ -13,7 +15,7 @@
     left: 0;
     z-index: 65530;	
     margin-left: 0;
-    background-color: #23475b;
+    background-color: $primary-bg;
 }
 
 #preloader,
@@ -41,13 +43,13 @@
 #preloader::before {
     left: 50%;
     animation: animation_left_round 1s infinite ease-in-out;
-    background-color: #ed5f6b;
+    background-color: $accent-bg;
 }
 
 #preloader::after {
     right: 50%;
     animation: animation_right_round 1s infinite ease-in-out;
-    background-color: #ffffff;
+    background-color: $primary-fg;
 }
 
 /* Tablets and phones */
