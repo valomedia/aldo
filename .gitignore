@@ -125,3 +125,7 @@ jspm_packages
 #
 !src/script.js
 
+# Essential styling.
+#
+!src/style.css
+
