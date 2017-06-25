@@ -22,7 +22,7 @@
     "sass": "node-sass src/stylesheets -o src/dist",
     "sass:watch": "node-sass src/stylesheets -wro src/dist",
     "compile": "tsc -p src/",
-    "compile:watch": "tsc -wp src/"
+    "compile:watch": "tsc -w -p src/"
   },
   "keywords": [],
   "author": "",
