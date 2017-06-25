@@ -24,7 +24,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@angular/animations": "^4.2.4",
+    "@angular/animations": "~4.0.0",
     "@angular/common": "~4.0.0",
     "@angular/compiler": "~4.0.0",
     "@angular/core": "~4.0.0",
