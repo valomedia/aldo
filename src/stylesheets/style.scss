@@ -52,7 +52,6 @@
 
 /* Tablets and phones */
 @media (max-width: 1280px) {
-
     #preloader,
     #preloader::before,
     #preloader::after {
@@ -64,23 +63,19 @@
         width: 32px;
         height: 32px;
     }
-
 }
 
 /* Phones */
 @media (max-width: 600px) {
-
     #preloader::before,
     #preloader::after {
         width: 28px;
         height: 28px;
     }
-
 }
 
 @-webkit-keyframes animation_left_round {
-
-    0%,100% {
+    0%, 100% {
         -webkit-transform: translate3d(50%,-50%,0);
         transform: translate3d(50%,-50%,0);
     }
@@ -89,12 +84,10 @@
         -webkit-transform: translate3d(-150%,-50%,0);
         transform: translate3d(-150%,-50%,0);
     }
-
 }
 
 @keyframes animation_left_round {
-
-    0%,100% {
+    0%, 100% {
         -webkit-transform: translate3d(50%,-50%,0);
         transform: translate3d(50%,-50%,0);
     }
@@ -103,12 +96,10 @@
         -webkit-transform: translate3d(-150%,-50%,0);
         transform: translate3d(-150%,-50%,0);
     }
-
 }
 
 @-webkit-keyframes animation_right_round {
-
-    0%,100% {
+    0%, 100% {
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
     }
@@ -117,12 +108,10 @@
         -webkit-transform: translate3d(150%,-50%,0);
         transform: translate3d(150%,-50%,0);
     }
-
 }
 
 @keyframes animation_right_round {
-
-    0%,100% {
+    0%, 100% {
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
     }
@@ -131,5 +120,5 @@
         -webkit-transform: translate3d(150%,-50%,0);
         transform: translate3d(150%,-50%,0);
     }
-
 }
+
