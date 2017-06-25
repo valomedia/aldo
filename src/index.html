@@ -8,19 +8,6 @@
 
         <!-- Essential for the user to see at least a loading screen -->
         <link rel='stylesheet' href='dist/style.css'>
-
-        <!-- Big stylesheet with all other styles -->
-        <link rel='stylesheet' href='dist/styles.css'>
-
-        <!-- Polyfill(s) for older browsers -->
-        <script src='node_modules/core-js/client/shim.min.js'></script>
-
-        <script src='node_modules/zone.js/dist/zone.js'></script>
-        <script src='node_modules/systemjs/dist/system.src.js'></script>
-
-        <script src='systemjs.config.js'></script>
-        <script src='aldo.conf.js'></script>
-        <script src='script.js' async></script>
     </head>
     <body>
         <div id="preloader"></div>
@@ -83,5 +70,20 @@
                 </div>
             </div>
         </app>
+
+        <!-- Big stylesheet with all other styles -->
+        <link rel='stylesheet' href='dist/styles.css'>
+
+        <!-- Polyfill(s) for older browsers -->
+        <script src='node_modules/core-js/client/shim.min.js'></script>
+
+        <script src='node_modules/zone.js/dist/zone.js'></script>
+        <script src='node_modules/systemjs/dist/system.src.js'></script>
+
+        <script src='systemjs.config.js'></script>
+
+        <!-- Configuration and bootstrap. -->
+        <script src='aldo.conf.js'></script>
+        <script src='script.js' async></script>
     </body>
 </html>
