@@ -73,12 +73,16 @@ $accent-palette: (
     )
 );
 
-$primary-shade: 500;
+$primary-medium-shade: 500;
+$primary-light-shade: 100;
+$primary-dark-shade: 800;
 $accent-medium-shade: A200;
 $accent-light-shade: A100;
 $accent-dark-shade: A400;
 
 $primary-bg: map-get($primary-palette, $primary-shade);
+$primary-light-bg: map-get($primary-palette, $primary-light-shade);
+$primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
 $accent-bg: map-get($accent-palette, $accent-medium-shade);
 $accent-light-bg: map-get($accent-palette, $accent-light-shade);
 $accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
@@ -86,6 +90,12 @@ $accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
     $primary-shade);
+$primary-light-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-light-shade);
+$primary-dark-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-dark-shade);
 $accent-fg: mag-get(
     map-get($accent-palette, contrast),
     $accent-medium-shade);

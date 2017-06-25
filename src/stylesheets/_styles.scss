@@ -23,12 +23,8 @@ a {
     text-decoration: none;
 }
 
-a:visited, a:link {
-    color: #607D8B;
-}
-
-a.active {
-    color: #039be5;
+a:visited, a:link, a.active {
+    color: inherit;
 }
 
 .hidden {
@@ -36,9 +32,9 @@ a.active {
 }
 
 button {
+    @include shade($primary-palette, $primary-shade);
     margin-top: 20px;
     font-family: Arial;
-    background-color: #eee;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -47,7 +43,7 @@ button {
 }
 
 button:hover {
-    background-color: #cfd8dc;
+    @include shade($primary-palette, 100);
 }
 
 button:disabled {
