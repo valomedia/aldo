@@ -7,6 +7,7 @@
  * to allow showing colored things before the big stylesheet is loaded.
  */
 
+// The colors used for large parts of the app.
 $primary-palette: (
     50: #e8eaf6,
     100: #c5cae9,
@@ -38,6 +39,7 @@ $primary-palette: (
         A400: white,
         A700: rgba(white, 0.87)));
 
+// Colors used sparingly across the interface.
 $accent-palette: (
     50: #fbe9e7,
     100: #ffccbc,
@@ -69,6 +71,7 @@ $accent-palette: (
         A400: white,
         A700: white));
 
+// Colors that indicate danger.
 $warn-palette: (
     50: #ffebee,
     100: #ffcdd2,
@@ -100,6 +103,7 @@ $warn-palette: (
         A400: white,
         A700: white));
 
+// Default shades from each palette.
 $primary-medium-shade: 500;
 $primary-light-shade: 100;
 $primary-dark-shade: 800;
@@ -110,6 +114,7 @@ $warn-medium-shade: 500;
 $warn-light-shade: 50;
 $warn-dark-shade: 900;
 
+// The actual background colors, for easy access.
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
 $primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
@@ -120,6 +125,7 @@ $warn-bg: map-get($warn-palette, $warn-medium-shade);
 $warn-light-bg: map-get($warn-palette, $warn-light-shade);
 $warn-dark-bg: mag-get($warn-palette, $warn-dark-shade);
 
+// The actual foreground colors, for easy access.
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
     $primary-medium-shade);
@@ -148,11 +154,13 @@ $warn-dark-bg: map-get(
     map-get($warn-palette, contrast),
     $warn-dark-shade);
 
+// Set foreground and background from a palette and shade.
 @mixin shade($palette, $shade) {
     color: map-get(map-get($palette, contrast), $shade);
     background-color: map-get($palette, $shade);
 }
 
+// Settings for @angular/material.
 @mixin colors() {
     @include angular-material-theme(
         mat-dark-theme(

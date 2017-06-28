@@ -5,16 +5,19 @@
  * This stylesheet contains all changes to the material typography.
  */
 
+// Typography for <h1>.
 $headline-typo: (
     font-size: 32px,
     line-height: 48px,
     font-weight: 700);
 
+// Typography for <body>.
 $body-1-typo: (
     font-size: 16px,
     line-height: 24px,
     font-weight: 500);
 
+// Settings for @angular/material.
 @mixin typo() {
     @include angular-material-typography(
         mat-typography-config(
