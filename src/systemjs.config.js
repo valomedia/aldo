@@ -31,6 +31,7 @@
             '@angular/platform-browser/animations':
                 'npm:@angular/platform-browser/bundles/'
                     + 'platform-browser-animations.umd.js',
+            '@angular/material': 'npm:@angular/material/bundles/material.umd.js'
         },
         packages: {
             app: {

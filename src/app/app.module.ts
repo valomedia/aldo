@@ -5,6 +5,8 @@ import {RouterModule} from '@angular/router';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import 'hammerjs';
+
 import {AppComponent} from './app.component';
 import {PageComponent} from './page.component';
 import {PagesComponent} from './pages.component';
