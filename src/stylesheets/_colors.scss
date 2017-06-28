@@ -106,7 +106,9 @@ $primary-dark-shade: 800;
 $accent-medium-shade: A200;
 $accent-light-shade: A100;
 $accent-dark-shade: A400;
-$warn-shade: 500;
+$warn-medium-shade: 500;
+$warn-light-shade: 200;
+$warn-dark-shade: 700;
 
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
@@ -114,7 +116,9 @@ $primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
 $accent-bg: map-get($accent-palette, $accent-medium-shade);
 $accent-light-bg: map-get($accent-palette, $accent-light-shade);
 $accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
-$warn-bg: map-get($warn-palette, $warn-shade);
+$warn-bg: map-get($warn-palette, $warn-medium-shade);
+$warn-light-bg: map-get($warn-palette, $warn-light-shade);
+$warn-dark-bg: mag-get($warn-palette, $warn-dark-shade);
 
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
@@ -136,7 +140,13 @@ $accent-dark-fg: map-get(
     $accent-dark-shade);
 $warn-fg: map-get(
     map-get($warn-palette, contrast),
-    $warn-shade);
+    $warn-medium-shade);
+$warn-light-fg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-light-shade);
+$warn-dark-bg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-dark-shade);
 
 @mixin shade($palette, $shade) {
     color: map-get(map-get($palette, contrast), $shade);
