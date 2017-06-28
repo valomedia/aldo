@@ -36,9 +36,7 @@ $primary-palette: (
         A100: rgba(black, 0.87),
         A200: white,
         A400: white,
-        A700: rgba(white, 0.87),
-    )
-);
+        A700: rgba(white, 0.87)));
 
 $accent-palette: (
     50: #fbe9e7,
@@ -69,9 +67,38 @@ $accent-palette: (
         A100: rgba(black, 0.87),
         A200: rgba(black, 0.87),
         A400: white,
-        A700: white,
-    )
-);
+        A700: white));
+
+$warn-palette: (
+    50: #ffebee,
+    100: #ffcdd2,
+    200: #ef9a9a,
+    300: #e57373,
+    400: #ef5350,
+    500: #f44336,
+    600: #e53935,
+    700: #d32f2f,
+    800: #c62828,
+    900: #b71c1c,
+    A100: #ff8a80,
+    A200: #ff5252,
+    A400: #ff1744,
+    A700: #d50000,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: rgba(white, 0.87),
+        900: rgba(white, 0.87),
+        A100: rgba(black, 0.87),
+        A200: white,
+        A400: white,
+        A700: white));
 
 $primary-medium-shade: 500;
 $primary-light-shade: 100;
@@ -79,6 +106,7 @@ $primary-dark-shade: 800;
 $accent-medium-shade: A200;
 $accent-light-shade: A100;
 $accent-dark-shade: A400;
+$warn-shade: 500;
 
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
@@ -86,6 +114,7 @@ $primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
 $accent-bg: map-get($accent-palette, $accent-medium-shade);
 $accent-light-bg: map-get($accent-palette, $accent-light-shade);
 $accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
+$warn-bg: map-get($warn-palette, $warn-shade);
 
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
@@ -105,13 +134,12 @@ $accent-light-fg: map-get(
 $accent-dark-fg: map-get(
     map-get($accent-palette, contrast),
     $accent-dark-shade);
+$warn-fg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-shade);
 
 @mixin shade($palette, $shade) {
     color: map-get(map-get($palette, contrast), $shade);
     background-color: map-get($palette, $shade);
 }
-
-$primary-fg: map-get(
-    map-get($primary-palette, contrast),
-    $primary-medium-shade);
 
