@@ -28,3 +28,14 @@
             $warn-light-shade,
             $warn-dark-shade)));
 
+@include angular-material-typography(
+    mat-typography-config(
+        $headline: mat-typography-level(
+            map-get($headline-typo, font-size),
+            map-get($headline-typo, line-height),
+            map-get($headline-typo, font-weight)),
+        $body-1: mat-typography-level(
+            map-get($body-1-typo, font-size),
+            map-get($body-1-typo, line-height),
+            map-get($body-1-typo, font-weight))));
+
