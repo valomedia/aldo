@@ -15,6 +15,7 @@ import {DashboardComponent} from './dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FbService} from './fb.service';
 import {GraphApiErrorComponent} from './graph-api-error.component';
+import {AppUxModule} from './app-ux.module';
 
 /*
  * The Module definitions for AppComponent.
@@ -26,7 +27,8 @@ import {GraphApiErrorComponent} from './graph-api-error.component';
         FormsModule,
         AppRoutingModule,
         HttpModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        AppUxModule
     ],
     declarations: [
         AppComponent,
