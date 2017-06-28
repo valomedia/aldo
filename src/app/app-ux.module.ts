@@ -1,3 +1,4 @@
+import {NgModule} from '@angular/core';
 import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 
 /*
