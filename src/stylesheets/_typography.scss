@@ -1,0 +1,18 @@
+
+/*
+ * Custom typography.
+ *
+ * This stylesheet contains all changes to the material typography.  Any 
+ * additional typographic styles have to be added to theme.scss as well.
+ */
+
+$headline-typo: (
+    font-size: 32px,
+    line-height: 48px,
+    font-weight: 700);
+
+$body-1-typo: (
+    font-size: 16px,
+    line-height: 24px,
+    font-weight: 500);
+
