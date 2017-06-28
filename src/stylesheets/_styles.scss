@@ -23,6 +23,11 @@ a {
     text-decoration: none;
 }
 
+body {
+    color: $body-fg;
+    background-color: $body-bg;
+}
+
 button {
     @include shade($primary-palette, $primary-medium-shade);
     margin-top: 20px;

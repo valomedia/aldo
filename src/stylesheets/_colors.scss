@@ -115,6 +115,7 @@ $warn-light-shade: 50;
 $warn-dark-shade: 900;
 
 // The actual background colors, for easy access.
+$body-bg: black;
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
 $primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
@@ -126,6 +127,7 @@ $warn-light-bg: map-get($warn-palette, $warn-light-shade);
 $warn-dark-bg: mag-get($warn-palette, $warn-dark-shade);
 
 // The actual foreground colors, for easy access.
+$body-fg: rgba(white, 0.87);
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
     $primary-medium-shade);
