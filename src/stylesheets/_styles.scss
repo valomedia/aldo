@@ -34,13 +34,25 @@ button {
     cursor: hand;
 }
 
+button.warn {
+    @include shade($warn-palette, $warn-medium-shade);
+}
+
 button:hover {
     @include shade($primary-palette, $primary-dark-shade);
+}
+
+button.warn:hover {
+    @include shade($warn-palette, $warn-dark-shade);
 }
 
 button:disabled {
     @include shade($primary-palette, $primary-light-shade);
     cursor: auto;
+}
+
+button.warn:disabled {
+    @include shade($warn-palette, $warn-light-shade);
 }
 
 h1 {
