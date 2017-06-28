@@ -2,7 +2,9 @@
 /*
  * Styling for Aldo.
  *
- * This is the master style for Aldo, all global stylesheets are loaded here.
+ * This is the master style for Aldo, all custom styles are loaded here, with 
+ * the exception of styles loaded early (style.scss) and the material design 
+ * theme (theme.scss).
  */
 
 @mixin box-sizing($x) {
@@ -11,7 +13,7 @@
     box-sizing: $x;
 }
 
-@import '_colors';
-@import '_spinner';
-@import '_styles';
+@import 'colors';
+@import 'spinner';
+@import 'styles';
 
