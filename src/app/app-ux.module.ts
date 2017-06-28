@@ -6,8 +6,14 @@ import {MdButtonModule, MdCheckboxModule} from '@angular/material';
  */
 
 @NgModule({
-    imports: [MdButtonModule, MdCheckboxModule],
-    exports: [MdButtonModule, MdCheckboxModule]
+    imports: [
+        MdButtonModule,
+        MdCheckboxModule
+    ],
+    exports: [
+        MdButtonModule,
+        MdCheckboxModule
+    ]
 })
 export class AppUxModule {}
 
