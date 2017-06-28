@@ -1,0 +1,29 @@
+
+/*
+ * Material design theme.
+ *
+ * This stylesheet contains all options for the material design framework.
+ */
+
+@import 'colors';
+@import '../../node_modules/@angular/material/theming';
+
+@include mat-core();
+@include angular-material-theme(
+    mat-dark-theme(
+        mat-palette(
+            $primary-palette,
+            $primary-medium-shade,
+            $primary-light-shade,
+            $primary-dark-shade),
+        mat-palette(
+            $accent-palette,
+            $accent-medium-shade,
+            $accent-light-shade,
+            $accent-dark-shade),
+        mat-palette(
+            $warn-palette,
+            $warn-medium-shade,
+            $warn-light-shade,
+            $warn-dark-shade)));
+
