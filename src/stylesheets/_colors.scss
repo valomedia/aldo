@@ -107,8 +107,8 @@ $accent-medium-shade: A200;
 $accent-light-shade: A100;
 $accent-dark-shade: A400;
 $warn-medium-shade: 500;
-$warn-light-shade: 200;
-$warn-dark-shade: 700;
+$warn-light-shade: 50;
+$warn-dark-shade: 900;
 
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
