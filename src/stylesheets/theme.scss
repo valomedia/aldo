@@ -10,32 +10,5 @@
 @import '../../node_modules/@angular/material/theming';
 
 @include mat-core();
-@include angular-material-theme(
-    mat-dark-theme(
-        mat-palette(
-            $primary-palette,
-            $primary-medium-shade,
-            $primary-light-shade,
-            $primary-dark-shade),
-        mat-palette(
-            $accent-palette,
-            $accent-medium-shade,
-            $accent-light-shade,
-            $accent-dark-shade),
-        mat-palette(
-            $warn-palette,
-            $warn-medium-shade,
-            $warn-light-shade,
-            $warn-dark-shade)));
-
-@include angular-material-typography(
-    mat-typography-config(
-        $headline: mat-typography-level(
-            map-get($headline-typo, font-size),
-            map-get($headline-typo, line-height),
-            map-get($headline-typo, font-weight)),
-        $body-1: mat-typography-level(
-            map-get($body-1-typo, font-size),
-            map-get($body-1-typo, line-height),
-            map-get($body-1-typo, font-weight))));
-
+@include colors();
+@include typo();

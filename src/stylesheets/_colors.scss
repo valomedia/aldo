@@ -153,3 +153,23 @@ $warn-dark-bg: map-get(
     background-color: map-get($palette, $shade);
 }
 
+@mixin colors() {
+    @include angular-material-theme(
+        mat-dark-theme(
+            mat-palette(
+                $primary-palette,
+                $primary-medium-shade,
+                $primary-light-shade,
+                $primary-dark-shade),
+            mat-palette(
+                $accent-palette,
+                $accent-medium-shade,
+                $accent-light-shade,
+                $accent-dark-shade),
+            mat-palette(
+                $warn-palette,
+                $warn-medium-shade,
+                $warn-light-shade,
+                $warn-dark-shade)));
+}
+

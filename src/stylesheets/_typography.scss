@@ -2,8 +2,7 @@
 /*
  * Custom typography.
  *
- * This stylesheet contains all changes to the material typography.  Any 
- * additional typographic styles have to be added to theme.scss as well.
+ * This stylesheet contains all changes to the material typography.
  */
 
 $headline-typo: (
@@ -15,4 +14,17 @@ $body-1-typo: (
     font-size: 16px,
     line-height: 24px,
     font-weight: 500);
+
+@mixin typo() {
+    @include angular-material-typography(
+        mat-typography-config(
+            $headline: mat-typography-level(
+                map-get($headline-typo, font-size),
+                map-get($headline-typo, line-height),
+                map-get($headline-typo, font-weight)),
+            $body-1: mat-typography-level(
+                map-get($body-1-typo, font-size),
+                map-get($body-1-typo, line-height),
+                map-get($body-1-typo, font-weight))));
+}
 
