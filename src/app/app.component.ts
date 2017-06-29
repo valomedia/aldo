@@ -8,6 +8,9 @@ import {Component} from '@angular/core';
     selector: 'app',
     template: `
         <md-toolbar>
+            <button md-button class='app-icon-button'>
+                <i class='material-icons'>menu</i>
+            </button>
             {{title}}
             <span class='app-toolbar-filler'></span>
             <button md-button class='app-icon-button' routerLink='/dashboard'>
