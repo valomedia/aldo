@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
             <button md-button class='app-icon-button'>
                 <i class='material-icons'>menu</i>
             </button>
-            {{title}}
+            <span class='app-title'>{{title}}</span>
             <span class='app-toolbar-filler'></span>
             <button md-button class='app-icon-button' routerLink='/dashboard'>
                 <i class='material-icons'>dashboard</i>
