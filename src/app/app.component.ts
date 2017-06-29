@@ -9,12 +9,13 @@ import {PageService} from './page.service';
 @Component({
     selector: 'app',
     template: `
-        <md-toolbar>{{title}}</md-toolbar>
+        <md-toolbar>
+            {{title}}
+            <span class='app-toolbar-filler'></span>
+            <button md-button routerLink='/dashboard'>Dashboard</button>
+            <button md-button routerLink='/pages'>Seiten</button>
+        </md-toolbar>
         <div class='app-content'>
-            <nav>
-                <a routerLink='/dashboard'>Dashboard</a>
-                <a routerLink='/pages'>Seiten</a>
-            </nav>
             <router-outlet></router-outlet>
         </div>
     `
