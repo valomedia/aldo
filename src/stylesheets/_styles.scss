@@ -108,6 +108,23 @@ nav {
     margin: 8px;
 }
 
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
 .app-toolbar-filler {
     flex: 1 1 auto;
 }
@@ -175,6 +192,11 @@ nav {
 
 .mat-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
+
+    button {
+        padding: 7px 14px;
+        color: white;
+    }
 }
 
 .module {
