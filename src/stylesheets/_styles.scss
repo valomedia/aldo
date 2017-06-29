@@ -24,6 +24,7 @@ a {
 }
 
 body {
+    margin: 0;
     color: $body-fg;
     background-color: $body-bg;
 }
@@ -103,6 +104,10 @@ nav {
     }
 }
 
+.app-content {
+    margin: 8px;
+}
+
 .col-1-4 {
     width: 25%;
 }
@@ -162,6 +167,10 @@ nav {
         margin-right: .8em;
         border-radius: 4px 0 0 4px;
     }
+}
+
+.mat-toolbar {
+    @include shade($primary-palette, $primary-medium-shade);
 }
 
 .module {

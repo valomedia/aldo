@@ -9,12 +9,14 @@ import {PageService} from './page.service';
 @Component({
     selector: 'app',
     template: `
-        <h1>{{title}}</h1>
-        <nav>
-            <a routerLink='/dashboard'>Dashboard</a>
-            <a routerLink='/pages'>Seiten</a>
-        </nav>
-        <router-outlet></router-outlet>
+        <md-toolbar>{{title}}</md-toolbar>
+        <div class='app-content'>
+            <nav>
+                <a routerLink='/dashboard'>Dashboard</a>
+                <a routerLink='/pages'>Seiten</a>
+            </nav>
+            <router-outlet></router-outlet>
+        </div>
     `
 })
 export class AppComponent {
