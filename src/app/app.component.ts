@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 
-import {PageService} from './page.service';
-
 /*
  * The main Component of Aldo.
  */
