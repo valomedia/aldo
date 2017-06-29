@@ -23,7 +23,9 @@ import {GraphApiError} from './graph-api-error';
                 <small>Detailansicht</small>
             </h2>
             <button (click)='locationService.back()'>Zurück</button>
-            <button (click)='post("Hello World!")'>Post erstellen</button>
+            <button (click)='post("Hello World!")' class='warn'>
+                Post erstellen
+            </button>
         </div>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
         `

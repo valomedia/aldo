@@ -1,0 +1,185 @@
+
+/*
+ * Aldo color scheme.
+ *
+ * This defines the colors used by Aldo.  The color scheme is taken from 
+ * material design and is included in @angular/material, but it is repeated here 
+ * to allow showing colored things before the big stylesheet is loaded.
+ */
+
+// The colors used for large parts of the app.
+$primary-palette: (
+    50: #e8eaf6,
+    100: #c5cae9,
+    200: #9fa8da,
+    300: #7986cb,
+    400: #5c6bc0,
+    500: #3f51b5,
+    600: #3949ab,
+    700: #303f9f,
+    800: #283593,
+    900: #1a237e,
+    A100: #8c9eff,
+    A200: #536dfe,
+    A400: #3d5afe,
+    A700: #304ffe,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        400: white,
+        500: rgba(white, 0.87),
+        600: rgba(white, 0.87),
+        700: rgba(white, 0.87),
+        800: rgba(white, 0.87),
+        900: rgba(white, 0.87),
+        A100: rgba(black, 0.87),
+        A200: white,
+        A400: white,
+        A700: rgba(white, 0.87)));
+
+// Colors used sparingly across the interface.
+$accent-palette: (
+    50: #fbe9e7,
+    100: #ffccbc,
+    200: #ffab91,
+    300: #ff8a65,
+    400: #ff7043,
+    500: #ff5722,
+    600: #f4511e,
+    700: #e64a19,
+    800: #d84315,
+    900: #bf360c,
+    A100: #ff9e80,
+    A200: #ff6e40,
+    A400: #ff3d00,
+    A700: #dd2c00,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: rgba(black, 0.87),
+        A200: rgba(black, 0.87),
+        A400: white,
+        A700: white));
+
+// Colors that indicate danger.
+$warn-palette: (
+    50: #ffebee,
+    100: #ffcdd2,
+    200: #ef9a9a,
+    300: #e57373,
+    400: #ef5350,
+    500: #f44336,
+    600: #e53935,
+    700: #d32f2f,
+    800: #c62828,
+    900: #b71c1c,
+    A100: #ff8a80,
+    A200: #ff5252,
+    A400: #ff1744,
+    A700: #d50000,
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: rgba(white, 0.87),
+        900: rgba(white, 0.87),
+        A100: rgba(black, 0.87),
+        A200: white,
+        A400: white,
+        A700: white));
+
+// Default shades from each palette.
+$primary-medium-shade: 500;
+$primary-light-shade: 100;
+$primary-dark-shade: 800;
+$accent-medium-shade: A200;
+$accent-light-shade: A100;
+$accent-dark-shade: A400;
+$warn-medium-shade: 500;
+$warn-light-shade: 50;
+$warn-dark-shade: 900;
+
+// The actual background colors, for easy access.
+$body-bg: black;
+$primary-bg: map-get($primary-palette, $primary-medium-shade);
+$primary-light-bg: map-get($primary-palette, $primary-light-shade);
+$primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
+$accent-bg: map-get($accent-palette, $accent-medium-shade);
+$accent-light-bg: map-get($accent-palette, $accent-light-shade);
+$accent-dark-bg: map-get($accent-palette, $accent-dark-shade);
+$warn-bg: map-get($warn-palette, $warn-medium-shade);
+$warn-light-bg: map-get($warn-palette, $warn-light-shade);
+$warn-dark-bg: mag-get($warn-palette, $warn-dark-shade);
+
+// The actual foreground colors, for easy access.
+$body-fg: rgba(white, 0.87);
+$primary-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-medium-shade);
+$primary-light-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-light-shade);
+$primary-dark-fg: map-get(
+    map-get($primary-palette, contrast),
+    $primary-dark-shade);
+$accent-fg: mag-get(
+    map-get($accent-palette, contrast),
+    $accent-medium-shade);
+$accent-light-fg: map-get(
+    map-get($accent-palette, contrast),
+    $accent-light-shade);
+$accent-dark-fg: map-get(
+    map-get($accent-palette, contrast),
+    $accent-dark-shade);
+$warn-fg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-medium-shade);
+$warn-light-fg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-light-shade);
+$warn-dark-bg: map-get(
+    map-get($warn-palette, contrast),
+    $warn-dark-shade);
+
+// Set foreground and background from a palette and shade.
+@mixin shade($palette, $shade) {
+    color: map-get(map-get($palette, contrast), $shade);
+    background-color: map-get($palette, $shade);
+}
+
+// Settings for @angular/material.
+@mixin colors() {
+    @include angular-material-theme(
+        mat-dark-theme(
+            mat-palette(
+                $primary-palette,
+                $primary-medium-shade,
+                $primary-light-shade,
+                $primary-dark-shade),
+            mat-palette(
+                $accent-palette,
+                $accent-medium-shade,
+                $accent-light-shade,
+                $accent-dark-shade),
+            mat-palette(
+                $warn-palette,
+                $warn-medium-shade,
+                $warn-light-shade,
+                $warn-dark-shade)));
+}
+

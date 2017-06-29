@@ -15,7 +15,7 @@
 .spinner::after {
     position: absolute;
     content: '';
-    background-color: #ffffff;
+    background-color: $body-bg;
 }
 
 .spinner::before {
@@ -41,7 +41,7 @@
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
-    color: #ed5f6b;
+    color: $accent-bg;
 }
 
 .spinner::after {
@@ -56,12 +56,7 @@
     animation: spinner 2s infinite ease;
 }
 
-#modal .spinner {
-    margin: 55px;
-}
-
 @-webkit-keyframes spinner {
-
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -71,11 +66,9 @@
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
-
 }
 
 @keyframes spinner {
-
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -85,6 +78,5 @@
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
-
 }
 
