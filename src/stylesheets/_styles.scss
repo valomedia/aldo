@@ -289,9 +289,6 @@ nav {
  * Everything except portait mode handsets that are not very large.
  */
 @media (min-width: 480px) {
-    #nav .back-btn {
-        display: none;
-    }
 }
 
 /*
@@ -299,6 +296,6 @@ nav {
  */
 @media (max-width: 479px) {
     #nav {
-        width: 100%
+        width: 80%;
     }
 }

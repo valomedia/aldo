@@ -8,20 +8,25 @@ import {Component} from '@angular/core';
     selector: 'app',
     template: `
         <md-sidenav-container (window:resize)='setSidennavMode()'>
-            <md-sidenav #nav id='nav' [mode]='sidenavMode'>
+            <md-sidenav #nav id='nav' mode='over'>
+                <md-toolbar>
+                    <span class='app-toolbar-title'>Seiten</span>
+                </md-toolbar>
+            </md-sidenav>
+            <md-sidenav #aside align='end' id='aside' [mode]='asideMode()'>
                 <md-toolbar>
                     <button
                             md-button
                             class='app-icon-button back-btn'
-                            (click)='nav.close()'>
+                            (click)='aside.close()'>
                         <i class='material-icons'>arrow_back</i>
                     </button>
-                    <span class='app-toolbar-title'>Seiten</span>
+                    <span class='app-toolbar-title'>Details</span>
                     <span class='app-toolbar-filler'></span>
                     <button
                             md-button
                             class='app-icon-button close-btn'
-                            (click)='nav.close()'>
+                            (click)='aside.close()'>
                         <i class='material-icons'>close</i>
                     </button>
                 </md-toolbar>
@@ -30,7 +35,7 @@ import {Component} from '@angular/core';
                 <button
                         md-button
                         class='app-icon-button'
-                        (click)='nav.toggle()'>
+                        (click)='nav.open()'>
                     <i class='material-icons'>menu</i>
                 </button>
                 <span class='app-toolbar-title'>{{title}}</span>
@@ -44,6 +49,12 @@ import {Component} from '@angular/core';
                 <button md-button class='app-icon-button' routerLink='/pages'>
                     <i class='material-icons'>list</i>
                 </button>
+                <button
+                        md-button
+                        class='app-icon-button'
+                        (click)='aside.toggle()'>
+                    <i class='material-icons'>more_vert</i>
+                </button>
             </md-toolbar>
             <div class='app-content'>
                 <router-outlet></router-outlet>
@@ -53,17 +64,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'Aldo';
-    sidenavMode: String;
-
-    constructor() {
-        this.setSidennavMode();
-    }
-
-    setSidennavMode() {
-        this.sidenavMode = 'over';
-        if (window.innerWidth >= 840) {
-            this.sidenavMode = window.innerWidth >= 1264 ? 'side' : 'push';
-        }
-    }
+    asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
 }
 
