@@ -13,7 +13,7 @@ import {GraphApiError} from './graph-api-error';
     template: `
         <div>
             <ul class='pages'>
-                <a *ngFor='let page of pages' routerLink='/page/{{page.id}}'>
+                <a *ngFor='let page of pages' routerLink='/{{page.id}}'>
                     <li>
                         <span class='badge'>{{page.fan_count}}</span>
                         {{page.name}}

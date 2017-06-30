@@ -43,10 +43,7 @@ import {Component} from '@angular/core';
                 </button>
                 <span class='app-toolbar-title pad'>{{title}}</span>
                 <span class='app-toolbar-filler'></span>
-                <button
-                        md-button
-                        class='app-icon-button'
-                        routerLink='/dashboard'>
+                <button md-button class='app-icon-button' routerLink='/'>
                     <i class='material-icons'>dashboard</i>
                 </button>
                 <button

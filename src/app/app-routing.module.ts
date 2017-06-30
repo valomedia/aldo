@@ -8,15 +8,11 @@ import {PageComponent} from './page.component';
 const ROUTES: Routes = [
     {
         path: '',
-        redirectTo: '/dashboard',
+        component: DashboardComponent,
         pathMatch: 'full'
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: 'page/:id',
+        path: ':id',
         component: PageComponent
     }
 ];

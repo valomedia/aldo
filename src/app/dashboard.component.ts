@@ -16,7 +16,7 @@ import {GraphApiError} from './graph-api-error';
         <div class='grid grid-pad'>
             <a
                     *ngFor='let page of biggestPages'
-                    routerLink='/page/{{page.id}}'
+                    routerLink='/{{page.id}}'
                     class='col-1-4'>
                 <div class='module page'>
                     <h4>{{page.name}}</h4>
