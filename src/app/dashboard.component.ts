@@ -11,8 +11,7 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'dashboard',
     template: `
-        <h2>Dashboard</h2>
-        <h3>Deine Seiten mit den meisten Likes</h3>
+        <h1>Dashboard</h1>
         <div class='grid grid-pad'>
             <a
                     *ngFor='let page of biggestPages'

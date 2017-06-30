@@ -61,26 +61,6 @@ button.warn:disabled {
     @include shade($warn-palette, $warn-light-shade);
 }
 
-h1 {
-    @include shade($primary-palette, $primary-medium-shade);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
-    padding: 1em;
-}
-
-h2 {
-    font-size: 2em;
-}
-
-h3 {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-h4 {
-    position: relative;
-}
-
 input {
     height: 2em;
     font-size: 1em;

@@ -18,10 +18,10 @@ import {GraphApiError} from './graph-api-error';
     selector: 'page',
     template: `
         <div *ngIf='page'>
-            <h2>
+            <h1>
                 {{page.name}} ({{page.fan_count}} Likes)<br>
                 <small>Detailansicht</small>
-            </h2>
+            </h1>
             <button (click)='locationService.back()'>Zurück</button>
             <button (click)='post("Hello World!")' class='warn'>
                 Post erstellen
