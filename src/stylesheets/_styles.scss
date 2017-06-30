@@ -87,6 +87,10 @@ input {
     padding-left: .4em;
 }
 
+md-sidenav-container {
+    height: 100vh;
+}
+
 nav {
     float: right;
 
@@ -104,8 +108,8 @@ nav {
     }
 }
 
-.app-content, .app-title {
-    margin: 8px;
+.app-content, .app-toolbar-title {
+    margin: 24px;
 }
 
 .app-icon-button {
@@ -213,19 +217,27 @@ nav {
     cursor: pointer;
 }
 
+#aside {
+    width: 600px;
+}
+
+#nav {
+    width: 480px;
+}
+
 #preload_content {
     width: 35em;
     margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-    .module {
-        font-size: 10px;
-        max-height: 75px;
+/*
+ * All mobile devices.
+ */
+@media (max-width: 1263px) {
+    .close-btn {
+        display: none;
     }
-}
 
-@media (max-width: 1024px) {
     .grid {
         margin: 0;
     }
@@ -235,3 +247,58 @@ nav {
     }
 }
 
+/*
+ * Handsets and tablets in portrait mode.
+ */
+@media (max-width: 959px) {
+    .module {
+        font-size: 10px;
+        max-height: 75px;
+    }
+}
+
+/*
+ * All handsets.
+ */
+@media (max-width: 959px) and (max-height: 599px), (max-width: 599px) {
+    .app-content, .app-toolbar-title {
+        margin: 16px;
+    }
+}
+
+/*
+ * Everything except the smallest devices in landscape mode and portrait mode 
+ * handsets.
+ */
+@media (min-width: 600px) {
+    #aside .back-btn {
+        display: none;
+    }
+}
+
+/*
+ * Handsets in portrait mode, small handsets in landscape mode.
+ */
+@media (max-width: 599px) {
+    #aside {
+        width: 100%;
+    }
+}
+
+/*
+ * Everything except portait mode handsets that are not very large.
+ */
+@media (min-width: 480px) {
+    #nav .back-btn {
+        display: none;
+    }
+}
+
+/*
+ * Small and medium handsets in portrait mode.
+ */
+@media (max-width: 479px) {
+    #nav {
+        width: 100%
+    }
+}

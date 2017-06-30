@@ -1,5 +1,10 @@
 import {NgModule} from '@angular/core';
-import {MdButtonModule, MdCheckboxModule, MdToolbarModule} from '@angular/material';
+import {
+    MdButtonModule,
+    MdCheckboxModule,
+    MdToolbarModule,
+    MdSidenavModule
+} from '@angular/material';
 
 /*
  * The root module for the material modules.
@@ -9,12 +14,14 @@ import {MdButtonModule, MdCheckboxModule, MdToolbarModule} from '@angular/materi
     imports: [
         MdButtonModule,
         MdCheckboxModule,
-        MdToolbarModule
+        MdToolbarModule,
+        MdSidenavModule
     ],
     exports: [
         MdButtonModule,
         MdCheckboxModule,
-        MdToolbarModule
+        MdToolbarModule,
+        MdSidenavModule
     ]
 })
 export class AppUxModule {}
