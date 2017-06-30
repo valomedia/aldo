@@ -12,7 +12,6 @@ import {GraphApiError} from './graph-api-error';
     selector: 'pages',
     template: `
         <div>
-            <h2>Seiten</h2>
             <ul class='pages'>
                 <a *ngFor='let page of pages' routerLink='/page/{{page.id}}'>
                     <li>

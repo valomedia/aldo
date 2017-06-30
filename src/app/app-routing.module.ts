@@ -18,10 +18,6 @@ const ROUTES: Routes = [
     {
         path: 'page/:id',
         component: PageComponent
-    },
-    {
-        path: 'pages',
-        component: PagesComponent
     }
 ];
 

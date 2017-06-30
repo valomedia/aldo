@@ -108,7 +108,7 @@ nav {
     }
 }
 
-.app-content, .app-toolbar-title {
+.pad {
     margin: 24px;
 }
 
@@ -261,7 +261,7 @@ nav {
  * All handsets.
  */
 @media (max-width: 959px) and (max-height: 599px), (max-width: 599px) {
-    .app-content, .app-toolbar-title {
+    .pad {
         margin: 16px;
     }
 }

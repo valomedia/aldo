@@ -7,11 +7,14 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'app',
     template: `
-        <md-sidenav-container (window:resize)='setSidennavMode()'>
+        <md-sidenav-container>
             <md-sidenav #nav id='nav' mode='over'>
                 <md-toolbar>
                     <span class='app-toolbar-title'>Seiten</span>
                 </md-toolbar>
+                <div class='pad'>
+                    <pages (click)='nav.close()'></pages>
+                </div>
             </md-sidenav>
             <md-sidenav #aside align='end' id='aside' [mode]='asideMode()'>
                 <md-toolbar>
@@ -38,16 +41,13 @@ import {Component} from '@angular/core';
                         (click)='nav.open()'>
                     <i class='material-icons'>menu</i>
                 </button>
-                <span class='app-toolbar-title'>{{title}}</span>
+                <span class='app-toolbar-title pad'>{{title}}</span>
                 <span class='app-toolbar-filler'></span>
                 <button
                         md-button
                         class='app-icon-button'
                         routerLink='/dashboard'>
                     <i class='material-icons'>dashboard</i>
-                </button>
-                <button md-button class='app-icon-button' routerLink='/pages'>
-                    <i class='material-icons'>list</i>
                 </button>
                 <button
                         md-button
@@ -56,7 +56,7 @@ import {Component} from '@angular/core';
                     <i class='material-icons'>more_vert</i>
                 </button>
             </md-toolbar>
-            <div class='app-content'>
+            <div class='app-content pad'>
                 <router-outlet></router-outlet>
             </div>
         </md-sidenav-container>
