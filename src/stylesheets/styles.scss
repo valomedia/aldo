@@ -1,0 +1,19 @@
+
+/*
+ * Styling for Aldo.
+ *
+ * This is the master style for Aldo, all custom styles are loaded here, with 
+ * the exception of styles loaded early (style.scss) and the material design 
+ * theme (theme.scss).
+ */
+
+@mixin box-sizing($x) {
+    -webkit-box-sizing: $x;
+    -moz-box-sizing: $x;
+    box-sizing: $x;
+}
+
+@import 'colors';
+@import 'spinner';
+@import '_styles';
+

@@ -3,6 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import 'hammerjs';
 
 import {AppComponent} from './app.component';
 import {PageComponent} from './page.component';
@@ -12,6 +15,7 @@ import {DashboardComponent} from './dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FbService} from './fb.service';
 import {GraphApiErrorComponent} from './graph-api-error.component';
+import {AppUxModule} from './app-ux.module';
 
 /*
  * The Module definitions for AppComponent.
@@ -22,7 +26,9 @@ import {GraphApiErrorComponent} from './graph-api-error.component';
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpModule
+        HttpModule,
+        BrowserAnimationsModule,
+        AppUxModule
     ],
     declarations: [
         AppComponent,
