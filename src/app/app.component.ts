@@ -1,5 +1,7 @@
 import {Component, ApplicationRef, HostListener} from '@angular/core';
 
+import {AppUxService} from './app-ux.service';
+
 /*
  * The main Component of Aldo.
  */
@@ -16,7 +18,11 @@ import {Component, ApplicationRef, HostListener} from '@angular/core';
                     <pages (click)='nav.close()'></pages>
                 </div>
             </md-sidenav>
-            <md-sidenav #aside align='end' id='aside' [mode]='asideMode()'>
+            <md-sidenav
+                    #aside
+                    align='end'
+                    id='aside'
+                    [mode]='appUxService.asideMode()'>
                 <md-toolbar>
                     <button
                             md-button
@@ -60,17 +66,14 @@ import {Component, ApplicationRef, HostListener} from '@angular/core';
     `
 })
 export class AppComponent {
-    constructor(private applicationRef: ApplicationRef) {}
+    constructor(
+        private applicationRef: ApplicationRef,
+        private appUxService: AppUxService) {}
 
     /*
      * Displayed in the main toolbar.
      */
     title = 'Aldo';
-
-    /*
-     * Calculates whether the aside will show as sidebar.
-     */
-    asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
 
     @HostListener('window:resize')
     onResize() {
