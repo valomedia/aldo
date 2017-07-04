@@ -11,6 +11,8 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'pages',
     template: `
+        <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
+        </md-spinner>
         <nav>
             <md-nav-list>
                 <a
@@ -30,7 +32,7 @@ export class PagesComponent implements OnInit {
     /*
      * All pages of the user.
      */
-    pages: Page[] = [];
+    pages: Page[];
 
     /*
      * The error, if an error occurs.
@@ -40,8 +42,9 @@ export class PagesComponent implements OnInit {
     ngOnInit() {
         this.pageService
             .getPages()
+            .toArray()
             .subscribe(
-                page => this.pages.push(page),
+                pages => this.pages = pages,
                 err => this.graphApiError = err);
     }
 }

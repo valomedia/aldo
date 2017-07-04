@@ -23,6 +23,10 @@ md-sidenav-container {
     height: 100vh;
 }
 
+md-spinner {
+    margin: auto;
+}
+
 md-grid-tile {
     background: $primary-bg;
     cursor: pointer;
@@ -32,6 +36,15 @@ md-grid-tile {
 md-grid-tile:hover {
     background: $primary-light-bg;
     a { color: $primary-light-fg; }
+}
+
+md-toolbar {
+    @include shade($primary-palette, $primary-medium-shade);
+
+    button {
+        padding: 7px 14px!important;
+        color: white!important;
+    }
 }
 
 .app-action {
@@ -69,15 +82,6 @@ md-grid-tile:hover {
 
 .invisible {
     opacity: 0;
-}
-
-.mat-toolbar {
-    @include shade($primary-palette, $primary-medium-shade);
-
-    button {
-        padding: 7px 14px;
-        color: white;
-    }
 }
 
 .pad {

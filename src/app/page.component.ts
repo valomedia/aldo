@@ -17,6 +17,7 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'page',
     template: `
+        <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
         <div *ngIf='page'>
             <h1>{{page.name}} ({{page.fan_count}} Likes)</h1>
             <span class='app-action'>

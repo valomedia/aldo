@@ -13,6 +13,8 @@ import {AppUxService} from './app-ux.service';
     selector: 'dashboard',
     template: `
         <h1>Dashboard</h1>
+        <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
+        </md-spinner>
         <md-grid-list
                 [cols]='appUxService.cols() / 4'
                 [gutterSize]='appUxService.gutterSize()'
@@ -34,7 +36,7 @@ export class DashboardComponent {
     /*
      * All pages the user has access to.
      */
-    pages: Page[] = [];
+    pages: Page[];
 
     /*
      * The error, if an error occurs.
