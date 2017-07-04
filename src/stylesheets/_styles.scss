@@ -71,6 +71,16 @@ md-sidenav-container {
     height: 100vh;
 }
 
+md-grid-tile {
+    background: $primary-bg;
+    a { color: $primary-fg; }
+}
+
+md-grid-tile:hover {
+    background: $primary-light-bg;
+    a { color: $primary-light-fg; }
+}
+
 .pad {
     margin: 24px;
 }

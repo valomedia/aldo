@@ -61,7 +61,15 @@ import {Component, ApplicationRef, HostListener} from '@angular/core';
 })
 export class AppComponent {
     constructor(private applicationRef: ApplicationRef) {}
+
+    /*
+     * Displayed in the main toolbar.
+     */
     title = 'Aldo';
+
+    /*
+     * Calculates whether the aside will show as sidebar.
+     */
     asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
 
     @HostListener('window:resize')
