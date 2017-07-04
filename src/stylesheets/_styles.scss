@@ -29,38 +29,6 @@ body {
     background-color: $body-bg;
 }
 
-button {
-    @include shade($primary-palette, $primary-medium-shade);
-    margin-top: 20px;
-    font-family: Arial;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-}
-
-button.warn {
-    @include shade($warn-palette, $warn-medium-shade);
-}
-
-button:hover {
-    @include shade($primary-palette, $primary-dark-shade);
-}
-
-button.warn:hover {
-    @include shade($warn-palette, $warn-dark-shade);
-}
-
-button:disabled {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: auto;
-}
-
-button.warn:disabled {
-    @include shade($warn-palette, $warn-light-shade);
-}
-
 input {
     height: 2em;
     font-size: 1em;
