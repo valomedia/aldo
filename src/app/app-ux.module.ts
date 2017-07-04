@@ -5,7 +5,9 @@ import {
     MdToolbarModule,
     MdSidenavModule,
     MdListModule,
-    MdGridListModule
+    MdGridListModule,
+    MdMenuModule,
+    MdSlideToggleModule
 } from '@angular/material';
 
 /*
@@ -19,7 +21,9 @@ import {
         MdToolbarModule,
         MdSidenavModule,
         MdListModule,
-        MdGridListModule
+        MdGridListModule,
+        MdMenuModule,
+        MdSlideToggleModule
     ],
     exports: [
         MdButtonModule,
@@ -27,7 +31,9 @@ import {
         MdToolbarModule,
         MdSidenavModule,
         MdListModule,
-        MdGridListModule
+        MdGridListModule,
+        MdMenuModule,
+        MdSlideToggleModule
     ]
 })
 export class AppUxModule {}

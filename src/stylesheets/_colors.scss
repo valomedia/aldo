@@ -162,9 +162,27 @@ $warn-dark-bg: map-get(
 
 // Settings for @angular/material.
 @mixin colors() {
-    body.dark {
+    @include angular-material-theme(
+        md-light-theme(
+            mat-palette(
+                $primary-palette,
+                $primary-medium-shade,
+                $primary-light-shade,
+                $primary-dark-shade),
+            mat-palette(
+                $accent-palette,
+                $accent-medium-shade,
+                $accent-light-shade,
+                $accent-dark-shade),
+            mat-palette(
+                $warn-palette,
+                $warn-medium-shade,
+                $warn-light-shade,
+                $warn-dark-shade)));
+
+    .dark {
         @include angular-material-theme(
-            mat-dark-theme(
+            md-dark-theme(
                 mat-palette(
                     $primary-palette,
                     $primary-medium-shade,
@@ -181,23 +199,5 @@ $warn-dark-bg: map-get(
                     $warn-light-shade,
                     $warn-dark-shade)));
     }
-
-    @include angular-material-theme(
-        mat-light-theme(
-            mat-palette(
-                $primary-palette,
-                $primary-medium-shade,
-                $primary-light-shade,
-                $primary-dark-shade),
-            mat-palette(
-                $accent-palette,
-                $accent-medium-shade,
-                $accent-light-shade,
-                $accent-dark-shade),
-            mat-palette(
-                $warn-palette,
-                $warn-medium-shade,
-                $warn-light-shade,
-                $warn-dark-shade)));
 }
 
