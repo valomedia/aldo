@@ -34,8 +34,12 @@ md-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
-.pad {
-    margin: 24px;
+.app-action {
+    @extend .pad;
+    display: inline-block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
 
 .app-icon-button {
@@ -74,6 +78,10 @@ md-grid-tile:hover {
         padding: 7px 14px;
         color: white;
     }
+}
+
+.pad {
+    margin: 24px;
 }
 
 #aside {

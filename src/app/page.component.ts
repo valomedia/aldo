@@ -19,18 +19,11 @@ import {GraphApiError} from './graph-api-error';
     template: `
         <div *ngIf='page'>
             <h1>{{page.name}} ({{page.fan_count}} Likes)</h1>
-            <button
-                    md-raised-button
-                    (click)='locationService.back()'
-                    color='primary'>
-                Zurück
-            </button>
-            <button
-                    md-raised-button
-                    (click)='post("Hello World!")'
-                    color='warn'>
-                Post erstellen
-            </button>
+            <span class='app-action'>
+                <button md-fab>
+                    <i class='material-icons'>create</i>
+                </button>
+            </span>
         </div>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
         `
