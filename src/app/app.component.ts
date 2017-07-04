@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ApplicationRef, HostListener} from '@angular/core';
 
 /*
  * The main Component of Aldo.
@@ -60,7 +60,13 @@ import {Component} from '@angular/core';
     `
 })
 export class AppComponent {
+    constructor(private applicationRef: ApplicationRef) {}
     title = 'Aldo';
     asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
+
+    @HostListener('window:resize')
+    onResize() {
+        this.applicationRef.tick();
+    }
 }
 
