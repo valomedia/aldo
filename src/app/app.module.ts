@@ -17,6 +17,7 @@ import {FbService} from './fb.service';
 import {GraphApiErrorComponent} from './graph-api-error.component';
 import {AppUxModule} from './app-ux.module';
 import {AppUxService} from './app-ux.service';
+import {PostDialogComponent} from './post-dialog.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -36,14 +37,16 @@ import {AppUxService} from './app-ux.service';
         PageComponent,
         PagesComponent,
         DashboardComponent,
-        GraphApiErrorComponent
+        GraphApiErrorComponent,
+        PostDialogComponent
     ],
     bootstrap: [AppComponent],
     providers: [
         PageService,
         FbService,
         AppUxService
-    ]
+    ],
+    entryComponents: [PostDialogComponent]
 })
 export class AppModule {}
 

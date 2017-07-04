@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
+import {MdDialog} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
@@ -9,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
+import {PostDialogComponent} from './post-dialog.component';
 
 /*
  * The Component showing a single page in detail.
@@ -21,7 +23,7 @@ import {GraphApiError} from './graph-api-error';
         <div *ngIf='page'>
             <h1>{{page.name}} ({{page.fan_count}} Likes)</h1>
             <span class='app-action'>
-                <button md-fab>
+                <button md-fab (click)='openPostDialog()'>
                     <i class='material-icons'>create</i>
                 </button>
             </span>
@@ -33,7 +35,8 @@ export class PageComponent implements OnInit {
     constructor(
         private pageService: PageService,
         private activatedRoute: ActivatedRoute,
-        private locationService: Location) {}
+        private locationService: Location,
+        private mdDialog: MdDialog) {}
 
     @Input()
     page: Page;
@@ -61,6 +64,14 @@ export class PageComponent implements OnInit {
             .postMessage(this.page, text)
             .then(id => alert('Post erstellt: ' + id))
             .catch(err => this.graphApiError = err);
+    }
+
+    /*
+     * Open the posting dialog.
+     */
+    openPostDialog() {
+        this.mdDialog.open(PostDialogComponent).afterClosed().subscribe(
+            res => { if (res) { console.log("Post erstellt!"); }});
     }
 }
 

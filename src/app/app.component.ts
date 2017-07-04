@@ -94,8 +94,6 @@ export class AppComponent {
     dark = false;
 
     @HostListener('window:resize')
-    onResize() {
-        this.applicationRef.tick();
-    }
+    onResize() { this.applicationRef.tick(); }
 }
 
