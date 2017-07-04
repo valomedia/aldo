@@ -3,7 +3,8 @@ import {
     MdButtonModule,
     MdCheckboxModule,
     MdToolbarModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdListModule
 } from '@angular/material';
 
 /*
@@ -15,13 +16,15 @@ import {
         MdButtonModule,
         MdCheckboxModule,
         MdToolbarModule,
-        MdSidenavModule
+        MdSidenavModule,
+        MdListModule
     ],
     exports: [
         MdButtonModule,
         MdCheckboxModule,
         MdToolbarModule,
-        MdSidenavModule
+        MdSidenavModule,
+        MdListModule
     ]
 })
 export class AppUxModule {}

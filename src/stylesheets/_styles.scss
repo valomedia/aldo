@@ -71,23 +71,6 @@ md-sidenav-container {
     height: 100vh;
 }
 
-nav {
-    float: right;
-
-    a {
-        @include shade($accent-palette, $accent-medium-shade);
-        padding: 5px 10px;
-        text-decoration: none;
-        margin-top: 10px;
-        display: inline-block;
-        border-radius: 4px;
-    }
-
-    a:hover {
-        @include shade($accent-palette, $accent-light-shade);
-    }
-}
-
 .pad {
     margin: 24px;
 }
