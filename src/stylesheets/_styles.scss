@@ -5,118 +5,54 @@
  * This includes all styles that fit nowhere else.
  */
 
-*, *:after, *:before {
-    @include box-sizing(border-box);
-}
-
-[class*='col-'] {
-    float: left;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-[class*='col-']:last-of-type {
-    padding-right: 0;
-}
-
 a {
     text-decoration: none;
 }
 
 body {
-    color: $body-fg;
-    background-color: $body-bg;
-}
-
-button {
-    @include shade($primary-palette, $primary-medium-shade);
-    margin-top: 20px;
-    font-family: Arial;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-}
-
-button.warn {
-    @include shade($warn-palette, $warn-medium-shade);
-}
-
-button:hover {
-    @include shade($primary-palette, $primary-dark-shade);
-}
-
-button.warn:hover {
-    @include shade($warn-palette, $warn-dark-shade);
-}
-
-button:disabled {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: auto;
-}
-
-button.warn:disabled {
-    @include shade($warn-palette, $warn-light-shade);
-}
-
-h1 {
-    @include shade($primary-palette, $primary-medium-shade);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
-    padding: 1em;
-}
-
-h2 {
-    font-size: 2em;
-}
-
-h3 {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-h4 {
-    position: relative;
-}
-
-input {
-    height: 2em;
-    font-size: 1em;
-    padding-left: .4em;
-}
-
-nav {
-    float: right;
-
-    a {
-        @include shade($accent-palette, $accent-medium-shade);
-        padding: 5px 10px;
-        text-decoration: none;
-        margin-top: 10px;
-        display: inline-block;
-        border-radius: 4px;
-    }
-
-    a:hover {
-        @include shade($accent-palette, $accent-light-shade);
-    }
-}
-
-.col-1-4 {
-    width: 25%;
-}
-
-.grid {
     margin: 0;
+    color: white;
+    background-color: black;
 }
 
-.grid-pad {
-    padding: 10px 0;
+md-sidenav-container {
+    height: 100vh;
 }
 
-.grid-pad > [class*='col-']:last-of-type {
-    padding-right: 20px;
+md-grid-tile {
+    background: $primary-bg;
+    cursor: pointer;
+    a { color: $primary-fg; }
+}
+
+md-grid-tile:hover {
+    background: $primary-light-bg;
+    a { color: $primary-light-fg; }
+}
+
+.pad {
+    margin: 24px;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-toolbar-filler {
+    flex: 1 1 auto;
 }
 
 .hidden {
@@ -127,55 +63,21 @@ nav {
     opacity: 0;
 }
 
-.pages {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-
-    li {
-        @include shade($primary-palette, $primary-medium-shade);
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        margin: .5em;
-        border-radius: 4px;
-    }
-
-    li:hover {
-        @include shade($primary-palette, $primary-dark-shade);
-        left: .1em;
-    }
-
-    .text {
-        position: relative;
-        top: -3px;
-    }
-
-    .badge {
-        @include shade($accent-palette, $accent-dark-shade);
-        display: inline-block;
-        font-size: small;
-        padding: 0.8em 0.7em;
-        left: -1px;
-        top: -4px;
-        margin-right: .8em;
-        border-radius: 4px 0 0 4px;
-    }
-}
-
-.module {
+.mat-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
-    padding: 20px;
-    text-align: center;
-    max-height: 120px;
-    min-width: 120px;
-    border-radius: 2px;
+
+    button {
+        padding: 7px 14px;
+        color: white;
+    }
 }
 
-.module:hover {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: pointer;
+#aside {
+    width: 600px;
+}
+
+#nav {
+    width: 480px;
 }
 
 #preload_content {
@@ -183,20 +85,53 @@ nav {
     margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-    .module {
-        font-size: 10px;
-        max-height: 75px;
+/*
+ * All mobile devices.
+ */
+@media (max-width: 1263px) {
+    .close-btn {
+        display: none;
     }
-}
 
-@media (max-width: 1024px) {
     .grid {
         margin: 0;
     }
+}
 
-    .module {
-        min-width: 60px;
+/*
+ * All handsets.
+ */
+@media (max-width: 959px) and (max-height: 599px), (max-width: 599px) {
+    .pad {
+        margin: 16px;
+    }
+}
+
+/*
+ * Everything except the smallest devices in landscape mode and portrait mode 
+ * handsets.
+ */
+@media (min-width: 600px) {
+    #aside .back-btn {
+        display: none;
+    }
+}
+
+/*
+ * Handsets in portrait mode, small handsets in landscape mode.
+ */
+@media (max-width: 599px) {
+    #aside {
+        width: 100%;
+    }
+}
+
+/*
+ * Small and medium handsets in portrait mode.
+ */
+@media (max-width: 479px) {
+    #nav {
+        width: 80%;
     }
 }
 

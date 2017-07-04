@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
+import {AppUxService} from './app-ux.service';
 
 /*
  * The Component showing the dashboard.
@@ -11,28 +12,29 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'dashboard',
     template: `
-        <h2>Dashboard</h2>
-        <h3>Deine Seiten mit den meisten Likes</h3>
-        <div class='grid grid-pad'>
-            <a
-                    *ngFor='let page of biggestPages'
-                    routerLink='/page/{{page.id}}'
-                    class='col-1-4'>
-                <div class='module page'>
-                    <h4>{{page.name}}</h4>
-                </div>
-            </a>
-        </div>
+        <h1>Dashboard</h1>
+        <md-grid-list
+                [cols]='appUxService.cols() / 4'
+                [gutterSize]='appUxService.gutterSize()'
+                rowHeight='2:1'>
+            <md-grid-tile
+                    *ngFor='let page of pages'
+                    routerLink='/{{page.id}}'>
+                {{page.name}}
+            </md-grid-tile>
+        </md-grid-list>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
     `
 })
 export class DashboardComponent {
-    constructor(private pageService: PageService) {}
+    constructor(
+        private pageService: PageService,
+        private appUxService: AppUxService) {}
 
     /*
-     * The four pages with the most likes.
+     * All pages the user has access to.
      */
-    biggestPages: Page[] = [];
+    pages: Page[] = [];
 
     /*
      * The error, if an error occurs.
@@ -42,11 +44,9 @@ export class DashboardComponent {
     ngOnInit() {
         this.pageService
             .getPages()
+            .toArray()
             .subscribe(
-                page => this.biggestPages = this.biggestPages
-                    .concat([page])
-                    .sort((a,b) => b.fan_count - a.fan_count)
-                    .slice(0, 4),
+                pages => this.pages = pages,
                 err => this.graphApiError = err);
     }
 }

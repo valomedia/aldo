@@ -16,6 +16,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {FbService} from './fb.service';
 import {GraphApiErrorComponent} from './graph-api-error.component';
 import {AppUxModule} from './app-ux.module';
+import {AppUxService} from './app-ux.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -40,7 +41,8 @@ import {AppUxModule} from './app-ux.module';
     bootstrap: [AppComponent],
     providers: [
         PageService,
-        FbService
+        FbService,
+        AppUxService
     ]
 })
 export class AppModule {}

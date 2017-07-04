@@ -11,17 +11,16 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'pages',
     template: `
-        <div>
-            <h2>Seiten</h2>
-            <ul class='pages'>
-                <a *ngFor='let page of pages' routerLink='/page/{{page.id}}'>
-                    <li>
-                        <span class='badge'>{{page.fan_count}}</span>
-                        {{page.name}}
-                    </li>
+        <nav>
+            <md-nav-list>
+                <a
+                        md-list-item
+                        *ngFor='let page of pages'
+                        routerLink='/{{page.id}}'>
+                    {{page.name}}
                 </a>
-            </ul>
-        </div>
+            </md-nav-list>
+        </nav>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
     `
 })
