@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
@@ -36,7 +36,8 @@ export class PageComponent implements OnInit {
         private pageService: PageService,
         private activatedRoute: ActivatedRoute,
         private locationService: Location,
-        private mdDialog: MdDialog) {}
+        private mdDialog: MdDialog,
+        private mdSnackBar: MdSnackBar) {}
 
     @Input()
     page: Page;
@@ -70,8 +71,14 @@ export class PageComponent implements OnInit {
      * Open the posting dialog.
      */
     openPostDialog() {
-        this.mdDialog.open(PostDialogComponent).afterClosed().subscribe(
-            res => { if (res) { console.log("Post erstellt!"); }});
+        this.mdDialog.open(PostDialogComponent).afterClosed().subscribe(res => {
+            if (res) {
+                this.mdSnackBar
+                    .open("Post erstellt", "Öffnen", {duration: 2000})
+                    .onAction()
+                    .subscribe(() => alert(res));
+            }
+        });
     }
 }
 

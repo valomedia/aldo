@@ -9,7 +9,8 @@ import {
     MdMenuModule,
     MdSlideToggleModule,
     MdProgressSpinnerModule,
-    MdDialogModule
+    MdDialogModule,
+    MdSnackBarModule
 } from '@angular/material';
 
 /*
@@ -27,7 +28,8 @@ import {
         MdMenuModule,
         MdSlideToggleModule,
         MdProgressSpinnerModule,
-        MdDialogModule
+        MdDialogModule,
+        MdSnackBarModule
     ],
     exports: [
         MdButtonModule,
@@ -39,7 +41,8 @@ import {
         MdMenuModule,
         MdSlideToggleModule,
         MdProgressSpinnerModule,
-        MdDialogModule
+        MdDialogModule,
+        MdSnackBarModule
     ]
 })
 export class AppUxModule {}
