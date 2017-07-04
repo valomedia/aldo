@@ -5,20 +5,6 @@
  * This includes all styles that fit nowhere else.
  */
 
-*, *:after, *:before {
-    @include box-sizing(border-box);
-}
-
-[class*='col-'] {
-    float: left;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-[class*='col-']:last-of-type {
-    padding-right: 0;
-}
-
 a {
     text-decoration: none;
 }
@@ -27,12 +13,6 @@ body {
     margin: 0;
     color: $body-fg;
     background-color: $body-bg;
-}
-
-input {
-    height: 2em;
-    font-size: 1em;
-    padding-left: .4em;
 }
 
 md-sidenav-container {
@@ -74,65 +54,12 @@ md-grid-tile:hover {
     flex: 1 1 auto;
 }
 
-.col-1-4 {
-    width: 25%;
-}
-
-.grid {
-    margin: 0;
-}
-
-.grid-pad {
-    padding: 10px 0;
-}
-
-.grid-pad > [class*='col-']:last-of-type {
-    padding-right: 20px;
-}
-
 .hidden {
     display: none;
 }
 
 .invisible {
     opacity: 0;
-}
-
-.pages {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-
-    li {
-        @include shade($primary-palette, $primary-medium-shade);
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        margin: .5em;
-        border-radius: 4px;
-    }
-
-    li:hover {
-        @include shade($primary-palette, $primary-dark-shade);
-        left: .1em;
-    }
-
-    .text {
-        position: relative;
-        top: -3px;
-    }
-
-    .badge {
-        @include shade($accent-palette, $accent-dark-shade);
-        display: inline-block;
-        font-size: small;
-        padding: 0.8em 0.7em;
-        left: -1px;
-        top: -4px;
-        margin-right: .8em;
-        border-radius: 4px 0 0 4px;
-    }
 }
 
 .mat-toolbar {
@@ -142,20 +69,6 @@ md-grid-tile:hover {
         padding: 7px 14px;
         color: white;
     }
-}
-
-.module {
-    @include shade($primary-palette, $primary-medium-shade);
-    padding: 20px;
-    text-align: center;
-    max-height: 120px;
-    min-width: 120px;
-    border-radius: 2px;
-}
-
-.module:hover {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: pointer;
 }
 
 #aside {
@@ -181,20 +94,6 @@ md-grid-tile:hover {
 
     .grid {
         margin: 0;
-    }
-
-    .module {
-        min-width: 60px;
-    }
-}
-
-/*
- * Handsets and tablets in portrait mode.
- */
-@media (max-width: 959px) {
-    .module {
-        font-size: 10px;
-        max-height: 75px;
     }
 }
 
@@ -227,12 +126,6 @@ md-grid-tile:hover {
 }
 
 /*
- * Everything except portait mode handsets that are not very large.
- */
-@media (min-width: 480px) {
-}
-
-/*
  * Small and medium handsets in portrait mode.
  */
 @media (max-width: 479px) {
@@ -240,3 +133,4 @@ md-grid-tile:hover {
         width: 80%;
     }
 }
+
