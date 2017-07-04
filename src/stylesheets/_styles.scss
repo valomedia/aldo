@@ -21,6 +21,7 @@ md-sidenav-container {
 
 md-grid-tile {
     background: $primary-bg;
+    cursor: pointer;
     a { color: $primary-fg; }
 }
 

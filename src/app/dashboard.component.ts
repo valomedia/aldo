@@ -17,8 +17,10 @@ import {AppUxService} from './app-ux.service';
                 [cols]='appUxService.cols() / 4'
                 [gutterSize]='appUxService.gutterSize()'
                 rowHeight='2:1'>
-            <md-grid-tile *ngFor='let page of pages'>
-                <a routerLink='/{{page.id}}'>{{page.name}}</a>
+            <md-grid-tile
+                    *ngFor='let page of pages'
+                    routerLink='/{{page.id}}'>
+                {{page.name}}
             </md-grid-tile>
         </md-grid-list>
         <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
