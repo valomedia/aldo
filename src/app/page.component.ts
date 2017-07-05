@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Location} from '@angular/common';
 import {MdDialog, MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
@@ -72,7 +71,6 @@ export class PageComponent implements OnInit {
     constructor(
         private pageService: PageService,
         private activatedRoute: ActivatedRoute,
-        private locationService: Location,
         private mdDialog: MdDialog,
         private mdSnackBar: MdSnackBar) {}
 
