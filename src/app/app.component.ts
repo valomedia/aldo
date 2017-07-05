@@ -1,5 +1,7 @@
 import {Component, ApplicationRef, HostListener} from '@angular/core';
 
+import 'rxjs/add/operator/toArray';
+
 import {AppUxService} from './app-ux.service';
 
 /*
