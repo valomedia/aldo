@@ -24,10 +24,6 @@ i.material-icons {
     vertical-align: text-bottom;
 }
 
-md-dialog-actions button {
-    @extend .right;
-}
-
 md-sidenav-container {
     height: 100vh;
 }
@@ -50,6 +46,10 @@ md-grid-tile:hover {
 md-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
     button { color: white!important; }
+}
+
+nav, .app-toolbar-title, .app-content, h1 > small > span {
+    @extend .pad;
 }
 
 .app-action {
@@ -93,7 +93,7 @@ md-toolbar {
     margin: 24px;
 }
 
-.right {
+.right, md-dialog-actions button {
     float: right;
 }
 
@@ -103,10 +103,6 @@ md-toolbar {
 
 .text-primary {
     color: $primary-bg;
-}
-
-.text-right {
-    text-align: right;
 }
 
 .text-warn {
@@ -171,10 +167,11 @@ md-toolbar {
  * Everything excapt smaller portrait mode devices.
  */
 @media (min-width: 480px) {
-    h1 small {
+    h1 > small {
         float: right;
     }
-    .mobile-only {
+
+    .mobile-only, h1 > small > br {
         display: none;
     }
 }

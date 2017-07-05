@@ -22,9 +22,9 @@ import {PostDialogComponent} from './post-dialog.component';
         <div *ngIf='page'>
             <h1>
                 {{page.name}}
-                <br class='mobile-only'>
+                <br>
                 <small>
-                    <span class='pad'>
+                    <span>
                         <span class='text-primary'>
                             <md-icon>thumb_up</md-icon>
                         </span>
@@ -35,8 +35,8 @@ import {PostDialogComponent} from './post-dialog.component';
                             (+{{page.new_like_count}})
                         </span>
                     </span>
-                    <br class='mobile-only'>
-                    <span *ngIf='page.overall_star_rating' class='pad'>
+                    <br>
+                    <span *ngIf='page.overall_star_rating'>
                         <span class='text-primary'>
                             <md-icon>star</md-icon>
                         </span>
@@ -47,8 +47,8 @@ import {PostDialogComponent} from './post-dialog.component';
                             (<md-icon>people</md-icon>{{page.rating_count}})
                         </span>
                     </span>
-                    <br class='mobile-only'>
-                    <span *ngIf='page.talking_about_count' class='pad'>
+                    <br>
+                    <span *ngIf='page.talking_about_count'>
                         <span class='text-primary'>
                             <md-icon>forum</md-icon>
                         </span>

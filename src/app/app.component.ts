@@ -17,9 +17,7 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <div class='pad'>
-                        <pages (click)='nav.close()'></pages>
-                    </div>
+                    <pages (click)='nav.close()'></pages>
                 </md-sidenav>
                 <md-sidenav
                         #aside
@@ -50,7 +48,7 @@ import {AppUxService} from './app-ux.service';
                             (click)='nav.open()'>
                         <md-icon>menu</md-icon>
                     </button>
-                    <span class='app-toolbar-title pad'>{{title}}</span>
+                    <span class='app-toolbar-title'>{{title}}</span>
                     <span class='app-toolbar-filler'></span>
                     <button md-button class='app-icon-button' routerLink='/'>
                         <md-icon>dashboard</md-icon>
@@ -76,7 +74,7 @@ import {AppUxService} from './app-ux.service';
                         <md-icon>more_vert</md-icon>
                     </button>
                 </md-toolbar>
-                <div class='app-content pad'>
+                <div class='app-content'>
                     <router-outlet></router-outlet>
                 </div>
             </md-sidenav-container>
