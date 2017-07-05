@@ -11,12 +11,20 @@ a {
 
 body {
     margin: 0;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
+}
+
+i.material-icons {
+    vertical-align: text-bottom;
 }
 
 md-sidenav-container {
     height: 100vh;
+}
+
+md-spinner {
+    margin: auto;
 }
 
 md-grid-tile {
@@ -30,8 +38,21 @@ md-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
-.pad {
-    margin: 24px;
+md-toolbar {
+    @include shade($primary-palette, $primary-medium-shade);
+
+    button {
+        padding: 7px 14px!important;
+        color: white!important;
+    }
+}
+
+.app-action {
+    @extend .pad;
+    display: inline-block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
 
 .app-icon-button {
@@ -63,13 +84,8 @@ md-grid-tile:hover {
     opacity: 0;
 }
 
-.mat-toolbar {
-    @include shade($primary-palette, $primary-medium-shade);
-
-    button {
-        padding: 7px 14px;
-        color: white;
-    }
+.pad {
+    margin: 24px;
 }
 
 #aside {

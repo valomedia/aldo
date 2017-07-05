@@ -122,11 +122,11 @@ window.fbAsyncInit = function() {
 // Remove the loader.
 setTimeout(function() {
     document.getElementById('preloader').className = 'fade';
-}, 2000);
+}, 2500);
 setTimeout(function() {
     document.getElementById('preloader').className = 'fade invisible';
-}, 2250);
+}, 2750);
 setTimeout(function() {
     document.getElementById('preloader').className = 'hidden';
-}, 2500);
+}, 3000);
 

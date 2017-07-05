@@ -63,6 +63,7 @@ import {AppUxService} from './app-ux.service';
                         <div md-menu-item>
                             <md-slide-toggle [(ngModel)]='dark'>
                                 Dark mode
+                                <i class='material-icons'>invert_colors</i>
                             </md-slide-toggle>
                         </div>
                     </md-menu>
@@ -93,8 +94,6 @@ export class AppComponent {
     dark = false;
 
     @HostListener('window:resize')
-    onResize() {
-        this.applicationRef.tick();
-    }
+    onResize() { this.applicationRef.tick(); }
 }
 
