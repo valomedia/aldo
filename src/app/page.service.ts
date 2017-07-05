@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 
 import {Page, EMPTY_PAGE} from './page';
 import {FbService, HttpMethod} from './fb.service';

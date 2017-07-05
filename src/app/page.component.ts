@@ -4,10 +4,7 @@ import {Location} from '@angular/common';
 import {MdDialog, MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/concatAll';
-import 'rxjs/add/operator/concat';
-import {Observable} from 'rxjs/Observable';
 
 import {Page} from './page';
 import {PageService} from './page.service';
@@ -52,12 +49,11 @@ export class PageComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute
             .params
-            .switchMap((params: Params) => 
+            .switchMap((params: Params) =>
                 this.pageService.getPage(+params['id']))
-            .first()
-            .toPromise()
-            .then(page => this.page = page)
-            .catch(err => this.graphApiError = err);
+            .subscribe(
+                page => this.page = page,
+                err => this.graphApiError = err);
     }
 
     /*
@@ -79,19 +75,15 @@ export class PageComponent implements OnInit {
             .afterClosed()
             .filter(Boolean)
             .concatAll()
-            .map((res: Number) =>
+            .map((id: Number) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
                     .onAction()
-                    .map(() => res))
+                    .map(() => id))
             .concatAll()
-            .concat(Observable.of(0))
-            .first()
-            .toPromise()
-            .then((res: Number) => {
-                if (res) { alert("Not Implemented"); }
-            })
-            .catch((err: GraphApiError) => this.graphApiError = err);
+            .subscribe(
+                (id: Number) => alert("Not Implemented"),
+                (err: GraphApiError) => this.graphApiError = err);
     }
 }
 
