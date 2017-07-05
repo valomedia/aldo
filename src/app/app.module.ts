@@ -48,7 +48,10 @@ import {CeilPipe} from './ceil.pipe';
         FbService,
         AppUxService
     ],
-    entryComponents: [PostDialogComponent]
+    entryComponents: [
+        PostDialogComponent,
+        GraphApiErrorComponent
+    ]
 })
 export class AppModule {}
 

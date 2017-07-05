@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {MdSnackBar, MdSnackBarRef} from '@angular/material';
 
 import {GraphApiError} from './graph-api-error';
 
@@ -13,16 +14,27 @@ import {GraphApiError} from './graph-api-error';
             <p>
                 <strong>{{graphApiError.getTitle()}}</strong><br>
                 <em>{{graphApiError.getMsg()}}</em><br>
-                <button (click)='reload()'>
-                    Seite neu laden
-                </button>
             </p>
+            <div class='app-snackbar-actions'>
+                <button md-button (click)='mdSnackBarRef.dismiss()'>
+                    Fehler ignorieren
+                    <md-icon>cancel</md-icon>
+                </button>
+                <button md-button color='primary' (click)='reload()'>
+                    Seite neu laden
+                    <md-icon>refresh</md-icon>
+                </button>
+            </div>
         </div>
         `
 })
 export class GraphApiErrorComponent {
+
     @Input()
     graphApiError: GraphApiError;
+
+    @Input()
+    mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
 
     /*
      * Reload the page.
@@ -30,5 +42,14 @@ export class GraphApiErrorComponent {
     reload() {
         location.reload();
     }
+}
+
+export function showGraphApiError(
+    mdSnackBar: MdSnackBar,
+    graphApiError: GraphApiError
+) {
+    let mdSnackBarRef = mdSnackBar.openFromComponent(GraphApiErrorComponent);
+    mdSnackBarRef.instance.graphApiError = graphApiError;
+    mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
 }
 

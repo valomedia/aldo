@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {MdSnackBar} from '@angular/material';
 
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
 import {AppUxService} from './app-ux.service';
+import {showGraphApiError} from './graph-api-error.component';
 
 /*
  * The Component showing the dashboard.
@@ -25,23 +27,18 @@ import {AppUxService} from './app-ux.service';
                 {{page.name}}
             </md-grid-tile>
         </md-grid-list>
-        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
     `
 })
 export class DashboardComponent {
     constructor(
         private pageService: PageService,
-        private appUxService: AppUxService) {}
+        private appUxService: AppUxService,
+        private mdSnackBar: MdSnackBar) {}
 
     /*
      * All pages the user has access to.
      */
     pages: Page[];
-
-    /*
-     * The error, if an error occurs.
-     */
-    graphApiError: GraphApiError;
 
     ngOnInit() {
         this.pageService
@@ -49,7 +46,7 @@ export class DashboardComponent {
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
-                err => this.graphApiError = err);
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 

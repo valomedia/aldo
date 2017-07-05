@@ -10,6 +10,7 @@ import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
 import {PostDialogComponent} from './post-dialog.component';
+import {showGraphApiError} from './graph-api-error.component';
 
 /*
  * The Component showing a single page in detail.
@@ -65,7 +66,6 @@ import {PostDialogComponent} from './post-dialog.component';
                 </button>
             </span>
         </div>
-        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
         `
 })
 export class PageComponent implements OnInit {
@@ -79,11 +79,6 @@ export class PageComponent implements OnInit {
     @Input()
     page: Page;
 
-    /*
-     * Any errors returned when trying to get the page info.
-     */
-    graphApiError: GraphApiError;
-
     ngOnInit() {
         this.activatedRoute
             .params
@@ -91,7 +86,7 @@ export class PageComponent implements OnInit {
                 this.pageService.getPage(+params['id']))
             .subscribe(
                 page => this.page = page,
-                err => this.graphApiError = err);
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 
     /*
@@ -101,7 +96,7 @@ export class PageComponent implements OnInit {
         this.pageService
             .postMessage(this.page, text)
             .then(id => alert('Post erstellt: ' + id))
-            .catch(err => this.graphApiError = err);
+            .catch(err => showGraphApiError(this.mdSnackBar, err))
     }
 
     /*
@@ -121,7 +116,7 @@ export class PageComponent implements OnInit {
             .concatAll()
             .subscribe(
                 (id: Number) => alert("Not Implemented"),
-                (err: GraphApiError) => this.graphApiError = err);
+                (err: GraphApiError) => showGraphApiError(this.mdSnackBar, err));
     }
 }
 

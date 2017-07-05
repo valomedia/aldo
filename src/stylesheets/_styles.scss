@@ -52,6 +52,10 @@ nav, .app-toolbar-title, .app-content > div, h1 > small > span {
     @extend .pad;
 }
 
+snack-bar-container {
+    color: white;
+}
+
 .app-action {
     @extend .pad;
     display: inline-block;
@@ -80,6 +84,10 @@ nav, .app-toolbar-title, .app-content > div, h1 > small > span {
   padding: 0;
   text-align: left;
   text-decoration: none;
+}
+
+.app-snackbar-actions {
+    text-align: right;
 }
 
 .app-toolbar-filler {
