@@ -33,13 +33,13 @@ md-spinner {
 }
 
 md-grid-tile {
-    background: $primary-bg;
+    @include shade($primary-palette, $primary-medium-shade);
     cursor: pointer;
     a { color: $primary-fg; }
 }
 
 md-grid-tile:hover {
-    background: $primary-light-bg;
+    @include shade($primary-palette, $primary-light-shade);
     a { color: $primary-light-fg; }
 }
 
