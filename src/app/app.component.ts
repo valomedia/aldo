@@ -31,7 +31,7 @@ import {AppUxService} from './app-ux.service';
                                 md-button
                                 class='app-icon-button back-btn'
                                 (click)='aside.close()'>
-                            <i class='material-icons'>arrow_back</i>
+                            <md-icon>arrow_back</md-icon>
                         </button>
                         <span class='app-toolbar-title'>Details</span>
                         <span class='app-toolbar-filler'></span>
@@ -39,7 +39,7 @@ import {AppUxService} from './app-ux.service';
                                 md-button
                                 class='app-icon-button close-btn'
                                 (click)='aside.close()'>
-                            <i class='material-icons'>close</i>
+                            <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
                 </md-sidenav>
@@ -48,24 +48,24 @@ import {AppUxService} from './app-ux.service';
                             md-button
                             class='app-icon-button'
                             (click)='nav.open()'>
-                        <i class='material-icons'>menu</i>
+                        <md-icon>menu</md-icon>
                     </button>
                     <span class='app-toolbar-title pad'>{{title}}</span>
                     <span class='app-toolbar-filler'></span>
                     <button md-button class='app-icon-button' routerLink='/'>
-                        <i class='material-icons'>dashboard</i>
+                        <md-icon>dashboard</md-icon>
                     </button>
                     <button
                             md-button
                             class='app-icon-button'
                             [mdMenuTriggerFor]='settings'>
-                        <i class='material-icons'>settings</i>
+                        <md-icon>settings</md-icon>
                     </button>
                     <md-menu #settings='mdMenu'>
                         <div md-menu-item>
                             <md-slide-toggle [(ngModel)]='dark'>
                                 Dark mode
-                                <i class='material-icons'>invert_colors</i>
+                                <md-icon>invert_colors</md-icon>
                             </md-slide-toggle>
                         </div>
                     </md-menu>
@@ -73,7 +73,7 @@ import {AppUxService} from './app-ux.service';
                             md-button
                             class='app-icon-button'
                             (click)='aside.toggle()'>
-                        <i class='material-icons'>more_vert</i>
+                        <md-icon>more_vert</md-icon>
                     </button>
                 </md-toolbar>
                 <div class='app-content pad'>

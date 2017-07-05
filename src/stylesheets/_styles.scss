@@ -15,8 +15,17 @@ body {
     background-color: white;
 }
 
+button {
+    margin: 6px 8px!important;
+    padding: 0 8px!important;
+}
+
 i.material-icons {
-    vertical-align: text-bottom;
+    vertical-align: middle;
+}
+
+md-dialog-actions button {
+    float: right;
 }
 
 md-sidenav-container {
@@ -40,11 +49,7 @@ md-grid-tile:hover {
 
 md-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
-
-    button {
-        padding: 7px 14px!important;
-        color: white!important;
-    }
+    button { color: white!important; }
 }
 
 .app-action {

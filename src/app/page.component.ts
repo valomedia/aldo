@@ -23,7 +23,7 @@ import {PostDialogComponent} from './post-dialog.component';
             <h1>{{page.name}} ({{page.fan_count}} Likes)</h1>
             <span class='app-action'>
                 <button md-fab (click)='openPostDialog()'>
-                    <i class='material-icons'>create</i>
+                    <md-icon>create</md-icon>
                 </button>
             </span>
         </div>
