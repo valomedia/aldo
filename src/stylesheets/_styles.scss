@@ -145,6 +145,16 @@ nav, .app-toolbar-title, .app-content, h1 > small > span {
 }
 
 /*
+ * Handsets and small tablets in portrait mode, small to medium handsets in 
+ * landscape.
+ */
+@media (max-width: 719px) {
+    #preload_content {
+        width: 95%;
+    }
+}
+
+/*
  * Everything except the smallest devices in landscape mode and portrait mode 
  * handsets.
  */

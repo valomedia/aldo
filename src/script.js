@@ -23,9 +23,47 @@ conf.perms = {
 
 // Set up the retry button.
 window.onload = function() {
+
+    // Remove the loader.
+    fadeLoader = function() {
+        document.getElementById('preloader').className = 'fade';
+
+        setTimeout(function() {
+            document.getElementById('preloader').className = 'fade invisible';
+        }, 250);
+
+        setTimeout(function() {
+            document.getElementById('preloader').className = 'hidden';
+        }, 500);
+    }
+
+    // Arm the reload button.
     document.getElementById('retry_auth_btn').onclick = function() {
         window.location.reload();
     };
+
+    // Check if the device is supported.
+    if (window.screen.width < 400 || window.screen.height < 400) {
+        document.getElementById('login_issue').classList.add('hidden');
+        document.getElementById('fatal_error').classList.remove('hidden');
+        document.getElementById('screen_too_small').classList.remove('hidden');
+        fadeLoader();
+        return;
+    }
+
+    // We are go, initialize FacebookSDK and start Aldo.
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = '//connect.facebook.net/de_DE/sdk/debug.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // There is no way to tell when the Facebook-popup is actually loaded, so we 
+    // just give it plenty of time, before fading the loading screen.
+    setTimeout(fadeLoader, 2500);
 };
 
 /*
@@ -108,25 +146,4 @@ window.fbAsyncInit = function() {
         }
     }, {scope: Object.keys(conf.perms)});
 };
-
-// Initialize FacebookSDK and start Aldo.
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = '//connect.facebook.net/de_DE/sdk/debug.js';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-// Remove the loader.
-setTimeout(function() {
-    document.getElementById('preloader').className = 'fade';
-}, 2500);
-setTimeout(function() {
-    document.getElementById('preloader').className = 'fade invisible';
-}, 2750);
-setTimeout(function() {
-    document.getElementById('preloader').className = 'hidden';
-}, 3000);
 
