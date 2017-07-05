@@ -20,7 +20,45 @@ import {PostDialogComponent} from './post-dialog.component';
     template: `
         <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
         <div *ngIf='page'>
-            <h1>{{page.name}} ({{page.fan_count}} Likes)</h1>
+            <h1>
+                {{page.name}}
+                <br class='mobile-only'>
+                <small>
+                    <span class='pad'>
+                        <span class='text-primary'>
+                            <md-icon>thumb_up</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.fan_count}}
+                        </span>
+                        <span class='text-primary'>
+                            (+{{page.new_like_count}})
+                        </span>
+                    </span>
+                    <br class='mobile-only'>
+                    <span *ngIf='page.overall_star_rating' class='pad'>
+                        <span class='text-primary'>
+                            <md-icon>star</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.overall_star_rating}}
+                        </span>
+                        <span class='text-primary'>
+                            (<md-icon>people</md-icon>{{page.rating_count}})
+                        </span>
+                    </span>
+                    <br class='mobile-only'>
+                    <span *ngIf='page.talking_about_count' class='pad'>
+                        <span class='text-primary'>
+                            <md-icon>forum</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.talking_about_count}}
+                        </span>
+                    </span>
+                </small>
+
+            </h1>
             <span class='app-action'>
                 <button md-fab (click)='openPostDialog()'>
                     <md-icon>create</md-icon>

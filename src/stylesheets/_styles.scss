@@ -21,11 +21,11 @@ button {
 }
 
 i.material-icons {
-    vertical-align: middle;
+    vertical-align: text-bottom;
 }
 
 md-dialog-actions button {
-    float: right;
+    @extend .right;
 }
 
 md-sidenav-container {
@@ -93,6 +93,26 @@ md-toolbar {
     margin: 24px;
 }
 
+.right {
+    float: right;
+}
+
+.text-accent {
+    color: $accent-bg;
+}
+
+.text-primary {
+    color: $primary-bg;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-warn {
+    color: $warn-bg;
+}
+
 #aside {
     width: 600px;
 }
@@ -144,6 +164,18 @@ md-toolbar {
 @media (max-width: 599px) {
     #aside {
         width: 100%;
+    }
+}
+
+/*
+ * Everything excapt smaller portrait mode devices.
+ */
+@media (min-width: 480px) {
+    h1 small {
+        float: right;
+    }
+    .mobile-only {
+        display: none;
     }
 }
 
