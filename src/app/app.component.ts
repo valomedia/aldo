@@ -75,7 +75,9 @@ import {AppUxService} from './app-ux.service';
                     </button>
                 </md-toolbar>
                 <div class='app-content'>
-                    <router-outlet></router-outlet>
+                    <div>
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </md-sidenav-container>
         </div>

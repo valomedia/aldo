@@ -48,7 +48,7 @@ md-toolbar {
     button { color: white!important; }
 }
 
-nav, .app-toolbar-title, .app-content, h1 > small > span {
+nav, .app-toolbar-title, .app-content > div, h1 > small > span {
     @extend .pad;
 }
 
@@ -58,6 +58,11 @@ nav, .app-toolbar-title, .app-content, h1 > small > span {
     position: fixed;
     bottom: 0;
     right: 0;
+}
+
+.app-content {
+    margin: auto;
+    max-width: 1600px;
 }
 
 .app-icon-button {
