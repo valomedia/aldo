@@ -163,7 +163,7 @@ $warn-dark-bg: map-get(
 // Settings for @angular/material.
 @mixin colors() {
     @include angular-material-theme(
-        md-light-theme(
+        mat-light-theme(
             mat-palette(
                 $primary-palette,
                 $primary-medium-shade,
@@ -182,7 +182,7 @@ $warn-dark-bg: map-get(
 
     .dark {
         @include angular-material-theme(
-            md-dark-theme(
+            mat-dark-theme(
                 mat-palette(
                     $primary-palette,
                     $primary-medium-shade,
