@@ -10,12 +10,12 @@ import {MdDialogRef} from '@angular/material';
             <button
                     md-button
                     class='pad'
-                    [md-dialog-close]='""'>
+                    [md-dialog-close]='undefined'>
                 Abbrechen
             </button>
             <button
                     md-raised-button
-                    [md-dialog-close]='"Not implemented"'
+                    [md-dialog-close]='return(1)'
                     class='pad'
                     color='primary'>
                 Post erstellen
@@ -24,6 +24,7 @@ import {MdDialogRef} from '@angular/material';
     `
 })
 export class PostDialogComponent {
-    constructor(private mdDialogRef: MdDialogRef<String>) {}
+    constructor(private mdDialogRef: MdDialogRef<Promise<Number>>) {}
+    return(id: Number) { return Promise.resolve(id); }
 }
 

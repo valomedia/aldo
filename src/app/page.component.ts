@@ -5,7 +5,9 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/concatAll';
+import 'rxjs/add/operator/concat';
+import {Observable} from 'rxjs/Observable';
 
 import {Page} from './page';
 import {PageService} from './page.service';
@@ -52,9 +54,10 @@ export class PageComponent implements OnInit {
             .params
             .switchMap((params: Params) => 
                 this.pageService.getPage(+params['id']))
-            .subscribe(
-                page => this.page = page,
-                err => this.graphApiError = err);
+            .first()
+            .toPromise()
+            .then(page => this.page = page)
+            .catch(err => this.graphApiError = err);
     }
 
     /*
@@ -71,14 +74,24 @@ export class PageComponent implements OnInit {
      * Open the posting dialog.
      */
     openPostDialog() {
-        this.mdDialog.open(PostDialogComponent).afterClosed().subscribe(res => {
-            if (res) {
+        this.mdDialog
+            .open(PostDialogComponent)
+            .afterClosed()
+            .filter(Boolean)
+            .concatAll()
+            .map((res: Number) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
                     .onAction()
-                    .subscribe(() => alert(res));
-            }
-        });
+                    .map(() => res))
+            .concatAll()
+            .concat(Observable.of(0))
+            .first()
+            .toPromise()
+            .then((res: Number) => {
+                if (res) { alert("Not Implemented"); }
+            })
+            .catch((err: GraphApiError) => this.graphApiError = err);
     }
 }
 
