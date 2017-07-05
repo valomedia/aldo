@@ -16,7 +16,7 @@ import {AppUxService} from './app-ux.service';
         <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
         </md-spinner>
         <md-grid-list
-                [cols]='appUxService.cols() / 4'
+                [cols]='appUxService.cols() / 3 | ceil'
                 [gutterSize]='appUxService.gutterSize()'
                 rowHeight='2:1'>
             <md-grid-tile
