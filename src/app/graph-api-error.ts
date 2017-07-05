@@ -18,7 +18,8 @@ export enum GraphApiErrorType {
     Blocked,
     Duplicate,
     DeadLink,
-    Session
+    Session,
+    Name
 }
 
 let msgs: String[] = [];
@@ -46,6 +47,8 @@ msgs[GraphApiErrorType.DeadLink] =
     "Bitte überprüfe, dass alle Links in deinem Post auch funktionieren.";
 msgs[GraphApiErrorType.Session] = 
     "Bitte melde dich erneut an.";
+msgs[GraphApiErrorType.Name] =
+    "Überprüfe die URL auf der du dich befindest";
 
 let titles: String[] = [];
 titles[GraphApiErrorType.UnhandledError] = 
@@ -72,6 +75,8 @@ titles[GraphApiErrorType.DeadLink] =
     "Du hast dich beim Eingeben eines Links vertippt";
 titles[GraphApiErrorType.Session] = 
     "Deine Sitzung ist abgelaufen oder geschlossen worden";
+titles[GraphApiErrorType.Name] = 
+    "Seiten können nur über ihre ID aufgerufen werden";
 
 /*
  * The kind of error Facebook will return on a failed call to the GraphAPI.
@@ -168,6 +173,9 @@ export class GraphApiError {
         }
         if (this.code == 506) {
             return GraphApiErrorType.Duplicate;
+        }
+        if (this.code == 803) {
+            return GraphApiErrorType.Name;
         }
         if (this.code == 1609005) {
             return GraphApiErrorType.DeadLink;
