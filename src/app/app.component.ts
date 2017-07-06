@@ -1,4 +1,5 @@
 import {Component, ApplicationRef, HostListener} from '@angular/core';
+import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/toArray';
 
@@ -53,6 +54,13 @@ import {AppUxService} from './app-ux.service';
                     <button md-button class='app-icon-button' routerLink='/'>
                         <md-icon>dashboard</md-icon>
                     </button>
+                    <a
+                            md-button
+                            class='button app-icon-button'
+                            href='//facebook.com{{location.path()}}'
+                            target='_blank'>
+                        <md-icon>open_in_browser</md-icon>
+                    </a>
                     <button
                             md-button
                             class='app-icon-button'
@@ -86,7 +94,8 @@ import {AppUxService} from './app-ux.service';
 export class AppComponent {
     constructor(
         private applicationRef: ApplicationRef,
-        private appUxService: AppUxService) {}
+        private appUxService: AppUxService,
+        private location: Location) {}
 
     /*
      * Displayed in the main toolbar.
