@@ -25,7 +25,8 @@ import {showGraphApiError} from './graph-api-error.component';
                 </a>
             </md-nav-list>
         </nav>
-    `
+    `,
+    styleUrls: ['dist/pages.component.css']
 })
 export class PagesComponent implements OnInit {
     constructor(

@@ -76,7 +76,8 @@ import {showGraphApiError} from './graph-api-error.component';
                 </button>
             </span>
         </div>
-        `
+    `,
+    styleUrls: ['dist/page.component.css']
 })
 export class PageComponent implements OnInit {
     constructor(

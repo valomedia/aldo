@@ -113,7 +113,8 @@ import {AppUxService} from './app-ux.service';
                 </div>
             </md-sidenav-container>
         </div>
-    `
+    `,
+    styleUrls: ['dist/app.component.css']
 })
 export class AppComponent {
     constructor(

@@ -26,7 +26,8 @@ import {GraphApiError} from './graph-api-error';
                 </button>
             </div>
         </div>
-        `
+    `,
+    styleUrls: ['dist/graph-api-error.component.css']
 })
 export class GraphApiErrorComponent {
 

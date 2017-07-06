@@ -2,17 +2,15 @@
 /*
  * Styling for Aldo.
  *
- * This is the master style for Aldo, all custom styles are loaded here, with 
- * the exception of styles loaded early (style.scss) and the material design 
- * theme (theme.scss).
+ * This is the master style for Aldo, all global custom styles are loaded here, 
+ * with the exception of styles loaded early (style.scss) and the material 
+ * design theme (theme.scss).
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _app.component partial, to keep things easier to restructure.
  */
 
-@mixin box-sizing($x) {
-    -webkit-box-sizing: $x;
-    -moz-box-sizing: $x;
-    box-sizing: $x;
-}
-
+@import 'mixins';
 @import 'colors';
 @import 'spinner';
 @import '_styles';

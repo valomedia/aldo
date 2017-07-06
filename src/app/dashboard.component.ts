@@ -27,7 +27,8 @@ import {showGraphApiError} from './graph-api-error.component';
                 {{page.name}}
             </md-grid-tile>
         </md-grid-list>
-    `
+    `,
+    styleUrls: ['dist/dashboard.component.css']
 })
 export class DashboardComponent {
     constructor(

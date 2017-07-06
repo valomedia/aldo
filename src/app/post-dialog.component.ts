@@ -36,7 +36,8 @@ import {PageService} from './page.service';
                 <md-icon>cancel</md-icon>
             </button>
         </md-dialog-actions>
-    `
+    `,
+    styleUrls: ['dist/post-dialog.component.css']
 })
 export class PostDialogComponent {
     constructor(
