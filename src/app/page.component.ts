@@ -113,7 +113,10 @@ export class PageComponent implements OnInit {
      */
     openPostDialog() {
         this.mdDialog
-            .open(PostDialogComponent)
+            .open(PostDialogComponent, {
+                width: '600px',
+                height: '400px'
+            })
             .afterClosed()
             .filter(Boolean)
             .concatAll()

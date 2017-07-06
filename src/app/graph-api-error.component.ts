@@ -16,13 +16,13 @@ import {GraphApiError} from './graph-api-error';
                 <em>{{graphApiError.getMsg()}}</em><br>
             </p>
             <div class='app-snackbar-actions'>
-                <button md-button (click)='mdSnackBarRef.dismiss()'>
-                    Fehler ignorieren
-                    <md-icon>cancel</md-icon>
-                </button>
                 <button md-button color='primary' (click)='reload()'>
                     Seite neu laden
                     <md-icon>refresh</md-icon>
+                </button>
+                <button md-button (click)='mdSnackBarRef.dismiss()'>
+                    Fehler ignorieren
+                    <md-icon>cancel</md-icon>
                 </button>
             </div>
         </div>

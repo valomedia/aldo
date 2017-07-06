@@ -9,16 +9,16 @@ import {MdDialogRef} from '@angular/material';
         <md-dialog-actions>
             <button
                     md-button
-                    [md-dialog-close]='undefined'>
-                Abbrechen
-                <md-icon>cancel</md-icon>
-            </button>
-            <button
-                    md-button
                     [md-dialog-close]='return(1)'
                     color='primary'>
                 Post erstellen
                 <md-icon>publish</md-icon>
+            </button>
+            <button
+                    md-button
+                    [md-dialog-close]='undefined'>
+                Abbrechen
+                <md-icon>cancel</md-icon>
             </button>
         </md-dialog-actions>
     `
