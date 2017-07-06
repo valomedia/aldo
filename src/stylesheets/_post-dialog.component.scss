@@ -5,5 +5,19 @@
  * This contains style directives locally applied to the PostDialogComponent.
  */
 
-// TODO Content.
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+:host > * {
+    flex-shrink: 0;
+}
+
+:host > md-dialog-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
 

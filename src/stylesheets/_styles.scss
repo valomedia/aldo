@@ -69,22 +69,6 @@ nav, .app-toolbar-title, .app-content > div, h1 > small > span {
     @extend .pad;
 }
 
-post-dialog {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-post-dialog > * {
-    flex-shrink: 0;
-}
-
-post-dialog > md-dialog-content {
-    flex-grow: 1;
-    flex-shrink: 1;
-}
-
 snack-bar-container {
     color: white;
 }
