@@ -99,36 +99,28 @@ export class PageComponent implements OnInit {
     }
 
     /*
-     * Post to a given String to this Page.
-     */
-    post(text: String): void {
-        this.pageService
-            .postMessage(this.page, text)
-            .then(id => alert('Post erstellt: ' + id))
-            .catch(err => showGraphApiError(this.mdSnackBar, err))
-    }
-
-    /*
      * Open the posting dialog.
      */
     openPostDialog() {
-        this.mdDialog
-            .open(PostDialogComponent, {
-                width: '600px',
-                height: '400px'
-            })
+        const mdDialogRef = this.mdDialog.open(PostDialogComponent, {
+            width: '600px',
+            height: '400px'
+        });
+        mdDialogRef.componentInstance.page = this.page;
+        mdDialogRef
             .afterClosed()
             .filter(Boolean)
             .concatAll()
-            .map((id: Number) =>
+            .map((id: String) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
                     .onAction()
                     .map(() => id))
             .concatAll()
             .subscribe(
-                (id: Number) => alert("Not Implemented"),
-                (err: GraphApiError) => showGraphApiError(this.mdSnackBar, err));
+                (id: String) => window.open('//facebook.com/' + id, '_blank'),
+                (err: GraphApiError) =>
+                    showGraphApiError(this.mdSnackBar, err));
     }
 }
 

@@ -1,15 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
+
+import {Page} from './page';
+import {PageService} from './page.service';
 
 @Component({
     selector: 'post-dialog',
     template: `
         <h1 md-dialog-title>Post erstellen</h1>
-        <md-dialog-content></md-dialog-content>
+        <md-dialog-content>
+            <md-input-container>
+                <textarea
+                        mdInput
+                        mdTextareaAutosize
+                        #text
+                        placeholder="Schreib etwas..."></textarea>
+            </md-input-container>
+        </md-dialog-content>
         <md-dialog-actions>
             <button
+                    *ngIf='page'
                     md-button
-                    [md-dialog-close]='return(1)'
+                    (click)='post(text.value)'
                     color='primary'>
                 Post erstellen
                 <md-icon>publish</md-icon>
@@ -24,7 +36,18 @@ import {MdDialogRef} from '@angular/material';
     `
 })
 export class PostDialogComponent {
-    constructor(private mdDialogRef: MdDialogRef<Promise<Number>>) {}
-    return(id: Number) { return Promise.resolve(id); }
+    constructor(
+        private mdDialogRef: MdDialogRef<Promise<String>>,
+        private pageService: PageService) {}
+
+    @Input()
+    page: Page;
+
+    /*
+     * Post to a given String to this Page.
+     */
+    post(text: String): void {
+        this.mdDialogRef.close(this.pageService.postMessage(this.page, text));
+    }
 }
 

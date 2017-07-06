@@ -37,8 +37,8 @@ md-dialog-container {
     margin: auto;
 }
 
-md-dialog-content {
-    flex-grow: 1;
+md-input-container {
+    width: 100%;
 }
 
 md-sidenav-container {
@@ -74,6 +74,15 @@ post-dialog {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+post-dialog > * {
+    flex-shrink: 0;
+}
+
+post-dialog > md-dialog-content {
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 snack-bar-container {
@@ -112,10 +121,6 @@ snack-bar-container {
 
 .app-toolbar-filler {
     flex: 1 1 auto;
-}
-
-.cdk-overlay-pane {
-    padding: 16px;
 }
 
 .hidden {
