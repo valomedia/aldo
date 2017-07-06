@@ -29,6 +29,9 @@ import {AppUxService} from './app-ux.service';
                         <button
                                 md-button
                                 class='app-icon-button back-btn'
+                                mdTooltip="Zurück"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
                                 (click)='aside.close()'>
                             <md-icon>arrow_back</md-icon>
                         </button>
@@ -37,6 +40,9 @@ import {AppUxService} from './app-ux.service';
                         <button
                                 md-button
                                 class='app-icon-button close-btn'
+                                mdTooltip="Schließen"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
                                 (click)='aside.close()'>
                             <md-icon>close</md-icon>
                         </button>
@@ -46,17 +52,29 @@ import {AppUxService} from './app-ux.service';
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Menü"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             (click)='nav.open()'>
                         <md-icon>menu</md-icon>
                     </button>
                     <span class='app-toolbar-title'>{{title}}</span>
                     <span class='app-toolbar-filler'></span>
-                    <button md-button class='app-icon-button' routerLink='/'>
+                    <button
+                            md-button
+                            class='app-icon-button'
+                            mdTooltip="Dashboard"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
+                            routerLink='/'>
                         <md-icon>dashboard</md-icon>
                     </button>
                     <a
                             md-button
                             class='button app-icon-button'
+                            mdTooltip="Facebook"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             href='//facebook.com{{location.path()}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
@@ -64,6 +82,9 @@ import {AppUxService} from './app-ux.service';
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Einstellungen"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             [mdMenuTriggerFor]='settings'>
                         <md-icon>settings</md-icon>
                     </button>
@@ -78,6 +99,9 @@ import {AppUxService} from './app-ux.service';
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Details"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             (click)='aside.toggle()'>
                         <md-icon>more_vert</md-icon>
                     </button>

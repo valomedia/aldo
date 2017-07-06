@@ -24,7 +24,10 @@ import {showGraphApiError} from './graph-api-error.component';
                 {{page.name}}
                 <br>
                 <small>
-                    <span>
+                    <span
+                            mdTooltip="Likes (neue Likes)"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
                             <md-icon>thumb_up</md-icon>
                         </span>
@@ -36,7 +39,11 @@ import {showGraphApiError} from './graph-api-error.component';
                         </span>
                     </span>
                     <br>
-                    <span *ngIf='page.overall_star_rating'>
+                    <span
+                            *ngIf='page.overall_star_rating'
+                            mdTooltip="Bewertung (Anzahl Bewertungen)"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
                             <md-icon>star</md-icon>
                         </span>
@@ -48,7 +55,11 @@ import {showGraphApiError} from './graph-api-error.component';
                         </span>
                     </span>
                     <br>
-                    <span *ngIf='page.talking_about_count'>
+                    <span
+                            *ngIf='page.talking_about_count'
+                            mdTooltip="Nutzer, die über die Seite reden"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
                             <md-icon>forum</md-icon>
                         </span>

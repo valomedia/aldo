@@ -11,7 +11,8 @@ import {
     MdProgressSpinnerModule,
     MdDialogModule,
     MdSnackBarModule,
-    MdIconModule
+    MdIconModule,
+    MdTooltipModule
 } from '@angular/material';
 
 /*
@@ -31,7 +32,8 @@ import {
         MdProgressSpinnerModule,
         MdDialogModule,
         MdSnackBarModule,
-        MdIconModule
+        MdIconModule,
+        MdTooltipModule
     ],
     exports: [
         MdButtonModule,
@@ -45,7 +47,8 @@ import {
         MdProgressSpinnerModule,
         MdDialogModule,
         MdSnackBarModule,
-        MdIconModule
+        MdIconModule,
+        MdTooltipModule
     ]
 })
 export class AppUxModule {}
