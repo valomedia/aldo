@@ -18,6 +18,7 @@ import {GraphApiErrorComponent} from './graph-api-error.component';
 import {AppUxModule} from './app-ux.module';
 import {AppUxService} from './app-ux.service';
 import {PostDialogComponent} from './post-dialog.component';
+import {CeilPipe} from './ceil.pipe';
 
 /*
  * The Module definitions for AppComponent.
@@ -38,7 +39,8 @@ import {PostDialogComponent} from './post-dialog.component';
         PagesComponent,
         DashboardComponent,
         GraphApiErrorComponent,
-        PostDialogComponent
+        PostDialogComponent,
+        CeilPipe
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -46,7 +48,10 @@ import {PostDialogComponent} from './post-dialog.component';
         FbService,
         AppUxService
     ],
-    entryComponents: [PostDialogComponent]
+    entryComponents: [
+        PostDialogComponent,
+        GraphApiErrorComponent
+    ]
 })
 export class AppModule {}
 

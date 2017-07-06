@@ -15,8 +15,30 @@ body {
     background-color: white;
 }
 
-i.material-icons {
-    vertical-align: text-bottom;
+button, .button {
+    margin: 6px 8px!important;
+    padding: 0 8px!important;
+}
+
+button, .button {
+    .material-icons {
+        vertical-align: middle;
+    }
+}
+
+md-dialog-actions, .app-snackbar-actions {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+md-dialog-container {
+    margin: auto;
+}
+
+md-input-container {
+    width: 100%;
 }
 
 md-sidenav-container {
@@ -28,23 +50,27 @@ md-spinner {
 }
 
 md-grid-tile {
-    background: $primary-bg;
+    @include shade($primary-palette, $primary-medium-shade);
     cursor: pointer;
     a { color: $primary-fg; }
 }
 
 md-grid-tile:hover {
-    background: $primary-light-bg;
+    @include shade($primary-palette, $primary-light-shade);
     a { color: $primary-light-fg; }
 }
 
 md-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
+    button, .button { color: white!important; }
+}
 
-    button {
-        padding: 7px 14px!important;
-        color: white!important;
-    }
+nav, .app-toolbar-title, .app-content > div, h1 > small > span {
+    @extend .pad;
+}
+
+snack-bar-container {
+    color: white;
 }
 
 .app-action {
@@ -53,6 +79,11 @@ md-toolbar {
     position: fixed;
     bottom: 0;
     right: 0;
+}
+
+.app-content {
+    margin: auto;
+    max-width: 1600px;
 }
 
 .app-icon-button {
@@ -86,6 +117,18 @@ md-toolbar {
 
 .pad {
     margin: 24px;
+}
+
+.text-accent {
+    color: $accent-bg;
+}
+
+.text-primary {
+    color: $primary-bg;
+}
+
+.text-warn {
+    color: $warn-bg;
 }
 
 #aside {
@@ -124,6 +167,16 @@ md-toolbar {
 }
 
 /*
+ * Handsets and small tablets in portrait mode, small to medium handsets in 
+ * landscape.
+ */
+@media (max-width: 719px) {
+    #preload_content {
+        width: 95%;
+    }
+}
+
+/*
  * Everything except the smallest devices in landscape mode and portrait mode 
  * handsets.
  */
@@ -139,6 +192,19 @@ md-toolbar {
 @media (max-width: 599px) {
     #aside {
         width: 100%;
+    }
+}
+
+/*
+ * Everything excapt smaller portrait mode devices.
+ */
+@media (min-width: 480px) {
+    h1 > small {
+        float: right;
+    }
+
+    .mobile-only, h1 br {
+        display: none;
     }
 }
 

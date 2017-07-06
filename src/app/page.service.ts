@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 
 import {Page, EMPTY_PAGE} from './page';
 import {FbService, HttpMethod} from './fb.service';
@@ -37,10 +38,11 @@ export class PageService {
     /*
      * Post a message as the page.
      */
-    postMessage(page: Page, msg: String) {
+    postMessage(page: Page, msg: String, link: String) {
         return this.fbService
             .call(page.id.toString() + '/feed', HttpMethod.Post, {
                 message: msg,
+                link: link,
                 access_token: page.access_token
             })
             .map(({id}: {id: String}) => id)

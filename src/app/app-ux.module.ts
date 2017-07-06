@@ -10,7 +10,10 @@ import {
     MdSlideToggleModule,
     MdProgressSpinnerModule,
     MdDialogModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdIconModule,
+    MdTooltipModule,
+    MdInputModule
 } from '@angular/material';
 
 /*
@@ -29,7 +32,10 @@ import {
         MdSlideToggleModule,
         MdProgressSpinnerModule,
         MdDialogModule,
-        MdSnackBarModule
+        MdSnackBarModule,
+        MdIconModule,
+        MdTooltipModule,
+        MdInputModule
     ],
     exports: [
         MdButtonModule,
@@ -42,7 +48,10 @@ import {
         MdSlideToggleModule,
         MdProgressSpinnerModule,
         MdDialogModule,
-        MdSnackBarModule
+        MdSnackBarModule,
+        MdIconModule,
+        MdTooltipModule,
+        MdInputModule
     ]
 })
 export class AppUxModule {}

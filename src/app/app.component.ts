@@ -1,4 +1,7 @@
 import {Component, ApplicationRef, HostListener} from '@angular/core';
+import {Location} from '@angular/common';
+
+import 'rxjs/add/operator/toArray';
 
 import {AppUxService} from './app-ux.service';
 
@@ -15,9 +18,7 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <div class='pad'>
-                        <pages (click)='nav.close()'></pages>
-                    </div>
+                    <pages (click)='nav.close()'></pages>
                 </md-sidenav>
                 <md-sidenav
                         #aside
@@ -28,16 +29,22 @@ import {AppUxService} from './app-ux.service';
                         <button
                                 md-button
                                 class='app-icon-button back-btn'
+                                mdTooltip="Zurück"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
                                 (click)='aside.close()'>
-                            <i class='material-icons'>arrow_back</i>
+                            <md-icon>arrow_back</md-icon>
                         </button>
                         <span class='app-toolbar-title'>Details</span>
                         <span class='app-toolbar-filler'></span>
                         <button
                                 md-button
                                 class='app-icon-button close-btn'
+                                mdTooltip="Schließen"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
                                 (click)='aside.close()'>
-                            <i class='material-icons'>close</i>
+                            <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
                 </md-sidenav>
@@ -45,46 +52,75 @@ import {AppUxService} from './app-ux.service';
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Menü"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             (click)='nav.open()'>
-                        <i class='material-icons'>menu</i>
+                        <md-icon>menu</md-icon>
                     </button>
-                    <span class='app-toolbar-title pad'>{{title}}</span>
+                    <span class='app-toolbar-title'>{{title}}</span>
                     <span class='app-toolbar-filler'></span>
-                    <button md-button class='app-icon-button' routerLink='/'>
-                        <i class='material-icons'>dashboard</i>
-                    </button>
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Dashboard"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
+                            routerLink='/'>
+                        <md-icon>dashboard</md-icon>
+                    </button>
+                    <a
+                            md-button
+                            class='button app-icon-button'
+                            mdTooltip="Facebook"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
+                            href='//facebook.com{{location.path()}}'
+                            target='_blank'>
+                        <md-icon>open_in_browser</md-icon>
+                    </a>
+                    <button
+                            md-button
+                            class='app-icon-button'
+                            mdTooltip="Einstellungen"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             [mdMenuTriggerFor]='settings'>
-                        <i class='material-icons'>settings</i>
+                        <md-icon>settings</md-icon>
                     </button>
                     <md-menu #settings='mdMenu'>
                         <div md-menu-item>
                             <md-slide-toggle [(ngModel)]='dark'>
                                 Dark mode
-                                <i class='material-icons'>invert_colors</i>
+                                <md-icon>invert_colors</md-icon>
                             </md-slide-toggle>
                         </div>
                     </md-menu>
                     <button
                             md-button
                             class='app-icon-button'
+                            mdTooltip="Details"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
                             (click)='aside.toggle()'>
-                        <i class='material-icons'>more_vert</i>
+                        <md-icon>more_vert</md-icon>
                     </button>
                 </md-toolbar>
-                <div class='app-content pad'>
-                    <router-outlet></router-outlet>
+                <div class='app-content'>
+                    <div>
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </md-sidenav-container>
         </div>
-    `
+    `,
+    styleUrls: ['dist/app.component.css']
 })
 export class AppComponent {
     constructor(
         private applicationRef: ApplicationRef,
-        private appUxService: AppUxService) {}
+        private appUxService: AppUxService,
+        private location: Location) {}
 
     /*
      * Displayed in the main toolbar.

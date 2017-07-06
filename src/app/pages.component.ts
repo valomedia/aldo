@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {MdSnackBar} from '@angular/material';
 
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
+import {showGraphApiError} from './graph-api-error.component';
 
 /*
  * The Component showing the list of pages.
@@ -23,21 +25,18 @@ import {GraphApiError} from './graph-api-error';
                 </a>
             </md-nav-list>
         </nav>
-        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
-    `
+    `,
+    styleUrls: ['dist/pages.component.css']
 })
 export class PagesComponent implements OnInit {
-    constructor(private pageService: PageService) {};
+    constructor(
+        private pageService: PageService,
+        private mdSnackBar: MdSnackBar) {};
 
     /*
      * All pages of the user.
      */
     pages: Page[];
-
-    /*
-     * The error, if an error occurs.
-     */
-    graphApiError: GraphApiError;
 
     ngOnInit() {
         this.pageService
@@ -45,7 +44,7 @@ export class PagesComponent implements OnInit {
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
-                err => this.graphApiError = err);
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 
