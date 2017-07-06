@@ -16,12 +16,15 @@ import {PageService} from './page.service';
                         #text
                         placeholder="Schreib etwas..."></textarea>
             </md-input-container>
+            <md-input-container>
+                <input mdInput #link placeholder="Füge einen Link hinzu...">
+            </md-input-container>
         </md-dialog-content>
         <md-dialog-actions>
             <button
                     *ngIf='page'
                     md-button
-                    (click)='post(text.value)'
+                    (click)='post(text.value, link.value)'
                     color='primary'>
                 Post erstellen
                 <md-icon>publish</md-icon>
@@ -46,8 +49,8 @@ export class PostDialogComponent {
     /*
      * Post to a given String to this Page.
      */
-    post(text: String): void {
-        this.mdDialogRef.close(this.pageService.postMessage(this.page, text));
+    post(text: String, link: String) {
+        this.mdDialogRef.close(this.pageService.postMessage(this.page, text, link));
     }
 }
 
