@@ -20,12 +20,6 @@ button, .button {
     padding: 0 8px!important;
 }
 
-button, .button {
-    .material-icons {
-        vertical-align: middle;
-    }
-}
-
 md-dialog-actions, .app-snackbar-actions {
     padding: 12px 0;
     display: flex;
@@ -35,6 +29,10 @@ md-dialog-actions, .app-snackbar-actions {
 
 md-dialog-container {
     margin: auto;
+}
+
+md-icon {
+    vertical-align: middle;
 }
 
 md-input-container {
