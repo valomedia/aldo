@@ -110,6 +110,11 @@ export class PageComponent implements OnInit {
         mdDialogRef.componentInstance.page = this.page;
         mdDialogRef
             .afterClosed()
+            .do(() => 
+                this.mdSnackBar.open(
+                    "Post wird erstellt...",
+                    "",
+                    {duration: 2000}))
             .filter(Boolean)
             .concatAll()
             .map((id: String) =>
