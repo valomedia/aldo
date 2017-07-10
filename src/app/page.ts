@@ -30,9 +30,7 @@ export interface PageType {
  * A Facebook page as used internally.
  */
 export class Page {
-    constructor(kwargs: PageType) {
-        return Object.assign(this, kwargs);
-    }
+    constructor(kwargs: PageType) { Object.assign(this, kwargs); }
 }
 export interface Page extends PageType {}
 
