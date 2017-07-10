@@ -1,3 +1,4 @@
+import {ProfileType, Profile, EMPTY_PROFILE} from './profile';
 
 /*
  * Classes related to handling Facebook pages.
@@ -15,10 +16,8 @@ export enum ContentType {
 /*
  * A Facebook page as returned by the Facebook API.
  */
-export interface PageType {
-    id: Number;
+export interface PageType extends ProfileType {
     access_token: String;
-    name: String;
     fan_count: Number;
     new_like_count: Number;
     overall_star_rating: Number;
@@ -29,8 +28,8 @@ export interface PageType {
 /*
  * A Facebook page as used internally.
  */
-export class Page {
-    constructor(kwargs: PageType) { Object.assign(this, kwargs); }
+export class Page extends Profile {
+    constructor(kwargs: PageType) { super(kwargs); }
 }
 export interface Page extends PageType {}
 
@@ -42,9 +41,8 @@ export interface Page extends PageType {}
  * PageService.
  */
 export const EMPTY_PAGE = new Page({
-    id: 0,
+    ...EMPTY_PROFILE,
     access_token: '',
-    name: '',
     fan_count: 0,
     new_like_count: 0,
     overall_star_rating: 0,
