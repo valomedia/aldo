@@ -1,6 +1,6 @@
 
 /*
- * A page.
+ * Classes related to handling Facebook pages.
  */
 
 /*
@@ -15,7 +15,7 @@ export enum ContentType {
 /*
  * A Facebook page as returned by the Facebook API.
  */
-export interface Page {
+export interface PageType {
     id: Number;
     access_token: String;
     name: String;
@@ -27,13 +27,24 @@ export interface Page {
 };
 
 /*
+ * A Facebook page as used internally.
+ */
+export class Page {
+    constructor(kwargs: PageType) {
+        return Object.assign(this, kwargs);
+    }
+}
+export interface Page extends PageType {}
+export default Page;
+
+/*
  * The simplest valid page.
  *
  * This exists, so the PageService can use it to check which fields to request 
  * from Facebook, thus allowing adding a field to Page without changing 
  * PageService.
  */
-export const EMPTY_PAGE = {
+export const EMPTY_PAGE = new Page({
     id: 0,
     access_token: '',
     name: '',
@@ -42,5 +53,5 @@ export const EMPTY_PAGE = {
     overall_star_rating: 0,
     rating_count: 0,
     talking_about_count: 0
-};
+});
 
