@@ -21,6 +21,9 @@ conf.perms = {
     }
 }
 
+// Calculate Facebook GraphAPI base url for direct requests withouth the jsSDK.
+conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
+
 // Set up the retry button.
 window.onload = function() {
 
@@ -74,10 +77,10 @@ window.onload = function() {
 window.fbAsyncInit = function() {
     // Initialize the FacebookSDK with the correct parameters for Aldo.
     FB.init({
-        appId: conf.fbAppID,
+        appId: conf.fb.appID,
         autoLogAppEvents: true,
         xfbml: false,
-        version: 'v2.9'
+        version: conf.fb.version
     });
     FB.AppEvents.logPageView();
 
