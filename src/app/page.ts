@@ -35,7 +35,6 @@ export class Page {
     }
 }
 export interface Page extends PageType {}
-export default Page;
 
 /*
  * The simplest valid page.
