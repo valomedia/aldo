@@ -5,6 +5,10 @@
  * Profiles are Users, Pages, Groups, Events and Applications.
  */
 
+declare var conf: {
+    fb: { apiUrl: string }
+};
+
 /*
  * A Facebook profile as returned by the Facebook API.
  */
@@ -19,6 +23,10 @@ export interface ProfileType {
  */
 export class Profile {
     constructor(kwargs: ProfileType) { Object.assign(this, kwargs); }
+
+    getIcon() {
+        return this.icon || conf.fb.apiUrl + '/' + this.id + '/picture';
+    }
 }
 export interface Profile extends ProfileType {}
 
