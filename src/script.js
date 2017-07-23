@@ -46,8 +46,7 @@ window.onload = function() {
         }, 1000);
     }
 
-    // JavaScript is working, replace the no_script notice with the preloader, 
-    // then disable FOUC-prevention.
+    // JavaScript is working, replace the no_script notice with the preloader.
     document.getElementById('preloader').className = '';
     document.getElementById('no_script').className = '';
     document.getElementById('login_notice').className = '';
@@ -67,6 +66,7 @@ window.onload = function() {
         return;
     }
 
+    // Load the FBJSSDK.
     var e = document.createElement('script');
     e.src = conf.fb.sdkUrl;
     document.body.appendChild(e);
