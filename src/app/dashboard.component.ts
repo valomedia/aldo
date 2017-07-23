@@ -41,13 +41,20 @@ export class DashboardComponent {
      */
     pages: Page[];
 
+    /*
+     * The error that occured, if any.
+     */
+    graphApiError: GraphApiError;
+
     ngOnInit() {
         this.pageService
             .getPages()
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
-                err => showGraphApiError(this.mdSnackBar, err));
+                err =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
     }
 }
 

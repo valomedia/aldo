@@ -18,7 +18,7 @@ import {showGraphApiError} from './graph-api-error.component';
 @Component({
     selector: 'page',
     template: `
-        <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
+        <md-spinner color='accent' *ngIf='!page'></md-spinner>
         <div *ngIf='page'>
             <h1>
                 {{page.name}}
@@ -89,6 +89,11 @@ export class PageComponent implements OnInit {
     @Input()
     page: Page;
 
+    /*
+     * The error that occured, if any.
+     */
+    graphApiError: GraphApiError;
+
     ngOnInit() {
         this.activatedRoute
             .params
@@ -126,7 +131,8 @@ export class PageComponent implements OnInit {
             .subscribe(
                 (id: String) => window.open('//facebook.com/' + id, '_blank'),
                 (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
     }
 }
 

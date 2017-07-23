@@ -45,6 +45,9 @@ export class GraphApiErrorComponent {
     }
 }
 
+/*
+ * Show a GraphApiError and return it.
+ */
 export function showGraphApiError(
     mdSnackBar: MdSnackBar,
     graphApiError: GraphApiError
@@ -53,5 +56,6 @@ export function showGraphApiError(
     let mdSnackBarRef = mdSnackBar.openFromComponent(GraphApiErrorComponent);
     mdSnackBarRef.instance.graphApiError = graphApiError;
     mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+    return graphApiError;
 }
 
