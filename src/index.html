@@ -9,7 +9,124 @@
                 content='width=360, initial-scale=1, minimum-scale=1, maximum-scale=1'>
 
         <!-- Essential for the user to see at least a loading screen -->
-        <link rel='stylesheet' href='dist/style.css'>
+        <style>
+            #preloader {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 65530;	
+                margin-left: 0;
+                background-color: #3f51b5;
+            }
+
+            #preloader,
+            #preloader::before,
+            #preloader::after {
+                transition: opacity 0.2s ease;
+            }
+
+            #preloader::before,
+            #preloader::after {
+                content: "";
+                display: block;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+            }
+
+            #preloader.fade::before,
+            #preloader.fade::after {
+                opacity: 0;
+            }
+
+            #preloader::before {
+                left: 50%;
+                animation: animation_left_round 1s infinite ease-in-out;
+                background-color: #ff6e40
+            }
+
+            #preloader::after {
+                right: 50%;
+                animation: animation_right_round 1s infinite ease-in-out;
+                background-color: white;
+            }
+
+            /* Tablets and phones */
+            @media (max-width: 1280px) {
+                #preloader,
+                #preloader::before,
+                #preloader::after {
+                    transition: opacity 0.15s ease;
+                }
+
+                #preloader::before,
+                #preloader::after {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+
+            /* Phones */
+            @media (max-width: 600px) {
+                #preloader::before,
+                #preloader::after {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+
+            @-webkit-keyframes animation_left_round {
+                0%, 100% {
+                    -webkit-transform: translate3d(50%,-50%,0);
+                    transform: translate3d(50%,-50%,0);
+                }
+
+                50% {
+                    -webkit-transform: translate3d(-150%,-50%,0);
+                    transform: translate3d(-150%,-50%,0);
+                }
+            }
+
+            @keyframes animation_left_round {
+                0%, 100% {
+                    -webkit-transform: translate3d(50%,-50%,0);
+                    transform: translate3d(50%,-50%,0);
+                }
+
+                50% {
+                    -webkit-transform: translate3d(-150%,-50%,0);
+                    transform: translate3d(-150%,-50%,0);
+                }
+            }
+
+            @-webkit-keyframes animation_right_round {
+                0%, 100% {
+                    -webkit-transform: translate3d(-50%,-50%,0);
+                    transform: translate3d(-50%,-50%,0);
+                }
+
+                50% {
+                    -webkit-transform: translate3d(150%,-50%,0);
+                    transform: translate3d(150%,-50%,0);
+                }
+            }
+
+            @keyframes animation_right_round {
+                0%, 100% {
+                    -webkit-transform: translate3d(-50%,-50%,0);
+                    transform: translate3d(-50%,-50%,0);
+                }
+
+                50% {
+                    -webkit-transform: translate3d(150%,-50%,0);
+                    transform: translate3d(150%,-50%,0);
+                }
+            }
+        </style>
 
         <!-- Early script to avoid a FOUC -->
         <script type='text/javascript'>
