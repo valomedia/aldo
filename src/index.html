@@ -129,9 +129,7 @@
         </style>
 
         <!-- Early script to avoid a FOUC -->
-        <script type='text/javascript'>
-            document.documentElement.className = 'hidden';
-        </script>
+        <script>document.documentElement.className = 'hidden';</script>
     </head>
     <body class='mat-typography'>
         <div id='preloader' class='hidden'></div>
@@ -248,9 +246,7 @@
     </body>
 
     <!-- Disarm FOUC-prevention -->
-    <script type='text/javascript'>
-        document.documentElement.className = '';
-    </script>
+    <script>document.documentElement.className = '';</script>
 
     <!-- Big stylesheets with all other styles -->
     <link
