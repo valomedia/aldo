@@ -33,11 +33,11 @@ window.onload = function() {
 
         setTimeout(function() {
             document.getElementById('preloader').className = 'fade invisible';
-        }, 250);
+        }, 500);
 
         setTimeout(function() {
             document.getElementById('preloader').className = 'hidden';
-        }, 500);
+        }, 1000);
     }
 
     // JavaScript is working, replace the no_script notice with the preloader, 
