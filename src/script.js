@@ -40,6 +40,14 @@ window.onload = function() {
         }, 500);
     }
 
+    // JavaScript is working, replace the no_script notice with the preloader, 
+    // then disable FOUC-prevention.
+    document.getElementById('preloader').className = '';
+    document.getElementById('no_script').className = '';
+    document.getElementById('login_notice').className = '';
+    document.getElementById('retry_auth_btn').className = '';
+    document.documentElement.className = '';
+
     // Arm the reload button.
     document.getElementById('retry_auth_btn').onclick = function() {
         window.location.reload();

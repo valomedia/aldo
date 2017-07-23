@@ -10,15 +10,32 @@
 
         <!-- Essential for the user to see at least a loading screen -->
         <link rel='stylesheet' href='dist/style.css'>
+
+        <!-- Early script to avoid a FOUC -->
+        <script type='text/javascript'>
+            document.documentElement.className = 'hidden';
+        </script>
     </head>
     <body class='mat-typography'>
-        <div id="preloader"></div>
+        <div id='preloader' class='hidden'></div>
         <app>
             <div id='preload_spinner' class='hidden spinner'></div>
             <div id='preload_content'>
                 <div id='login_issue'>
                     <h1>Fast geschafft! :)</h1>
-                    <div id='login_notice'>
+                    <div id='no_script'>
+                        <p>
+                            JavaScript läd nicht.  Aldo benötigt JavaScript, um 
+                            Inhalte dynamisch an zu zeigen.  Solltest du Scripts 
+                            in deinem Browser deaktiviert haben, musst du für 
+                            Aldo eine Ausnahme hinzufügen. Manche Unternehmen 
+                            unterbinden das Ausführen von Scripten in ihrer 
+                            Firewall.  Sollte dies der Fall sein, musst du den 
+                            Netzwerkadministrator bitten, eine Ausnahme hinzu zu 
+                            fügen.
+                        </p>
+                    </div>
+                    <div id='login_notice' class='hidden'>
                         <p>
                             Bitte melde dich mit deinem Facebook-Account an, um 
                             Aldo zu nutzen.  Falls du einen Popupblocker 
@@ -50,7 +67,7 @@
                         <ul id='denied_permissions'></ul>
                     </div>
                     <div>
-                        <button id='retry_auth_btn'>
+                        <button id='retry_auth_btn' class='hidden'>
                             Erneut versuchen
                             <i class='material-icons'>refresh</i>
                         </button>
