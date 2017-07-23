@@ -1,9 +1,10 @@
+'use strict';
 
 /*
  * Configuration options for Aldo.
  */
 
-conf = {};
+this.conf = {};
 
 conf.fb = {
     appID: '319585755122078',

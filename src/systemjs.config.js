@@ -1,3 +1,4 @@
+'use strict';
 
 /*
  * System configuration for Angular samples

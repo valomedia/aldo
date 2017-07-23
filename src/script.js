@@ -1,7 +1,10 @@
+'use strict';
 
 /*
  * Bootstrap script.
  */
+
+var conf = this.conf || {};
 
 // Inject permissions into Aldo config.
 conf.perms = {
@@ -21,6 +24,9 @@ conf.perms = {
     }
 }
 
+// Path to the Facebook GraphAPI JavaScript SDK.
+conf.fb.sdkUrl = '//connect.facebook.net/de_DE/sdk/debug.js';
+
 // Calculate Facebook GraphAPI base url for direct requests withouth the jsSDK.
 conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
 
@@ -28,7 +34,7 @@ conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
 window.onload = function() {
 
     // Remove the loader.
-    fadeLoader = function() {
+    var fadeLoader = function() {
         document.getElementById('preloader').className = 'fade';
 
         setTimeout(function() {
@@ -61,15 +67,9 @@ window.onload = function() {
         return;
     }
 
-    // We are go, initialize FacebookSDK and start Aldo.
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = '//connect.facebook.net/de_DE/sdk/debug.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    var e = document.createElement('script');
+    e.src = conf.fb.sdkUrl;
+    document.body.appendChild(e);
 
     // There is no way to tell when the Facebook-popup is actually loaded, so we 
     // just give it plenty of time, before fading the loading screen.
