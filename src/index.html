@@ -130,6 +130,11 @@
         </app>
     </body>
 
+    <!-- Disarm FOUC-prevention -->
+    <script type='text/javascript'>
+        document.documentElement.className = '';
+    </script>
+
     <!-- Big stylesheets with all other styles -->
     <link
             rel='stylesheet'
@@ -150,6 +155,6 @@
 
     <!-- Configuration and bootstrap. -->
     <script src='aldo.conf.js'></script>
-    <script src='script.js' async></script>
+    <script src='script.js'></script>
 </html>
 
