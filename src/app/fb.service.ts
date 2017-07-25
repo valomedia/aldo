@@ -17,10 +17,10 @@ interface GraphApiResponse {
     data?: any[];
     paging?: {
         cursors: {
-            before: String,
-            after: String
+            before: string,
+            after: string
         },
-        next?: String
+        next?: string
     }
 }
 
@@ -36,8 +36,8 @@ export enum HttpMethod {
 declare var FB: {
     init: (params: any) => void;
     api: (
-        path: String,
-        method: String,
+        path: string,
+        method: string,
         params: any,
         callback: (response: any) => void) => void;
     ui: (params: any, callback: (response: any) => void) => void;
@@ -54,7 +54,7 @@ export class FbService {
      * Promise will be rejected with a GraphApiError.
      */
     api(
-        path: String,
+        path: string,
         method = HttpMethod.Get,
         params = {}
     ): Promise<GraphApiResponse> {
@@ -75,7 +75,7 @@ export class FbService {
      *
      * TODO Look at this again, when not tired.
      */
-    call(path: String, method = HttpMethod.Get, params = {}) {
+    call(path: string, method = HttpMethod.Get, params = {}) {
         return Observable.fromPromise(this.api(path, method, params))
             .map(res => ({
                 data: res.data || [res],

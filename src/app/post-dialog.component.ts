@@ -76,7 +76,7 @@ import {PageService} from './page.service';
 })
 export class PostDialogComponent {
     constructor(
-        private mdDialogRef: MdDialogRef<Promise<String>>,
+        private mdDialogRef: MdDialogRef<Promise<string>>,
         private pageService: PageService) {}
 
     @Input()

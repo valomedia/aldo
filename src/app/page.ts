@@ -17,12 +17,12 @@ export enum ContentType {
  * A Facebook page as returned by the Facebook API.
  */
 export interface PageType extends ProfileType {
-    access_token: String;
-    fan_count: Number;
-    new_like_count: Number;
-    overall_star_rating: Number;
-    rating_count: Number;
-    talking_about_count: Number;
+    access_token: string;
+    fan_count: number;
+    new_like_count: number;
+    overall_star_rating: number;
+    rating_count: number;
+    talking_about_count: number;
 };
 
 /*

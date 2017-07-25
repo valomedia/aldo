@@ -22,7 +22,7 @@ export enum GraphApiErrorType {
     Name
 }
 
-let msgs: String[] = [];
+let msgs: string[] = [];
 msgs[GraphApiErrorType.UnhandledError] = 
     "Bitte kontaktiere den Support, wir werden das Problem sofort beheben.";
 msgs[GraphApiErrorType.Registration] = 
@@ -50,7 +50,7 @@ msgs[GraphApiErrorType.Session] =
 msgs[GraphApiErrorType.Name] =
     "Überprüfe die URL auf der du dich befindest";
 
-let titles: String[] = [];
+let titles: string[] = [];
 titles[GraphApiErrorType.UnhandledError] = 
     "Es ist ein unerwarteter Fehler aufgetreten";
 titles[GraphApiErrorType.Registration] = 
@@ -91,13 +91,13 @@ export class GraphApiError {
         error_user_msg = '',
         fbtrace_id
     }: {
-        message: String,
-        type?: String,
+        message: string,
+        type?: string,
         code: number,
         error_subcode?: number,
-        error_user_title?: String,
-        error_user_msg?: String,
-        fbtrace_id: String
+        error_user_title?: string,
+        error_user_msg?: string,
+        fbtrace_id: string
     }) {
         this.message = message;
         this.type = type;
@@ -111,12 +111,12 @@ export class GraphApiError {
     /*
      * Facebook's error message.
      */
-    message: String;
+    message: string;
 
     /*
      * The type of error for named errors.
      */
-    type: String;
+    type: string;
 
     /*
      * Primary error code.
@@ -131,17 +131,17 @@ export class GraphApiError {
     /*
      * A message from Facebook, describing the error for the user.
      */
-    error_user_msg: String;
+    error_user_msg: string;
 
     /*
      * A dialog title from Facebook, describing the error for the user.
      */
-    error_user_title: String;
+    error_user_title: string;
 
     /*
      * An identifyer used for Debugging internally by Facebook.
      */
-    fbtrace_id: String;
+    fbtrace_id: string;
 
     /*
      * Resolve the error codes to a class of error.
@@ -195,14 +195,14 @@ export class GraphApiError {
     /*
      * Get an appropriate help message for the user.
      */
-    getMsg(): String {
+    getMsg(): string {
         return this.error_user_msg || msgs[this.getErrorClass()];
     }
 
     /*
      * Get a short error description for use as dialog box title.
      */
-    getTitle(): String {
+    getTitle(): string {
         return this.error_user_title || titles[this.getErrorClass()];
     }
 }

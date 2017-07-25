@@ -121,14 +121,14 @@ export class PageComponent implements OnInit {
                     {duration: 2000}))
             .filter(Boolean)
             .concatAll()
-            .map((id: String) =>
+            .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
                     .onAction()
                     .map(() => id))
             .concatAll()
             .subscribe(
-                (id: String) => window.open('//facebook.com/' + id, '_blank'),
+                (id: string) => window.open('//facebook.com/' + id, '_blank'),
                 (err: GraphApiError) =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));

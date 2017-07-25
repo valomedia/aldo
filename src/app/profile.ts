@@ -13,9 +13,9 @@ declare var conf: {
  * A Facebook profile as returned by the Facebook API.
  */
 export interface ProfileType {
-    id: Number;
-    name: String;
-    icon?: String;
+    id: number;
+    name: string;
+    icon?: string;
 }
 
 /*

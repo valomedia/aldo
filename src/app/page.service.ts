@@ -18,7 +18,7 @@ export class PageService {
     /*
      * Perform a GET-request for a Page on a given path.
      */
-    get(path: String, params = {}): Observable<Page> {
+    get(path: string, params = {}): Observable<Page> {
         return this.fbService
             .call(path, HttpMethod.Get, {
                 fields: Object.keys(EMPTY_PAGE),
@@ -30,7 +30,7 @@ export class PageService {
     /*
      * Get all Pages of the user.
      */
-    getPages(after?: String) { return this.get('me/accounts'); }
+    getPages(after?: string) { return this.get('me/accounts'); }
 
     /*
      * Get a Page by its ID.
@@ -42,9 +42,9 @@ export class PageService {
      */
     postMessage(
             page: Page,
-            msg: String,
+            msg: string,
             contentType: ContentType,
-            link: String
+            link: string
     ) {
         let result;
         switch (+contentType) {
@@ -79,7 +79,7 @@ export class PageService {
                     });
                 break;
         }
-        return result.map(({id}: {id: String}) => id).first().toPromise();
+        return result.map(({id}: {id: string}) => id).first().toPromise();
     }
 }
 
