@@ -10,6 +10,7 @@ import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
 import {PostDialogComponent} from './post-dialog.component';
 import {showGraphApiError} from './graph-api-error.component';
+import {AppUxService} from './app-ux.service';
 
 /*
  * The Component showing a single page in detail.
@@ -74,6 +75,78 @@ import {showGraphApiError} from './graph-api-error.component';
                     <md-icon>create</md-icon>
                 </button>
             </span>
+            <md-tab-group *ngIf='appUxService.cols() == 4'>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>archive</md-icon>
+                    </ng-template>
+                    <h2>Posts auf deiner Seite</h2>
+                </md-tab>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>inbox</md-icon>
+                    </ng-template>
+                    <h2>Posts mit deiner Seite</h2>
+                </md-tab>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>hourglass_full</md-icon>
+                    </ng-template>
+                    <h2>Geplante Posts</h2>
+                </md-tab>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>drafts</md-icon>
+                    </ng-template>
+                    <h2>Entwürfe für Posts</h2>
+                </md-tab>
+            </md-tab-group>
+            <md-tab-group *ngIf='appUxService.cols() == 8'>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>public</md-icon>
+                        Veröffentlichte Posts
+                    </ng-template>
+                    <div class='flex'>
+                        <div class='flex-6-cols'>
+                            <h2>Posts auf deiner Seite</h2>
+                        </div>
+                        <div class='flex-6-cols'>
+                            <h2>Posts mit deiner Seite</h2>
+                        </div>
+                    </div>
+                </md-tab>
+                <md-tab>
+                    <ng-template md-tab-label>
+                        <md-icon>lock</md-icon>
+                        Zukünftige Posts
+                    </ng-template>
+                    <div class='flex'>
+                        <div class='flex-6-cols'>
+                            <h2>Geplante Posts</h2>
+                        </div>
+                        <div class='flex-6-cols'>
+                            <h2>Entwürfe für Posts</h2>
+                        </div>
+                    </div>
+                </md-tab>
+            </md-tab-group>
+            <div *ngIf='appUxService.cols() == 12'>
+                    <div class='flex'>
+                        <div class='flex-3-cols'>
+                            <h2>Posts auf deiner Seite</h2>
+                        </div>
+                        <div class='flex-3-cols'>
+                            <h2>Posts mit deiner Seite</h2>
+                        </div>
+                        <div class='flex-3-cols'>
+                            <h2>Geplante Posts</h2>
+                        </div>
+                        <div class='flex-3-cols'>
+                            <h2>Entwürfe für Posts</h2>
+                        </div>
+                    </div>
+            </div>
         </div>
     `,
     styleUrls: ['dist/page.component.css']
@@ -83,7 +156,8 @@ export class PageComponent implements OnInit {
         private pageService: PageService,
         private activatedRoute: ActivatedRoute,
         private mdDialog: MdDialog,
-        private mdSnackBar: MdSnackBar) {}
+        private mdSnackBar: MdSnackBar,
+        private appUxService: AppUxService) {}
 
     @Input()
     page: Page;
