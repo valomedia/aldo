@@ -18,7 +18,7 @@ import {showGraphApiError} from './graph-api-error.component';
 @Component({
     selector: 'page',
     template: `
-        <md-spinner color='accent' *ngIf='!page'></md-spinner>
+        <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
         <div *ngIf='page'>
             <h1>
                 {{page.name}}
