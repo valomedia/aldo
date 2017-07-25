@@ -24,7 +24,10 @@ export interface ProfileType {
 export class Profile {
     constructor(kwargs: ProfileType) { Object.assign(this, kwargs); }
 
-    getIcon() {
+    /*
+     * Get the url to the icon for this Profile.
+     */
+    iconUrl() {
         return this.icon || conf.fb.apiUrl + '/' + this.id + '/picture';
     }
 }

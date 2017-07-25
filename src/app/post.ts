@@ -19,11 +19,17 @@ export interface PostType {
 export class Post {
     constructor(kwargs: PostType) { Object.assign(this, kwargs); }
 
-    getText() {
+    /*
+     * Get the text to display for this Post.
+     */
+    text() {
         return this.message || this.story;
     }
 
-    getCreatedTime() {
+    /*
+     * Get the time this post was created.
+     */
+    createdTime() {
         return new Date(this.created_time);
     }
 }
