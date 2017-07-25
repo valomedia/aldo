@@ -36,15 +36,16 @@ export class Post {
 export interface Post extends PostType {}
 
 /*
- * The simplest valid profile.
+ * The simplest valid post.
  *
- * This exists, so the Users and Pages can use it to build their EMPTY 
- * constants.
+ * This exists, so the PageService can use it to check which fields to request 
+ * from Facebook, thus allowing adding a field to Post without changing 
+ * PageService.
  */
-export const EMPTY_POST = new Post({
+export const EMPTY_POST: PostType = {
     id: 0,
     message: '',
     story: '',
     created_time: ''
-});
+};
 

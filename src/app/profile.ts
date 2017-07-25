@@ -39,8 +39,8 @@ export interface Profile extends ProfileType {}
  * This exists, so the Users and Pages can use it to build their EMPTY 
  * constants.
  */
-export const EMPTY_PROFILE = new Profile({
+export const EMPTY_PROFILE: ProfileType = {
     id: 0,
     name: '',
-});
+};
 

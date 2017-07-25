@@ -1,4 +1,8 @@
+import {ReflectiveInjector} from '@angular/core';
+
 import {ProfileType, Profile, EMPTY_PROFILE} from './profile';
+import {PageService} from './page.service';
+import {FbService} from './fb.service';
 
 /*
  * Classes related to handling Facebook pages.
@@ -30,6 +34,10 @@ export interface PageType extends ProfileType {
  */
 export class Page extends Profile {
     constructor(kwargs: PageType) { super(kwargs); }
+
+    private pageService = ReflectiveInjector
+        .resolveAndCreate([PageService, FbService])
+        .get(PageService);
 }
 export interface Page extends PageType {}
 
@@ -40,7 +48,7 @@ export interface Page extends PageType {}
  * from Facebook, thus allowing adding a field to Page without changing 
  * PageService.
  */
-export const EMPTY_PAGE = new Page({
+export const EMPTY_PAGE: PageType = {
     ...EMPTY_PROFILE,
     access_token: '',
     fan_count: 0,
@@ -48,5 +56,5 @@ export const EMPTY_PAGE = new Page({
     overall_star_rating: 0,
     rating_count: 0,
     talking_about_count: 0
-});
+};
 
