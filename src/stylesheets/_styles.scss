@@ -71,42 +71,6 @@ snack-bar-container {
     color: white;
 }
 
-.flex-2-cols {
-    width: 100% * 2 / 12;
-}
-
-.flex-3-cols {
-    width: 100% * 3 / 12;
-}
-
-.flex-4-cols {
-    width: 100% * 4 / 12;
-}
-
-.flex-5-cols {
-    width: 100% * 5 / 12;
-}
-
-.flex-6-cols {
-    width: 100% * 6 / 12;
-}
-
-.flex-7-cols {
-    width: 100% * 7 / 12;
-}
-
-.flex-8-cols {
-    width: 100% * 8 / 12;
-}
-
-.flex-9-cols {
-    width: 100% * 9 / 12;
-}
-
-.flex-10-cols {
-    width: 100% * 10 / 12;
-}
-
 .app-action {
     @extend .pad;
     display: inline-block;
@@ -141,8 +105,48 @@ snack-bar-container {
     flex: 1 1 auto;
 }
 
+.clear, page div {
+    clear: both;
+}
+
 .flex {
     display: flex;
+}
+
+.flex-2-cols {
+    width: 100% * 2 / 12;
+}
+
+.flex-3-cols {
+    width: 100% * 3 / 12;
+}
+
+.flex-4-cols {
+    width: 100% * 4 / 12;
+}
+
+.flex-5-cols {
+    width: 100% * 5 / 12;
+}
+
+.flex-6-cols {
+    width: 100% * 6 / 12;
+}
+
+.flex-7-cols {
+    width: 100% * 7 / 12;
+}
+
+.flex-8-cols {
+    width: 100% * 8 / 12;
+}
+
+.flex-9-cols {
+    width: 100% * 9 / 12;
+}
+
+.flex-10-cols {
+    width: 100% * 10 / 12;
 }
 
 .hidden {

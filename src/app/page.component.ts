@@ -21,131 +21,137 @@ import {AppUxService} from './app-ux.service';
     template: `
         <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
         <div *ngIf='page'>
-            <h1>
-                {{page.name}}
-                <br>
-                <small>
-                    <span
-                            mdTooltip="Likes (neue Likes)"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
-                        <span class='text-primary'>
-                            <md-icon>thumb_up</md-icon>
-                        </span>
-                        <span class='text-accent'>
-                            {{page.fan_count}}
-                        </span>
-                        <span class='text-primary'>
-                            (+{{page.new_like_count}})
-                        </span>
-                    </span>
+            <div>
+                <h1>
+                    {{page.name}}
                     <br>
-                    <span
-                            *ngIf='page.overall_star_rating'
-                            mdTooltip="Bewertung (Anzahl Bewertungen)"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
-                        <span class='text-primary'>
-                            <md-icon>star</md-icon>
+                    <small>
+                        <span
+                                mdTooltip="Likes (neue Likes)"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'>
+                            <span class='text-primary'>
+                                <md-icon>thumb_up</md-icon>
+                            </span>
+                            <span class='text-accent'>
+                                {{page.fan_count}}
+                            </span>
+                            <span class='text-primary'>
+                                (+{{page.new_like_count}})
+                            </span>
                         </span>
-                        <span class='text-accent'>
-                            {{page.overall_star_rating}}
+                        <br>
+                        <span
+                                *ngIf='page.overall_star_rating'
+                                mdTooltip="Bewertung (Anzahl Bewertungen)"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'>
+                            <span class='text-primary'>
+                                <md-icon>star</md-icon>
+                            </span>
+                            <span class='text-accent'>
+                                {{page.overall_star_rating}}
+                            </span>
+                            <span class='text-primary'>
+                                (<md-icon>people</md-icon>{{page.rating_count}})
+                            </span>
                         </span>
-                        <span class='text-primary'>
-                            (<md-icon>people</md-icon>{{page.rating_count}})
+                        <br>
+                        <span
+                                *ngIf='page.talking_about_count'
+                                mdTooltip="Nutzer, die über die Seite reden"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'>
+                            <span class='text-primary'>
+                                <md-icon>forum</md-icon>
+                            </span>
+                            <span class='text-accent'>
+                                {{page.talking_about_count}}
+                            </span>
                         </span>
-                    </span>
-                    <br>
-                    <span
-                            *ngIf='page.talking_about_count'
-                            mdTooltip="Nutzer, die über die Seite reden"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
-                        <span class='text-primary'>
-                            <md-icon>forum</md-icon>
-                        </span>
-                        <span class='text-accent'>
-                            {{page.talking_about_count}}
-                        </span>
-                    </span>
-                </small>
-            </h1>
-            <span class='app-action'>
-                <button md-fab (click)='openPostDialog()'>
-                    <md-icon>create</md-icon>
-                </button>
-            </span>
-            <md-tab-group *ngIf='appUxService.cols() == 4'>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>archive</md-icon>
-                    </ng-template>
-                    <h2>Posts auf deiner Seite</h2>
-                </md-tab>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>inbox</md-icon>
-                    </ng-template>
-                    <h2>Posts mit deiner Seite</h2>
-                </md-tab>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>hourglass_full</md-icon>
-                    </ng-template>
-                    <h2>Geplante Posts</h2>
-                </md-tab>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>drafts</md-icon>
-                    </ng-template>
-                    <h2>Entwürfe für Posts</h2>
-                </md-tab>
-            </md-tab-group>
-            <md-tab-group *ngIf='appUxService.cols() == 8'>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>public</md-icon>
-                        Veröffentlichte Posts
-                    </ng-template>
+                    </small>
+                </h1>
+            </div>
+            <div>
+                <span class='app-action'>
+                    <button md-fab (click)='openPostDialog()'>
+                        <md-icon>create</md-icon>
+                    </button>
+                </span>
+            </div>
+            <div>
+                <md-tab-group *ngIf='appUxService.cols() == 4'>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>archive</md-icon>
+                        </ng-template>
+                        <h2>Posts auf deiner Seite</h2>
+                    </md-tab>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>inbox</md-icon>
+                        </ng-template>
+                        <h2>Posts mit deiner Seite</h2>
+                    </md-tab>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>hourglass_full</md-icon>
+                        </ng-template>
+                        <h2>Geplante Posts</h2>
+                    </md-tab>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>drafts</md-icon>
+                        </ng-template>
+                        <h2>Entwürfe für Posts</h2>
+                    </md-tab>
+                </md-tab-group>
+                <md-tab-group *ngIf='appUxService.cols() == 8'>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>public</md-icon>
+                            Veröffentlichte Posts
+                        </ng-template>
+                        <div class='flex'>
+                            <div class='flex-6-cols'>
+                                <h2>Posts auf deiner Seite</h2>
+                            </div>
+                            <div class='flex-6-cols'>
+                                <h2>Posts mit deiner Seite</h2>
+                            </div>
+                        </div>
+                    </md-tab>
+                    <md-tab>
+                        <ng-template md-tab-label>
+                            <md-icon>lock</md-icon>
+                            Zukünftige Posts
+                        </ng-template>
+                        <div class='flex'>
+                            <div class='flex-6-cols'>
+                                <h2>Geplante Posts</h2>
+                            </div>
+                            <div class='flex-6-cols'>
+                                <h2>Entwürfe für Posts</h2>
+                            </div>
+                        </div>
+                    </md-tab>
+                </md-tab-group>
+                <div *ngIf='appUxService.cols() == 12'>
                     <div class='flex'>
-                        <div class='flex-6-cols'>
+                        <div class='flex-3-cols'>
                             <h2>Posts auf deiner Seite</h2>
                         </div>
-                        <div class='flex-6-cols'>
+                        <div class='flex-3-cols'>
                             <h2>Posts mit deiner Seite</h2>
                         </div>
-                    </div>
-                </md-tab>
-                <md-tab>
-                    <ng-template md-tab-label>
-                        <md-icon>lock</md-icon>
-                        Zukünftige Posts
-                    </ng-template>
-                    <div class='flex'>
-                        <div class='flex-6-cols'>
+                        <div class='flex-3-cols'>
                             <h2>Geplante Posts</h2>
                         </div>
-                        <div class='flex-6-cols'>
+                        <div class='flex-3-cols'>
                             <h2>Entwürfe für Posts</h2>
                         </div>
                     </div>
-                </md-tab>
-            </md-tab-group>
-            <div *ngIf='appUxService.cols() == 12'>
-                    <div class='flex'>
-                        <div class='flex-3-cols'>
-                            <h2>Posts auf deiner Seite</h2>
-                        </div>
-                        <div class='flex-3-cols'>
-                            <h2>Posts mit deiner Seite</h2>
-                        </div>
-                        <div class='flex-3-cols'>
-                            <h2>Geplante Posts</h2>
-                        </div>
-                        <div class='flex-3-cols'>
-                            <h2>Entwürfe für Posts</h2>
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
     `,
