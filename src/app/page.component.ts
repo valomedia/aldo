@@ -68,7 +68,6 @@ import {showGraphApiError} from './graph-api-error.component';
                         </span>
                     </span>
                 </small>
-
             </h1>
             <span class='app-action'>
                 <button md-fab (click)='openPostDialog()'>
