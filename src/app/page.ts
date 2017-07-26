@@ -35,9 +35,13 @@ export interface PageType extends ProfileType {
 export class Page extends Profile {
     constructor(kwargs: PageType) { super(kwargs); }
 
-    private postService = ReflectiveInjector
+    private postService: PostService = ReflectiveInjector
         .resolveAndCreate([PostService, FbService])
         .get(PostService);
+
+    get feed() { return this.postService.feed(this.id); }
+    get posts() { return this.postService.posts(this.id); }
+    get tagged() { return this.postService.tagged(this.id); }
 }
 export interface Page extends PageType {}
 

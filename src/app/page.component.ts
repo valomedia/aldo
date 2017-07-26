@@ -188,21 +188,13 @@ export class PageComponent implements OnInit {
     graphApiError: GraphApiError;
 
     ngOnInit() {
-        this.activatedRoute
-            .params
-            .switchMap((params: Params) =>
-                this.pageService.page(+params['id']))
-            .subscribe(
-                page => this.page = page,
-                err => showGraphApiError(this.mdSnackBar, err));
-        this.posts = this.activatedRoute
-            .params
-            .switchMap((params: Params) =>
-                this.postService.posts(+params['id']));
-        this.tagged = this.activatedRoute
-            .params
-            .switchMap((params: Params) =>
-                this.postService.tagged(+params['id']));
+        const page = this.activatedRoute.params.switchMap((params: Params) =>
+            this.pageService.page(+params['id']))
+        this.posts = page.switchMap(page => page.posts);
+        this.tagged = page.switchMap(page => page.tagged);
+        page.subscribe(
+            page => this.page = page,
+            err => showGraphApiError(this.mdSnackBar, err));
     }
 
     /*
