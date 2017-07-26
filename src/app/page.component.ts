@@ -4,6 +4,7 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/concatAll';
+import {Observable} from 'rxjs/Observable';
 
 import {Page} from './page';
 import {PageService} from './page.service';
@@ -11,6 +12,8 @@ import {GraphApiError} from './graph-api-error';
 import {PostDialogComponent} from './post-dialog.component';
 import {showGraphApiError} from './graph-api-error.component';
 import {AppUxService} from './app-ux.service';
+import {PostService} from './post.service';
+import {Post} from './post';
 
 /*
  * The Component showing a single page in detail.
@@ -163,10 +166,21 @@ export class PageComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private mdDialog: MdDialog,
         private mdSnackBar: MdSnackBar,
-        private appUxService: AppUxService) {}
+        private appUxService: AppUxService,
+        private postService: PostService) {}
 
     @Input()
     page: Page;
+
+    /*
+     * Posts by this Page.
+     */
+    posts: Observable<Post>;
+
+    /*
+     * Posts with this Page.
+     */
+    tagged: Observable<Post>;
 
     /*
      * The error that occured, if any.
@@ -181,6 +195,14 @@ export class PageComponent implements OnInit {
             .subscribe(
                 page => this.page = page,
                 err => showGraphApiError(this.mdSnackBar, err));
+        this.posts = this.activatedRoute
+            .params
+            .switchMap((params: Params) =>
+                this.postService.posts(+params['id']));
+        this.tagged = this.activatedRoute
+            .params
+            .switchMap((params: Params) =>
+                this.postService.tagged(+params['id']));
     }
 
     /*
