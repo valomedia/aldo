@@ -19,7 +19,8 @@ export enum GraphApiErrorType {
     Duplicate,
     DeadLink,
     Session,
-    Name
+    Name,
+    Rate
 }
 
 let msgs: string[] = [];
@@ -47,8 +48,10 @@ msgs[GraphApiErrorType.DeadLink] =
     "Bitte überprüfe, dass alle Links in deinem Post auch funktionieren.";
 msgs[GraphApiErrorType.Session] = 
     "Bitte melde dich erneut an.";
-msgs[GraphApiErrorType.Name] =
+msgs[GraphApiErrorType.Name] = 
     "Überprüfe die URL auf der du dich befindest";
+msgs[GraphApiErrorType.Rate] = 
+    "Mach bitte langsamer";
 
 let titles: string[] = [];
 titles[GraphApiErrorType.UnhandledError] = 
@@ -77,6 +80,8 @@ titles[GraphApiErrorType.Session] =
     "Deine Sitzung ist abgelaufen oder geschlossen worden";
 titles[GraphApiErrorType.Name] = 
     "Seiten können nur über ihre ID aufgerufen werden";
+titles[GraphApiErrorType.Rate] = 
+    "Das API-Limit für deine Seite ist überschritten";
 
 /*
  * The kind of error Facebook will return on a failed call to the GraphAPI.
@@ -167,6 +172,9 @@ export class GraphApiError {
         }
         if (this.code == 10 || this.code < 300 && this.code >= 200) {
             return GraphApiErrorType.Permission;
+        }
+        if (this.code == 32) {
+            return GraphApiErrorType.Rate;
         }
         if (this.code == 368) {
             return GraphApiErrorType.Blocked;
