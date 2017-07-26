@@ -14,7 +14,8 @@ import {
     MdIconModule,
     MdTooltipModule,
     MdInputModule,
-    MdTabsModule
+    MdTabsModule,
+    MdCardModule
 } from '@angular/material';
 
 /*
@@ -37,7 +38,8 @@ import {
         MdIconModule,
         MdTooltipModule,
         MdInputModule,
-        MdTabsModule
+        MdTabsModule,
+        MdCardModule
     ],
     exports: [
         MdButtonModule,
@@ -54,7 +56,8 @@ import {
         MdIconModule,
         MdTooltipModule,
         MdInputModule,
-        MdTabsModule
+        MdTabsModule,
+        MdCardModule
     ]
 })
 export class AppUxModule {}

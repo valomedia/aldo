@@ -20,6 +20,7 @@ import {AppUxService} from './app-ux.service';
 import {PostDialogComponent} from './post-dialog.component';
 import {CeilPipe} from './ceil.pipe';
 import {PostService} from './post.service';
+import {PostsComponent} from './posts.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -41,7 +42,8 @@ import {PostService} from './post.service';
         DashboardComponent,
         GraphApiErrorComponent,
         PostDialogComponent,
-        CeilPipe
+        CeilPipe,
+        PostsComponent
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/expand';
 import 'rxjs/add/observable/empty';
-import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/concatMap';
 
 import {GraphApiError} from './graph-api-error';
 
@@ -72,25 +71,19 @@ export class FbService {
      * This provides all the niceities of Observers.  Most notably it will 
      * abstract away pagination and instead observe the individual data entries.  
      * Non-paginated data will be passed as-is.
-     *
-     * TODO Look at this again, when not tired.
      */
     call(path: string, method = HttpMethod.Get, params = {}) {
-        return Observable.fromPromise(this.api(path, method, params))
-            .map(res => ({
-                data: res.data || [res],
-                paging: res.paging
-            }))
+        return Observable
+            .fromPromise(this.api(path, method, params))
             .expand(res =>
-                res.paging.next
+                res.paging && res.paging.next
                     ? Observable.fromPromise(
                         this.api(
                             path,
                             method,
                             {...params, after: res.paging.cursors.after}))
                     : Observable.empty())
-            .map(res => Observable.from(res.data))
-            .concatAll()
+            .concatMap(res => res.data || [res])
     }
 }
 

@@ -89,12 +89,14 @@ import {Post} from './post';
                             <md-icon>archive</md-icon>
                         </ng-template>
                         <h2>Posts auf deiner Seite</h2>
+                        <posts [posts]='posts'></posts>
                     </md-tab>
                     <md-tab>
                         <ng-template md-tab-label>
                             <md-icon>inbox</md-icon>
                         </ng-template>
                         <h2>Posts mit deiner Seite</h2>
+                        <posts [posts]='tagged'></posts>
                     </md-tab>
                     <md-tab>
                         <ng-template md-tab-label>
@@ -118,9 +120,11 @@ import {Post} from './post';
                         <div class='flex'>
                             <div class='flex-6-cols'>
                                 <h2>Posts auf deiner Seite</h2>
+                                <posts [posts]='posts'></posts>
                             </div>
                             <div class='flex-6-cols'>
                                 <h2>Posts mit deiner Seite</h2>
+                                <posts [posts]='tagged'></posts>
                             </div>
                         </div>
                     </md-tab>
@@ -143,9 +147,11 @@ import {Post} from './post';
                     <div class='flex'>
                         <div class='flex-3-cols'>
                             <h2>Posts auf deiner Seite</h2>
+                            <posts [posts]='posts'></posts>
                         </div>
                         <div class='flex-3-cols'>
                             <h2>Posts mit deiner Seite</h2>
+                            <posts [posts]='tagged'></posts>
                         </div>
                         <div class='flex-3-cols'>
                             <h2>Geplante Posts</h2>
@@ -188,7 +194,7 @@ export class PageComponent implements OnInit {
     graphApiError: GraphApiError;
 
     ngOnInit() {
-        const page = this.activatedRoute.params.switchMap((params: Params) =>
+        const page = this.activatedRoute.params.first().switchMap((params: Params) =>
             this.pageService.page(+params['id']))
         this.posts = page.switchMap(page => page.posts);
         this.tagged = page.switchMap(page => page.tagged);
