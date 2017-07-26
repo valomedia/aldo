@@ -30,17 +30,17 @@ export class PageService {
     /*
      * Get all Pages of the user.
      */
-    getPages(after?: string) { return this.get('me/accounts'); }
+    pages(after?: string) { return this.get('me/accounts'); }
 
     /*
      * Get a Page by its ID.
      */
-    getPage(id: number) { return this.get(id.toString()).first().toPromise(); }
+    page(id: number) { return this.get(id.toString()).first().toPromise(); }
 
     /*
      * Post a message as the page.
      */
-    postMessage(
+    postMsg(
             page: Page,
             msg: string,
             contentType: ContentType,

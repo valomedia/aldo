@@ -27,7 +27,7 @@ export class Profile {
     /*
      * Get the url to the icon for this Profile.
      */
-    iconUrl() {
+    get iconUrl() {
         return this.icon || conf.fb.apiUrl + '/' + this.id + '/picture';
     }
 }

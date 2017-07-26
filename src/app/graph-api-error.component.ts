@@ -12,8 +12,8 @@ import {GraphApiError} from './graph-api-error';
     template: `
         <div *ngIf='graphApiError'>
             <p>
-                <strong>{{graphApiError.getTitle()}}</strong><br>
-                <em>{{graphApiError.getMsg()}}</em><br>
+                <strong>{{graphApiError.title}}</strong><br>
+                <em>{{graphApiError.msg}}</em><br>
             </p>
             <div class='app-snackbar-actions'>
                 <button md-button color='primary' (click)='reload()'>

@@ -22,14 +22,14 @@ export class Post {
     /*
      * Get the text to display for this Post.
      */
-    text() {
+    get text() {
         return this.message || this.story;
     }
 
     /*
      * Get the time this post was created.
      */
-    createdTime() {
+    get createdTime() {
         return new Date(this.created_time);
     }
 }

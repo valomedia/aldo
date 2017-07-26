@@ -24,7 +24,7 @@ import {AppUxService} from './app-ux.service';
                         #aside
                         align='end'
                         id='aside'
-                        [mode]='appUxService.asideMode()'>
+                        [mode]='appUxService.asideMode'>
                     <md-toolbar>
                         <button
                                 md-button

@@ -112,7 +112,7 @@ export class PostDialogComponent {
      */
     post() {
         this.mdDialogRef.close(
-            this.pageService.postMessage(
+            this.pageService.postMsg(
                 this.page,
                 this.text,
                 this.contentType,

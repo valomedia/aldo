@@ -146,7 +146,7 @@ export class GraphApiError {
     /*
      * Resolve the error codes to a class of error.
      */
-    getErrorClass() {
+    get errorClass() {
         if (this.error_subcode == 458) {
             return GraphApiErrorType.Registration;
         }
@@ -195,15 +195,15 @@ export class GraphApiError {
     /*
      * Get an appropriate help message for the user.
      */
-    getMsg(): string {
-        return this.error_user_msg || msgs[this.getErrorClass()];
+    get msg(): string {
+        return this.error_user_msg || msgs[this.errorClass];
     }
 
     /*
      * Get a short error description for use as dialog box title.
      */
-    getTitle(): string {
-        return this.error_user_title || titles[this.getErrorClass()];
+    get title(): string {
+        return this.error_user_title || titles[this.errorClass];
     }
 }
 

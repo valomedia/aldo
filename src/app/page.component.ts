@@ -80,7 +80,7 @@ import {AppUxService} from './app-ux.service';
                 </span>
             </div>
             <div>
-                <md-tab-group *ngIf='appUxService.cols() == 4'>
+                <md-tab-group *ngIf='appUxService.cols == 4'>
                     <md-tab>
                         <ng-template md-tab-label>
                             <md-icon>archive</md-icon>
@@ -106,7 +106,7 @@ import {AppUxService} from './app-ux.service';
                         <h2>Entwürfe für Posts</h2>
                     </md-tab>
                 </md-tab-group>
-                <md-tab-group *ngIf='appUxService.cols() == 8'>
+                <md-tab-group *ngIf='appUxService.cols == 8'>
                     <md-tab>
                         <ng-template md-tab-label>
                             <md-icon>public</md-icon>
@@ -136,7 +136,7 @@ import {AppUxService} from './app-ux.service';
                         </div>
                     </md-tab>
                 </md-tab-group>
-                <div *ngIf='appUxService.cols() == 12'>
+                <div *ngIf='appUxService.cols == 12'>
                     <div class='flex'>
                         <div class='flex-3-cols'>
                             <h2>Posts auf deiner Seite</h2>
@@ -177,7 +177,7 @@ export class PageComponent implements OnInit {
         this.activatedRoute
             .params
             .switchMap((params: Params) =>
-                this.pageService.getPage(+params['id']))
+                this.pageService.page(+params['id']))
             .subscribe(
                 page => this.page = page,
                 err => showGraphApiError(this.mdSnackBar, err));

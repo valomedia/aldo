@@ -45,7 +45,7 @@ export class PagesComponent implements OnInit {
 
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
             .toArray()
             .subscribe(
                 pages => this.pages = pages,

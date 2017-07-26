@@ -18,8 +18,8 @@ import {showGraphApiError} from './graph-api-error.component';
         <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
         </md-spinner>
         <md-grid-list
-                [cols]='appUxService.cols() / 3 | ceil'
-                [gutterSize]='appUxService.gutterSize()'
+                [cols]='appUxService.cols / 3 | ceil'
+                [gutterSize]='appUxService.gutterSize'
                 rowHeight='2:1'>
             <md-grid-tile
                     *ngFor='let page of pages'
@@ -48,7 +48,7 @@ export class DashboardComponent {
 
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
