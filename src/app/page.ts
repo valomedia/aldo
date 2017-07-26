@@ -1,7 +1,7 @@
 import {ReflectiveInjector} from '@angular/core';
 
 import {ProfileType, Profile, EMPTY_PROFILE} from './profile';
-import {PageService} from './page.service';
+import {PostService} from './post.service';
 import {FbService} from './fb.service';
 
 /*
@@ -35,9 +35,9 @@ export interface PageType extends ProfileType {
 export class Page extends Profile {
     constructor(kwargs: PageType) { super(kwargs); }
 
-    private pageService = ReflectiveInjector
-        .resolveAndCreate([PageService, FbService])
-        .get(PageService);
+    private postService = ReflectiveInjector
+        .resolveAndCreate([PostService, FbService])
+        .get(PostService);
 }
 export interface Page extends PageType {}
 

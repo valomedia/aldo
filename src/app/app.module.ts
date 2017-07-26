@@ -19,6 +19,7 @@ import {AppUxModule} from './app-ux.module';
 import {AppUxService} from './app-ux.service';
 import {PostDialogComponent} from './post-dialog.component';
 import {CeilPipe} from './ceil.pipe';
+import {PostService} from './post.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -46,7 +47,8 @@ import {CeilPipe} from './ceil.pipe';
     providers: [
         PageService,
         FbService,
-        AppUxService
+        AppUxService,
+        PostService
     ],
     entryComponents: [
         PostDialogComponent,

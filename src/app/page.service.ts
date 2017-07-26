@@ -18,12 +18,9 @@ export class PageService {
     /*
      * Perform a GET-request for a Page on a given path.
      */
-    get(path: string, params = {}): Observable<Page> {
+    get(path: string): Observable<Page> {
         return this.fbService
-            .call(path, HttpMethod.Get, {
-                fields: Object.keys(EMPTY_PAGE),
-                ...params
-            })
+            .call(path, HttpMethod.Get, {fields: Object.keys(EMPTY_PAGE)})
             .map(result => new Page(result));
     }
 
