@@ -21,6 +21,7 @@ import {PostDialogComponent} from './post-dialog.component';
 import {CeilPipe} from './ceil.pipe';
 import {PostService} from './post.service';
 import {PostsComponent} from './posts.component';
+import {EndlessListComponent} from './endless-list.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -43,7 +44,8 @@ import {PostsComponent} from './posts.component';
         GraphApiErrorComponent,
         PostDialogComponent,
         CeilPipe,
-        PostsComponent
+        PostsComponent,
+        EndlessListComponent
     ],
     bootstrap: [AppComponent],
     providers: [
