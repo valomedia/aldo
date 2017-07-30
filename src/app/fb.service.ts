@@ -19,8 +19,9 @@ interface GraphApiResponse {
             before: string,
             after: string
         },
-        next?: string
-    }
+        next?: string,
+        previous?: string
+    };
 }
 
 /*
@@ -44,6 +45,7 @@ declare var FB: {
 
 @Injectable()
 export class FbService {
+
     /*
      * Low-level API access.
      *
