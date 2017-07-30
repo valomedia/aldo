@@ -23,6 +23,7 @@ import {PostService} from './post.service';
 import {PostsComponent} from './posts.component';
 import {EndlessListComponent} from './endless-list.component';
 import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
+import {MissingFeatureComponent} from './missing-feature.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -46,7 +47,8 @@ import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
         PostDialogComponent,
         CeilPipe,
         PostsComponent,
-        EndlessListComponent
+        EndlessListComponent,
+        MissingFeatureComponent
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -107,12 +107,14 @@ import {Post} from './post';
                             <md-icon>hourglass_full</md-icon>
                         </ng-template>
                         <h2>Geplante Posts</h2>
+                        <missing-feature></missing-feature>
                     </md-tab>
                     <md-tab>
                         <ng-template md-tab-label>
                             <md-icon>drafts</md-icon>
                         </ng-template>
                         <h2>Entwürfe für Posts</h2>
+                        <missing-feature></missing-feature>
                     </md-tab>
                 </md-tab-group>
                 <md-tab-group *ngIf='appUxService.cols == 8'>
@@ -144,9 +146,11 @@ import {Post} from './post';
                         <div class='flex'>
                             <div class='flex-6-cols'>
                                 <h2>Geplante Posts</h2>
+                                <missing-feature></missing-feature>
                             </div>
                             <div class='flex-6-cols'>
                                 <h2>Entwürfe für Posts</h2>
+                                <missing-feature></missing-feature>
                             </div>
                         </div>
                     </md-tab>
@@ -167,7 +171,9 @@ import {Post} from './post';
                         </div>
                         <div class='flex-4-cols'>
                             <h2>Geplante Posts</h2>
+                            <missing-feature></missing-feature>
                             <h2>Entwürfe für Posts</h2>
+                            <missing-feature></missing-feature>
                         </div>
                     </div>
                 </div>
