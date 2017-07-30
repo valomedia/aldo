@@ -11,6 +11,7 @@ import {Component} from '@angular/core';
             <md-card-header>
                 <md-card-title>Fehlendes Feature</md-card-title>
                 <md-card-subtitle>Hier entsteht etwas neues</md-card-subtitle>
+                <img md-card-avatar src='favicon.ico'>
             </md-card-header>
             <md-card-content>
                 <p>
