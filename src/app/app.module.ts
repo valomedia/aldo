@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {RouterModule, RouteReuseStrategy} from '@angular/router';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -22,6 +22,7 @@ import {CeilPipe} from './ceil.pipe';
 import {PostService} from './post.service';
 import {PostsComponent} from './posts.component';
 import {EndlessListComponent} from './endless-list.component';
+import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
 
 /*
  * The Module definitions for AppComponent.
@@ -52,7 +53,11 @@ import {EndlessListComponent} from './endless-list.component';
         PageService,
         FbService,
         AppUxService,
-        PostService
+        PostService,
+        {
+            provide: RouteReuseStrategy,
+            useClass: CustomRouteReuseStrategy
+        }
     ],
     entryComponents: [
         PostDialogComponent,
