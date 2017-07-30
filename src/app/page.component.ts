@@ -153,22 +153,20 @@ import {Post} from './post';
                 </md-tab-group>
                 <div *ngIf='appUxService.cols == 12'>
                     <div class='flex'>
-                        <div class='flex-3-cols'>
+                        <div class='flex-4-cols'>
                             <h2>Posts auf deiner Seite</h2>
                             <endless-list [content]='posts'>
                                 <posts [posts]='posts'></posts>
                             </endless-list>
                         </div>
-                        <div class='flex-3-cols'>
+                        <div class='flex-4-cols'>
                             <h2>Posts mit deiner Seite</h2>
                             <endless-list [content]='tagged'>
                                 <posts [posts]='tagged'></posts>
                             </endless-list>
                         </div>
-                        <div class='flex-3-cols'>
+                        <div class='flex-4-cols'>
                             <h2>Geplante Posts</h2>
-                        </div>
-                        <div class='flex-3-cols'>
                             <h2>Entwürfe für Posts</h2>
                         </div>
                     </div>
