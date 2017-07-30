@@ -92,7 +92,7 @@ export class FbService {
     call(path: string, method = HttpMethod.Get, params = {}) {
         return Observable
             .fromPromise(this.api(path, method, params))
-            .concatMap(res => res.dump)
+            .concatMap(res => res.observable)
     }
 }
 
