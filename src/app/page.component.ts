@@ -75,13 +75,13 @@ import {Post} from './post';
                     </small>
                 </h1>
             </div>
-            <div>
+            <displacer>
                 <span class='app-action'>
                     <button md-fab (click)='openPostDialog()'>
                         <md-icon>create</md-icon>
                     </button>
                 </span>
-            </div>
+            </displacer>
             <div>
                 <md-tab-group *ngIf='appUxService.cols == 4'>
                     <md-tab>

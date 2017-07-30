@@ -24,6 +24,8 @@ import {PostsComponent} from './posts.component';
 import {EndlessListComponent} from './endless-list.component';
 import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
 import {MissingFeatureComponent} from './missing-feature.component';
+import {DisplacerComponent} from './displacer.component';
+import {DisplacerPortalDirective} from './displacer-portal.directive';
 
 /*
  * The Module definitions for AppComponent.
@@ -48,7 +50,9 @@ import {MissingFeatureComponent} from './missing-feature.component';
         CeilPipe,
         PostsComponent,
         EndlessListComponent,
-        MissingFeatureComponent
+        MissingFeatureComponent,
+        DisplacerComponent,
+        DisplacerPortalDirective
     ],
     bootstrap: [AppComponent],
     providers: [
