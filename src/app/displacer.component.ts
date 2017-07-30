@@ -14,9 +14,9 @@ import {DisplacerPortalDirective} from './displacer-portal.directive';
 @Component({
     selector: 'displacer',
     template: `
-        <template displacerPortal>
+        <ng-template displacer-portal>
             <ng-content></ng-content>
-        </template>
+        </ng-template>
     `,
     styleUrls: ['dist/displacer.component.css']
 })

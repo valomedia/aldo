@@ -8,7 +8,7 @@ import {TemplatePortal} from '@angular/material';
  * https://gist.github.com/fxck/b668f7fec77d7b28d8c7ce6b706601f7.
  */
 
-@Directive({selector: '[displacerPortal]'})
+@Directive({selector: '[displacer-portal]'})
 export class DisplacerPortalDirective extends TemplatePortal {
     constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
         super(templateRef, viewContainerRef);
