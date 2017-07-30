@@ -27,12 +27,16 @@ export class PageService {
     /*
      * Get all Pages of the user.
      */
-    pages(after?: string) { return this.get('me/accounts'); }
+    pages(after?: string) {
+        return this.get('me/accounts');
+    }
 
     /*
      * Get a Page by its ID.
      */
-    page(id: number) { return this.get(id.toString()).first().toPromise(); }
+    page(id: number) {
+        return this.pages().filter((page) => page.id == id).toPromise();
+    }
 
     /*
      * Post a message as the page.

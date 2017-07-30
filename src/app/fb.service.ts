@@ -46,6 +46,8 @@ declare var FB: {
 @Injectable()
 export class FbService {
 
+    private cache: {[id: string]: Promise<GraphApiResponse>;} = {};
+
     /*
      * Low-level API access.
      *
@@ -59,12 +61,24 @@ export class FbService {
         method = HttpMethod.Get,
         params = {}
     ): Promise<GraphApiResponse> {
-        return new Promise((resolve, reject) =>
-            FB.api(path, HttpMethod[method], params, (res) => {
-                console.log('GraphAPI: ' + JSON.stringify(res));
-                if (res.error) { reject(new GraphApiError(res.error)); }
-                resolve(res)
-            }));
+
+        // ID for cacheing.
+        const id = btoa(path + ':' + method + ':' + JSON.stringify(params));
+
+        /*
+        if (this.cache[id]) {
+            this.cache[id].then((graphApiResponse) =>
+                console.log('Cache: ' + JSON.stringify(graphApiResponse)));
+        }
+        */
+
+        return this.cache[id]
+            || (this.cache[id] = new Promise((resolve, reject) =>
+                FB.api(path, HttpMethod[method], params, (res) => {
+                    console.log('GraphAPI: ' + JSON.stringify(res));
+                    if (res.error) { reject(new GraphApiError(res.error)); }
+                    resolve(res);
+                })));
     }
 
     /*
