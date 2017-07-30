@@ -7,22 +7,11 @@ import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/concatMap';
 
 import {GraphApiError} from './graph-api-error';
+import {GraphApiResponse} from './graph-api-response';
 
 /*
  * The Service providing the Facebook API.
  */
-
-interface GraphApiResponse {
-    data?: any[];
-    paging?: {
-        cursors: {
-            before: string,
-            after: string
-        },
-        next?: string,
-        previous?: string
-    };
-}
 
 /*
  * The HttpMethods used by Facebook.
@@ -46,21 +35,22 @@ declare var FB: {
 @Injectable()
 export class FbService {
 
-    private cache: {[id: string]: Promise<GraphApiResponse>;} = {};
+    private cache: {[id: string]: Promise<GraphApiResponse<any>>;} = {};
 
     /*
      * Low-level API access.
      *
      * This function wraps FB.api() to make it typesafe.  It also returns 
-     * a Promise, instead of accepting a callback.  The promise will return the 
-     * result in the same way the callback would, in the case of an error, the 
-     * Promise will be rejected with a GraphApiError.
+     * a Promise, instead of accepting a callback.  The promise will return 
+     * a GraphApiResponse, which has a clojure, that can be used to fetch more 
+     * results, if the response was paged.  If the call fails, the promise will 
+     * be rejected with a GraphApiError.
      */
     api(
         path: string,
         method = HttpMethod.Get,
         params = {}
-    ): Promise<GraphApiResponse> {
+    ): Promise<GraphApiResponse<any>> {
 
         // ID for cacheing.
         const id = btoa(path + ':' + method + ':' + JSON.stringify(params));
@@ -77,7 +67,19 @@ export class FbService {
                 FB.api(path, HttpMethod[method], params, (res) => {
                     console.log('GraphAPI: ' + JSON.stringify(res));
                     if (res.error) { reject(new GraphApiError(res.error)); }
-                    resolve(res);
+                    resolve(
+                        new GraphApiResponse(
+                            res,
+                            () =>
+                                res.paging && res.paging.next
+                                    ? this.api(
+                                        path,
+                                        method,
+                                        {
+                                            ...params,
+                                            after: res.paging.cursors.after
+                                        })
+                                    : Promise.resolve(null)));
                 })));
     }
 
@@ -85,21 +87,12 @@ export class FbService {
      * High-level API access.
      *
      * This provides all the niceities of Observers.  Most notably it will 
-     * abstract away pagination and instead observe the individual data entries.  
-     * Non-paginated data will be passed as-is.
+     * abstract away pagination and instead observe the individual data entries.
      */
     call(path: string, method = HttpMethod.Get, params = {}) {
         return Observable
             .fromPromise(this.api(path, method, params))
-            .expand(res =>
-                res.paging && res.paging.next
-                    ? Observable.fromPromise(
-                        this.api(
-                            path,
-                            method,
-                            {...params, after: res.paging.cursors.after}))
-                    : Observable.empty())
-            .concatMap(res => res.data || [res])
+            .concatMap(res => res.dump)
     }
 }
 
