@@ -7,6 +7,8 @@ import {Observer} from 'rxjs/Observer';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
+import {Page, PageType} from './page';
+import {Post, PostType} from './post';
 
 /*
  * The Service providing the Facebook API.
@@ -73,6 +75,10 @@ export class FbService {
                             if (res.error) {
                                 observer.error(new GraphApiError(res.error));
                             }
+
+                            // Normalize the result.
+                            res = res.data ? res : {data: [res]};
+
                             observer.next(
                                 new GraphApiResponse(
                                     res,

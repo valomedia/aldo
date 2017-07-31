@@ -29,11 +29,12 @@ interface GraphApiResponseType<T> extends ExpandableType<T> {
  * A GraphAPI-response as used internally.
  */
 export class GraphApiResponse<T> extends Expandable<T> {
-    constructor(kwargs: any, next: () => Observable<GraphApiResponse<T>>) {
+    constructor(
+        kwargs: GraphApiResponseType<T>,
+        next: () => Observable<GraphApiResponse<T>>
+    ) {
         super();
-        Object.assign(
-            this,
-            kwargs.data ? {next, ...kwargs} : {data: [kwargs], next: next});
+        Object.assign(this, {next, ...kwargs});
     }
 
     /*
