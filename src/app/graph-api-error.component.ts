@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MdSnackBar, MdSnackBarRef} from '@angular/material';
 
 import {GraphApiError} from './graph-api-error';
@@ -29,13 +29,15 @@ import {GraphApiError} from './graph-api-error';
     `,
     styleUrls: ['dist/graph-api-error.component.css']
 })
-export class GraphApiErrorComponent {
+export class GraphApiErrorComponent implements OnInit {
 
     @Input()
     graphApiError: GraphApiError;
 
     @Input()
     mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
+
+    ngOnInit() { console.error(this.graphApiError); }
 
     /*
      * Reload the page.
