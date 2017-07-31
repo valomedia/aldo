@@ -29,7 +29,7 @@ interface GraphApiResponseType<T> extends ExpandableType<T> {
  * A GraphAPI-response as used internally.
  */
 export class GraphApiResponse<T> extends Expandable<T> {
-    constructor(kwargs: any, next: () => Promise<GraphApiResponse<T>|null>) {
+    constructor(kwargs: any, next: () => Observable<GraphApiResponse<T>>) {
         super();
         Object.assign(
             this,
@@ -40,7 +40,7 @@ export class GraphApiResponse<T> extends Expandable<T> {
      * Filler, to make the typechecker happy.
      */
     next() {
-        return Promise.resolve(null);
+        return Observable.empty();
     }
 }
 export interface GraphApiResponse<T> extends GraphApiResponseType<T> {}

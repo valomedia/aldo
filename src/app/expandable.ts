@@ -13,20 +13,20 @@ import 'rxjs/add/operator/concatMap';
 
 export interface ExpandableType<T> {
     data: T[];
-    next: () => Promise<Expandable<T>|null>;
+    next: () => Observable<Expandable<T>>;
 }
 
 export abstract class Expandable<T> implements ExpandableType<T> {
     data: T[];
-    abstract next(): Promise<Expandable<T>|null>;
+    abstract next(): Observable<Expandable<T>>;
 
     /*
      * Turn the Expandable into an Observable.
      */
-    public get observable() {
+    public get expanded() {
         return Observable
-            .from([this])
-            .expand(res => Observable.fromPromise(res.next()).filter(Boolean))
-            .concatMap(res => res.data)
+            .of(this)
+            .expand(res => res.next())
+            .concatMap(res => res.data);
     }
 }

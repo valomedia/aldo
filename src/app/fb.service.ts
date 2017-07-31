@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/expand';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/concatMap';
+import {Observer} from 'rxjs/Observer';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
@@ -35,7 +34,7 @@ declare var FB: {
 @Injectable()
 export class FbService {
 
-    private cache: {[id: string]: Promise<GraphApiResponse<any>>;} = {};
+    private cache: {[id: string]: Observable<GraphApiResponse<any>>;} = {};
 
     /*
      * Low-level API access.
@@ -50,7 +49,7 @@ export class FbService {
         path: string,
         method = HttpMethod.Get,
         params = {}
-    ): Promise<GraphApiResponse<any>> {
+    ): Observable<GraphApiResponse<any>> {
 
         // ID for cacheing.
         const id = btoa(path + ':' + method + ':' + JSON.stringify(params));
@@ -63,24 +62,33 @@ export class FbService {
         */
 
         return this.cache[id]
-            || (this.cache[id] = new Promise((resolve, reject) =>
-                FB.api(path, HttpMethod[method], params, (res) => {
-                    console.log('GraphAPI: ' + JSON.stringify(res));
-                    if (res.error) { reject(new GraphApiError(res.error)); }
-                    resolve(
-                        new GraphApiResponse(
-                            res,
-                            () =>
-                                res.paging && res.paging.next
-                                    ? this.api(
-                                        path,
-                                        method,
-                                        {
-                                            ...params,
-                                            after: res.paging.cursors.after
-                                        })
-                                    : Promise.resolve(null)));
-                })));
+            || (this.cache[id] = Observable
+                .create((observer: Observer<GraphApiResponse<any>>) =>
+                    FB.api(
+                        path,
+                        HttpMethod[method],
+                        params,
+                        res => {
+                            console.log('GraphAPI: ' + JSON.stringify(res));
+                            if (res.error) {
+                                observer.error(new GraphApiError(res.error));
+                            }
+                            observer.next(
+                                new GraphApiResponse(
+                                    res,
+                                    () =>
+                                        res.paging && res.paging.next
+                                            ? this.api(
+                                                path,
+                                                method,
+                                                {
+                                                    ...params,
+                                                    after:
+                                                        res.paging.cursors.after
+                                                })
+                                            : Observable.empty()));
+                            observer.complete();
+                        })));
     }
 
     /*
@@ -90,9 +98,7 @@ export class FbService {
      * abstract away pagination and instead observe the individual data entries.
      */
     call(path: string, method = HttpMethod.Get, params = {}) {
-        return Observable
-            .fromPromise(this.api(path, method, params))
-            .concatMap(res => res.observable)
+        return this.api(path, method, params).concatMap(res => res.expanded);
     }
 }
 
