@@ -14,6 +14,7 @@ import {showGraphApiError} from './graph-api-error.component';
 import {AppUxService} from './app-ux.service';
 import {PostService} from './post.service';
 import {Post} from './post';
+import {GraphApiResponse} from './graph-api-response';
 
 /*
  * The Component showing a single page in detail.
@@ -151,7 +152,9 @@ import {Post} from './post';
                     <div class='flex'>
                         <div class='flex-4-cols'>
                             <h2>Posts auf deiner Seite</h2>
-                            <posts [posts]='posts'></posts>
+                            <endless-list #postsDesktop [input]='posts'>
+                                <posts [posts]='postsDesktop.output'></posts>
+                            </endless-list>
                         </div>
                         <div class='flex-4-cols'>
                             <h2>Posts mit deiner Seite</h2>
@@ -185,7 +188,7 @@ export class PageComponent implements OnInit {
     /*
      * Posts by this Page.
      */
-    posts: Observable<Post>;
+    posts: Observable<GraphApiResponse<Post>>;
 
     /*
      * Posts with this Page.
@@ -199,10 +202,8 @@ export class PageComponent implements OnInit {
 
     ngOnInit() {
         const page = this.activatedRoute.params.first().switchMap((params: Params) =>
-            this.pageService.page(+params['id']))
-        this.posts = page
-            .switchMap(page => page.posts)
-            .concatMap(expandable => expandable.expanded);
+            this.pageService.page(params['id']))
+        this.posts = page.switchMap(page => page.posts);
         this.tagged = page
             .switchMap(page => page.tagged)
             .concatMap(expandable => expandable.expanded);

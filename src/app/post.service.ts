@@ -38,17 +38,17 @@ export class PostService {
     /*
      * Get the feed of Posts published by a Page or by others on the Page.
      */
-    feed(id: number) { return this.get(id.toString() + '/feed'); }
+    feed(id: string) { return this.get(id + '/feed'); }
 
     /*
      * Get only the Posts published by the Page.
      */
-    posts(id: number) { return this.get(id.toString() + '/posts'); }
+    posts(id: string) { return this.get(id + '/posts'); }
 
     /*
      * Get only the Posts the Page has been tagged in.
      */
-    tagged(id: number) { return this.get(id.toString() + '/tagged'); }
+    tagged(id: string) { return this.get(id + '/tagged'); }
 
     /*
      * Get only the Posts that can be promoted.
@@ -56,8 +56,8 @@ export class PostService {
      * The paremeter isPublished can be used to filter only published or only 
      * unpublished posts.  Not passing it will return both.
      */
-    promotablePosts(id: number, isPublished?: boolean) {
-        return this.get(id.toString() + '/promotable_posts', isPublished);
+    promotablePosts(id: string, isPublished?: boolean) {
+        return this.get(id + '/promotable_posts', isPublished);
     }
 }
 

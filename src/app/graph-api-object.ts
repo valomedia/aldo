@@ -10,7 +10,7 @@
  * The common base of all objects retuned by the GraphAPI.
  */
 export interface GraphApiObjectType {
-    id: number;
+    id: string;
 }
 
 /*
@@ -29,6 +29,6 @@ export interface GraphApiObject extends GraphApiObjectType {}
  * This exists, so the child classes can use it to build their dummy constants.
  */
 export const DUMMY_GRAPH_API_OBJECT_TYPE: GraphApiObjectType = {
-    id: 0,
+    id: '',
 };
 
