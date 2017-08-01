@@ -64,14 +64,14 @@ export class FbService {
      * This function makes the API more useable, by normalizing the result to 
      * GraphApiResponseType and turning it into a much more workable 
      * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
-     * provided as the magic last parameter, GraphApiObject() will be used as 
-     * a default.
+     * provided as the magic last parameter, if none as provided the Object will 
+     * be passed as parsed.
      */
     api(
         path: string,
         method = HttpMethod.Get,
         params = {},
-        T: new (kwargs: GraphApiObjectType) => GraphApiObject = GraphApiObject
+        T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ): Observable<GraphApiResponse<GraphApiObject>> {
         return Observable
             .fromPromise(api(path, method, params))
@@ -80,7 +80,7 @@ export class FbService {
                 (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
             .map(res => ({
                 ...res,
-                data: res.data.map(i => new T(i))
+                data: res.data.map(i => T ? new T(i) : i)
             }))
             .map(res =>
                 new GraphApiResponse(
@@ -104,13 +104,13 @@ export class FbService {
      * that will observe all results at the cost of being unable to fetch the 
      * whole set only when it turns out to be necessary.  The Observable will be 
      * of type T, whose constructor needs to be supplied as the magic last 
-     * parameter, which defaults to GraphApiObject().
+     * parameter, if none as provided the Object will be passed as parsed.
      */
     call(
         path: string,
         method = HttpMethod.Get,
         params = {},
-        T: new (kwargs: GraphApiObjectType) => GraphApiObject = GraphApiObject
+        T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ) {
         return this.api(path, method, params, T).concatMap(res => res.expanded);
     }
