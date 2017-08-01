@@ -80,7 +80,8 @@ export class FbService {
                 (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
             .map(res => ({
                 ...res,
-                data: res.data.map(i => T ? new T(i) : i)
+                data: res.data.map(i =>
+                    T ? new T(i) : i)
             }))
             .map(res =>
                 new GraphApiResponse(
@@ -93,7 +94,8 @@ export class FbService {
                                 {
                                     ...params,
                                     after: res.paging.cursors.after
-                                })
+                                },
+                                T)
                             : Observable.empty()));
     }
 
