@@ -1,3 +1,5 @@
+import {GraphApiObject, GraphApiObjectType, EMPTY_GRAPH_API_OBJECT}
+    from './graph-api-object';
 
 /*
  * Classes related to Facebook posts.
@@ -6,8 +8,7 @@
 /*
  * A Facebook post as returned by the Facebook API.
  */
-export interface PostType {
-    id: number;
+export interface PostType extends GraphApiObjectType {
     message: string;
     story: string;
     created_time: string;
@@ -16,9 +17,9 @@ export interface PostType {
 /*
  * A Facebook post as used internally.
  */
-export class Post {
+export class Post extends GraphApiObject {
     constructor(kwargs: PostType) {
-        Object.assign(this, kwargs);
+        super(kwargs);
     }
 
     /*
@@ -45,7 +46,7 @@ export interface Post extends PostType {}
  * PageService.
  */
 export const EMPTY_POST: PostType = {
-    id: 0,
+    ...EMPTY_GRAPH_API_OBJECT,
     message: '',
     story: '',
     created_time: ''

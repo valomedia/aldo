@@ -1,3 +1,5 @@
+import {GraphApiObject, GraphApiObjectType, EMPTY_GRAPH_API_OBJECT}
+    from './graph-api-object';
 
 /*
  * Classes related to Facebook profiles.
@@ -12,8 +14,7 @@ declare var conf: {
 /*
  * A Facebook profile as returned by the Facebook API.
  */
-export interface ProfileType {
-    id: number;
+export interface ProfileType extends GraphApiObjectType {
     name: string;
     icon?: string;
 }
@@ -21,9 +22,9 @@ export interface ProfileType {
 /*
  * A Facebook profile as used internally.
  */
-export class Profile {
+export class Profile extends GraphApiObject {
     constructor(kwargs: ProfileType) {
-        Object.assign(this, kwargs);
+        super(kwargs);
     }
 
     /*
@@ -42,7 +43,7 @@ export interface Profile extends ProfileType {}
  * constants.
  */
 export const EMPTY_PROFILE: ProfileType = {
-    id: 0,
-    name: '',
+    ...EMPTY_GRAPH_API_OBJECT,
+    name: ''
 };
 
