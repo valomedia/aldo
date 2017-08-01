@@ -1,4 +1,4 @@
-import {GraphApiObject, GraphApiObjectType, EMPTY_GRAPH_API_OBJECT}
+import {GraphApiObject, GraphApiObjectType, DUMMY_GRAPH_API_OBJECT_TYPE}
     from './graph-api-object';
 
 /*
@@ -45,8 +45,8 @@ export interface Post extends PostType {}
  * from Facebook, thus allowing adding a field to Post without changing 
  * PageService.
  */
-export const EMPTY_POST: PostType = {
-    ...EMPTY_GRAPH_API_OBJECT,
+export const DUMMY_POST_TYPE: PostType = {
+    ...DUMMY_GRAPH_API_OBJECT_TYPE,
     message: '',
     story: '',
     created_time: ''

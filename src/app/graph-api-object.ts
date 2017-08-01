@@ -26,9 +26,9 @@ export interface GraphApiObject extends GraphApiObjectType {}
 /*
  * The simplest valid GraphApiObject.
  *
- * This exists, so the child classes can use it to build their empty constants.
+ * This exists, so the child classes can use it to build their dummy constants.
  */
-export const EMPTY_GRAPH_API_OBJECT: GraphApiObjectType = {
+export const DUMMY_GRAPH_API_OBJECT_TYPE: GraphApiObjectType = {
     id: 0,
 };
 

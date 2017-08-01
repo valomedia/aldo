@@ -1,4 +1,4 @@
-import {GraphApiObject, GraphApiObjectType, EMPTY_GRAPH_API_OBJECT}
+import {GraphApiObject, GraphApiObjectType, DUMMY_GRAPH_API_OBJECT_TYPE}
     from './graph-api-object';
 
 /*
@@ -39,11 +39,11 @@ export interface Profile extends ProfileType {}
 /*
  * The simplest valid profile.
  *
- * This exists, so the Users and Pages can use it to build their EMPTY 
+ * This exists, so the Users and Pages can use it to build their dummy 
  * constants.
  */
-export const EMPTY_PROFILE: ProfileType = {
-    ...EMPTY_GRAPH_API_OBJECT,
+export const DUMMY_PROFILE_TYPE: ProfileType = {
+    ...DUMMY_GRAPH_API_OBJECT_TYPE,
     name: ''
 };
 

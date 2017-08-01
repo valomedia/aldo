@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import {Page, EMPTY_PAGE, ContentType} from './page';
+import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 
@@ -22,7 +22,7 @@ export class PageService {
         return this.fbService.call(
             path,
             HttpMethod.Get,
-            {fields: Object.keys(EMPTY_PAGE)},
+            {fields: Object.keys(DUMMY_PAGE_TYPE)},
             Page);
     }
 

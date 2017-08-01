@@ -1,6 +1,6 @@
 import {ReflectiveInjector} from '@angular/core';
 
-import {ProfileType, Profile, EMPTY_PROFILE} from './profile';
+import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
 import {FbService} from './fb.service';
 
@@ -52,8 +52,8 @@ export interface Page extends PageType {}
  * from Facebook, thus allowing adding a field to Page without changing 
  * PageService.
  */
-export const EMPTY_PAGE: PageType = {
-    ...EMPTY_PROFILE,
+export const DUMMY_PAGE_TYPE: PageType = {
+    ...DUMMY_PROFILE_TYPE,
     access_token: '',
     fan_count: 0,
     new_like_count: 0,
