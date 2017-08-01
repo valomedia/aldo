@@ -14,7 +14,7 @@ import {Post} from './post';
 @Component({
     selector: 'posts',
     template: `
-        <md-card *ngFor='let post of _posts'>{{post.message}}</md-card>
+        <md-card *ngFor='let post of _posts'>{{post.text}}</md-card>
         <md-spinner color='accent' *ngIf='!loaded'>
         </md-spinner>
     `,
