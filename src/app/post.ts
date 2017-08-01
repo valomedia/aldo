@@ -1,5 +1,9 @@
-import {GraphApiObject, GraphApiObjectType, DUMMY_GRAPH_API_OBJECT_TYPE}
-    from './graph-api-object';
+import {
+    GraphApiObject,
+    GraphApiObjectType,
+    DUMMY_GRAPH_API_OBJECT_TYPE
+} from './graph-api-object';
+import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 
 /*
  * Classes related to Facebook posts.
@@ -12,6 +16,8 @@ export interface PostType extends GraphApiObjectType {
     message: string;
     story: string;
     created_time: string;
+    from: ProfileType,
+    to?: ProfileType[]
 }
 
 /*
@@ -19,8 +25,23 @@ export interface PostType extends GraphApiObjectType {
  */
 export class Post extends GraphApiObject {
     constructor(kwargs: PostType) {
+        kwargs = {
+            ...kwargs,
+            from: new Profile(kwargs.from),
+            to: (kwargs.to || []).map(profileType => new Profile(profileType))
+        };
         super(kwargs);
     }
+
+    /*
+     * The Profile that sent this Post.
+     */
+    from: Profile;
+
+    /*
+     * Profiles mentioned or targeted in this Post.
+     */
+    to: Profile[];
 
     /*
      * Get the text to display for this Post.
@@ -49,6 +70,7 @@ export const DUMMY_POST_TYPE: PostType = {
     ...DUMMY_GRAPH_API_OBJECT_TYPE,
     message: '',
     story: '',
-    created_time: ''
+    created_time: '',
+    from: DUMMY_PROFILE_TYPE
 };
 
