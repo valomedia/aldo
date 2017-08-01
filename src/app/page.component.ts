@@ -200,8 +200,12 @@ export class PageComponent implements OnInit {
     ngOnInit() {
         const page = this.activatedRoute.params.first().switchMap((params: Params) =>
             this.pageService.page(+params['id']))
-        this.posts = page.switchMap(page => page.posts);
-        this.tagged = page.switchMap(page => page.tagged);
+        this.posts = page
+            .switchMap(page => page.posts)
+            .concatMap(expandable => expandable.expanded);
+        this.tagged = page
+            .switchMap(page => page.tagged)
+            .concatMap(expandable => expandable.expanded);
         page.subscribe(
             page => this.page = page,
             err => showGraphApiError(this.mdSnackBar, err));

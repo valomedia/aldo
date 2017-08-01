@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import {Post, DUMMY_POST_TYPE} from './post';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
+import {GraphApiResponse} from './graph-api-response';
 
 /*
  * The Service providing the Pages.
@@ -22,8 +23,8 @@ export class PostService {
         path: string,
         isPublished?: boolean,
         includeHidden = false
-    ): Observable<Post> {
-        return this.fbService.call(
+    ): Observable<GraphApiResponse<Post>> {
+        return this.fbService.api(
             path,
             HttpMethod.Get,
             {
