@@ -16,7 +16,6 @@ declare var conf: {
  */
 export interface ProfileType extends GraphApiObjectType {
     name: string;
-    icon?: string;
 }
 
 /*
@@ -30,8 +29,8 @@ export class Profile extends GraphApiObject {
     /*
      * Get the url to the icon for this Profile.
      */
-    get iconUrl() {
-        return this.icon || conf.fb.apiUrl + '/' + this.id + '/picture';
+    get picture() {
+        return conf.fb.apiUrl + '/' + this.id + '/picture';
     }
 }
 export interface Profile extends ProfileType {}
