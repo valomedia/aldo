@@ -7,8 +7,7 @@ import 'rxjs/add/observable/fromPromise';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse, GraphApiResponseType} from './graph-api-response';
-import {Page, EMPTY_PAGE} from './page';
-import {Post, EMPTY_POST} from './post';
+import {GraphApiObject, GraphApiObjectType} from './graph-api-object';
 
 /*
  * The Service providing the Facebook API.
@@ -22,15 +21,6 @@ export enum HttpMethod {
     Post,
     Delete
 };
-
-/*
- * A dummy class used for results that do not match any class.
- */
-class Dummy {
-    constructor(kwargs: any) {
-        Object.assign(this, kwargs);
-    }
-}
 
 declare var FB: {
     init: (params: any) => void;
@@ -74,14 +64,15 @@ export class FbService {
      * This function makes the API more useable, by normalizing the result to 
      * GraphApiResponseType and turning it into a much more workable 
      * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
-     * provided as the magic last parameter, Dummy() will be used as a default.
+     * provided as the magic last parameter, GraphApiObject() will be used as 
+     * a default.
      */
     api(
         path: string,
         method = HttpMethod.Get,
         params = {},
-        magic: new (kwargs: any) => any = Dummy
-    ): Observable<GraphApiResponse<any>> {
+        T: new (kwargs: GraphApiObjectType) => GraphApiObject = GraphApiObject
+    ): Observable<GraphApiResponse<GraphApiObject>> {
         return Observable
             .fromPromise(api(path, method, params))
             .do(console.log)
@@ -89,7 +80,7 @@ export class FbService {
                 (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
             .map(res => ({
                 ...res,
-                data: res.data.map(i => new magic(i))
+                data: res.data.map(i => new T(i))
             }))
             .do(res => console.log(typeof res.data[0]))
             .map(res =>
@@ -114,16 +105,15 @@ export class FbService {
      * that will observe all results at the cost of being unable to fetch the 
      * whole set only when it turns out to be necessary.  The Observable will be 
      * of type T, whose constructor needs to be supplied as the magic last 
-     * parameter, which defaults to Dummy().
+     * parameter, which defaults to GraphApiObject().
      */
     call(
         path: string,
         method = HttpMethod.Get,
         params = {},
-        magic: new (kwargs: any) => any = Dummy
+        T: new (kwargs: GraphApiObjectType) => GraphApiObject = GraphApiObject
     ) {
-        return this.api(path, method, params, magic)
-            .concatMap(res => res.expanded);
+        return this.api(path, method, params, T).concatMap(res => res.expanded);
     }
 }
 
