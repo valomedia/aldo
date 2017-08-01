@@ -30,7 +30,8 @@ export class PostService {
             {
                 fields: Object.keys(DUMMY_POST_TYPE),
                 include_hidden: includeHidden,
-                is_published: isPublished
+                is_published: isPublished,
+                limit: 100
             },
             Post);
     }
