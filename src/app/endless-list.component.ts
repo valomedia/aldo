@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, HostListener} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -15,7 +15,7 @@ import {Expandable} from './expandable';
 @Component({
     selector: 'endless-list',
     template: `
-        <ng-content></ng-content>
+        <ng-content #element></ng-content>
     `,
     styleUrls: ['dist/endless-list.component.css']
 })
@@ -24,6 +24,11 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
 
     @Input()
     input: Observable<InType>;
+
+    /*
+     * Element containing the list.
+     */
+    private element: HTMLElement;
 
     /*
      * Controller for the output.
@@ -48,9 +53,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
             .concatMap(resultSet => resultSet.data);
     }
 
-    /*
-     * Fetch more content if necessary.
-     */
+    @HostListener('window:scroll')
     load() {
         if (true) {
             this.controller.next();
