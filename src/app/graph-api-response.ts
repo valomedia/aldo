@@ -14,7 +14,7 @@ import {Expandable, ExpandableType} from './expandable';
  * make handling easier.  There is no type for the actual replies from the API, 
  * because the replies have no common structure.
  */
-interface GraphApiResponseType<T> extends ExpandableType<T> {
+export interface GraphApiResponseType<T> extends ExpandableType<T> {
     paging?: {
         cursors: {
             before: string,
