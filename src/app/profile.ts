@@ -22,7 +22,9 @@ export interface ProfileType {
  * A Facebook profile as used internally.
  */
 export class Profile {
-    constructor(kwargs: ProfileType) { Object.assign(this, kwargs); }
+    constructor(kwargs: ProfileType) {
+        Object.assign(this, kwargs);
+    }
 
     /*
      * Get the url to the icon for this Profile.

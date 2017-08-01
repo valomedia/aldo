@@ -17,7 +17,9 @@ export interface PostType {
  * A Facebook post as used internally.
  */
 export class Post {
-    constructor(kwargs: PostType) { Object.assign(this, kwargs); }
+    constructor(kwargs: PostType) {
+        Object.assign(this, kwargs);
+    }
 
     /*
      * Get the text to display for this Post.

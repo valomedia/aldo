@@ -23,13 +23,15 @@ export class PostService {
         isPublished?: boolean,
         includeHidden = false
     ): Observable<Post> {
-        return this.fbService
-            .call(path, HttpMethod.Get, {
+        return this.fbService.call(
+            path,
+            HttpMethod.Get,
+            {
                 fields: Object.keys(EMPTY_POST),
                 include_hidden: includeHidden,
                 is_published: isPublished
-            })
-            .map(result => new Post(result));
+            },
+            Post);
     }
 
     /*

@@ -7,8 +7,8 @@ import 'rxjs/add/observable/fromPromise';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse, GraphApiResponseType} from './graph-api-response';
-import {Page, PageType} from './page';
-import {Post, PostType} from './post';
+import {Page, EMPTY_PAGE} from './page';
+import {Post, EMPTY_POST} from './post';
 
 /*
  * The Service providing the Facebook API.
@@ -21,6 +21,15 @@ export enum HttpMethod {
     Get,
     Post,
     Delete
+};
+
+/*
+ * A dummy class used for results that do not match any class.
+ */
+class Dummy {
+    constructor(kwargs: any) {
+        Object.assign(this, kwargs);
+    }
 }
 
 declare var FB: {
@@ -64,18 +73,25 @@ export class FbService {
      *
      * This function makes the API more useable, by normalizing the result to 
      * GraphApiResponseType and turning it into a much more workable 
-     * Observable<GraphApiResponse<any>>.
+     * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
+     * provided as the magic last parameter, Dummy() will be used as a default.
      */
     api(
         path: string,
         method = HttpMethod.Get,
-        params = {}
+        params = {},
+        magic: new (kwargs: any) => any = Dummy
     ): Observable<GraphApiResponse<any>> {
         return Observable
             .fromPromise(api(path, method, params))
             .do(console.log)
             .map((res: {data?: any}): GraphApiResponseType<any> =>
                 (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
+            .map(res => ({
+                ...res,
+                data: res.data.map(i => new magic(i))
+            }))
+            .do(res => console.log(typeof res.data[0]))
             .map(res =>
                 new GraphApiResponse(
                     res,
@@ -96,10 +112,18 @@ export class FbService {
      *
      * This will completely abstract away pagination and return an Observable, 
      * that will observe all results at the cost of being unable to fetch the 
-     * whole set only when it turns out to be necessary.
+     * whole set only when it turns out to be necessary.  The Observable will be 
+     * of type T, whose constructor needs to be supplied as the magic last 
+     * parameter, which defaults to Dummy().
      */
-    call(path: string, method = HttpMethod.Get, params = {}) {
-        return this.api(path, method, params).concatMap(res => res.expanded);
+    call(
+        path: string,
+        method = HttpMethod.Get,
+        params = {},
+        magic: new (kwargs: any) => any = Dummy
+    ) {
+        return this.api(path, method, params, magic)
+            .concatMap(res => res.expanded);
     }
 }
 
