@@ -82,7 +82,6 @@ export class FbService {
                 ...res,
                 data: res.data.map(i => new T(i))
             }))
-            .do(res => console.log(typeof res.data[0]))
             .map(res =>
                 new GraphApiResponse(
                     res,
