@@ -1,10 +1,18 @@
-import {Component, OnInit, Input, HostListener} from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    HostListener,
+    ViewChild,
+    ElementRef
+} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeScan';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/observable/concat';
+import 'rxjs/add/operator/throttleTime';
 
 import {Expandable} from './expandable';
 
@@ -15,25 +23,30 @@ import {Expandable} from './expandable';
 @Component({
     selector: 'endless-list',
     template: `
-        <ng-content #element></ng-content>
+        <div #element>
+            <ng-content></ng-content>
+        </div>
     `,
     styleUrls: ['dist/endless-list.component.css']
 })
 export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
         implements OnInit {
 
-    @Input()
-    input: Observable<InType>;
-
-    /*
-     * Element containing the list.
-     */
-    private element: HTMLElement;
+    @ViewChild('element')
+    private element: ElementRef;
 
     /*
      * Controller for the output.
      */
     private controller: Subject<null>;
+
+    /*
+     * Whether there is already a request in flight.
+     */
+    private inFlight = false;
+
+    @Input()
+    input: Observable<InType>;
 
     /*
      * Content for the endless list.
@@ -46,18 +59,36 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
             .concat(
                 this.input,
                 this.controller
-                    .mergeScan(acc =>
-                        acc.map((page) => page.next()), this.input, 1)
+                    .throttleTime(50)
+                    .filter(() => !this.inFlight)
+                    .filter(() =>
+                        this.element
+                            .nativeElement
+                            .getBoundingClientRect()
+                            .bottom < 2 * window.innerHeight)
+                    .concatMap(() => Observable.from([null,null]))
+                    .do(() => this.inFlight = true)
+                    .mergeScan(
+                        acc =>
+                            acc
+                                ? Observable
+                                    .concat(
+                                        acc.map((page) => page.next()),
+                                        Observable.of(null))
+                                    .first()
+                                : Observable.of(null),
+                        this.input,
+                        1)
+                    .do((res) => res || this.controller.complete())
+                    .do(() => this.inFlight = false)
+                    .filter(Boolean)
                     .concatAll())
-            .do(() => this.load())
             .concatMap(resultSet => resultSet.data);
     }
 
     @HostListener('window:scroll')
     load() {
-        if (true) {
-            this.controller.next();
-        }
+        this.controller.next();
     }
 }
 
