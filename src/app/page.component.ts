@@ -90,7 +90,9 @@ import {GraphApiResponse} from './graph-api-response';
                             <md-icon>archive</md-icon>
                         </ng-template>
                         <h2>Posts auf deiner Seite</h2>
-                        <posts [posts]='posts'></posts>
+                        <endless-list #postsHandset [input]='posts'>
+                            <posts [posts]='postsHandset.output'></posts>
+                        </endless-list>
                     </md-tab>
                     <md-tab>
                         <ng-template md-tab-label>
@@ -123,7 +125,9 @@ import {GraphApiResponse} from './graph-api-response';
                         <div class='flex'>
                             <div class='flex-6-cols'>
                                 <h2>Posts auf deiner Seite</h2>
-                                <posts [posts]='posts'></posts>
+                                <endless-list #postsTablet [input]='posts'>
+                                    <posts [posts]='postsTablet.output'></posts>
+                                </endless-list>
                             </div>
                             <div class='flex-6-cols'>
                                 <h2>Posts mit deiner Seite</h2>
