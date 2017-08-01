@@ -47,6 +47,7 @@ import {AppUxService} from './app-ux.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
+                    <div></div>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -127,6 +128,9 @@ export class AppComponent {
      */
     title = 'Aldo';
 
+    /*
+     * Whether the dark-theme is active.
+     */
     dark = false;
 
     @HostListener('window:resize')

@@ -39,8 +39,14 @@ md-input-container {
     width: 100%;
 }
 
-md-sidenav-container {
-    height: 100vh;
+md-sidenav-container > * {
+    display: flex!important;
+    flex-direction: column;
+    height: 100vh!important;
+}
+
+md-sidenav-container > * > *:last-child {
+    overflow: auto;
 }
 
 md-spinner {
@@ -81,6 +87,8 @@ snack-bar-container {
 
 .app-content {
     margin: auto;
+    margin-top: 0;
+    width: 100%;
     max-width: 1600px;
 }
 
