@@ -13,6 +13,7 @@ import 'rxjs/add/operator/mergeScan';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/observable/concat';
 import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/operator/mapTo';
 
 import {Expandable} from './expandable';
 
@@ -61,11 +62,12 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
                 this.controller
                     .throttleTime(50)
                     .filter(() => !this.inFlight)
-                    .filter(() =>
-                        this.element
-                            .nativeElement
-                            .getBoundingClientRect()
-                            .bottom < 2 * window.innerHeight)
+                    .mapTo(this.element
+                        .nativeElement
+                        .getBoundingClientRect()
+                        .bottom)
+                    .filter((bottomPosition) =>
+                        bottomPosition < 2 * window.innerHeight)
                     .concatMap(() => Observable.from([null,null]))
                     .do(() => this.inFlight = true)
                     .mergeScan(
