@@ -13,7 +13,7 @@ import {AppUxService} from './app-ux.service';
     selector: 'app',
     template: `
         <div [class.dark]='dark'>
-            <md-sidenav-container>
+            <md-sidenav-container id='main'>
                 <md-sidenav #nav id='nav' mode='over'>
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
@@ -107,6 +107,7 @@ import {AppUxService} from './app-ux.service';
                         <md-icon>more_vert</md-icon>
                     </button>
                 </md-toolbar>
+                <div id='displacer-target'></div>
                 <div class='app-content' (scroll)='reDispatchEvent($event)'>
                     <div>
                         <router-outlet></router-outlet>
@@ -149,5 +150,8 @@ export class AppComponent {
 
     @HostListener('window:resize')
     onResize() { this.applicationRef.tick(); }
+
+    @HostListener('window:scroll')
+    onScroll() { }
 }
 
