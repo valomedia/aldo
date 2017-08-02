@@ -27,6 +27,7 @@ import {MissingFeatureComponent} from './missing-feature.component';
 import {DisplacerComponent} from './displacer.component';
 import {DisplacerPortalDirective} from './displacer-portal.directive';
 import {ProfileComponent} from './profile.component';
+import {PostComponent} from './post.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -54,7 +55,8 @@ import {ProfileComponent} from './profile.component';
         MissingFeatureComponent,
         DisplacerComponent,
         DisplacerPortalDirective,
-        ProfileComponent
+        ProfileComponent,
+        PostComponent
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -47,7 +47,6 @@ import {AppUxService} from './app-ux.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <div></div>
                 </md-sidenav>
                 <md-toolbar>
                     <button
