@@ -44,33 +44,36 @@ import {GraphApiResponse} from './graph-api-response';
                                 (+{{page.new_like_count}})
                             </span>
                         </span>
-                        <br>
-                        <span
-                                *ngIf='page.overall_star_rating'
-                                mdTooltip="Bewertung (Anzahl Bewertungen)"
-                                mdTooltipShowDelay='1500'
-                                mdTooltipHideDelay='1500'>
-                            <span class='text-primary'>
-                                <md-icon>star</md-icon>
-                            </span>
-                            <span class='text-accent'>
-                                {{page.overall_star_rating}}
-                            </span>
-                            <span class='text-primary'>
-                                (<md-icon>people</md-icon>{{page.rating_count}})
+                        <span *ngIf='page.overall_star_rating'>
+                            <br>
+                            <span
+                                    mdTooltip="Bewertung (Anzahl Bewertungen)"
+                                    mdTooltipShowDelay='1500'
+                                    mdTooltipHideDelay='1500'>
+                                <span class='text-primary'>
+                                    <md-icon>star</md-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{page.overall_star_rating}}
+                                </span>
+                                <span class='text-primary'>
+                                    (<md-icon>people</md-icon><!--
+                                        -->{{page.rating_count}})
+                                </span>
                             </span>
                         </span>
-                        <br>
-                        <span
-                                *ngIf='page.talking_about_count'
-                                mdTooltip="Nutzer, die über die Seite reden"
-                                mdTooltipShowDelay='1500'
-                                mdTooltipHideDelay='1500'>
-                            <span class='text-primary'>
-                                <md-icon>forum</md-icon>
-                            </span>
-                            <span class='text-accent'>
-                                {{page.talking_about_count}}
+                        <span *ngIf='page.talking_about_count'>
+                            <br>
+                            <span
+                                    mdTooltip="Nutzer, die über die Seite reden"
+                                    mdTooltipShowDelay='1500'
+                                    mdTooltipHideDelay='1500'>
+                                <span class='text-primary'>
+                                    <md-icon>forum</md-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{page.talking_about_count}}
+                                </span>
                             </span>
                         </span>
                     </small>
