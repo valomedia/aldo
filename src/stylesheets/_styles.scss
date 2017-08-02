@@ -117,6 +117,10 @@ snack-bar-container {
     clear: both;
 }
 
+.displacer-content .positioning-anchor * {
+    pointer-events: all;
+}
+
 .flex {
     display: flex;
 }
