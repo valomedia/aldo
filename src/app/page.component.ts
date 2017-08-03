@@ -251,9 +251,7 @@ export class PageComponent implements OnInit {
                 this.postService
                     .post(id)
                     .then(post => this.newPosts.next(post))
-                    .catch(err =>
-                        this.graphApiError
-                            = showGraphApiError(this.mdSnackBar, err)))
+                    .catch(err => this.newPosts.error(err)))
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
@@ -263,8 +261,7 @@ export class PageComponent implements OnInit {
             .subscribe(
                 (id: string) => window.open('//facebook.com/' + id, '_blank'),
                 (err: GraphApiError) =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                    showGraphApiError(this.mdSnackBar, err));
     }
 }
 
