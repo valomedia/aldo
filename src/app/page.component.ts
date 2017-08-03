@@ -225,7 +225,8 @@ export class PageComponent implements OnInit {
             .concatMap(expandable => expandable.expanded);
         page.subscribe(
             page => this.page = page,
-            err => showGraphApiError(this.mdSnackBar, err));
+            err =>
+                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
     }
 
     /*
@@ -251,9 +252,8 @@ export class PageComponent implements OnInit {
                     .post(id)
                     .then(post => this.newPosts.next(post))
                     .catch(err =>
-                        this.graphApiError = showGraphApiError(
-                            this.mdSnackBar,
-                            err)))
+                        this.graphApiError
+                            = showGraphApiError(this.mdSnackBar, err)))
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})
