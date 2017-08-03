@@ -29,6 +29,7 @@ import {DisplacerPortalDirective} from './displacer-portal.directive';
 import {ProfileComponent} from './profile.component';
 import {PostComponent} from './post.component';
 import {LayoutComponent} from './layout.component';
+import {NavComponent} from './nav.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -58,7 +59,8 @@ import {LayoutComponent} from './layout.component';
         DisplacerPortalDirective,
         ProfileComponent,
         PostComponent,
-        LayoutComponent
+        LayoutComponent,
+        NavComponent
     ],
     bootstrap: [AppComponent],
     providers: [

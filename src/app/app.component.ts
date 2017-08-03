@@ -11,7 +11,9 @@ import {FbService} from './fb.service';
     selector: 'app',
     template: `
         <div [class.dark]='dark'>
-            <layout></layout>
+            <layout>
+                <nav></nav>
+            </layout>
         </div>
     `,
     styleUrls: ['dist/app.component.css']
