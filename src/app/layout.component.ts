@@ -5,7 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {AppUxService} from './app-ux.service';
 
 /*
- * The main Component of Aldo.
+ * The Component containing the layout everything else goes into.
  */
 
 @Component({
@@ -45,6 +45,7 @@ import {AppUxService} from './app-ux.service';
                         <md-icon>close</md-icon>
                     </button>
                 </md-toolbar>
+                <ng-content select='aside'></ng-content>
             </md-sidenav>
             <md-toolbar>
                 <button

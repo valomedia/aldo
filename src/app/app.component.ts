@@ -13,6 +13,7 @@ import {FbService} from './fb.service';
         <div [class.dark]='dark'>
             <layout>
                 <nav></nav>
+                <aside></aside>
             </layout>
         </div>
     `,

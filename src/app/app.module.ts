@@ -30,6 +30,7 @@ import {ProfileComponent} from './profile.component';
 import {PostComponent} from './post.component';
 import {LayoutComponent} from './layout.component';
 import {NavComponent} from './nav.component';
+import {AsideComponent} from './aside.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -60,7 +61,8 @@ import {NavComponent} from './nav.component';
         ProfileComponent,
         PostComponent,
         LayoutComponent,
-        NavComponent
+        NavComponent,
+        AsideComponent
     ],
     bootstrap: [AppComponent],
     providers: [
