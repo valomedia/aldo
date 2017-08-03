@@ -10,15 +10,14 @@ import {FbService} from './fb.service';
 @Component({
     selector: 'app',
     template: `
-        <div [class.dark]='dark'>
-            <layout>
-                <nav></nav>
-                <aside></aside>
-                <main>
-                    <router-outlet></router-outlet>
-                </main>
-            </layout>
-        </div>
+        <layout>
+            <aside>
+                <router-outlet name='detail'></router-outlet>
+            </aside>
+            <main>
+                <router-outlet></router-outlet>
+            </main>
+        </layout>
     `,
     styleUrls: ['dist/app.component.css']
 })
@@ -32,11 +31,6 @@ export class AppComponent implements OnInit {
      * Displayed in the main toolbar.
      */
     title = 'Aldo';
-
-    /*
-     * Whether the dark-theme is active.
-     */
-    dark = false;
 
     ngOnInit() {
         this.router

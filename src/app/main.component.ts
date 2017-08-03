@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
     template: `
         <div class='app-content' (scroll)='reDispatchEvent($event)'>
             <div>
-                <ng-content></ng-content>
+                <router-outlet></router-outlet>
             </div>
         </div>
     `,

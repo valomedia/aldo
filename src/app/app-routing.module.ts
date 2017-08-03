@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {PagesComponent} from './pages.component';
 import {PageComponent} from './page.component';
+import {MissingFeatureComponent} from './missing-feature.component';
 
 const ROUTES: Routes = [
     {
@@ -12,8 +13,13 @@ const ROUTES: Routes = [
         pathMatch: 'full'
     },
     {
-        path: ':id',
+        path: ':page',
         component: PageComponent
+    },
+    {
+        path: '',
+        component: MissingFeatureComponent,
+        outlet: 'detail'
     }
 ];
 

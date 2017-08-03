@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'nav',
     template: `
-        <pages (click)='nav.close()'></pages>
+        <pages></pages>
     `,
     styleUrls: ['dist/nav.component.css']
 })
