@@ -38,7 +38,7 @@ export class PageService {
      * Get a Page by its ID.
      */
     page(id: string) {
-        return this.pages().filter((page) => page.id == id).toPromise();
+        return this.get(id).first().toPromise();
     }
 
     /*
