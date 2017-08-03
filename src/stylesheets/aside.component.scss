@@ -1,15 +1,15 @@
 
 /*
- * Styling for the AppComponent.
+ * Styling for the AsideComponent.
  *
- * This is a style locally applied to AppComponent.  All styles specific to the 
- * AppComponent are loaded here.
+ * This is a style locally applied to AsideComponent.  All styles specific to 
+ * the AsideComponent are loaded here.
  *
  * This stylesheet contains at-rules only. The actual rules should go into the 
- * _app.component partial, to keep things easier to restructure.
+ * _aside.component partial, to keep things easier to restructure.
  */
 
 @import 'mixins';
 @import 'colors';
-@import '_app.component';
+@import '_aside.component';
 

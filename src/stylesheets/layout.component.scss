@@ -1,15 +1,15 @@
 
 /*
- * Styling for the AppComponent.
+ * Styling for the LayoutComponent.
  *
- * This is a style locally applied to AppComponent.  All styles specific to the 
- * AppComponent are loaded here.
+ * This is a style locally applied to LayoutComponent.  All styles specific to 
+ * the LayoutComponent are loaded here.
  *
  * This stylesheet contains at-rules only. The actual rules should go into the 
- * _app.component partial, to keep things easier to restructure.
+ * _layout.component partial, to keep things easier to restructure.
  */
 
 @import 'mixins';
 @import 'colors';
-@import '_app.component';
+@import '_layout.component';
 
