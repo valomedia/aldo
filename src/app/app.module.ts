@@ -33,6 +33,7 @@ import {NavComponent} from './nav.component';
 import {AsideComponent} from './aside.component';
 import {MainComponent} from './main.component';
 import {NotFoundComponent} from './not-found.component';
+import {NoDetailComponent} from './no-detail.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -66,7 +67,8 @@ import {NotFoundComponent} from './not-found.component';
         NavComponent,
         AsideComponent,
         MainComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        NoDetailComponent
     ],
     bootstrap: [AppComponent],
     providers: [

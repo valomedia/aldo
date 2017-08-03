@@ -69,7 +69,7 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
-nav, .app-toolbar-title, .app-content > div, h1 > small > span, md-card {
+nav, aside, .app-content > div, .app-toolbar-title, h1 > small > span, md-card {
     @extend .pad;
 }
 

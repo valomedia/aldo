@@ -6,6 +6,7 @@ import {PagesComponent} from './pages.component';
 import {PageComponent} from './page.component';
 import {MissingFeatureComponent} from './missing-feature.component';
 import {NotFoundComponent} from './not-found.component';
+import {NoDetailComponent} from './no-detail.component';
 
 const ROUTES: Routes = [
     {
@@ -23,7 +24,7 @@ const ROUTES: Routes = [
     },
     {
         path: '',
-        component: MissingFeatureComponent,
+        component: NoDetailComponent,
         outlet: 'detail'
     },
     {
