@@ -59,6 +59,13 @@ function api(path: string, method: HttpMethod, params: any): Promise<any> {
 export class FbService {
 
     /*
+     * Clear the cache.
+     */
+    clearCache() {
+        cache = {};
+    }
+
+    /*
      * Low-level API access.
      *
      * This function makes the API more useable, by normalizing the result to 

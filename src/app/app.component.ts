@@ -1,9 +1,11 @@
-import {Component, ApplicationRef, HostListener} from '@angular/core';
+import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+import {Router, NavigationStart} from '@angular/router';
 
 import 'rxjs/add/operator/toArray';
 
 import {AppUxService} from './app-ux.service';
+import {FbService} from './fb.service';
 
 /*
  * The main Component of Aldo.
@@ -117,11 +119,13 @@ import {AppUxService} from './app-ux.service';
     `,
     styleUrls: ['dist/app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(
         private applicationRef: ApplicationRef,
         private appUxService: AppUxService,
-        private location: Location) {}
+        private location: Location,
+        private router: Router,
+        private fbService: FbService) {}
 
     /*
      * Displayed in the main toolbar.
@@ -132,6 +136,13 @@ export class AppComponent {
      * Whether the dark-theme is active.
      */
     dark = false;
+    
+    ngOnInit() {
+        this.router
+            .events
+            .filter((event) => event instanceof NavigationStart)
+            .subscribe(this.fbService.clearCache);
+    }
 
     /*
      * Take an already dispatched Event and dispatch a copy of it on window.
