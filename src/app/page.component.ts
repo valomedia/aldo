@@ -5,6 +5,7 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/concatAll';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 import {Page} from './page';
 import {PageService} from './page.service';
@@ -93,6 +94,7 @@ import {GraphApiResponse} from './graph-api-response';
                             <md-icon>archive</md-icon>
                         </ng-template>
                         <h2>Posts auf deiner Seite</h2>
+                        <posts [posts]='newPosts' loaded='true'></posts>
                         <endless-list #postsHandset [input]='posts'>
                             <posts [posts]='postsHandset.output'></posts>
                         </endless-list>
@@ -128,6 +130,7 @@ import {GraphApiResponse} from './graph-api-response';
                         <div class='flex'>
                             <div class='flex-6-cols'>
                                 <h2>Posts auf deiner Seite</h2>
+                                <posts [posts]='newPosts' loaded='true'></posts>
                                 <endless-list #postsTablet [input]='posts'>
                                     <posts [posts]='postsTablet.output'></posts>
                                 </endless-list>
@@ -159,6 +162,7 @@ import {GraphApiResponse} from './graph-api-response';
                     <div class='flex'>
                         <div class='flex-4-cols'>
                             <h2>Posts auf deiner Seite</h2>
+                            <posts [posts]='newPosts' loaded='true'></posts>
                             <endless-list #postsDesktop [input]='posts'>
                                 <posts [posts]='postsDesktop.output'></posts>
                             </endless-list>
@@ -203,9 +207,14 @@ export class PageComponent implements OnInit {
     tagged: Observable<Post>;
 
     /*
+     * New Posts written by the user since they opened this Page.
+     */
+    newPosts = new Subject<Post>();
+    
+    /*
      * The error that occured, if any.
      */
-    graphApiError: GraphApiError;
+    graphApiError?: GraphApiError;
 
     ngOnInit() {
         const page = this.activatedRoute.params.first().switchMap((params: Params) =>
@@ -237,6 +246,14 @@ export class PageComponent implements OnInit {
                     "",
                     {duration: 2000}))
             .concatAll()
+            .do((id: string) =>
+                this.postService
+                    .post(id)
+                    .then(post => this.newPosts.next(post))
+                    .catch(err =>
+                        this.graphApiError = showGraphApiError(
+                            this.mdSnackBar,
+                            err)))
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})

@@ -42,6 +42,7 @@ export class PostsComponent implements OnInit {
     /*
      * True if no more posts can be loaded.
      */
+    @Input()
     loaded = false;
 
     ngOnInit() {
