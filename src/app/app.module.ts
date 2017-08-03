@@ -31,6 +31,7 @@ import {PostComponent} from './post.component';
 import {LayoutComponent} from './layout.component';
 import {NavComponent} from './nav.component';
 import {AsideComponent} from './aside.component';
+import {MainComponent} from './main.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -62,7 +63,8 @@ import {AsideComponent} from './aside.component';
         PostComponent,
         LayoutComponent,
         NavComponent,
-        AsideComponent
+        AsideComponent,
+        MainComponent
     ],
     bootstrap: [AppComponent],
     providers: [

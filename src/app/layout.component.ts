@@ -106,11 +106,7 @@ import {AppUxService} from './app-ux.service';
                 </button>
             </md-toolbar>
             <div id='displacer-target'></div>
-            <div class='app-content' (scroll)='reDispatchEvent($event)'>
-                <div>
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
+            <ng-content select='main'></ng-content>
         </md-sidenav-container>
     `,
     styleUrls: ['dist/layout.component.css']
@@ -120,19 +116,5 @@ export class LayoutComponent {
         private appUxService: AppUxService,
         private location: Location,
         private title: Title) {}
-
-    /*
-     * Take an already dispatched Event and dispatch a copy of it on window.
-     *
-     * This is used to redispatch scroll events from the main content, so 
-     * browser chrome will hide correctly on mobile.
-     */
-    reDispatchEvent(
-        event: Event & {
-            constructor: new (typeArg: string, eventInit?: EventInit) => Event
-        }
-    ) {
-        dispatchEvent(new event.constructor(event.type, event));
-    }
 }
 

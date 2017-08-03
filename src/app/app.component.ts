@@ -14,6 +14,9 @@ import {FbService} from './fb.service';
             <layout>
                 <nav></nav>
                 <aside></aside>
+                <main>
+                    <router-outlet></router-outlet>
+                </main>
             </layout>
         </div>
     `,
