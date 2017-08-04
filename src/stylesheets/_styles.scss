@@ -13,6 +13,7 @@ body {
     margin: 0;
     color: black;
     background-color: white;
+    word-wrap: break-word;
 }
 
 button, .button {
@@ -46,7 +47,8 @@ md-sidenav-container > * {
 }
 
 nav, aside, main {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 md-spinner {
