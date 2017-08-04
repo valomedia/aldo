@@ -46,7 +46,7 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Schließen"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                (click)='aside.close()'>
+                                routerLink='..'>
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
