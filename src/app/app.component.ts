@@ -16,7 +16,7 @@ import {FbService} from './fb.service';
                 <router-outlet name='detail'></router-outlet>
             </aside>
             <main app-content>
-                <router-outlet></router-outlet>
+                <router-outlet name='master'></router-outlet>
             </main>
         </layout>
     `,

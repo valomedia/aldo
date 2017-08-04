@@ -11,26 +11,41 @@ import {NoDetailComponent} from './no-detail.component';
 const ROUTES: Routes = [
     {
         path: '',
-        component: DashboardComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        children: [
+            {
+                path: '',
+                component: DashboardComponent
+            },
+            {
+                path: '',
+                component: NoDetailComponent,
+                outlet: 'detail'
+            }
+        ]
     },
     {
         path: ':page',
-        component: PageComponent
-    },
-    {
-        path: '**',
-        component: NotFoundComponent,
-    },
-    {
-        path: '',
-        component: NoDetailComponent,
-        outlet: 'detail'
-    },
-    {
-        path: '**',
-        component: NotFoundComponent,
-        outlet: 'detail'
+        children: [
+            {
+                path: '',
+                component: PageComponent
+            },
+            {
+                path: '',
+                component: NoDetailComponent,
+                outlet: 'detail'
+            },
+            {
+                path: '**',
+                component: NotFoundComponent
+            },
+            {
+                path: '**',
+                component: NoDetailComponent,
+                outlet: 'detail'
+            }
+        ]
     }
 ];
 
