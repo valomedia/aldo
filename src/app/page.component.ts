@@ -41,7 +41,9 @@ import {GraphApiResponse} from './graph-api-response';
                             <span class='text-accent'>
                                 {{page.fan_count}}
                             </span>
-                            <span *ngIf='page.new_like_count' class='text-primary'>
+                            <span
+                                    *ngIf='page.new_like_count' 
+                                    class='text-primary'>
                                 (+{{page.new_like_count}})
                             </span>
                         </span>
