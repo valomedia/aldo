@@ -11,7 +11,6 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeScan';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/observable/concat';
-import 'rxjs/add/operator/mapTo';
 
 import {Expandable} from './expandable';
 
@@ -40,7 +39,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
     /*
      * Whether there is already a request in flight.
      */
-    private inFlight = false;
+    private inFlight = 0;
 
     @Input()
     input: Observable<InType>;
@@ -55,10 +54,10 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
             .concat(
                 this.input,
                 this.controller
-                    .debounceTime(100)
-                    .filter(() => !this.inFlight)
                     .filter((bottom) => bottom < 2 * window.innerHeight)
+                    .filter(() => !this.inFlight)
                     .concatMap(() => Observable.from([null,null]))
+                    .do(() => ++this.inFlight)
                     .mergeScan(
                         acc =>
                             acc
@@ -70,8 +69,8 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
                                 : Observable.of(null),
                         this.input,
                         1)
-                    .do((res) => res || this.controller.complete())
-                    .do(() => this.inFlight = false)
+                    .map((res) => res || this.controller.complete())
+                    .do(() => --this.inFlight)
                     .filter(Boolean)
                     .concatAll())
             .concatMap(resultSet => resultSet.data);
