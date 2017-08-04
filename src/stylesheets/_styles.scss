@@ -69,11 +69,22 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
-.app-content > div,
+[app-content] > div,
 .app-toolbar-title,
 h1 > small > span,
 md-card {
     @extend .pad;
+}
+
+[app-content] {
+    margin: auto;
+    margin-top: 0;
+    max-width: 1600px;
+    width: 100%;
+}
+
+[app-content] .positioning-anchor * {
+    pointer-events: all;
 }
 
 snack-bar-container {
@@ -86,12 +97,6 @@ snack-bar-container {
     position: absolute;
     bottom: 0;
     right: 0;
-}
-
-.app-content {
-    margin: auto;
-    margin-top: 0;
-    max-width: 1600px;
 }
 
 .app-icon-button {
@@ -117,10 +122,6 @@ snack-bar-container {
 
 .clear, page div {
     clear: both;
-}
-
-.displacer-content .positioning-anchor * {
-    pointer-events: all;
 }
 
 .flex {

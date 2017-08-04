@@ -24,12 +24,10 @@ import {DisplacerPortalDirective} from './displacer-portal.directive';
     selector: 'displacer',
     template: `
         <ng-template displacer-portal>
-            <div class='displacer-source'>
-                <div class='app-content'>
-                    <div class='displacer-content'>
-                        <div class='positioning-anchor'>
-                            <ng-content></ng-content>
-                        </div>
+            <div app-content>
+                <div class='displacer-content'>
+                    <div class='positioning-anchor'>
+                        <ng-content></ng-content>
                     </div>
                 </div>
             </div>

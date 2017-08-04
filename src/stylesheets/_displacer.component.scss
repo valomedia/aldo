@@ -5,14 +5,8 @@
  * This contains style directives locally applied to the DisplacerComponent.
  */
 
-.displacer-source {
+[app-content] {
     @extend .maximized;
-
-    position: absolute;
-}
-
-.app-content {
-    height: 100vh;
 }
 
 .displacer-content {

@@ -34,6 +34,7 @@ import {AsideComponent} from './aside.component';
 import {MainComponent} from './main.component';
 import {NotFoundComponent} from './not-found.component';
 import {NoDetailComponent} from './no-detail.component';
+import {AppContentDirective} from './app-content.directive';
 
 /*
  * The Module definitions for AppComponent.
@@ -68,7 +69,8 @@ import {NoDetailComponent} from './no-detail.component';
         AsideComponent,
         MainComponent,
         NotFoundComponent,
-        NoDetailComponent
+        NoDetailComponent,
+        AppContentDirective
     ],
     bootstrap: [AppComponent],
     providers: [
