@@ -32,6 +32,8 @@ import {Expandable} from './expandable';
 })
 export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
         implements OnInit {
+    constructor(private elementRef: ElementRef) {}
+
 
     @ViewChild('element')
     private element: ElementRef;
@@ -39,7 +41,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
     /*
      * Controller for the output.
      */
-    private controller: Subject<null>;
+    private controller: Subject<number>;
 
     /*
      * Whether there is already a request in flight.
@@ -62,12 +64,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
                 this.controller
                     .throttleTime(50)
                     .filter(() => !this.inFlight)
-                    .mapTo(this.element
-                        .nativeElement
-                        .getBoundingClientRect()
-                        .bottom)
-                    .filter((bottomPosition) =>
-                        bottomPosition < 2 * window.innerHeight)
+                    .filter((bottom) => bottom < 2 * window.innerHeight)
                     .concatMap(() => Observable.from([null,null]))
                     .do(() => this.inFlight = true)
                     .mergeScan(
@@ -90,7 +87,8 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
 
     @HostListener('window:scroll')
     load() {
-        this.controller.next();
+        this.controller.next(
+            this.elementRef.nativeElement.getBoundingClientRect().bottom);
     }
 }
 
