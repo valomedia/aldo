@@ -17,7 +17,9 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <nav (click)='nav.close()'></nav>
+                    <div (click)='nav.close()'>
+                        <ng-content select='nav'></ng-content>
+                    </div>
                 </md-sidenav>
                 <md-sidenav
                         #aside

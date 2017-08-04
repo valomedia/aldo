@@ -45,7 +45,7 @@ md-sidenav-container > * {
     height: 100vh!important;
 }
 
-md-sidenav-container > * > *:last-child {
+nav, aside, main {
     overflow: auto;
 }
 
@@ -69,7 +69,10 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
-nav, aside, .app-content > div, .app-toolbar-title, h1 > small > span, md-card {
+.app-content > div,
+.app-toolbar-title,
+h1 > small > span,
+md-card {
     @extend .pad;
 }
 
@@ -88,7 +91,6 @@ snack-bar-container {
 .app-content {
     margin: auto;
     margin-top: 0;
-    width: 100%;
     max-width: 1600px;
 }
 

@@ -7,7 +7,9 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'nav',
     template: `
-        <pages></pages>
+        <div>
+            <pages></pages>
+        </div>
     `,
     styleUrls: ['dist/nav.component.css']
 })

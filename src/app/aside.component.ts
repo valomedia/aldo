@@ -7,7 +7,9 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'aside',
     template: `
-        <ng-content></ng-content>
+        <div>
+            <ng-content></ng-content>
+        </div>
     `,
     styleUrls: ['dist/aside.component.css']
 })
