@@ -56,6 +56,13 @@ export class Post extends GraphApiObject {
     get createdTime() {
         return new Date(this.created_time);
     }
+
+    /*
+     * Get a link to this post in the app.
+     */
+    get path() {
+        return '/' + this.id.replace('_', '/');
+    }
 }
 export interface Post extends PostType {}
 

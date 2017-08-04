@@ -14,10 +14,12 @@ import {Post} from './post';
 @Component({
     selector: 'posts',
     template: `
-        <md-card *ngFor='let post of _posts'>
-            <profile [profile]='post.from'></profile>
-            <md-card-content>{{post.text}}</md-card-content>
-        </md-card>
+        <a routerLink='{{post.path}}' *ngFor='let post of _posts'>
+            <md-card>
+                <profile [profile]='post.from'></profile>
+                <md-card-content>{{post.text}}</md-card-content>
+            </md-card>
+        </a>
         <md-spinner color='accent' *ngIf='!loaded'>
         </md-spinner>
     `,
