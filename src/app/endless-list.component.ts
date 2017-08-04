@@ -3,7 +3,6 @@ import {
     OnInit,
     Input,
     HostListener,
-    ViewChild,
     ElementRef
 } from '@angular/core';
 
@@ -24,9 +23,7 @@ import {Expandable} from './expandable';
 @Component({
     selector: 'endless-list',
     template: `
-        <div #element>
-            <ng-content></ng-content>
-        </div>
+        <ng-content></ng-content>
     `,
     styleUrls: ['dist/endless-list.component.css']
 })
@@ -34,14 +31,10 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
         implements OnInit {
     constructor(private elementRef: ElementRef) {}
 
-
-    @ViewChild('element')
-    private element: ElementRef;
-
     /*
      * Controller for the output.
      */
-    private controller: Subject<number>;
+    private controller = new Subject<number>;
 
     /*
      * Whether there is already a request in flight.
@@ -57,7 +50,6 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
     output: Observable<OutType>;
 
     ngOnInit() {
-        this.controller = new Subject<null>();
         this.output = Observable
             .concat(
                 this.input,
