@@ -1,6 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Location} from '@angular/common';
 import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Params} from '@angular/router';
+import {MdSidenav} from '@angular/material';
+
+import 'rxjs/add/operator/pluck';
 
 import {AppUxService} from './app-ux.service';
 
@@ -17,9 +21,7 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <div (click)='nav.close()'>
-                        <ng-content select='nav'></ng-content>
-                    </div>
+                    <nav app-content (click)='nav.close()'></nav>
                 </md-sidenav>
                 <md-sidenav
                         #aside
@@ -48,7 +50,9 @@ import {AppUxService} from './app-ux.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <ng-content select='aside'></ng-content>
+                    <aside app-content>
+                        <router-outlet name='detail'></router-outlet>
+                    </aside>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -109,21 +113,36 @@ import {AppUxService} from './app-ux.service';
                     </button>
                 </md-toolbar>
                 <div id='displacer-target'></div>
-                <ng-content select='main'></ng-content>
+                <main app-content>
+                    <router-outlet name='master'></router-outlet>
+                </main>
             </md-sidenav-container>
         </div>
     `,
     styleUrls: ['dist/layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
     constructor(
         private appUxService: AppUxService,
         private location: Location,
-        private title: Title) {}
+        private title: Title,
+        private activatedRoute: ActivatedRoute) {}
+
+    @ViewChild('aside')
+    private aside: MdSidenav;
 
     /*
      * Whether the dark-theme is active.
      */
     dark = false;
+
+    ngOnInit() {
+        this.activatedRoute
+            .params
+            .first()
+            .pluck('post')
+            .filter(Boolean)
+            .subscribe(() => this.aside.open());
+    }
 }
 
