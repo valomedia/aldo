@@ -11,9 +11,9 @@
 
 .displacer-content {
     @extend .maximized;
+    @include box-sizing(border-box);
 
     margin: 0;
-    box-sizing: border-box;
 }
 
 .maximized {
@@ -25,7 +25,7 @@
     @extend .maximized;
 
     // Force this element to be the ancestor for absolute positioning.
-    transform: translate(0,0);
+    @include transform(translate(0,0));
 }
 
 /*
