@@ -210,15 +210,18 @@ export class PageComponent implements OnInit {
      * New Posts written by the user since they opened this Page.
      */
     newPosts = new Subject<Post>();
-    
+
     /*
      * The error that occured, if any.
      */
     graphApiError?: GraphApiError;
 
     ngOnInit() {
-        const page = this.activatedRoute.params.first().switchMap((params: Params) =>
-            this.pageService.page(params['page']))
+        const page = this.activatedRoute
+            .params
+            .first()
+            .switchMap((params: Params) =>
+                this.pageService.page(params['page']))
         this.posts = page.switchMap(page => page.posts);
         this.tagged = page
             .switchMap(page => page.tagged)
