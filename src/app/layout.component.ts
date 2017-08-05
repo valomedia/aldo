@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Location} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MdSidenav} from '@angular/material';
@@ -81,7 +80,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='//facebook.com{{location.path()}}'
+                            href='//facebook.com/{{params.page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -124,7 +123,6 @@ import {AppUxService} from './app-ux.service';
 export class LayoutComponent implements OnInit {
     constructor(
         private appUxService: AppUxService,
-        private location: Location,
         private title: Title,
         private activatedRoute: ActivatedRoute) {}
 
@@ -136,6 +134,11 @@ export class LayoutComponent implements OnInit {
      */
     dark = false;
 
+    /*
+     * The id of the page the user has open.
+     */
+    params: Params;
+
     ngOnInit() {
         this.activatedRoute
             .params
@@ -143,6 +146,10 @@ export class LayoutComponent implements OnInit {
             .pluck('post')
             .filter(Boolean)
             .subscribe(() => this.aside.open());
+        this.activatedRoute
+            .params
+            .first()
+            .subscribe(params => this.params = params);
     }
 }
 
