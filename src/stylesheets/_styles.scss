@@ -15,6 +15,10 @@ blockquote {
     border-left: 4px solid $primary-bg;
 }
 
+blockquote.accent {
+    border-left-color: $accent-bg;
+}
+
 body {
     margin: 0;
     color: black;

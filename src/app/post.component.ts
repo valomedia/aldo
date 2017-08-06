@@ -20,7 +20,9 @@ import {Video} from './video';
         <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
         <div *ngIf='post'>
             <div *ngIf='post.picture' class='picture'>
-                <img *ngIf='!video' [src]='post.picture'>
+                <a [href]='post.link' target='_blank'>
+                    <img *ngIf='!video' [src]='post.picture'>
+                </a>
                 <video
                         *ngIf='video'
                         controls
@@ -35,6 +37,11 @@ import {Video} from './video';
             </h1>
             <blockquote>
                 <p>{{post.text}}</p>
+            </blockquote>
+            <blockquote *ngIf='post.link' class='accent'>
+                <p>
+                    <a [href]='post.link' target='_blank'>{{post.link}}</a>
+                </p>
             </blockquote>
         </div>
     `,
