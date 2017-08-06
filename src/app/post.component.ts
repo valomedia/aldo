@@ -39,13 +39,14 @@ import {Video} from './video';
                     <small>{{post.name}}</small>
                 </span>
                 <span
+                        *ngIf='post.shares'
                         mdTooltip="Shares"
                         mdTooltipShowDelay='1500'
                         mdTooltipHideDelay='1500'>
                     <span class='text-primary'>
                         <md-icon>share</md-icon>
                     </span>
-                    <span *ngIf='post.shares' class='text-accent'>
+                    <span class='text-accent'>
                         {{post.shares.count}}
                     </span>
                 </span>
