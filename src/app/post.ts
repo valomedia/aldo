@@ -41,7 +41,7 @@ export interface PostType extends GraphApiObjectType {
     name?: string;
     caption?: string;
     description?: string;
-    shares: {count: number};
+    shares?: {count: number};
 }
 
 /*

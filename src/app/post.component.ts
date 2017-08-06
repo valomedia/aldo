@@ -45,7 +45,9 @@ import {Video} from './video';
                     <span class='text-primary'>
                         <md-icon>share</md-icon>
                     </span>
-                    <span class='text-accent'>{{post.shares.count}}</span>
+                    <span *ngIf='post.shares' class='text-accent'>
+                        {{post.shares.count}}
+                    </span>
                 </span>
             </h2>
             <blockquote>
