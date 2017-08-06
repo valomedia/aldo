@@ -16,7 +16,13 @@ import {showGraphApiError} from './graph-api-error.component';
     template: `
         <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
         <div *ngIf='post'>
-            <h1>{{post.from.name}}</h1>
+            <div class='picture'>
+                <img *ngIf='post.picture' [src]='post.picture'>
+            </div>
+            <h1>
+                <span><img [src]='post.from.picture'></span>
+                {{post.from.name}}
+            </h1>
         </div>
     `,
     styleUrls: ['dist/post.component.css']

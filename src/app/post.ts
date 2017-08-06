@@ -16,9 +16,10 @@ export interface PostType extends GraphApiObjectType {
     message: string;
     story: string;
     created_time: string;
-    from: ProfileType,
-    to?: ProfileType[],
-    picture: string;
+    from: ProfileType;
+    to?: ProfileType[];
+    picture?: string;
+    full_picture?: string;
 }
 
 /*
@@ -64,6 +65,16 @@ export class Post extends GraphApiObject {
     get path() {
         return '/' + this.id.replace('_', '/');
     }
+
+    /*
+     * Get a link to the picture for this post.
+     *
+     * This will be the picture for picture posts, the video thumbnail for video 
+     * posts, or a picture scraped from the website at the link for link posts.
+     */
+    get picture() {
+        return this.full_picture;
+    }
 }
 export interface Post extends PostType {}
 
@@ -80,6 +91,6 @@ export const DUMMY_POST_TYPE: PostType = {
     story: '',
     created_time: '',
     from: DUMMY_PROFILE_TYPE,
-    picture: ''
+    full_picture: ''
 };
 

@@ -21,6 +21,10 @@ button, .button {
     padding: 0 8px!important;
 }
 
+img {
+    vertical-align: top;
+}
+
 md-dialog-actions, .app-snackbar-actions {
     padding: 12px 0;
     display: flex;
@@ -74,6 +78,7 @@ md-toolbar {
 [app-content] > div,
 .app-toolbar-title,
 h1 > small > span,
+h1 > span,
 md-card,
 md-card-content {
     @extend .pad;
@@ -183,6 +188,17 @@ snack-bar-container {
     margin: 24px;
 }
 
+.picture {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -24px;
+    margin-bottom: 24px;
+}
+
+.picture img {
+    width: 100%;
+}
+
 .text-accent {
     color: $accent-bg;
 }
@@ -239,6 +255,13 @@ snack-bar-container {
 @media (max-width: 959px) and (max-height: 599px), (max-width: 599px) {
     .pad {
         margin: 16px;
+    }
+
+    .picture {
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-top: -16px;
+        margin-bottom: 16px;
     }
 }
 
