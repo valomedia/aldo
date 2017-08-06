@@ -112,9 +112,14 @@ export class Post extends GraphApiObject {
 
     /*
      * Get a promise for the video attached to this Post.
+     *
+     * If no video is attached to the post, or if the post is not a video post, 
+     * this will return undefined.
      */
     get video() {
-        return this.videoService.video(this.object_id);
+        return this.object_id
+            && this.contentType == PostContentType.video
+            && this.videoService.video(this.object_id);
     }
 }
 export interface Post extends PostType {}

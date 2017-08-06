@@ -98,11 +98,12 @@ export class PostComponent implements OnInit {
             err =>
                 this.graphApiError = showGraphApiError(this.mdSnackBar, err));
         post
-            .filter(post => post.contentType == PostContentType.video)
-            .concatMap(post => post.video)
+            .map(post => post.video)
+            .filter(Boolean)
+            .concatAll()
             .subscribe(
-                video => this.video = video,
-                err =>
+                (video: Video) => this.video = video,
+                (err: GraphApiError) =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));
     }
