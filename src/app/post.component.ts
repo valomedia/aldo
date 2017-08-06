@@ -23,6 +23,9 @@ import {showGraphApiError} from './graph-api-error.component';
                 <span><img [src]='post.from.picture'></span>
                 {{post.from.name}}
             </h1>
+            <blockquote>
+                <p>{{post.text}}</p>
+            </blockquote>
         </div>
     `,
     styleUrls: ['dist/post.component.css']

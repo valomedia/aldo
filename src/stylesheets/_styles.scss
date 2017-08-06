@@ -9,6 +9,12 @@ a {
     text-decoration: none;
 }
 
+blockquote {
+    margin-left: 18px;
+    padding-left: 18px;
+    border-left: 4px solid $primary-bg;
+}
+
 body {
     margin: 0;
     color: black;
