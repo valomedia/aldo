@@ -16,9 +16,11 @@ import {Post} from './post';
     template: `
         <a routerLink='{{post.path}}' *ngFor='let post of _posts'>
             <md-card>
-                <profile [profile]='post.from'></profile>
                 <img *ngIf='post.picture' md-card-image [src]='post.picture'>
-                <md-card-content>{{post.text}}</md-card-content>
+                <profile [profile]='post.from'></profile>
+                <md-card-content *ngIf='post.text'>
+                    {{post.text}}
+                </md-card-content>
             </md-card>
         </a>
         <md-spinner color='accent' *ngIf='!loaded'>

@@ -74,7 +74,8 @@ md-toolbar {
 [app-content] > div,
 .app-toolbar-title,
 h1 > small > span,
-md-card {
+md-card,
+md-card-content {
     @extend .pad;
 }
 
