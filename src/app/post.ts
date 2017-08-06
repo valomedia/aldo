@@ -17,7 +17,8 @@ export interface PostType extends GraphApiObjectType {
     story: string;
     created_time: string;
     from: ProfileType,
-    to?: ProfileType[]
+    to?: ProfileType[],
+    picture: string;
 }
 
 /*
@@ -78,6 +79,7 @@ export const DUMMY_POST_TYPE: PostType = {
     message: '',
     story: '',
     created_time: '',
-    from: DUMMY_PROFILE_TYPE
+    from: DUMMY_PROFILE_TYPE,
+    picture: ''
 };
 

@@ -17,6 +17,7 @@ import {Post} from './post';
         <a routerLink='{{post.path}}' *ngFor='let post of _posts'>
             <md-card>
                 <profile [profile]='post.from'></profile>
+                <img *ngIf='post.picture' md-card-image [src]='post.picture'>
                 <md-card-content>{{post.text}}</md-card-content>
             </md-card>
         </a>
