@@ -16,8 +16,8 @@ import {showGraphApiError} from './graph-api-error.component';
     template: `
         <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
         <div *ngIf='post'>
-            <div class='picture'>
-                <img *ngIf='post.picture' [src]='post.picture'>
+            <div *ngIf='post.picture' class='picture'>
+                <img [src]='post.picture'>
             </div>
             <h1>
                 <span><img [src]='post.from.picture'></span>
