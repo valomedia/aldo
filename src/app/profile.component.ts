@@ -17,7 +17,6 @@ import {Profile} from './profile';
     styleUrls: ['dist/profile.component.css']
 })
 export class ProfileComponent {
-
     @Input()
     profile: Profile;
 }

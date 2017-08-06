@@ -35,6 +35,7 @@ import {MainComponent} from './main.component';
 import {NotFoundComponent} from './not-found.component';
 import {NoDetailComponent} from './no-detail.component';
 import {AppContentDirective} from './app-content.directive';
+import {VideoService} from './video.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -81,7 +82,8 @@ import {AppContentDirective} from './app-content.directive';
         {
             provide: RouteReuseStrategy,
             useClass: CustomRouteReuseStrategy
-        }
+        },
+        VideoService
     ],
     entryComponents: [
         PostDialogComponent,

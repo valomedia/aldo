@@ -39,6 +39,16 @@ import {AppUxService} from './app-ux.service';
                         </button>
                         <span class='app-toolbar-title'>Details</span>
                         <span class='app-toolbar-filler'></span>
+                        <a
+                                md-button
+                                class='button app-icon-button'
+                                mdTooltip="Facebook"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
+                                href='{{post}}'
+                                target='_blank'>
+                            <md-icon>open_in_browser</md-icon>
+                        </a>
                         <button
                                 md-button
                                 class='app-icon-button close-btn'
@@ -81,7 +91,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='//facebook.com/{{params.page}}'
+                            href='{{page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -136,9 +146,14 @@ export class LayoutComponent implements OnInit {
     dark = false;
 
     /*
-     * The id of the page the user has open.
+     * The url of the page the user has open.
      */
-    params: Params;
+    page = '';
+
+    /*
+     * The url of the post the user has open.
+     */
+    post = '';
 
     ngOnInit() {
         this.activatedRoute
@@ -150,7 +165,10 @@ export class LayoutComponent implements OnInit {
         this.activatedRoute
             .params
             .first()
-            .subscribe(params => this.params = params);
+            .subscribe(params => {
+                this.page = '//facebook.com/' + params.page;
+                this.post = this.page + '_' + params.post;
+            });
     }
 }
 

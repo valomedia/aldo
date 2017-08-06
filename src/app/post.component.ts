@@ -6,6 +6,9 @@ import {Post} from './post';
 import {PostService} from './post.service';
 import {GraphApiError} from './graph-api-error';
 import {showGraphApiError} from './graph-api-error.component';
+import {PostContentType} from './post';
+import {VideoService} from './video.service';
+import {Video} from './video';
 
 /*
  * The Component showing a single post in detail.
@@ -17,7 +20,14 @@ import {showGraphApiError} from './graph-api-error.component';
         <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
         <div *ngIf='post'>
             <div *ngIf='post.picture' class='picture'>
-                <img [src]='post.picture'>
+                <img *ngIf='!video' [src]='post.picture'>
+                <video
+                        *ngIf='video'
+                        controls
+                        preload='metadata'
+                        [poster]='post.picture'>
+                    <source [src]='video.source'>
+                </video>
             </div>
             <h1>
                 <span><img [src]='post.from.picture'></span>
@@ -34,10 +44,18 @@ export class PostComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private postService: PostService,
-        private mdSnackBar: MdSnackBar) {}
+        private mdSnackBar: MdSnackBar,
+        private videoService: VideoService) {}
+
+    private PostContentType = PostContentType;
 
     @Input()
     post: Post;
+
+    /*
+     * The video of the post, if any.
+     */
+    video?: Video;
 
     /*
      * The error that occured, if any.
@@ -45,17 +63,23 @@ export class PostComponent implements OnInit {
     graphApiError?: GraphApiError;
 
     ngOnInit() {
-        this.activatedRoute
+        const post = this.activatedRoute
             .params
             .first()
             .switchMap((params: Params) =>
-                this.postService.post(params['page'] + '_' + params['post']))
+                this.postService.post(params['page'] + '_' + params['post']));
+        post.subscribe(
+            post => this.post = post,
+            err =>
+                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
+        post
+            .filter(post => post.contentType == PostContentType.video)
+            .concatMap(post => post.video)
             .subscribe(
-                post => this.post = post,
+                video => this.video = video,
                 err =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));
-
     }
 }
 

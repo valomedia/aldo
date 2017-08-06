@@ -81,6 +81,11 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
+video {
+    width: 100%;
+    object-fit: cover;
+}
+
 [app-content] > div,
 .app-toolbar-title,
 h1 > small > span,

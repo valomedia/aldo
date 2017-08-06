@@ -1,13 +1,28 @@
+import {ReflectiveInjector} from '@angular/core';
+
 import {
     GraphApiObject,
     GraphApiObjectType,
     DUMMY_GRAPH_API_OBJECT_TYPE
 } from './graph-api-object';
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
+import {VideoService} from './video.service';
+import {FbService} from './fb.service';
 
 /*
  * Classes related to Facebook posts.
  */
+
+/*
+ * The different types of post.
+ */
+export enum PostContentType {
+    link,
+    status,
+    photo,
+    video,
+    offer
+}
 
 /*
  * A Facebook post as returned by the Facebook API.
@@ -20,6 +35,8 @@ export interface PostType extends GraphApiObjectType {
     to?: ProfileType[];
     picture?: string;
     full_picture?: string;
+    object_id?: string;
+    type: string;
 }
 
 /*
@@ -33,7 +50,12 @@ export class Post extends GraphApiObject {
             to: (kwargs.to || []).map(profileType => new Profile(profileType))
         };
         super(kwargs);
+        this.videoService = ReflectiveInjector
+            .resolveAndCreate([VideoService, FbService])
+            .get(VideoService);
     }
+
+    private videoService: VideoService;
 
     /*
      * The Profile that sent this Post.
@@ -75,6 +97,20 @@ export class Post extends GraphApiObject {
     get picture() {
         return this.full_picture;
     }
+
+    /*
+     * Get the type of this Post.
+     */
+    get contentType(): PostContentType {
+        return PostContentType[this.type];
+    }
+
+    /*
+     * Get a promise for the video attached to this Post.
+     */
+    get video() {
+        return this.videoService.video(this.object_id);
+    }
 }
 export interface Post extends PostType {}
 
@@ -91,6 +127,8 @@ export const DUMMY_POST_TYPE: PostType = {
     story: '',
     created_time: '',
     from: DUMMY_PROFILE_TYPE,
-    full_picture: ''
+    full_picture: '',
+    object_id: '',
+    type: ''
 };
 
