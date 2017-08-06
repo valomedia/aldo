@@ -31,17 +31,33 @@ import {Video} from './video';
                     <source [src]='video.source'>
                 </video>
             </div>
-            <h1>
-                <span><img [src]='post.from.picture'></span>
-                {{post.from.name}}
-            </h1>
+            <h2>
+                <img [src]='post.from.picture'>
+                <span>
+                    {{post.from.name}}
+                    <br>
+                    <small>{{post.name}}</small>
+                </span>
+                <span
+                        mdTooltip="Shares"
+                        mdTooltipShowDelay='1500'
+                        mdTooltipHideDelay='1500'>
+                    <span class='text-primary'>
+                        <md-icon>share</md-icon>
+                    </span>
+                    <span class='text-accent'>{{post.shares.count}}</span>
+                </span>
+            </h2>
             <blockquote>
                 <p>{{post.text}}</p>
             </blockquote>
             <blockquote *ngIf='post.link' class='accent'>
                 <p>
-                    <a [href]='post.link' target='_blank'>{{post.link}}</a>
+                    <a [href]='post.link' target='_blank'>
+                        {{post.caption || post.link}}
+                    </a>
                 </p>
+                <p *ngIf='post.description'>{{post.description}}</p>
             </blockquote>
         </div>
     `,

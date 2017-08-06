@@ -5,3 +5,37 @@
  * This contains style directives locally applied to the PostComponent.
  */
 
+h2 {
+    display: flex;
+}
+
+h2 img {
+    margin-top: auto!important;
+    margin-bottom: auto!important;
+
+    // It's complicated.
+    padding-bottom: 4px;
+}
+
+h2 > *:first-child {
+    margin-right: 8px;
+}
+
+h2 > *:not(*:first-child):not(*:last-child) {
+    flex-grow: 1;
+}
+
+h2 > *:last-child {
+    margin-left: 8px;
+}
+
+h2 > *:first-child, h2 > *:last-child {
+    flex-shrink: 0;
+}
+
+h2 * {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+

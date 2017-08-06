@@ -38,6 +38,10 @@ export interface PostType extends GraphApiObjectType {
     object_id?: string;
     type: string;
     link?: string;
+    name?: string;
+    caption?: string;
+    description?: string;
+    shares: {count: number};
 }
 
 /*
@@ -131,6 +135,10 @@ export const DUMMY_POST_TYPE: PostType = {
     full_picture: '',
     object_id: '',
     type: '',
-    link: ''
+    link: '',
+    name: '',
+    caption: '',
+    description: '',
+    shares: {count: 0}
 };
 
