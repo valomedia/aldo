@@ -16,11 +16,8 @@ import {Video} from './video';
     selector: 'comment',
     template: `
         <div *ngIf='comment.attachment'>
-            <a [href]='comment.attachment.url' target='_blank'>
-                <img
-                        *ngIf='!video'
-                        md-card-image
-                        [src]='comment.attachment.media.image.src'>
+            <a *ngIf='!video' [href]='comment.attachment.url' target='_blank'>
+                <img md-card-image [src]='comment.attachment.media.image.src'>
             </a>
             <video
                     *ngIf='video'
@@ -33,10 +30,47 @@ import {Video} from './video';
         </div>
         <profile [profile]='comment.from'></profile>
         <md-card-content *ngIf='comment.message'>
-            {{comment.message}}
+            <p>{{comment.message}}</p>
         </md-card-content>
+        <md-card-content>
+            <blockquote *ngFor='let comment of comments'>
+                <p>
+                    <strong>@{{comment.from.name}}</strong>
+                    <a
+                            *ngIf='comment.attachment'
+                            md-button
+                            color='primary'
+                            class='app-icon-button'
+                            [href]='comment.attachment.url'
+                            target='_blank'>
+                        <md-icon>attachment</md-icon>
+                    </a>
+                    <br>
+                    {{comment.message}}
+                </p>
+            </blockquote>
+        </md-card-content>
+        <md-card-footer>
+            <div
+                    mdTooltip="Likes"
+                    mdTooltipShowDelay='1500'
+                    mdTooltipHideDelay='1500'>
+                <span class='text-primary'>
+                    <md-icon>thumb_up</md-icon>
+                </span>
+                <span class='text-accent'>
+                    <strong>{{comment.like_count}}</strong>
+                </span>
+            </div>
+        </md-card-footer>
+        <md-card-actions>
+            <a md-button href='//facebook.com/{{comment.id}}' target='_blank'>
+                Facebook
+                <md-icon>open_in_browser</md-icon>
+            </a>
+        </md-card-actions>
     `,
-    styleUrls: ['dist/posts.component.css']
+    styleUrls: ['dist/comment.component.css']
 })
 export class CommentComponent implements OnInit {
     constructor(private mdSnackBar: MdSnackBar) {}
@@ -67,11 +101,13 @@ export class CommentComponent implements OnInit {
                 err =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));
-        this.comment
-            .video
-            .then(video => this.video = video)
-            .catch(err =>
-                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
+        this.comment.video
+            && this.comment
+                .video
+                .then(video => this.video = video)
+                .catch(err =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
     }
 }
 

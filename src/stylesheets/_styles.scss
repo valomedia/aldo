@@ -95,7 +95,8 @@ video {
 h1 > small > span,
 h1 > span,
 md-card,
-md-card-content {
+md-card-content,
+md-card-footer > * {
     @extend .pad;
 }
 

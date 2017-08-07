@@ -20,7 +20,7 @@ import {Comment} from './comment';
         <md-spinner color='accent' *ngIf='!loaded'>
         </md-spinner>
     `,
-    styleUrls: ['dist/posts.component.css']
+    styleUrls: ['dist/comments.component.css']
 })
 export class CommentsComponent implements OnInit {
     constructor(private mdSnackBar: MdSnackBar) {}
