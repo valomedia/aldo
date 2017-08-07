@@ -22,10 +22,6 @@ export interface ProfileType extends GraphApiObjectType {
  * A Facebook profile as used internally.
  */
 export class Profile extends GraphApiObject {
-    constructor(kwargs: ProfileType) {
-        super(kwargs);
-    }
-
     /*
      * Get the url to the icon for this Profile.
      */
