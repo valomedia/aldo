@@ -9,6 +9,14 @@
 @mixin box-sizing($x) {
     -webkit-box-sizing: $x;
     -moz-box-sizing: $x;
+    -ms-box-sizing: $x;
     box-sizing: $x;
+}
+
+@mixin transform($x) {
+    -webkit-transform: $x;
+    -moz-transform: $x;
+    -ms-transform: $x;
+    transform: $x;
 }
 

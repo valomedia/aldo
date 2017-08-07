@@ -4,16 +4,77 @@ import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {PagesComponent} from './pages.component';
 import {PageComponent} from './page.component';
+import {MissingFeatureComponent} from './missing-feature.component';
+import {NotFoundComponent} from './not-found.component';
+import {NoDetailComponent} from './no-detail.component';
+import {PostComponent} from './post.component';
+import {LayoutComponent} from './layout.component';
 
 const ROUTES: Routes = [
     {
         path: '',
-        component: DashboardComponent,
-        pathMatch: 'full'
+        component: LayoutComponent,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                component: DashboardComponent
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                component: NoDetailComponent,
+                outlet: 'detail'
+            }
+        ]
     },
     {
-        path: ':id',
-        component: PageComponent
+        path: ':page',
+        children: [
+            {
+                path: '',
+                component: LayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: PageComponent
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: NoDetailComponent,
+                        outlet: 'detail'
+                    }
+                ]
+            },
+            {
+                path: ':post',
+                component: LayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: PageComponent
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: PostComponent,
+                        outlet: 'detail'
+                    },
+                    {
+                        path: '**',
+                        component: NotFoundComponent
+                    },
+                    {
+                        path: '**',
+                        component: NoDetailComponent,
+                        outlet: 'detail'
+                    }
+                ]
+            }
+        ]
     }
 ];
 

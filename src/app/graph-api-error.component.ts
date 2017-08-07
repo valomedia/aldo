@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MdSnackBar, MdSnackBarRef} from '@angular/material';
 
 import {GraphApiError} from './graph-api-error';
@@ -12,8 +12,8 @@ import {GraphApiError} from './graph-api-error';
     template: `
         <div *ngIf='graphApiError'>
             <p>
-                <strong>{{graphApiError.getTitle()}}</strong><br>
-                <em>{{graphApiError.getMsg()}}</em><br>
+                <strong>{{graphApiError.title}}</strong><br>
+                <em>{{graphApiError.msg}}</em><br>
             </p>
             <div class='app-snackbar-actions'>
                 <button md-button color='primary' (click)='reload()'>
@@ -29,13 +29,17 @@ import {GraphApiError} from './graph-api-error';
     `,
     styleUrls: ['dist/graph-api-error.component.css']
 })
-export class GraphApiErrorComponent {
+export class GraphApiErrorComponent implements OnInit {
 
     @Input()
     graphApiError: GraphApiError;
 
     @Input()
     mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
+
+    ngOnInit() {
+        console.error(this.graphApiError);
+    }
 
     /*
      * Reload the page.
@@ -45,6 +49,9 @@ export class GraphApiErrorComponent {
     }
 }
 
+/*
+ * Show a GraphApiError and return it.
+ */
 export function showGraphApiError(
     mdSnackBar: MdSnackBar,
     graphApiError: GraphApiError
@@ -53,5 +60,6 @@ export function showGraphApiError(
     let mdSnackBarRef = mdSnackBar.openFromComponent(GraphApiErrorComponent);
     mdSnackBarRef.instance.graphApiError = graphApiError;
     mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+    return graphApiError;
 }
 

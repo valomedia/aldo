@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/pluck';
 
-import {Page, EMPTY_PAGE, ContentType} from './page';
+import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 
@@ -18,31 +19,36 @@ export class PageService {
     /*
      * Perform a GET-request for a Page on a given path.
      */
-    get(path: String, params = {}): Observable<Page> {
-        return this.fbService.call(path, HttpMethod.Get, {
-            fields: Object.keys(EMPTY_PAGE),
-            ...params
-        });
+    get(path: string): Observable<Page> {
+        return this.fbService.call(
+            path,
+            HttpMethod.Get,
+            {fields: Object.keys(DUMMY_PAGE_TYPE)},
+            Page);
     }
 
     /*
      * Get all Pages of the user.
      */
-    getPages(after?: String) { return this.get('me/accounts'); }
+    pages(after?: string) {
+        return this.get('me/accounts');
+    }
 
     /*
      * Get a Page by its ID.
      */
-    getPage(id: number) { return this.get(id.toString()).first().toPromise(); }
+    page(id: string) {
+        return this.get(id).first().toPromise();
+    }
 
     /*
      * Post a message as the page.
      */
-    postMessage(
+    postMsg(
             page: Page,
-            msg: String,
+            msg: string,
             contentType: ContentType,
-            link: String
+            link: string
     ) {
         let result;
         switch (+contentType) {
@@ -77,7 +83,7 @@ export class PageService {
                     });
                 break;
         }
-        return result.map(({id}: {id: String}) => id).first().toPromise();
+        return result.pluck('id').first().toPromise();
     }
 }
 

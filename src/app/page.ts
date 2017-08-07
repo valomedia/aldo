@@ -1,6 +1,11 @@
+import {ReflectiveInjector} from '@angular/core';
+
+import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
+import {PostService} from './post.service';
+import {FbService} from './fb.service';
 
 /*
- * A page.
+ * Classes related to handling Facebook pages.
  */
 
 /*
@@ -15,16 +20,30 @@ export enum ContentType {
 /*
  * A Facebook page as returned by the Facebook API.
  */
-export interface Page {
-    id: Number;
-    access_token: String;
-    name: String;
-    fan_count: Number;
-    new_like_count: Number;
-    overall_star_rating: Number;
-    rating_count: Number;
-    talking_about_count: Number;
+export interface PageType extends ProfileType {
+    access_token: string;
+    fan_count: number;
+    new_like_count: number;
+    overall_star_rating: number;
+    rating_count: number;
+    talking_about_count: number;
 };
+
+/*
+ * A Facebook page as used internally.
+ */
+export class Page extends Profile {
+    constructor(kwargs: PageType) { super(kwargs); }
+
+    private postService: PostService = ReflectiveInjector
+        .resolveAndCreate([PostService, FbService])
+        .get(PostService);
+
+    get feed() { return this.postService.feed(this.id); }
+    get posts() { return this.postService.posts(this.id); }
+    get tagged() { return this.postService.tagged(this.id); }
+}
+export interface Page extends PageType {}
 
 /*
  * The simplest valid page.
@@ -33,10 +52,9 @@ export interface Page {
  * from Facebook, thus allowing adding a field to Page without changing 
  * PageService.
  */
-export const EMPTY_PAGE = {
-    id: 0,
+export const DUMMY_PAGE_TYPE: PageType = {
+    ...DUMMY_PROFILE_TYPE,
     access_token: '',
-    name: '',
     fan_count: 0,
     new_like_count: 0,
     overall_star_rating: 0,

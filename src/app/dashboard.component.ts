@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
+import 'rxjs/add/operator/toArray';
+
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
@@ -18,8 +20,8 @@ import {showGraphApiError} from './graph-api-error.component';
         <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
         </md-spinner>
         <md-grid-list
-                [cols]='appUxService.cols() / 3 | ceil'
-                [gutterSize]='appUxService.gutterSize()'
+                [cols]='appUxService.cols / 3 | ceil'
+                [gutterSize]='appUxService.gutterSize'
                 rowHeight='2:1'>
             <md-grid-tile
                     *ngFor='let page of pages'
@@ -41,13 +43,20 @@ export class DashboardComponent {
      */
     pages: Page[];
 
+    /*
+     * The error that occured, if any.
+     */
+    graphApiError: GraphApiError;
+
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
-                err => showGraphApiError(this.mdSnackBar, err));
+                err =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
     }
 }
 

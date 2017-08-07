@@ -1,0 +1,25 @@
+
+/*
+ * Material theme customizations.
+ *
+ * This mainly contains workarounds for fuckup by Angular Material 2.
+ */
+
+.dark {
+    .mat-sidenav {
+        background-color: #303030!important;
+    }
+
+    .mat-sidenav-container {
+        background-color: #212121!important;
+    }
+}
+
+.mat-sidenav {
+    background-color: #FAFAFA!important;
+}
+
+.mat-sidenav-container {
+    background-color: #F5F5F5!important;
+}
+

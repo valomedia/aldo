@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the MissingFeatureComponent.
+ *
+ * This is a style locally applied to MissingFeatureComponent.  All styles 
+ * specific to the MissingFeatureComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _missing-feature.component partial, to keep things easier to restructure.
+ */
+
+@import 'mixins';
+@import 'colors';
+@import '_missing-feature.component';
+

@@ -15,16 +15,14 @@ import {showGraphApiError} from './graph-api-error.component';
     template: `
         <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
         </md-spinner>
-        <nav>
-            <md-nav-list>
-                <a
-                        md-list-item
-                        *ngFor='let page of pages'
-                        routerLink='/{{page.id}}'>
-                    {{page.name}}
-                </a>
-            </md-nav-list>
-        </nav>
+        <md-nav-list>
+            <a
+                    md-list-item
+                    *ngFor='let page of pages'
+                    routerLink='/{{page.id}}'>
+                {{page.name}}
+            </a>
+        </md-nav-list>
     `,
     styleUrls: ['dist/pages.component.css']
 })
@@ -38,13 +36,20 @@ export class PagesComponent implements OnInit {
      */
     pages: Page[];
 
+    /*
+     * The error that occured, if any.
+     */
+    graphApiError: GraphApiError;
+
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
             .toArray()
             .subscribe(
                 pages => this.pages = pages,
-                err => showGraphApiError(this.mdSnackBar, err));
+                err =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
     }
 }
 

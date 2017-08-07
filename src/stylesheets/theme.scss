@@ -8,6 +8,7 @@
 @import 'colors';
 @import 'typo';
 @import '../../node_modules/@angular/material/theming';
+@import '_theme';
 
 @include mat-core();
 @include colors();

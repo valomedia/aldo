@@ -76,7 +76,7 @@ import {PageService} from './page.service';
 })
 export class PostDialogComponent {
     constructor(
-        private mdDialogRef: MdDialogRef<Promise<String>>,
+        private mdDialogRef: MdDialogRef<Promise<string>>,
         private pageService: PageService) {}
 
     @Input()
@@ -112,7 +112,7 @@ export class PostDialogComponent {
      */
     post() {
         this.mdDialogRef.close(
-            this.pageService.postMessage(
+            this.pageService.postMsg(
                 this.page,
                 this.text,
                 this.contentType,

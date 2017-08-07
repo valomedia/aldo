@@ -19,10 +19,11 @@ export enum GraphApiErrorType {
     Duplicate,
     DeadLink,
     Session,
-    Name
+    Name,
+    Rate
 }
 
-let msgs: String[] = [];
+let msgs: string[] = [];
 msgs[GraphApiErrorType.UnhandledError] = 
     "Bitte kontaktiere den Support, wir werden das Problem sofort beheben.";
 msgs[GraphApiErrorType.Registration] = 
@@ -47,10 +48,12 @@ msgs[GraphApiErrorType.DeadLink] =
     "Bitte überprüfe, dass alle Links in deinem Post auch funktionieren.";
 msgs[GraphApiErrorType.Session] = 
     "Bitte melde dich erneut an.";
-msgs[GraphApiErrorType.Name] =
+msgs[GraphApiErrorType.Name] = 
     "Überprüfe die URL auf der du dich befindest";
+msgs[GraphApiErrorType.Rate] = 
+    "Mach bitte langsamer";
 
-let titles: String[] = [];
+let titles: string[] = [];
 titles[GraphApiErrorType.UnhandledError] = 
     "Es ist ein unerwarteter Fehler aufgetreten";
 titles[GraphApiErrorType.Registration] = 
@@ -77,6 +80,8 @@ titles[GraphApiErrorType.Session] =
     "Deine Sitzung ist abgelaufen oder geschlossen worden";
 titles[GraphApiErrorType.Name] = 
     "Seiten können nur über ihre ID aufgerufen werden";
+titles[GraphApiErrorType.Rate] = 
+    "Das API-Limit für deine Seite ist überschritten";
 
 /*
  * The kind of error Facebook will return on a failed call to the GraphAPI.
@@ -91,13 +96,13 @@ export class GraphApiError {
         error_user_msg = '',
         fbtrace_id
     }: {
-        message: String,
-        type?: String,
+        message: string,
+        type?: string,
         code: number,
         error_subcode?: number,
-        error_user_title?: String,
-        error_user_msg?: String,
-        fbtrace_id: String
+        error_user_title?: string,
+        error_user_msg?: string,
+        fbtrace_id: string
     }) {
         this.message = message;
         this.type = type;
@@ -111,12 +116,12 @@ export class GraphApiError {
     /*
      * Facebook's error message.
      */
-    message: String;
+    message: string;
 
     /*
      * The type of error for named errors.
      */
-    type: String;
+    type: string;
 
     /*
      * Primary error code.
@@ -131,22 +136,22 @@ export class GraphApiError {
     /*
      * A message from Facebook, describing the error for the user.
      */
-    error_user_msg: String;
+    error_user_msg: string;
 
     /*
      * A dialog title from Facebook, describing the error for the user.
      */
-    error_user_title: String;
+    error_user_title: string;
 
     /*
      * An identifyer used for Debugging internally by Facebook.
      */
-    fbtrace_id: String;
+    fbtrace_id: string;
 
     /*
      * Resolve the error codes to a class of error.
      */
-    getErrorClass() {
+    get errorClass() {
         if (this.error_subcode == 458) {
             return GraphApiErrorType.Registration;
         }
@@ -167,6 +172,9 @@ export class GraphApiError {
         }
         if (this.code == 10 || this.code < 300 && this.code >= 200) {
             return GraphApiErrorType.Permission;
+        }
+        if (this.code == 32) {
+            return GraphApiErrorType.Rate;
         }
         if (this.code == 368) {
             return GraphApiErrorType.Blocked;
@@ -195,15 +203,15 @@ export class GraphApiError {
     /*
      * Get an appropriate help message for the user.
      */
-    getMsg(): String {
-        return this.error_user_msg || msgs[this.getErrorClass()];
+    get msg(): string {
+        return this.error_user_msg || msgs[this.errorClass];
     }
 
     /*
      * Get a short error description for use as dialog box title.
      */
-    getTitle(): String {
-        return this.error_user_title || titles[this.getErrorClass()];
+    get title(): string {
+        return this.error_user_title || titles[this.errorClass];
     }
 }
 

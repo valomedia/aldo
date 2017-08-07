@@ -1,3 +1,4 @@
+'use strict';
 
 /*
  * Nothing here so far.
