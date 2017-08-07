@@ -92,10 +92,10 @@ import {Video} from './video';
                         type='text'
                         value='https://facebook.com/{{comment.id}}'>
             </div>
-            <button md-button (click)='copy()'>
+            <a md-button (click)='copy()'>
                 Link kopieren
                 <md-icon>insert_link</md-icon>
-            </button>
+            </a>
             <a
                     md-button
                     color='primary'
