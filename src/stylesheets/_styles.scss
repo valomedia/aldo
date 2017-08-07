@@ -110,6 +110,10 @@ md-card-content {
     pointer-events: all;
 }
 
+[md-button] {
+    text-transform: uppercase;
+}
+
 snack-bar-container {
     color: white;
 }
