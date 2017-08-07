@@ -57,7 +57,7 @@ import {Video} from './video';
                     {{comment.message}}
                 </p>
             </blockquote>
-            <md-spinner *ngIf='!loaded'></md-spinner>
+            <md-spinner *ngIf='!loaded' color='accent'></md-spinner>
         </md-card-content>
         <md-card-footer>
             <div>

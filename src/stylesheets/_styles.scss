@@ -85,6 +85,17 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
+profile .mat-card-header-text {
+    // This is what separates the men from the boys.
+    min-width: 0;
+}
+
+profile .mat-card-header-text > md-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 video {
     width: 100%;
     object-fit: cover;
