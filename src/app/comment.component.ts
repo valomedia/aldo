@@ -57,6 +57,7 @@ import {Video} from './video';
                     {{comment.message}}
                 </p>
             </blockquote>
+            <md-spinner *ngIf='!loaded'></md-spinner>
         </md-card-content>
         <md-card-footer>
             <div>
@@ -119,6 +120,9 @@ export class CommentComponent implements OnInit {
     @Input()
     comment: Comment;
 
+    @Input()
+    loaded: Boolean;
+
     /*
      * The comments on this Comment, if any.
      */
@@ -129,26 +133,18 @@ export class CommentComponent implements OnInit {
      */
     video?: Video;
 
-    /*
-     * The error that occured, if any.
-     */
-    graphApiError: GraphApiError;
-
     ngOnInit() {
         this.comment
             .comments
+            .finally(() => this.loaded = true)
             .subscribe(
                 comment => this.comments.push(comment),
-                err =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                err => showGraphApiError(this.mdSnackBar, err));
         this.comment.video
             && this.comment
                 .video
                 .then(video => this.video = video)
-                .catch(err =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                .catch(err => showGraphApiError(this.mdSnackBar, err));
     }
 
     /*

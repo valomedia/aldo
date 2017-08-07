@@ -53,7 +53,14 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType>
         this.output = Observable
             .concat(
                 this.input,
-                this.controller
+                Observable
+                    .concat(
+                        Observable.of(
+                            this.elementRef
+                                .nativeElement
+                                .getBoundingClientRect()
+                                .bottom),
+                        this.controller)
                     .filter((bottom) => bottom < 2 * window.innerHeight)
                     .filter(() => !this.inFlight)
                     .concatMap(() => Observable.from([null,null]))
