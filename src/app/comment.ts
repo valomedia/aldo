@@ -37,6 +37,7 @@ export interface CommentType extends GraphApiObjectType {
         url: string;
     };
     like_count: number;
+    comment_count: number;
 }
 
 /*
@@ -124,6 +125,7 @@ export const DUMMY_COMMENT_TYPE: CommentType = {
         type: '',
         url: ''
     },
-    like_count: 0
+    like_count: 0,
+    comment_count: 0
 };
 

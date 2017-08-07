@@ -59,16 +59,29 @@ import {Video} from './video';
             </blockquote>
         </md-card-content>
         <md-card-footer>
-            <div
-                    mdTooltip="Likes"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'>
-                <span class='text-primary'>
-                    <md-icon>thumb_up</md-icon>
-                </span>
-                <span class='text-accent'>
-                    <strong>{{comment.like_count}}</strong>
-                </span>
+            <div>
+                <p
+                        mdTooltip="Antworten"
+                        mdTooltipShowDelay='1500'
+                        mdTooltipHideDelay='1500'>
+                    <span class='text-primary'>
+                        <md-icon>reply</md-icon>
+                    </span>
+                    <span class='text-accent'>
+                        <strong>{{comment.comment_count}}</strong>
+                    </span>
+                </p>
+                <p
+                        mdTooltip="Likes"
+                        mdTooltipShowDelay='1500'
+                        mdTooltipHideDelay='1500'>
+                    <span class='text-primary'>
+                        <md-icon>thumb_up</md-icon>
+                    </span>
+                    <span class='text-accent'>
+                        <strong>{{comment.like_count}}</strong>
+                    </span>
+                </p>
             </div>
         </md-card-footer>
         <md-card-actions>
