@@ -37,6 +37,7 @@ import {NoDetailComponent} from './no-detail.component';
 import {AppContentDirective} from './app-content.directive';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
+import {CommentsComponent} from './comments.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -72,7 +73,8 @@ import {CommentService} from './comment.service';
         MainComponent,
         NotFoundComponent,
         NoDetailComponent,
-        AppContentDirective
+        AppContentDirective,
+        CommentsComponent
     ],
     bootstrap: [AppComponent],
     providers: [

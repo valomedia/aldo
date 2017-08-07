@@ -8,6 +8,7 @@ import {
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
 import {FbService} from './fb.service';
+import {CommentService} from './comment.service';
 
 /*
  * Classes related to Facebook posts.
@@ -55,12 +56,18 @@ export class Post extends GraphApiObject {
             to: (kwargs.to || []).map(profileType => new Profile(profileType))
         };
         super(kwargs);
-        this.videoService = ReflectiveInjector
-            .resolveAndCreate([VideoService, FbService])
-            .get(VideoService);
+        const reflectiveInjector = ReflectiveInjector
+            .resolveAndCreate([
+                CommentService,
+                VideoService,
+                FbService
+            ]);
+        this.videoService = reflectiveInjector.get(VideoService);
+        this.commentService = reflectiveInjector.get(CommentService);
     }
 
     private videoService: VideoService;
+    private commentService: CommentService;
 
     /*
      * The Profile that sent this Post.
@@ -120,6 +127,13 @@ export class Post extends GraphApiObject {
         return this.object_id
             && this.contentType == PostContentType.video
             && this.videoService.video(this.object_id);
+    }
+
+    /*
+     * Get the Comments on this Post as an Observable of GraphApiResponses.
+     */
+    get comments() {
+        return this.commentService.comments(this.id);
     }
 }
 export interface Post extends PostType {}

@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 
+import {Observable} from 'rxjs/Observable';
+
 import {Post} from './post';
 import {PostService} from './post.service';
 import {GraphApiError} from './graph-api-error';
@@ -9,6 +11,8 @@ import {showGraphApiError} from './graph-api-error.component';
 import {PostContentType} from './post';
 import {VideoService} from './video.service';
 import {Video} from './video';
+import {GraphApiResponse} from './graph-api-response';
+import {Comment} from './comment';
 
 /*
  * The Component showing a single post in detail.
@@ -62,6 +66,9 @@ import {Video} from './video';
                 </p>
                 <p *ngIf='post.description'>{{post.description}}</p>
             </blockquote>
+            <endless-list #commentList [input]='comments'>
+                <comments [comments]='commentList.output'></comments>
+            </endless-list>
         </div>
     `,
     styleUrls: ['dist/post.component.css']
@@ -79,9 +86,14 @@ export class PostComponent implements OnInit {
     post: Post;
 
     /*
-     * The video of the post, if any.
+     * The Video of the Post, if any.
      */
     video?: Video;
+
+    /*
+     * The Comments on this Post.
+     */
+    comments: Observable<GraphApiResponse<Comment>>;
 
     /*
      * The error that occured, if any.
@@ -107,6 +119,7 @@ export class PostComponent implements OnInit {
                 (err: GraphApiError) =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));
+        this.comments = post.switchMap(post => post.comments);
     }
 }
 

@@ -39,7 +39,7 @@ export class CommentService {
      */
     comments(id: string): Observable<GraphApiResponse<Comment>> {
         return this.fbService.api(
-            id,
+            id + '/comments',
             HttpMethod.Get,
             {fields: Object.keys(DUMMY_COMMENT_TYPE)},
             Comment);
