@@ -152,6 +152,11 @@ snack-bar-container {
     clear: both;
 }
 
+.dummy-input {
+    height: 0;
+    opacity: 0;
+}
+
 .flex {
     display: flex;
 }

@@ -1,5 +1,13 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    Inject,
+    ViewChild,
+    ElementRef
+} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
+import {DOCUMENT} from '@angular/common';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -64,8 +72,22 @@ import {Video} from './video';
             </div>
         </md-card-footer>
         <md-card-actions>
-            <a md-button href='//facebook.com/{{comment.id}}' target='_blank'>
-                Facebook
+            <div class='dummy-input'>
+                <input
+                        #clipboardDummy
+                        type='text'
+                        value='https://facebook.com/{{comment.id}}'>
+            </div>
+            <button md-button (click)='copy()'>
+                Link kopieren
+                <md-icon>insert_link</md-icon>
+            </button>
+            <a
+                    md-button
+                    color='primary'
+                    href='//facebook.com/{{comment.id}}'
+                    target='_blank'>
+                Facebook öffnen
                 <md-icon>open_in_browser</md-icon>
             </a>
         </md-card-actions>
@@ -73,7 +95,13 @@ import {Video} from './video';
     styleUrls: ['dist/comment.component.css']
 })
 export class CommentComponent implements OnInit {
-    constructor(private mdSnackBar: MdSnackBar) {}
+    constructor(
+        private mdSnackBar: MdSnackBar,
+        @Inject(DOCUMENT)
+        private document: Document) {}
+
+    @ViewChild('clipboardDummy')
+    clipboardDummy: ElementRef;
 
     @Input()
     comment: Comment;
@@ -108,6 +136,15 @@ export class CommentComponent implements OnInit {
                 .catch(err =>
                     this.graphApiError
                         = showGraphApiError(this.mdSnackBar, err));
+    }
+
+    /*
+     * Copy the link to this comment to the clipboard.
+     */
+    copy() {
+        this.clipboardDummy.nativeElement.select();
+        this.document.execCommand('Copy');
+        this.mdSnackBar.open("Link kopiert", undefined, {duration: 2000});
     }
 }
 
