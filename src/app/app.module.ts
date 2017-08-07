@@ -38,6 +38,7 @@ import {AppContentDirective} from './app-content.directive';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
 import {CommentsComponent} from './comments.component';
+import {CommentComponent} from './comment.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -74,7 +75,8 @@ import {CommentsComponent} from './comments.component';
         NotFoundComponent,
         NoDetailComponent,
         AppContentDirective,
-        CommentsComponent
+        CommentsComponent,
+        CommentComponent
     ],
     bootstrap: [AppComponent],
     providers: [

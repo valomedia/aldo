@@ -15,10 +15,7 @@ import {Comment} from './comment';
     selector: 'comments',
     template: `
         <md-card *ngFor='let comment of _comments'>
-            <profile [profile]='comment.from'></profile>
-            <md-card-content *ngIf='comment.text'>
-                {{comment.text}}
-            </md-card-content>
+            <comment [comment]='comment'></comment>
         </md-card>
         <md-spinner color='accent' *ngIf='!loaded'>
         </md-spinner>
