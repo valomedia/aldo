@@ -17,24 +17,12 @@ const ROUTES: Routes = [
         component: DashboardComponent
     },
     {
-        path: '',
-        pathMatch: 'full',
-        component: NoDetailComponent,
-        outlet: 'detail'
-    },
-    {
         path: ':page',
         children: [
             {
                 path: '',
                 pathMatch: 'full',
                 component: PageComponent
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                component: NoDetailComponent,
-                outlet: 'detail'
             },
             {
                 path: ':post',
