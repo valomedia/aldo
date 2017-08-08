@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 import {MdSidenav} from '@angular/material';
+import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
 
@@ -20,13 +21,16 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <nav app-content (click)='nav.close()'></nav>
+                    <div (click)='nav.close()'>
+                        <ng-content select='nav'></ng-content>
+                    </div>
                 </md-sidenav>
                 <md-sidenav
                         #aside
                         align='end'
                         id='aside'
-                        [mode]='appUxService.asideMode'>
+                        [mode]='appUxService.asideMode'
+                        (close)='router.navigateByUrl(page)'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -45,7 +49,7 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Facebook"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                href='{{post}}'
+                                href='//facebook.com/{{post}}'
                                 target='_blank'>
                             <md-icon>open_in_browser</md-icon>
                         </a>
@@ -55,14 +59,11 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Schließen"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                (click)='aside.close()'
-                                routerLink='..'>
+                                (click)='aside.close()'>
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <aside app-content>
-                        <router-outlet name='detail'></router-outlet>
-                    </aside>
+                    <ng-content select='aside'></ng-content>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -91,7 +92,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='{{page}}'
+                            href='//facebook.com/{{page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -112,20 +113,9 @@ import {AppUxService} from './app-ux.service';
                             </md-slide-toggle>
                         </div>
                     </md-menu>
-                    <button
-                            md-button
-                            class='app-icon-button'
-                            mdTooltip="Details"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'
-                            (click)='aside.toggle()'>
-                        <md-icon>more_vert</md-icon>
-                    </button>
                 </md-toolbar>
                 <div id='displacer-target'></div>
-                <main app-content>
-                    <router-outlet name='master'></router-outlet>
-                </main>
+                <ng-content select='main'></ng-content>
             </md-sidenav-container>
         </div>
     `,
@@ -135,7 +125,8 @@ export class LayoutComponent implements OnInit {
     constructor(
         private appUxService: AppUxService,
         private title: Title,
-        private activatedRoute: ActivatedRoute) {}
+        private router: Router,
+        private location: Location) {}
 
     @ViewChild('aside')
     private aside: MdSidenav;
@@ -146,29 +137,24 @@ export class LayoutComponent implements OnInit {
     dark = false;
 
     /*
-     * The url of the page the user has open.
+     * The id of the page the user has open, or empty string.
      */
     page = '';
 
     /*
-     * The url of the post the user has open.
+     * The id of the post the user has open, or empty string.
      */
     post = '';
 
     ngOnInit() {
-        this.activatedRoute
-            .params
-            .first()
-            .pluck('post')
-            .filter(Boolean)
-            .subscribe(() => this.aside.open());
-        this.activatedRoute
-            .params
-            .first()
-            .subscribe(params => {
-                this.page = '//facebook.com/' + params.page;
-                this.post = this.page + '_' + params.post;
+        this.router
+            .events
+            .filter(event => event instanceof NavigationEnd)
+            .map(() => this.location.path().split('/').slice(1))
+            .do(path => path[1] ? this.aside.open() : this.aside.close())
+            .subscribe(path => {
+                this.page = path[0] || '';
+                this.post = path[1] ? this.page + '_' + path[1] : '';
             });
     }
 }
-

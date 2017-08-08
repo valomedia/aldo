@@ -324,6 +324,10 @@ snack-bar-container {
     #aside {
         width: 100%;
     }
+
+    #aside .close-btn {
+        display: none;
+    }
 }
 
 /*

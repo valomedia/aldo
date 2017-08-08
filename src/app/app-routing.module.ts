@@ -13,44 +13,31 @@ import {LayoutComponent} from './layout.component';
 const ROUTES: Routes = [
     {
         path: '',
-        component: LayoutComponent,
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                component: DashboardComponent
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                component: NoDetailComponent,
-                outlet: 'detail'
-            }
-        ]
+        pathMatch: 'full',
+        component: DashboardComponent
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        component: NoDetailComponent,
+        outlet: 'detail'
     },
     {
         path: ':page',
         children: [
             {
                 path: '',
-                component: LayoutComponent,
-                children: [
-                    {
-                        path: '',
-                        pathMatch: 'full',
-                        component: PageComponent
-                    },
-                    {
-                        path: '',
-                        pathMatch: 'full',
-                        component: NoDetailComponent,
-                        outlet: 'detail'
-                    }
-                ]
+                pathMatch: 'full',
+                component: PageComponent
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                component: NoDetailComponent,
+                outlet: 'detail'
             },
             {
                 path: ':post',
-                component: LayoutComponent,
                 children: [
                     {
                         path: '',
@@ -65,12 +52,7 @@ const ROUTES: Routes = [
                     },
                     {
                         path: '**',
-                        component: NotFoundComponent
-                    },
-                    {
-                        path: '**',
-                        component: NoDetailComponent,
-                        outlet: 'detail'
+                        redirectTo: '/'
                     }
                 ]
             }
