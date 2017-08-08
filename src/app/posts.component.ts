@@ -14,7 +14,7 @@ import {Post} from './post';
 @Component({
     selector: 'posts',
     template: `
-        <a routerLink='{{post.path}}' *ngFor='let post of _posts'>
+        <a routerLink='{{post.id}}' *ngFor='let post of _posts'>
             <md-card>
                 <img *ngIf='post.picture' md-card-image [src]='post.picture'>
                 <profile [profile]='post.from'></profile>

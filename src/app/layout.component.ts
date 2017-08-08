@@ -154,7 +154,7 @@ export class LayoutComponent implements OnInit {
             .do(path => path[1] ? this.aside.open() : this.aside.close())
             .subscribe(path => {
                 this.page = path[0] || '';
-                this.post = path[1] ? this.page + '_' + path[1] : '';
+                this.post = path[1] || '';
             });
     }
 }

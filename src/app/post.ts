@@ -94,13 +94,6 @@ export class Post extends GraphApiObject {
     }
 
     /*
-     * Get a link to this post in the app.
-     */
-    get path() {
-        return '/' + this.id.replace('_', '/');
-    }
-
-    /*
      * Get a link to the picture for this post.
      *
      * This will be the picture for picture posts, the video thumbnail for video 

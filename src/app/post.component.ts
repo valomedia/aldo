@@ -105,7 +105,7 @@ export class PostComponent implements OnInit {
             .params
             .first()
             .switchMap((params: Params) =>
-                this.postService.post(params['page'] + '_' + params['post']));
+                this.postService.post(params['post']));
         post.subscribe(
             post => this.post = post,
             err =>
