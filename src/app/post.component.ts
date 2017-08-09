@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 
@@ -21,7 +21,7 @@ import {Comment} from './comment';
 @Component({
     selector: 'post',
     template: `
-        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
+        <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
         <div *ngIf='post'>
             <div *ngIf='post.picture' class='picture'>
                 <a [href]='post.link' target='_blank'>
@@ -82,11 +82,10 @@ export class PostComponent implements OnInit {
 
     private PostContentType = PostContentType;
 
-    @Input()
+    /*
+     * The Post this Component is currently showing.
+     */
     post: Post;
-
-    @Input()
-    loaded: boolean;
 
     /*
      * The Video of the Post, if any.
@@ -98,25 +97,39 @@ export class PostComponent implements OnInit {
      */
     comments: Observable<GraphApiResponse<Comment>>;
 
+    /*
+     * The error that occured, if any.
+     */
+    graphApiError: GraphApiError;
+
     ngOnInit() {
-        const post = this.activatedRoute
+        // The Component is reused, so this will fire multiple times.
+        const posts = this.activatedRoute
             .params
-            .first()
             .switchMap((params: Params) =>
                 this.postService.post(params['post']))
-            .finally(() => this.loaded = true);
-        post.subscribe(
-            post => this.post = post,
-            err => showGraphApiError(this.mdSnackBar, err));
-        post
+        posts.subscribe(
+                (post: Post) => {
+                    this.post = post;
+
+                    // This is intentionally reassigned every time the user 
+                    // switches to a new page, so the Observables can complete 
+                    // whenever loading is finished, allowing me when to show 
+                    // the spinners and when to hide them.
+                    this.comments = post.comments;
+                },
+                (err: GraphApiError) =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
+        posts
             .map(post => post.video)
+            .do(this.video = null)
             .filter(Boolean)
             .concatAll()
             .subscribe(
                 (video: Video) => this.video = video,
                 (err: GraphApiError) =>
                     showGraphApiError(this.mdSnackBar, err));
-        this.comments = post.switchMap(post => post.comments);
     }
 }
 

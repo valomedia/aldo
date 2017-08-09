@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MdDialog, MdSnackBar} from '@angular/material';
 
@@ -195,7 +195,9 @@ export class PageComponent implements OnInit {
         private appUxService: AppUxService,
         private postService: PostService) {}
 
-    @Input()
+    /*
+     * The Page currently shown.
+     */
     page: Page;
 
     /*
@@ -219,19 +221,27 @@ export class PageComponent implements OnInit {
     graphApiError?: GraphApiError;
 
     ngOnInit() {
-        const page = this.activatedRoute
+        // The Component is reused, so this will fire multiple times.
+        this.activatedRoute
             .params
-            .first()
             .switchMap((params: Params) =>
                 this.pageService.page(params['page']))
-        this.posts = page.switchMap(page => page.posts);
-        this.tagged = page
-            .switchMap(page => page.tagged)
-            .concatMap(expandable => expandable.expanded);
-        page.subscribe(
-            page => this.page = page,
-            err =>
-                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
+            .subscribe(
+                (page: Page) => {
+                    this.page = page;
+
+                    // This is intentionally reassigned every time the user 
+                    // switches to a new page, so the Observables can complete 
+                    // whenever loading is finished, allowing me when to show 
+                    // the spinners and when to hide them.
+                    this.posts = page.posts;
+                    this.tagged = page
+                        .tagged
+                        .concatMap((posts: GraphApiResponse<Post>) =>
+                            posts.expanded);
+                },
+                (err: GraphApiError) =>
+                    this.graphApiError = showGraphApiError(this.mdSnackBar, err));
     }
 
     /*

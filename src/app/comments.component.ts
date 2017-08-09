@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
@@ -17,27 +17,32 @@ import {Comment} from './comment';
         <md-card *ngFor='let comment of _comments'>
             <comment [comment]='comment'></comment>
         </md-card>
-        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
+        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
     `,
     styleUrls: ['dist/comments.component.css']
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent {
     constructor(private mdSnackBar: MdSnackBar) {}
-
-    @Input()
-    comments: Observable<Comment>;
-
-    @Input()
-    loaded: Boolean;
 
     /*
      * All Comments shown by this Component.
      */
-    _comments: Comment[] = [];
+    _comments: Comment[];
 
-    ngOnInit() {
-        this.comments
-            .finally(() => this.loaded = true)
+    /*
+     * Whether more comments can currently be loaded.
+     */
+    _loaded: boolean;
+
+    @Input()
+    loaded: boolean;
+
+    @Input()
+    set comments(comments: Observable<Comment>) {
+        this._comments = [];
+        this._loaded = this.loaded;
+        comments
+            .finally(() => this._loaded = true)
             .subscribe(
                 comment => this._comments.push(comment),
                 err => showGraphApiError(this.mdSnackBar, err));

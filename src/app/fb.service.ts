@@ -71,7 +71,6 @@ export class FbService {
         ) {
             delete cache[i];
         }
-        console.warn(cache);
     }
 
     /*

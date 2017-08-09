@@ -1,11 +1,4 @@
-import {
-    Component,
-    OnInit,
-    Input,
-    Inject,
-    ViewChild,
-    ElementRef
-} from '@angular/core';
+import {Component, Input, Inject, ViewChild, ElementRef} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 import {DOCUMENT} from '@angular/common';
 
@@ -23,22 +16,22 @@ import {Video} from './video';
 @Component({
     selector: 'comment',
     template: `
-        <div *ngIf='comment.attachment'>
-            <a *ngIf='!video' [href]='comment.attachment.url' target='_blank'>
-                <img md-card-image [src]='comment.attachment.media.image.src'>
+        <div *ngIf='_comment.attachment'>
+            <a *ngIf='!video' [href]='_comment.attachment.url' target='_blank'>
+                <img md-card-image [src]='_comment.attachment.media.image.src'>
             </a>
             <video
                     *ngIf='video'
                     md-card-image
                     controls
                     preload='metadata'
-                    [poster]='comment.attachment.media.image.src'>
+                    [poster]='_comment.attachment.media.image.src'>
                 <source [src]='video.source'>
             </video>
         </div>
-        <profile [profile]='comment.from'></profile>
-        <md-card-content *ngIf='comment.message'>
-            <p>{{comment.message}}</p>
+        <profile [profile]='_comment.from'></profile>
+        <md-card-content *ngIf='_comment.message'>
+            <p>{{_comment.message}}</p>
         </md-card-content>
         <md-card-content>
             <blockquote *ngFor='let comment of comments'>
@@ -57,7 +50,7 @@ import {Video} from './video';
                     {{comment.message}}
                 </p>
             </blockquote>
-            <md-spinner *ngIf='!loaded' color='accent'></md-spinner>
+            <md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
         </md-card-content>
         <md-card-footer>
             <div>
@@ -69,7 +62,7 @@ import {Video} from './video';
                         <md-icon>reply</md-icon>
                     </span>
                     <span class='text-accent'>
-                        <strong>{{comment.comment_count}}</strong>
+                        <strong>{{_comment.comment_count}}</strong>
                     </span>
                 </p>
                 <p
@@ -80,7 +73,7 @@ import {Video} from './video';
                         <md-icon>thumb_up</md-icon>
                     </span>
                     <span class='text-accent'>
-                        <strong>{{comment.like_count}}</strong>
+                        <strong>{{_comment.like_count}}</strong>
                     </span>
                 </p>
             </div>
@@ -90,7 +83,7 @@ import {Video} from './video';
                 <input
                         #clipboardDummy
                         type='text'
-                        value='https://facebook.com/{{comment.id}}'>
+                        value='https://facebook.com/{{_comment.id}}'>
             </div>
             <a md-button (click)='copy()'>
                 Link kopieren
@@ -99,7 +92,7 @@ import {Video} from './video';
             <a
                     md-button
                     color='primary'
-                    href='//facebook.com/{{comment.id}}'
+                    href='//facebook.com/{{_comment.id}}'
                     target='_blank'>
                 Facebook öffnen
                 <md-icon>open_in_browser</md-icon>
@@ -108,40 +101,49 @@ import {Video} from './video';
     `,
     styleUrls: ['dist/comment.component.css']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent {
     constructor(
         private mdSnackBar: MdSnackBar,
         @Inject(DOCUMENT)
         private document: Document) {}
 
-    @ViewChild('clipboardDummy')
-    clipboardDummy: ElementRef;
-
-    @Input()
-    comment: Comment;
-
-    @Input()
-    loaded: Boolean;
+    private _loaded: boolean;
 
     /*
-     * The comments on this Comment, if any.
+     * The Comment this Component is currently displaying.
      */
-    comments: Comment[] = [];
+    private _comment: Comment;
+
+    /*
+     * The Comments on this Comment, if any.
+     */
+    private comments: Comment[];
 
     /*
      * The Video of the Comment, if any.
      */
-    video?: Video;
+    private video?: Video;
 
-    ngOnInit() {
-        this.comment
+    @ViewChild('clipboardDummy')
+    clipboardDummy: ElementRef;
+
+    @Input()
+    loaded: boolean;
+
+    @Input()
+    set comment(comment: Comment) {
+        this._loaded = this.loaded;
+        this.comments = [];
+        this.video = null;
+        this._comment = comment;
+        comment
             .comments
-            .finally(() => this.loaded = true)
+            .finally(() => this._loaded = true)
             .subscribe(
                 comment => this.comments.push(comment),
                 err => showGraphApiError(this.mdSnackBar, err));
-        this.comment.video
-            && this.comment
+        comment.video
+            && comment
                 .video
                 .then(video => this.video = video)
                 .catch(err => showGraphApiError(this.mdSnackBar, err));
