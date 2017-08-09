@@ -21,7 +21,7 @@ import {Comment} from './comment';
 @Component({
     selector: 'post',
     template: `
-        <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
+        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
         <div *ngIf='post'>
             <div *ngIf='post.picture' class='picture'>
                 <a [href]='post.link' target='_blank'>
@@ -85,6 +85,9 @@ export class PostComponent implements OnInit {
     @Input()
     post: Post;
 
+    @Input()
+    loaded: boolean;
+
     /*
      * The Video of the Post, if any.
      */
@@ -95,21 +98,16 @@ export class PostComponent implements OnInit {
      */
     comments: Observable<GraphApiResponse<Comment>>;
 
-    /*
-     * The error that occured, if any.
-     */
-    graphApiError?: GraphApiError;
-
     ngOnInit() {
         const post = this.activatedRoute
             .params
             .first()
             .switchMap((params: Params) =>
-                this.postService.post(params['post']));
+                this.postService.post(params['post']))
+            .finally(() => this.loaded = true);
         post.subscribe(
             post => this.post = post,
-            err =>
-                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
+            err => showGraphApiError(this.mdSnackBar, err));
         post
             .map(post => post.video)
             .filter(Boolean)
@@ -117,8 +115,7 @@ export class PostComponent implements OnInit {
             .subscribe(
                 (video: Video) => this.video = video,
                 (err: GraphApiError) =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                    showGraphApiError(this.mdSnackBar, err));
         this.comments = post.switchMap(post => post.comments);
     }
 }
