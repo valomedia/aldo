@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {Router, NavigationEnd} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MdSidenav} from '@angular/material';
-import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
 
@@ -21,16 +20,15 @@ import {AppUxService} from './app-ux.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <div (click)='nav.close()'>
-                        <ng-content select='nav'></ng-content>
-                    </div>
+                    <nav app-content (click)='nav.close()'></nav>
                 </md-sidenav>
                 <md-sidenav
                         #aside
                         align='end'
                         id='aside'
                         [mode]='appUxService.asideMode'
-                        (close)='router.navigateByUrl(page)'>
+                        [opened]='(params | async).post'
+                        (close-start)='goUp()'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -49,7 +47,7 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Facebook"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                href='//facebook.com/{{post}}'
+                                href='//facebook.com/{{(params | async).post}}'
                                 target='_blank'>
                             <md-icon>open_in_browser</md-icon>
                         </a>
@@ -63,7 +61,9 @@ import {AppUxService} from './app-ux.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <ng-content select='aside'></ng-content>
+                    <aside app-content>
+                        <router-outlet name='detail'></router-outlet>
+                    </aside>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -92,7 +92,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='//facebook.com/{{page}}'
+                            href='//facebook.com/{{(params | async).page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -115,46 +115,35 @@ import {AppUxService} from './app-ux.service';
                     </md-menu>
                 </md-toolbar>
                 <div id='displacer-target'></div>
-                <ng-content select='main'></ng-content>
+                <main app-content>
+                    <router-outlet></router-outlet>
+                </main>
             </md-sidenav-container>
         </div>
     `,
     styleUrls: ['dist/layout.component.css']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
     constructor(
         private appUxService: AppUxService,
         private title: Title,
-        private router: Router,
-        private location: Location) {}
+        private activatedRoute: ActivatedRoute,
+        private router: Router) {}
 
-    @ViewChild('aside')
-    private aside: MdSidenav;
+    /*
+     * Navigate one level up.
+     */
+    goUp() {
+        this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+    }
+
+    /*
+     * An Observable for the route parameters.
+     */
+    private params = this.activatedRoute.params;
 
     /*
      * Whether the dark-theme is active.
      */
     dark = false;
-
-    /*
-     * The id of the page the user has open, or empty string.
-     */
-    page = '';
-
-    /*
-     * The id of the post the user has open, or empty string.
-     */
-    post = '';
-
-    ngOnInit() {
-        this.router
-            .events
-            .filter(event => event instanceof NavigationEnd)
-            .map(() => this.location.path().split('/').slice(1))
-            .do(path => path[1] ? this.aside.open() : this.aside.close())
-            .subscribe(path => {
-                this.page = path[0] || '';
-                this.post = path[1] || '';
-            });
-    }
 }

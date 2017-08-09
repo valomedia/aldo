@@ -14,7 +14,14 @@ const ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: DashboardComponent
+        component: LayoutComponent,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                component: DashboardComponent
+            }
+        ]
     },
     {
         path: ':page',
@@ -22,10 +29,18 @@ const ROUTES: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: PageComponent
+                component: LayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: PageComponent
+                    }
+                ]
             },
             {
                 path: ':post',
+                component: LayoutComponent,
                 children: [
                     {
                         path: '',
@@ -40,7 +55,11 @@ const ROUTES: Routes = [
                     },
                     {
                         path: '**',
-                        redirectTo: '/'
+                        component: NotFoundComponent
+                    },
+                    {
+                        path: '**',
+                        component: NoDetailComponent
                     }
                 ]
             }

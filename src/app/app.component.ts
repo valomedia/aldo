@@ -14,15 +14,7 @@ import {FbService} from './fb.service';
 @Component({
     selector: 'app',
     template: `
-        <layout>
-            <nav app-content></nav>
-            <aside app-content>
-                <router-outlet name='detail'></router-outlet>
-            </aside>
-            <main app-content>
-                <router-outlet></router-outlet>
-            </main>
-        </layout>
+        <router-outlet></router-outlet>
     `,
     styleUrls: ['dist/app.component.css']
 })
