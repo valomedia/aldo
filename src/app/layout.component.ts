@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MdSidenav} from '@angular/material';
@@ -27,8 +27,7 @@ import {AppUxService} from './app-ux.service';
                         align='end'
                         id='aside'
                         [mode]='appUxService.asideMode'
-                        [opened]='(params | async).post'
-                        (close-start)='goUp()'>
+                        (close)='goUp()'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -47,7 +46,7 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Facebook"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                href='//facebook.com/{{(params | async).post}}'
+                                href='//facebook.com/{{params.post}}'
                                 target='_blank'>
                             <md-icon>open_in_browser</md-icon>
                         </a>
@@ -92,7 +91,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='//facebook.com/{{(params | async).page}}'
+                            href='//facebook.com/{{params.page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -123,12 +122,22 @@ import {AppUxService} from './app-ux.service';
     `,
     styleUrls: ['dist/layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
     constructor(
         private appUxService: AppUxService,
         private title: Title,
         private activatedRoute: ActivatedRoute,
         private router: Router) {}
+
+    /*
+     * The route parameters.
+     */
+    private params: Params = {};
+
+    /*
+     * Whether the dark-theme is active.
+     */
+    dark = false;
 
     /*
      * Navigate one level up.
@@ -137,13 +146,13 @@ export class LayoutComponent {
         this.router.navigate(['..'], {relativeTo: this.activatedRoute});
     }
 
-    /*
-     * An Observable for the route parameters.
-     */
-    private params = this.activatedRoute.params;
+    @ViewChild('aside')
+    aside: MdSidenav;
 
-    /*
-     * Whether the dark-theme is active.
-     */
-    dark = false;
+    ngOnInit() {
+        this.activatedRoute
+            .params
+            .do(params => params.post && setTimeout(() => this.aside.open()))
+            .subscribe(params => this.params = params);
+    }
 }
