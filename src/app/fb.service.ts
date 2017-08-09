@@ -42,7 +42,7 @@ let cache = {};
  */
 function api(path: string, method: HttpMethod, params: any): Promise<any> {
     // ID for cacheing.
-    const id = btoa(path + ':' + method + ':' + JSON.stringify(params));
+    const id = path + ':' + method + ':' + btoa(JSON.stringify(params));
 
     return cache[id] || (cache[id] = new Promise((resolve, reject) =>
         FB.api(
@@ -61,8 +61,17 @@ export class FbService {
     /*
      * Clear the cache.
      */
-    clearCache() {
-        cache = {};
+    clearCache(keep: string[] = []) {
+        for (
+            const i of Object
+                .keys(cache)
+                .map(k => [k.split(/[\/:]/)[0], k])
+                .filter(([id, _]) => !(keep.indexOf(id) + 1))
+                .map(([_, k]) => k)
+        ) {
+            delete cache[i];
+        }
+        console.warn(cache);
     }
 
     /*
