@@ -2,10 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MdSidenav} from '@angular/material';
+import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
 
 import {AppUxService} from './app-ux.service';
+import {FbService} from './fb.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -40,6 +42,15 @@ import {AppUxService} from './app-ux.service';
                         </button>
                         <span class='app-toolbar-title'>Details</span>
                         <span class='app-toolbar-filler'></span>
+                        <button
+                                md-button
+                                class='app-icon-button'
+                                mdTooltip="Neu laden"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
+                                (click)='refresh()'>
+                            <md-icon>refresh</md-icon>
+                        </button>
                         <a
                                 md-button
                                 class='button app-icon-button'
@@ -76,6 +87,16 @@ import {AppUxService} from './app-ux.service';
                     </button>
                     <span class='app-toolbar-title'>{{title.getTitle()}}</span>
                     <span class='app-toolbar-filler'></span>
+                    <button
+                            *ngIf='params.page'
+                            md-button
+                            class='app-icon-button'
+                            mdTooltip="Neu laden"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
+                            (click)='refresh()'>
+                        <md-icon>refresh</md-icon>
+                    </button>
                     <button
                             md-button
                             class='app-icon-button'
@@ -127,7 +148,9 @@ export class LayoutComponent implements OnInit {
         private appUxService: AppUxService,
         private title: Title,
         private activatedRoute: ActivatedRoute,
-        private router: Router) {}
+        private router: Router,
+        private fbService: FbService,
+        private location: Location) {}
 
     /*
      * The route parameters.
@@ -144,6 +167,16 @@ export class LayoutComponent implements OnInit {
      */
     goUp() {
         this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+    }
+
+    /*
+     * Refresh the view.
+     */
+    refresh() {
+        this.fbService.clearCache();
+        const path = this.location.path();
+        this.router.navigateByUrl('/');
+        setTimeout(() => this.router.navigateByUrl(path));
     }
 
     @ViewChild('aside')
