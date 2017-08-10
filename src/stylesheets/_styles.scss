@@ -85,6 +85,17 @@ md-toolbar {
     button, .button { color: white!important; }
 }
 
+profile .mat-card-header-text {
+    // This is what separates the men from the boys.
+    min-width: 0;
+}
+
+profile .mat-card-header-text > md-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 video {
     width: 100%;
     object-fit: cover;
@@ -95,7 +106,8 @@ video {
 h1 > small > span,
 h1 > span,
 md-card,
-md-card-content {
+md-card-content,
+md-card-footer > * {
     @extend .pad;
 }
 
@@ -108,6 +120,10 @@ md-card-content {
 
 [app-content] .positioning-anchor * {
     pointer-events: all;
+}
+
+[md-button] {
+    text-transform: uppercase;
 }
 
 snack-bar-container {
@@ -145,6 +161,11 @@ snack-bar-container {
 
 .clear, page div {
     clear: both;
+}
+
+.dummy-input {
+    height: 0;
+    opacity: 0;
 }
 
 .flex {
@@ -302,6 +323,10 @@ snack-bar-container {
 @media (max-width: 599px) {
     #aside {
         width: 100%;
+    }
+
+    #aside .close-btn {
+        display: none;
     }
 }
 

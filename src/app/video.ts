@@ -21,10 +21,6 @@ export interface VideoType extends GraphApiObjectType {
  * A Facebook video as used internally.
  */
 export class Video extends GraphApiObject {
-    constructor(kwargs: VideoType) {
-        super(kwargs);
-    }
-
     /*
      * Get the time this post was created.
      */

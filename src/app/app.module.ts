@@ -36,6 +36,9 @@ import {NotFoundComponent} from './not-found.component';
 import {NoDetailComponent} from './no-detail.component';
 import {AppContentDirective} from './app-content.directive';
 import {VideoService} from './video.service';
+import {CommentService} from './comment.service';
+import {CommentsComponent} from './comments.component';
+import {CommentComponent} from './comment.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -71,7 +74,9 @@ import {VideoService} from './video.service';
         MainComponent,
         NotFoundComponent,
         NoDetailComponent,
-        AppContentDirective
+        AppContentDirective,
+        CommentsComponent,
+        CommentComponent
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -83,7 +88,8 @@ import {VideoService} from './video.service';
             provide: RouteReuseStrategy,
             useClass: CustomRouteReuseStrategy
         },
-        VideoService
+        VideoService,
+        CommentService
     ],
     entryComponents: [
         PostDialogComponent,

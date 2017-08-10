@@ -33,15 +33,30 @@ export interface PageType extends ProfileType {
  * A Facebook page as used internally.
  */
 export class Page extends Profile {
-    constructor(kwargs: PageType) { super(kwargs); }
-
     private postService: PostService = ReflectiveInjector
         .resolveAndCreate([PostService, FbService])
         .get(PostService);
 
-    get feed() { return this.postService.feed(this.id); }
-    get posts() { return this.postService.posts(this.id); }
-    get tagged() { return this.postService.tagged(this.id); }
+    /*
+     * Get the feed of Posts of this Page.
+     */
+    get feed() {
+        return this.postService.feed(this.id);
+    }
+
+    /*
+     * Get the Posts by this Page.
+     */
+    get posts() {
+        return this.postService.posts(this.id);
+    }
+
+    /*
+     * Get the Posts with this Page.
+     */
+    get tagged() {
+        return this.postService.tagged(this.id);
+    }
 }
 export interface Page extends PageType {}
 

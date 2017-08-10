@@ -1,5 +1,9 @@
 import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
-import {Router, NavigationStart} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
+import {Location} from '@angular/common';
+
+import 'rxjs/add/operator/mergeScan';
+import {Observable} from 'rxjs/Observable';
 
 import {FbService} from './fb.service';
 
@@ -18,7 +22,8 @@ export class AppComponent implements OnInit {
     constructor(
         private applicationRef: ApplicationRef,
         private router: Router,
-        private fbService: FbService) {}
+        private fbService: FbService,
+        private location: Location) {}
 
     /*
      * Displayed in the main toolbar.
@@ -28,11 +33,19 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.router
             .events
-            .filter((event) => event instanceof NavigationStart)
-            .subscribe(this.fbService.clearCache);
+            .filter((event) => event instanceof NavigationEnd)
+            .map(() => this.location.path().split('/').slice(1))
+            .mergeScan(
+                ([_, last], next) => Observable.of([last, next]),
+                [[],[]],
+                1)
+            .map(([last, next]) => last.filter(i => next.indexOf(i) + 1))
+            .subscribe(ids => this.fbService.clearCache(ids));
     }
 
     @HostListener('window:resize')
-    onResize() { this.applicationRef.tick(); }
+    onResize() {
+        this.applicationRef.tick();
+    }
 }
 

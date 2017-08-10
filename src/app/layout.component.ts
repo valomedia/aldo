@@ -1,11 +1,13 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MdSidenav} from '@angular/material';
+import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
 
 import {AppUxService} from './app-ux.service';
+import {FbService} from './fb.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -26,7 +28,8 @@ import {AppUxService} from './app-ux.service';
                         #aside
                         align='end'
                         id='aside'
-                        [mode]='appUxService.asideMode'>
+                        [mode]='appUxService.asideMode'
+                        (close)='goUp()'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -39,13 +42,22 @@ import {AppUxService} from './app-ux.service';
                         </button>
                         <span class='app-toolbar-title'>Details</span>
                         <span class='app-toolbar-filler'></span>
+                        <button
+                                md-button
+                                class='app-icon-button'
+                                mdTooltip="Neu laden"
+                                mdTooltipShowDelay='1500'
+                                mdTooltipHideDelay='1500'
+                                (click)='refresh()'>
+                            <md-icon>refresh</md-icon>
+                        </button>
                         <a
                                 md-button
                                 class='button app-icon-button'
                                 mdTooltip="Facebook"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                href='{{post}}'
+                                href='//facebook.com/{{params.post}}'
                                 target='_blank'>
                             <md-icon>open_in_browser</md-icon>
                         </a>
@@ -55,8 +67,7 @@ import {AppUxService} from './app-ux.service';
                                 mdTooltip="Schließen"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                (click)='aside.close()'
-                                routerLink='..'>
+                                (click)='aside.close()'>
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
@@ -77,6 +88,16 @@ import {AppUxService} from './app-ux.service';
                     <span class='app-toolbar-title'>{{title.getTitle()}}</span>
                     <span class='app-toolbar-filler'></span>
                     <button
+                            *ngIf='params.page'
+                            md-button
+                            class='app-icon-button'
+                            mdTooltip="Neu laden"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'
+                            (click)='refresh()'>
+                        <md-icon>refresh</md-icon>
+                    </button>
+                    <button
                             md-button
                             class='app-icon-button'
                             mdTooltip="Dashboard"
@@ -91,7 +112,7 @@ import {AppUxService} from './app-ux.service';
                             mdTooltip="Facebook"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            href='{{page}}'
+                            href='//facebook.com/{{params.page}}'
                             target='_blank'>
                         <md-icon>open_in_browser</md-icon>
                     </a>
@@ -112,19 +133,10 @@ import {AppUxService} from './app-ux.service';
                             </md-slide-toggle>
                         </div>
                     </md-menu>
-                    <button
-                            md-button
-                            class='app-icon-button'
-                            mdTooltip="Details"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'
-                            (click)='aside.toggle()'>
-                        <md-icon>more_vert</md-icon>
-                    </button>
                 </md-toolbar>
                 <div id='displacer-target'></div>
                 <main app-content>
-                    <router-outlet name='master'></router-outlet>
+                    <router-outlet></router-outlet>
                 </main>
             </md-sidenav-container>
         </div>
@@ -135,10 +147,15 @@ export class LayoutComponent implements OnInit {
     constructor(
         private appUxService: AppUxService,
         private title: Title,
-        private activatedRoute: ActivatedRoute) {}
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private fbService: FbService,
+        private location: Location) {}
 
-    @ViewChild('aside')
-    private aside: MdSidenav;
+    /*
+     * The route parameters.
+     */
+    private params: Params = {};
 
     /*
      * Whether the dark-theme is active.
@@ -146,29 +163,29 @@ export class LayoutComponent implements OnInit {
     dark = false;
 
     /*
-     * The url of the page the user has open.
+     * Navigate one level up.
      */
-    page = '';
+    goUp() {
+        this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+    }
 
     /*
-     * The url of the post the user has open.
+     * Refresh the view.
      */
-    post = '';
+    refresh() {
+        this.fbService.clearCache();
+        const path = this.location.path();
+        this.router.navigateByUrl('/');
+        setTimeout(() => this.router.navigateByUrl(path));
+    }
+
+    @ViewChild('aside')
+    aside: MdSidenav;
 
     ngOnInit() {
         this.activatedRoute
             .params
-            .first()
-            .pluck('post')
-            .filter(Boolean)
-            .subscribe(() => this.aside.open());
-        this.activatedRoute
-            .params
-            .first()
-            .subscribe(params => {
-                this.page = '//facebook.com/' + params.page;
-                this.post = this.page + '_' + params.post;
-            });
+            .do(params => params.post && setTimeout(() => this.aside.open()))
+            .subscribe(params => this.params = params);
     }
 }
-

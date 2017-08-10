@@ -73,7 +73,7 @@ window.onload = function() {
 
     // There is no way to tell when the Facebook-popup is actually loaded, so we 
     // just give it plenty of time, before fading the loading screen.
-    setTimeout(fadeLoader, 2500);
+    setTimeout(fadeLoader, 3000);
 };
 
 /*

@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
+
+import {Observable} from 'rxjs/Observable';
 
 import {Post} from './post';
 import {PostService} from './post.service';
@@ -9,6 +11,8 @@ import {showGraphApiError} from './graph-api-error.component';
 import {PostContentType} from './post';
 import {VideoService} from './video.service';
 import {Video} from './video';
+import {GraphApiResponse} from './graph-api-response';
+import {Comment} from './comment';
 
 /*
  * The Component showing a single post in detail.
@@ -62,6 +66,9 @@ import {Video} from './video';
                 </p>
                 <p *ngIf='post.description'>{{post.description}}</p>
             </blockquote>
+            <endless-list #commentList [input]='comments'>
+                <comments [comments]='commentList.output'></comments>
+            </endless-list>
         </div>
     `,
     styleUrls: ['dist/post.component.css']
@@ -75,38 +82,54 @@ export class PostComponent implements OnInit {
 
     private PostContentType = PostContentType;
 
-    @Input()
+    /*
+     * The Post this Component is currently showing.
+     */
     post: Post;
 
     /*
-     * The video of the post, if any.
+     * The Video of the Post, if any.
      */
     video?: Video;
 
     /*
+     * The Comments on this Post.
+     */
+    comments: Observable<GraphApiResponse<Comment>>;
+
+    /*
      * The error that occured, if any.
      */
-    graphApiError?: GraphApiError;
+    graphApiError: GraphApiError;
 
     ngOnInit() {
-        const post = this.activatedRoute
+        // The Component is reused, so this will fire multiple times.
+        const posts = this.activatedRoute
             .params
-            .first()
             .switchMap((params: Params) =>
-                this.postService.post(params['page'] + '_' + params['post']));
-        post.subscribe(
-            post => this.post = post,
-            err =>
-                this.graphApiError = showGraphApiError(this.mdSnackBar, err));
-        post
+                this.postService.post(params['post']))
+        posts.subscribe(
+                (post: Post) => {
+                    this.post = post;
+
+                    // This is intentionally reassigned every time the user 
+                    // switches to a new page, so the Observables can complete 
+                    // whenever loading is finished, allowing me when to show 
+                    // the spinners and when to hide them.
+                    this.comments = post.comments;
+                },
+                (err: GraphApiError) =>
+                    this.graphApiError
+                        = showGraphApiError(this.mdSnackBar, err));
+        posts
             .map(post => post.video)
+            .do(this.video = null)
             .filter(Boolean)
             .concatAll()
             .subscribe(
                 (video: Video) => this.video = video,
                 (err: GraphApiError) =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                    showGraphApiError(this.mdSnackBar, err));
     }
 }
 

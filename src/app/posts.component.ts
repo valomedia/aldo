@@ -1,5 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
+import {ActivatedRoute, Params} from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -14,7 +15,7 @@ import {Post} from './post';
 @Component({
     selector: 'posts',
     template: `
-        <a routerLink='{{post.path}}' *ngFor='let post of _posts'>
+        <a routerLink='/{{pageId}}/{{post.id}}' *ngFor='let post of _posts'>
             <md-card>
                 <img *ngIf='post.picture' md-card-image [src]='post.picture'>
                 <profile [profile]='post.from'></profile>
@@ -23,41 +24,49 @@ import {Post} from './post';
                 </md-card-content>
             </md-card>
         </a>
-        <md-spinner color='accent' *ngIf='!loaded'>
-        </md-spinner>
+        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
     `,
     styleUrls: ['dist/posts.component.css']
 })
 export class PostsComponent implements OnInit {
-    constructor(private mdSnackBar: MdSnackBar) {}
-
-    @Input()
-    posts: Observable<Post>;
+    constructor(
+        private mdSnackBar: MdSnackBar,
+        private activatedRoute: ActivatedRoute) {}
 
     /*
      * All posts shown by this Component.
      */
-    _posts: Post[] = [];
-
-    /*
-     * The error that occured, if any.
-     */
-    graphApiError: GraphApiError;
+    private _posts: Post[];
 
     /*
      * True if no more posts can be loaded.
      */
+    private _loaded: boolean;
+
+    /*
+     * The id of the page currently open.
+     */
+    pageId: string;
+
     @Input()
     loaded = false;
 
-    ngOnInit() {
-        this.posts
-            .finally(() => this.loaded = true)
+    @Input()
+    set posts(posts: Observable<Post>) {
+        this._posts = [];
+        this._loaded = this.loaded;
+        posts
+            .finally(() => this._loaded = true)
             .subscribe(
                 post => this._posts.push(post),
-                err =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                err => showGraphApiError(this.mdSnackBar, err));
+    }
+
+    ngOnInit() {
+        this.activatedRoute
+            .params
+            .pluck('page')
+            .subscribe((pageId: string) => this.pageId = pageId);
     }
 }
 

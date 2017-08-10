@@ -13,18 +13,13 @@ import {LayoutComponent} from './layout.component';
 const ROUTES: Routes = [
     {
         path: '',
+        pathMatch: 'full',
         component: LayoutComponent,
         children: [
             {
                 path: '',
                 pathMatch: 'full',
                 component: DashboardComponent
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                component: NoDetailComponent,
-                outlet: 'detail'
             }
         ]
     },
@@ -33,18 +28,13 @@ const ROUTES: Routes = [
         children: [
             {
                 path: '',
+                pathMatch: 'full',
                 component: LayoutComponent,
                 children: [
                     {
                         path: '',
                         pathMatch: 'full',
                         component: PageComponent
-                    },
-                    {
-                        path: '',
-                        pathMatch: 'full',
-                        component: NoDetailComponent,
-                        outlet: 'detail'
                     }
                 ]
             },
@@ -69,8 +59,7 @@ const ROUTES: Routes = [
                     },
                     {
                         path: '**',
-                        component: NoDetailComponent,
-                        outlet: 'detail'
+                        component: NoDetailComponent
                     }
                 ]
             }
