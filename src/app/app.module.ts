@@ -39,6 +39,7 @@ import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
 import {CommentsComponent} from './comments.component';
 import {CommentComponent} from './comment.component';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -89,7 +90,8 @@ import {CommentComponent} from './comment.component';
             useClass: CustomRouteReuseStrategy
         },
         VideoService,
-        CommentService
+        CommentService,
+        AppRoutingService
     ],
     entryComponents: [
         PostDialogComponent,

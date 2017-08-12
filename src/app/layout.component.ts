@@ -8,6 +8,7 @@ import 'rxjs/add/operator/pluck';
 
 import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -150,7 +151,8 @@ export class LayoutComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private fbService: FbService,
-        private location: Location) {}
+        private location: Location,
+        private appRoutingService: AppRoutingService) {}
 
     /*
      * The route parameters.
