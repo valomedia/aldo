@@ -15,7 +15,7 @@ import {PAGE, POST} from './app';
     selector: 'app',
     template: `
         <layout>
-            <nav app-content (click)='nav.close()'></nav>
+            <nav app-content></nav>
             <aside app-content>
                 <post *appRouting='POST'></post>
                 <no-detail *appRouting></no-detail>
