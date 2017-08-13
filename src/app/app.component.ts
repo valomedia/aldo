@@ -5,13 +5,11 @@ import {Observable} from 'rxjs/Observable';
 
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
+import {PAGE, POST} from './app';
 
 /*
  * The main Component of Aldo.
  */
-
-const PAGE = 'page';
-const POST = 'post';
 
 @Component({
     selector: 'app',
