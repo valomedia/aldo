@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Router, NavigationEnd, Params} from '@angular/router';
 import {Location} from '@angular/common';
 
+import 'rxjs/add/operator/publishBehavior';
+
 /*
  * The service providing routing for the app.
  *
@@ -19,6 +21,13 @@ export class AppRoutingService {
         private router: Router,
         private location: Location) {}
 
+    events = this.router
+        .events
+        .filter(event => event instanceof NavigationEnd)
+        .map((event: NavigationEnd) => this.parse(event.url))
+        .publishBehavior(this.params)
+        .refCount();
+
     /*
      * Parse the parameters from a path.
      */
@@ -27,7 +36,7 @@ export class AppRoutingService {
             .split('/')
             .slice(1)
             .map((v, i) =>
-                PARAMS[i] ? {[PARAMS[i]]: v == '_' ? undefined : v} : null)
+                PARAMS[i] ? (v ? {[PARAMS[i]]: v} : {}) : null)
             .reduce((o, e) => o && e ? Object.assign(o, e) : null, {});
     }
 
@@ -54,16 +63,6 @@ export class AppRoutingService {
                     .join('/')
                     .replace(/(_\/)*_$/, '')
                 : '/');
-    }
-
-    /*
-     * Get an Observable of route parameters.
-     */
-    get events() {
-        return this.router
-            .events
-            .filter(event => event instanceof NavigationEnd)
-            .map((event: NavigationEnd) => this.parse(event.url));
     }
 }
 

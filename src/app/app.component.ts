@@ -10,10 +10,24 @@ import {AppRoutingService} from './app-routing.service';
  * The main Component of Aldo.
  */
 
+const PAGE = 'page';
+const POST = 'post';
+
 @Component({
     selector: 'app',
     template: `
-        <router-outlet></router-outlet>
+        <layout>
+            <nav app-content (click)='nav.close()'></nav>
+            <aside app-content>
+                <post *appRouting='POST'></post>
+                <no-detail *appRouting></no-detail>
+            </aside>
+            <main app-content>
+                <dashboard *appRouting='null; conflicts:PAGE'></dashboard>
+                <page *appRouting='PAGE'></page>
+                <not-found *appRouting></not-found>
+            </main>
+        </layout>
     `,
     styleUrls: ['dist/app.component.css']
 })
@@ -23,6 +37,9 @@ export class AppComponent implements OnInit {
         private fbService: FbService,
         private appRoutingService: AppRoutingService) {}
 
+    private PAGE = PAGE;
+    private POST = POST;
+
     /*
      * Displayed in the main toolbar.
      */
@@ -31,13 +48,13 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.appRoutingService
             .events
+            .filter(Boolean)
             .map(params => Object.keys(params).map(k => params[k]))
             .mergeScan(
                 ([_, last], next) => Observable.of([last, next]),
                 [[],[]],
                 1)
             .map(([last, next]) => last.filter(i => next.indexOf(i) + 1))
-            .do(console.warn)
             .subscribe(ids => this.fbService.clearCache(ids));
     }
 

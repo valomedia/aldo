@@ -23,7 +23,9 @@ import {AppRoutingService} from './app-routing.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <nav app-content (click)='nav.close()'></nav>
+                    <div (click)='nav.close()'>
+                        <ng-content select='nav'></ng-content>
+                    </div>
                 </md-sidenav>
                 <md-sidenav
                         #aside
@@ -72,9 +74,7 @@ import {AppRoutingService} from './app-routing.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <aside app-content>
-                        <router-outlet name='detail'></router-outlet>
-                    </aside>
+                    <ng-content select='aside'></ng-content>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -136,9 +136,8 @@ import {AppRoutingService} from './app-routing.service';
                     </md-menu>
                 </md-toolbar>
                 <div id='displacer-target'></div>
-                <main app-content>
-                    <router-outlet></router-outlet>
-                </main>
+                <ng-content select='main'></ng-content>
+                <router-outlet></router-outlet>
             </md-sidenav-container>
         </div>
     `,
@@ -185,8 +184,9 @@ export class LayoutComponent implements OnInit {
     aside: MdSidenav;
 
     ngOnInit() {
-        this.activatedRoute
-            .params
+        this.appRoutingService
+            .events
+            .filter(Boolean)
             .do(params => params.post && setTimeout(() => this.aside.open()))
             .subscribe(params => this.params = params);
     }

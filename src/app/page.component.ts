@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {Params} from '@angular/router';
 import {MdDialog, MdSnackBar} from '@angular/material';
 
-import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/concatAll';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -16,6 +15,8 @@ import {AppUxService} from './app-ux.service';
 import {PostService} from './post.service';
 import {Post} from './post';
 import {GraphApiResponse} from './graph-api-response';
+import {AppRoutingComponent} from './app-routing.component';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component showing a single page in detail.
@@ -24,7 +25,7 @@ import {GraphApiResponse} from './graph-api-response';
 @Component({
     selector: 'page',
     template: `
-        <md-spinner color='accent' *ngIf='!page && !graphApiError'></md-spinner>
+        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
         <div *ngIf='page'>
             <div>
                 <h1>
@@ -186,14 +187,17 @@ import {GraphApiResponse} from './graph-api-response';
     `,
     styleUrls: ['dist/page.component.css']
 })
-export class PageComponent implements OnInit {
+export class PageComponent extends AppRoutingComponent {
     constructor(
         private pageService: PageService,
-        private activatedRoute: ActivatedRoute,
         private mdDialog: MdDialog,
         private mdSnackBar: MdSnackBar,
         private appUxService: AppUxService,
-        private postService: PostService) {}
+        private postService: PostService,
+        appRoutingService: AppRoutingService
+    ) {
+        super(appRoutingService);
+    }
 
     /*
      * The Page currently shown.
@@ -216,24 +220,21 @@ export class PageComponent implements OnInit {
     newPosts = new Subject<Post>();
 
     /*
-     * The error that occured, if any.
+     * Whether the component is still loading.
      */
-    graphApiError?: GraphApiError;
+    private _loaded: boolean;
 
-    ngOnInit() {
-        // The Component is reused, so this will fire multiple times.
-        this.activatedRoute
-            .params
-            .switchMap((params: Params) =>
-                this.pageService.page(params['page']))
+    @Input()
+    loaded: boolean;
+
+    @Input()
+    set params(params: Params) {
+        this._loaded = this.loaded;
+        Observable.fromPromise(this.pageService.page(params['page']))
+            .finally(() => this._loaded = true)
             .subscribe(
                 (page: Page) => {
                     this.page = page;
-
-                    // This is intentionally reassigned every time the user 
-                    // switches to a new page, so the Observables can complete 
-                    // whenever loading is finished, allowing me when to show 
-                    // the spinners and when to hide them.
                     this.posts = page.posts;
                     this.tagged = page
                         .tagged
@@ -241,7 +242,7 @@ export class PageComponent implements OnInit {
                             posts.expanded);
                 },
                 (err: GraphApiError) =>
-                    this.graphApiError = showGraphApiError(this.mdSnackBar, err));
+                    showGraphApiError(this.mdSnackBar, err));
     }
 
     /*

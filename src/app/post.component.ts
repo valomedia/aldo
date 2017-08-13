@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, Input, forwardRef} from '@angular/core';
+import {Params} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
@@ -13,6 +13,8 @@ import {VideoService} from './video.service';
 import {Video} from './video';
 import {GraphApiResponse} from './graph-api-response';
 import {Comment} from './comment';
+import {AppRoutingComponent} from './app-routing.component';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component showing a single post in detail.
@@ -21,7 +23,7 @@ import {Comment} from './comment';
 @Component({
     selector: 'post',
     template: `
-        <md-spinner color='accent' *ngIf='!post && !graphApiError'></md-spinner>
+        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
         <div *ngIf='post'>
             <div *ngIf='post.picture' class='picture'>
                 <a [href]='post.link' target='_blank'>
@@ -73,12 +75,15 @@ import {Comment} from './comment';
     `,
     styleUrls: ['dist/post.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostComponent extends AppRoutingComponent {
     constructor(
-        private activatedRoute: ActivatedRoute,
         private postService: PostService,
         private mdSnackBar: MdSnackBar,
-        private videoService: VideoService) {}
+        private videoService: VideoService,
+        appRoutingService: AppRoutingService
+    ) {
+        super(appRoutingService);
+    }
 
     private PostContentType = PostContentType;
 
@@ -98,30 +103,26 @@ export class PostComponent implements OnInit {
     comments: Observable<GraphApiResponse<Comment>>;
 
     /*
-     * The error that occured, if any.
+     * Whether the component is still loading.
      */
-    graphApiError: GraphApiError;
+    private _loaded: boolean;
 
-    ngOnInit() {
-        // The Component is reused, so this will fire multiple times.
-        const posts = this.activatedRoute
-            .params
-            .switchMap((params: Params) =>
-                this.postService.post(params['post']))
-        posts.subscribe(
+    @Input()
+    loaded: boolean;
+
+    @Input()
+    set params(params: Params) {
+        this._loaded = this.loaded;
+        Observable.fromPromise(this.postService.post(params['post']))
+            .finally(() => this._loaded = true)
+            .subscribe(
                 (post: Post) => {
                     this.post = post;
-
-                    // This is intentionally reassigned every time the user 
-                    // switches to a new page, so the Observables can complete 
-                    // whenever loading is finished, allowing me when to show 
-                    // the spinners and when to hide them.
                     this.comments = post.comments;
                 },
                 (err: GraphApiError) =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
-        posts
+                    showGraphApiError(this.mdSnackBar, err));
+        Observable.fromPromise(this.postService.post(params['post']))
             .map(post => post.video)
             .do(this.video = null)
             .filter(Boolean)

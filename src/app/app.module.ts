@@ -40,6 +40,8 @@ import {CommentService} from './comment.service';
 import {CommentsComponent} from './comments.component';
 import {CommentComponent} from './comment.component';
 import {AppRoutingService} from './app-routing.service';
+import {AppRoutingDirective} from './app-routing.directive';
+import {DummyComponent} from './dummy.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -77,7 +79,9 @@ import {AppRoutingService} from './app-routing.service';
         NoDetailComponent,
         AppContentDirective,
         CommentsComponent,
-        CommentComponent
+        CommentComponent,
+        AppRoutingDirective,
+        DummyComponent
     ],
     bootstrap: [AppComponent],
     providers: [
