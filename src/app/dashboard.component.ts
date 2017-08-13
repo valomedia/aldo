@@ -17,8 +17,7 @@ import {showGraphApiError} from './graph-api-error.component';
     selector: 'dashboard',
     template: `
         <h1>Dashboard</h1>
-        <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
-        </md-spinner>
+        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
         <md-grid-list
                 [cols]='appUxService.cols / 3 | ceil'
                 [gutterSize]='appUxService.gutterSize'
@@ -38,6 +37,8 @@ export class DashboardComponent {
         private appUxService: AppUxService,
         private mdSnackBar: MdSnackBar) {}
 
+    loaded = false;
+
     /*
      * All pages the user has access to.
      */
@@ -52,11 +53,10 @@ export class DashboardComponent {
         this.pageService
             .pages()
             .toArray()
+            .finally(() => this.loaded = true)
             .subscribe(
                 pages => this.pages = pages,
-                err =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 

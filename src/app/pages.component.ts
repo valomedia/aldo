@@ -13,8 +13,7 @@ import {showGraphApiError} from './graph-api-error.component';
 @Component({
     selector: 'pages',
     template: `
-        <md-spinner color='accent' *ngIf='!pages && !graphApiError'>
-        </md-spinner>
+        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
         <md-nav-list>
             <a
                     md-list-item
@@ -31,6 +30,8 @@ export class PagesComponent implements OnInit {
         private pageService: PageService,
         private mdSnackBar: MdSnackBar) {};
 
+    loaded = false;
+
     /*
      * All pages of the user.
      */
@@ -45,11 +46,10 @@ export class PagesComponent implements OnInit {
         this.pageService
             .pages()
             .toArray()
+            .finally(() => this.loaded = true)
             .subscribe(
                 pages => this.pages = pages,
-                err =>
-                    this.graphApiError
-                        = showGraphApiError(this.mdSnackBar, err));
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 
