@@ -51,7 +51,8 @@ import {AppRoutingService} from './app-routing.service';
                                 mdTooltip="Neu laden"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                (click)='refresh()'>
+                                (click)='fbService.clearCache()'
+                                (click)='appRoutingService.refresh()'>
                             <md-icon>refresh</md-icon>
                         </button>
                         <a
@@ -95,7 +96,8 @@ import {AppRoutingService} from './app-routing.service';
                             mdTooltip="Neu laden"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            (click)='refresh()'>
+                            (click)='fbService.clearCache()'
+                            (click)='appRoutingService.refresh()'>
                         <md-icon>refresh</md-icon>
                     </button>
                     <button
@@ -163,16 +165,6 @@ export class LayoutComponent implements OnInit {
      */
     dark = false;
 
-    /*
-     * Refresh the view.
-     */
-    refresh() {
-        this.fbService.clearCache();
-        const path = this.location.path();
-        this.router.navigateByUrl('/');
-        setTimeout(() => this.router.navigateByUrl(path));
-    }
-
     @ViewChild('aside')
     aside: MdSidenav;
 
@@ -184,3 +176,4 @@ export class LayoutComponent implements OnInit {
             .subscribe(params => this.params = params);
     }
 }
+

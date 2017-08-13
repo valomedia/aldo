@@ -69,5 +69,19 @@ export class AppRoutingService {
                     .replace(/(_\/)*_$/, '')
                 : '/');
     }
+
+    /*
+     * Refresh all routed Components.
+     *
+     * This will browse to a bogus route and back, to force all routed 
+     * Components being rebuilt.
+     */
+    refresh() {
+        const params = this.params;
+        this.router.navigateByUrl(
+            Array(PARAMS.length + 1).join('/_'),
+            {skipLocationChange: true});
+        setTimeout(() => this.params = params);
+    }
 }
 
