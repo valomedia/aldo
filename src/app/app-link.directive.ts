@@ -12,11 +12,11 @@ import {AppRoutingService} from './app-routing.service';
  * directive instead of Params is a shortcut for unsetting all parameters.
  */
 
-@Directive({selector: '[app-link]'})
+@Directive({selector: '[appLink]'})
 export class AppLinkDirective {
     constructor(private appRoutingService: AppRoutingService) {}
 
-    @Input('app-link')
+    @Input()
     appLink: Params|null;
 
     @HostListener('click')

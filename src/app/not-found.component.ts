@@ -29,7 +29,7 @@ import {Location} from '@angular/common';
                     Zurück
                     <md-icon>arrow_back</md-icon>
                 </a>
-                <a md-button color='primary' [app-link]='null'>
+                <a md-button color='primary' [appLink]='null'>
                     Dashboard
                     <md-icon>dashboard</md-icon>
                 </a>

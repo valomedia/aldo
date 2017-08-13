@@ -24,7 +24,7 @@ import {showGraphApiError} from './graph-api-error.component';
                 rowHeight='2:1'>
             <md-grid-tile
                     *ngFor='let page of pages'
-                    routerLink='/{{page.id}}'>
+                    [appLink]='{page: page.id}'>
                 {{page.name}}
             </md-grid-tile>
         </md-grid-list>

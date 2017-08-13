@@ -32,7 +32,7 @@ import {AppRoutingService} from './app-routing.service';
                         align='end'
                         id='aside'
                         [mode]='appUxService.asideMode'
-                        (close)='goUp()'>
+                        (close)='appRoutingService.params = {post: null}'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -104,7 +104,7 @@ import {AppRoutingService} from './app-routing.service';
                             mdTooltip="Dashboard"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            routerLink='/'>
+                            [appLink]='{page: null}'>
                         <md-icon>dashboard</md-icon>
                     </button>
                     <a
@@ -162,13 +162,6 @@ export class LayoutComponent implements OnInit {
      * Whether the dark-theme is active.
      */
     dark = false;
-
-    /*
-     * Navigate one level up.
-     */
-    goUp() {
-        this.router.navigate(['..'], {relativeTo: this.activatedRoute});
-    }
 
     /*
      * Refresh the view.

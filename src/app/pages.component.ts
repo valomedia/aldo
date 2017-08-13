@@ -18,7 +18,7 @@ import {showGraphApiError} from './graph-api-error.component';
             <a
                     md-list-item
                     *ngFor='let page of pages'
-                    routerLink='/{{page.id}}'>
+                    [appLink]='{page: page.id}'>
                 {{page.name}}
             </a>
         </md-nav-list>
