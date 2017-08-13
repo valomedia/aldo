@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Location} from '@angular/common';
 
 /*
  * The Component shown when the user hits a dead link.
@@ -23,9 +24,21 @@ import {Component} from '@angular/core';
                     Supportteam, damit wir das Problem beheben können.
                 </p>
             </md-card-content>
+            <md-card-actions>
+                <a md-button (click)='location.back()'>
+                    Zurück
+                    <md-icon>arrow_back</md-icon>
+                </a>
+                <a md-button color='primary' [app-link]='null'>
+                    Dashboard
+                    <md-icon>dashboard</md-icon>
+                </a>
+            </md-card-actions>
         </md-card>
     `,
     styleUrls: ['dist/not-found.component.css']
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+    constructor(private location: Location) {}
+}
 
