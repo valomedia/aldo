@@ -32,7 +32,7 @@ import {AppRoutingService} from './app-routing.service';
                         align='end'
                         id='aside'
                         [mode]='appUxService.asideMode'
-                        (close)='appRoutingService.params = {post: null}'>
+                        (close-start)='appRoutingService.params = {post: null}'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -172,7 +172,7 @@ export class LayoutComponent implements OnInit {
         this.appRoutingService
             .events
             .filter(Boolean)
-            .do(params => params.post && setTimeout(() => this.aside.open()))
+            .do(params => params.post && this.aside.open())
             .subscribe(params => this.params = params);
     }
 }
