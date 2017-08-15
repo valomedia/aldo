@@ -56,26 +56,28 @@ import {Video} from './video';
         </md-card-content>
         <md-card-footer>
             <div>
-                <p
-                        mdTooltip="Antworten"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'>
-                    <span class='text-primary'>
-                        <md-icon>reply</md-icon>
+                <p>
+                    <span
+                            mdTooltip="Likes"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>thumb_up</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            <strong>{{_comment.like_count}}</strong>
+                        </span>
                     </span>
-                    <span class='text-accent'>
-                        <strong>{{_comment.comment_count}}</strong>
-                    </span>
-                </p>
-                <p
-                        mdTooltip="Likes"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'>
-                    <span class='text-primary'>
-                        <md-icon>thumb_up</md-icon>
-                    </span>
-                    <span class='text-accent'>
-                        <strong>{{_comment.like_count}}</strong>
+                    <span
+                            mdTooltip="Antworten"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>reply</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            <strong>{{_comment.comment_count}}</strong>
+                        </span>
                     </span>
                 </p>
             </div>

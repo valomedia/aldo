@@ -36,6 +36,16 @@ img {
     vertical-align: top;
 }
 
+md-card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+md-card-footer > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
 md-dialog-actions, .app-snackbar-actions {
     padding: 12px 0;
     display: flex;

@@ -22,6 +22,34 @@ import {Post} from './post';
                 <md-card-content *ngIf='post.text'>
                     {{post.text}}
                 </md-card-content>
+                <md-card-footer>
+                    <div>
+                        <p>
+                            <span
+                                    mdTooltip="Likes"
+                                    mdTooltipShowDelay='1500'
+                                    mdTooltipHideDelay='1500'>
+                                <span class='text-primary'>
+                                    <md-icon>thumb_up</md-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{post.likes.summary.total_count}}
+                                </span>
+                            </span>
+                            <span
+                                    mdTooltip="Shares"
+                                    mdTooltipShowDelay='1500'
+                                    mdTooltipHideDelay='1500'>
+                                <span class='text-primary'>
+                                    <md-icon>share</md-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{post.shares ? post.shares.count : 0}}
+                                </span>
+                            </span>
+                        </p>
+                    </div>
+                </md-card-footer>
             </md-card>
         </a>
         <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>

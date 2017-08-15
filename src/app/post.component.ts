@@ -44,28 +44,28 @@ import {AppRoutingService} from './app-routing.service';
                     <br>
                     <small>{{post.name}}</small>
                 </span>
-                <span
-                        *ngIf='post.likes.summary.total_count'
-                        mdTooltip="Likes"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'>
-                    <span class='text-primary'>
-                        <md-icon>thumb_up</md-icon>
+                <span>
+                    <span
+                            mdTooltip="Likes"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>thumb_up</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{post.likes.summary.total_count}}
+                        </span>
                     </span>
-                    <span class='text-accent'>
-                        {{post.likes.summary.total_count}}
-                    </span>
-                </span>
-                <span
-                        *ngIf='post.shares'
-                        mdTooltip="Shares"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'>
-                    <span class='text-primary'>
-                        <md-icon>share</md-icon>
-                    </span>
-                    <span class='text-accent'>
-                        {{post.shares.count}}
+                    <span
+                            mdTooltip="Shares"
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>share</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{post.shares ? post.shares.count : 0}}
+                        </span>
                     </span>
                 </span>
             </h2>

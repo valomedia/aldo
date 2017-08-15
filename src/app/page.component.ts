@@ -43,9 +43,22 @@ import {AppRoutingService} from './app-routing.service';
                                 {{page.fan_count}}
                             </span>
                             <span
-                                    *ngIf='page.new_like_count' 
                                     class='text-primary'>
-                                (+{{page.new_like_count}})
+                                (+{{page.new_like_count || 0}})
+                            </span>
+                        </span>
+                        <span>
+                            <br>
+                            <span
+                                    mdTooltip="Nutzer, die über die Seite reden"
+                                    mdTooltipShowDelay='1500'
+                                    mdTooltipHideDelay='1500'>
+                                <span class='text-primary'>
+                                    <md-icon>forum</md-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{page.talking_about_count || 0}}
+                                </span>
                             </span>
                         </span>
                         <span *ngIf='page.overall_star_rating'>
@@ -63,20 +76,6 @@ import {AppRoutingService} from './app-routing.service';
                                 <span class='text-primary'>
                                     (<md-icon>people</md-icon><!--
                                         -->{{page.rating_count}})
-                                </span>
-                            </span>
-                        </span>
-                        <span *ngIf='page.talking_about_count'>
-                            <br>
-                            <span
-                                    mdTooltip="Nutzer, die über die Seite reden"
-                                    mdTooltipShowDelay='1500'
-                                    mdTooltipHideDelay='1500'>
-                                <span class='text-primary'>
-                                    <md-icon>forum</md-icon>
-                                </span>
-                                <span class='text-accent'>
-                                    {{page.talking_about_count}}
                                 </span>
                             </span>
                         </span>
