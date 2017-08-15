@@ -45,6 +45,18 @@ import {AppRoutingService} from './app-routing.service';
                     <small>{{post.name}}</small>
                 </span>
                 <span
+                        *ngIf='post.likes.summary.total_count'
+                        mdTooltip="Likes"
+                        mdTooltipShowDelay='1500'
+                        mdTooltipHideDelay='1500'>
+                    <span class='text-primary'>
+                        <md-icon>thumb_up</md-icon>
+                    </span>
+                    <span class='text-accent'>
+                        {{post.likes.summary.total_count}}
+                    </span>
+                </span>
+                <span
                         *ngIf='post.shares'
                         mdTooltip="Shares"
                         mdTooltipShowDelay='1500'
