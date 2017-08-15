@@ -1,11 +1,11 @@
 import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
-import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/mergeScan';
 import {Observable} from 'rxjs/Observable';
 
 import {FbService} from './fb.service';
+import {AppRoutingService} from './app-routing.service';
+import {PAGE, POST} from './app';
 
 /*
  * The main Component of Aldo.
@@ -14,16 +14,29 @@ import {FbService} from './fb.service';
 @Component({
     selector: 'app',
     template: `
-        <router-outlet></router-outlet>
+        <layout>
+            <nav app-content></nav>
+            <aside app-content>
+                <post *appRouting='POST'></post>
+                <no-detail *appRouting></no-detail>
+            </aside>
+            <main app-content>
+                <dashboard *appRouting='null; conflicts:PAGE'></dashboard>
+                <page *appRouting='PAGE'></page>
+                <not-found *appRouting></not-found>
+            </main>
+        </layout>
     `,
     styleUrls: ['dist/app.component.css']
 })
 export class AppComponent implements OnInit {
     constructor(
         private applicationRef: ApplicationRef,
-        private router: Router,
         private fbService: FbService,
-        private location: Location) {}
+        private appRoutingService: AppRoutingService) {}
+
+    private PAGE = PAGE;
+    private POST = POST;
 
     /*
      * Displayed in the main toolbar.
@@ -31,10 +44,10 @@ export class AppComponent implements OnInit {
     title = 'Aldo';
 
     ngOnInit() {
-        this.router
+        this.appRoutingService
             .events
-            .filter((event) => event instanceof NavigationEnd)
-            .map(() => this.location.path().split('/').slice(1))
+            .filter(Boolean)
+            .map(params => Object.keys(params).map(k => params[k]))
             .mergeScan(
                 ([_, last], next) => Observable.of([last, next]),
                 [[],[]],

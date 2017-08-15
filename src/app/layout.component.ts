@@ -8,6 +8,7 @@ import 'rxjs/add/operator/pluck';
 
 import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -22,14 +23,16 @@ import {FbService} from './fb.service';
                     <md-toolbar>
                         <span class='app-toolbar-title'>Seiten</span>
                     </md-toolbar>
-                    <nav app-content (click)='nav.close()'></nav>
+                    <div (click)='nav.close()'>
+                        <ng-content select='nav'></ng-content>
+                    </div>
                 </md-sidenav>
                 <md-sidenav
                         #aside
                         align='end'
                         id='aside'
                         [mode]='appUxService.asideMode'
-                        (close)='goUp()'>
+                        (close-start)='appRoutingService.params = {post: null}'>
                     <md-toolbar>
                         <button
                                 md-button
@@ -48,7 +51,8 @@ import {FbService} from './fb.service';
                                 mdTooltip="Neu laden"
                                 mdTooltipShowDelay='1500'
                                 mdTooltipHideDelay='1500'
-                                (click)='refresh()'>
+                                (click)='fbService.clearCache()'
+                                (click)='appRoutingService.refresh()'>
                             <md-icon>refresh</md-icon>
                         </button>
                         <a
@@ -71,9 +75,7 @@ import {FbService} from './fb.service';
                             <md-icon>close</md-icon>
                         </button>
                     </md-toolbar>
-                    <aside app-content>
-                        <router-outlet name='detail'></router-outlet>
-                    </aside>
+                    <ng-content select='aside'></ng-content>
                 </md-sidenav>
                 <md-toolbar>
                     <button
@@ -94,7 +96,8 @@ import {FbService} from './fb.service';
                             mdTooltip="Neu laden"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            (click)='refresh()'>
+                            (click)='fbService.clearCache()'
+                            (click)='appRoutingService.refresh()'>
                         <md-icon>refresh</md-icon>
                     </button>
                     <button
@@ -103,7 +106,7 @@ import {FbService} from './fb.service';
                             mdTooltip="Dashboard"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'
-                            routerLink='/'>
+                            [appLink]='{page: null}'>
                         <md-icon>dashboard</md-icon>
                     </button>
                     <a
@@ -135,9 +138,8 @@ import {FbService} from './fb.service';
                     </md-menu>
                 </md-toolbar>
                 <div id='displacer-target'></div>
-                <main app-content>
-                    <router-outlet></router-outlet>
-                </main>
+                <ng-content select='main'></ng-content>
+                <router-outlet></router-outlet>
             </md-sidenav-container>
         </div>
     `,
@@ -150,7 +152,8 @@ export class LayoutComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private fbService: FbService,
-        private location: Location) {}
+        private location: Location,
+        private appRoutingService: AppRoutingService) {}
 
     /*
      * The route parameters.
@@ -162,30 +165,15 @@ export class LayoutComponent implements OnInit {
      */
     dark = false;
 
-    /*
-     * Navigate one level up.
-     */
-    goUp() {
-        this.router.navigate(['..'], {relativeTo: this.activatedRoute});
-    }
-
-    /*
-     * Refresh the view.
-     */
-    refresh() {
-        this.fbService.clearCache();
-        const path = this.location.path();
-        this.router.navigateByUrl('/');
-        setTimeout(() => this.router.navigateByUrl(path));
-    }
-
     @ViewChild('aside')
     aside: MdSidenav;
 
     ngOnInit() {
-        this.activatedRoute
-            .params
-            .do(params => params.post && setTimeout(() => this.aside.open()))
+        this.appRoutingService
+            .events
+            .filter(Boolean)
+            .do(params => params.post && this.aside.open())
             .subscribe(params => this.params = params);
     }
 }
+

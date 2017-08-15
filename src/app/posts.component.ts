@@ -15,7 +15,7 @@ import {Post} from './post';
 @Component({
     selector: 'posts',
     template: `
-        <a routerLink='/{{pageId}}/{{post.id}}' *ngFor='let post of _posts'>
+        <a *ngFor='let post of _posts' [appLink]='{post: post.id}'>
             <md-card>
                 <img *ngIf='post.picture' md-card-image [src]='post.picture'>
                 <profile [profile]='post.from'></profile>
@@ -28,7 +28,7 @@ import {Post} from './post';
     `,
     styleUrls: ['dist/posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent {
     constructor(
         private mdSnackBar: MdSnackBar,
         private activatedRoute: ActivatedRoute) {}
@@ -43,11 +43,6 @@ export class PostsComponent implements OnInit {
      */
     private _loaded: boolean;
 
-    /*
-     * The id of the page currently open.
-     */
-    pageId: string;
-
     @Input()
     loaded = false;
 
@@ -60,13 +55,6 @@ export class PostsComponent implements OnInit {
             .subscribe(
                 post => this._posts.push(post),
                 err => showGraphApiError(this.mdSnackBar, err));
-    }
-
-    ngOnInit() {
-        this.activatedRoute
-            .params
-            .pluck('page')
-            .subscribe((pageId: string) => this.pageId = pageId);
     }
 }
 

@@ -7,6 +7,7 @@
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 blockquote {
@@ -256,11 +257,15 @@ snack-bar-container {
 }
 
 #displacer-target {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 2;
+}
+
+#displacer-target > * {
+    position: absolute;
 }
 
 #nav {

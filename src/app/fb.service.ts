@@ -80,14 +80,17 @@ export class FbService {
      * GraphApiResponseType and turning it into a much more workable 
      * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
      * provided as the magic last parameter, if none as provided the Object will 
-     * be passed as parsed.
+     * be passed as parsed.  This will automatically fetch a summary for every 
+     * field.
      */
     api(
         path: string,
         method = HttpMethod.Get,
-        params = {},
+        params: {fields?: string[]} = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ): Observable<GraphApiResponse<GraphApiObject>> {
+        params.fields
+            && (params.fields = params.fields.map(k => k + '.summary(true)'));
         return Observable
             .fromPromise(api(path, method, params))
             .do(console.log)

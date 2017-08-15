@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
     selector: 'main',
     template: `
         <div>
-            <router-outlet></router-outlet>
+            <ng-content></ng-content>
         </div>
     `,
     styleUrls: ['dist/main.component.css']

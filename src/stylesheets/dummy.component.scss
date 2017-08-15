@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the DummyComponent.
+ *
+ * This is a style locally applied to DummyComponent.  All styles specific to 
+ * the DummyComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _dummy.component partial, to keep things easier to restructure.
+ */
+
+@import 'mixins';
+@import 'colors';
+@import '_dummy.component';
+

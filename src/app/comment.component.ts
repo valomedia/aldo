@@ -36,11 +36,13 @@ import {Video} from './video';
         <md-card-content>
             <blockquote *ngFor='let comment of comments'>
                 <p>
-                    <strong>@{{comment.from.name}}</strong>
+                    <strong>
+                        <span class='text-primary'>@</span>{{comment.from.name}}
+                    </strong>
                     <a
                             *ngIf='comment.attachment'
                             md-button
-                            color='primary'
+                            color='accent'
                             class='app-icon-button'
                             [href]='comment.attachment.url'
                             target='_blank'>

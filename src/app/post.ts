@@ -43,6 +43,14 @@ export interface PostType extends GraphApiObjectType {
     caption?: string;
     description?: string;
     shares?: {count: number};
+    likes: {
+        data: [{name: string;}];
+        summary: {
+            total_count: number;
+            can_like: boolean;
+            has_liked: boolean;
+        }
+    };
 }
 
 /*
@@ -151,6 +159,14 @@ export const DUMMY_POST_TYPE: PostType = {
     name: '',
     caption: '',
     description: '',
-    shares: {count: 0}
+    shares: {count: 0},
+    likes: {
+        data: [],
+        summary: {
+            total_count: 0,
+            can_like: false,
+            has_liked: false
+        }
+    }
 };
 
