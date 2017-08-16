@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import {Comment, DUMMY_COMMENT_TYPE} from './comment';
 import {FbService, HttpMethod} from './fb.service';

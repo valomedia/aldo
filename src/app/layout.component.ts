@@ -5,6 +5,7 @@ import {MdSidenav} from '@angular/material';
 import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/do';
 
 import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';

@@ -2,6 +2,7 @@ import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
 
 import 'rxjs/add/operator/mergeScan';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';

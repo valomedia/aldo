@@ -3,6 +3,7 @@ import {MdSnackBar} from '@angular/material';
 import {DOCUMENT} from '@angular/common';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
 
 import {GraphApiError} from './graph-api-error';
 import {showGraphApiError} from './graph-api-error.component';

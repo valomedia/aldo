@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/operator/do';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse, GraphApiResponseType} from './graph-api-response';

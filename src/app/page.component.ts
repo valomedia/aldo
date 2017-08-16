@@ -5,6 +5,8 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 import 'rxjs/add/operator/concatAll';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/do';
 
 import {Page} from './page';
 import {PageService} from './page.service';

@@ -5,6 +5,8 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeScan';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/observable/concat';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/first';
 
 import {Expandable} from './expandable';
 

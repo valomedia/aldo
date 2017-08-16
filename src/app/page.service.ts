@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/first';
 
 import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
 import {FbService, HttpMethod} from './fb.service';

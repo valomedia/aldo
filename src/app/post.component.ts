@@ -3,6 +3,8 @@ import {Params} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/do';
 
 import {Post} from './post';
 import {PostService} from './post.service';

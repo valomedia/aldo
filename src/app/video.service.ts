@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import {Video, DUMMY_VIDEO_TYPE} from './video';
 import {FbService, HttpMethod} from './fb.service';

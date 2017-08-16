@@ -3,6 +3,7 @@ import {Router, NavigationEnd, Params} from '@angular/router';
 import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/publishBehavior';
+import 'rxjs/add/operator/map';
 
 /*
  * The service providing routing for the app.

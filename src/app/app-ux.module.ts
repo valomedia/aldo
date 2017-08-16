@@ -18,6 +18,8 @@ import {
     MdCardModule
 } from '@angular/material';
 
+import {CovalentStepsModule} from '@covalent/core';
+
 /*
  * The root module for the material modules.
  */
@@ -39,7 +41,8 @@ import {
         MdTooltipModule,
         MdInputModule,
         MdTabsModule,
-        MdCardModule
+        MdCardModule,
+        CovalentStepsModule
     ],
     exports: [
         MdButtonModule,
@@ -57,7 +60,8 @@ import {
         MdTooltipModule,
         MdInputModule,
         MdTabsModule,
-        MdCardModule
+        MdCardModule,
+        CovalentStepsModule
     ]
 })
 export class AppUxModule {}

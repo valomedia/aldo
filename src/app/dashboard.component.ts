@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/finally';
 
 import {Page} from './page';
 import {PageService} from './page.service';

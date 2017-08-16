@@ -16,7 +16,7 @@
 <md-card-content *ngIf='_comment.message'>
     <p>{{_comment.message}}</p>
 </md-card-content>
-<md-card-content>
+<md-card-content *ngIf='comments.length'>
     <blockquote *ngFor='let comment of comments'>
         <p>
             <strong>
