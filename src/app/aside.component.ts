@@ -6,12 +6,8 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'aside',
-    template: `
-        <div>
-            <ng-content></ng-content>
-        </div>
-    `,
-    styleUrls: ['dist/aside.component.css']
+    templateUrl: './_aside.component.html',
+    styleUrls: ['./aside.component.css']
 })
 export class AsideComponent {}
 

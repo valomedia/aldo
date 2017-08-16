@@ -6,12 +6,8 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'dummy',
-    template: `
-        <displacer>
-            <div></div>
-        </displacer>
-    `,
-    styleUrls: ['dist/dummy.component.css']
+    templateUrl: './_dummy.component.html',
+    styleUrls: ['./dummy.component.css']
 })
 export class DummyComponent {}
 

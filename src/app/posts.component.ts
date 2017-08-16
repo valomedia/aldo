@@ -14,47 +14,8 @@ import {Post} from './post';
 
 @Component({
     selector: 'posts',
-    template: `
-        <a *ngFor='let post of _posts' [appLink]='{post: post.id}'>
-            <md-card>
-                <img *ngIf='post.picture' md-card-image [src]='post.picture'>
-                <profile [profile]='post.from'></profile>
-                <md-card-content *ngIf='post.text'>
-                    {{post.text}}
-                </md-card-content>
-                <md-card-footer>
-                    <div>
-                        <p>
-                            <span
-                                    mdTooltip="Likes"
-                                    mdTooltipShowDelay='1500'
-                                    mdTooltipHideDelay='1500'>
-                                <span class='text-primary'>
-                                    <md-icon>thumb_up</md-icon>
-                                </span>
-                                <span class='text-accent'>
-                                    {{post.likes.summary.total_count}}
-                                </span>
-                            </span>
-                            <span
-                                    mdTooltip="Shares"
-                                    mdTooltipShowDelay='1500'
-                                    mdTooltipHideDelay='1500'>
-                                <span class='text-primary'>
-                                    <md-icon>share</md-icon>
-                                </span>
-                                <span class='text-accent'>
-                                    {{post.shares ? post.shares.count : 0}}
-                                </span>
-                            </span>
-                        </p>
-                    </div>
-                </md-card-footer>
-            </md-card>
-        </a>
-        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
-    `,
-    styleUrls: ['dist/posts.component.css']
+    templateUrl: './_posts.component.html',
+    styleUrls: ['./posts.component.css']
 })
 export class PostsComponent {
     constructor(

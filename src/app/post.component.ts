@@ -22,70 +22,8 @@ import {AppRoutingService} from './app-routing.service';
 
 @Component({
     selector: 'post',
-    template: `
-        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
-        <div *ngIf='post'>
-            <div *ngIf='post.picture' class='picture'>
-                <a [href]='post.link' target='_blank'>
-                    <img *ngIf='!video' [src]='post.picture'>
-                </a>
-                <video
-                        *ngIf='video'
-                        controls
-                        preload='metadata'
-                        [poster]='post.picture'>
-                    <source [src]='video.source'>
-                </video>
-            </div>
-            <h2>
-                <img [src]='post.from.picture'>
-                <span>
-                    {{post.from.name}}
-                    <br>
-                    <small>{{post.name}}</small>
-                </span>
-                <span>
-                    <span
-                            mdTooltip="Likes"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
-                        <span class='text-primary'>
-                            <md-icon>thumb_up</md-icon>
-                        </span>
-                        <span class='text-accent'>
-                            {{post.likes.summary.total_count}}
-                        </span>
-                    </span>
-                    <span
-                            mdTooltip="Shares"
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
-                        <span class='text-primary'>
-                            <md-icon>share</md-icon>
-                        </span>
-                        <span class='text-accent'>
-                            {{post.shares ? post.shares.count : 0}}
-                        </span>
-                    </span>
-                </span>
-            </h2>
-            <blockquote>
-                <p>{{post.text}}</p>
-            </blockquote>
-            <blockquote *ngIf='post.link' class='accent'>
-                <p>
-                    <a [href]='post.link' target='_blank'>
-                        {{post.caption || post.link}}
-                    </a>
-                </p>
-                <p *ngIf='post.description'>{{post.description}}</p>
-            </blockquote>
-            <endless-list #commentList [input]='comments'>
-                <comments [comments]='commentList.output'></comments>
-            </endless-list>
-        </div>
-    `,
-    styleUrls: ['dist/post.component.css']
+    templateUrl: './_post.component.html',
+    styleUrls: ['./post.component.css']
 })
 export class PostComponent extends AppRoutingComponent {
     constructor(

@@ -32,7 +32,7 @@ export class AppRoutingService {
      * Parse the parameters from a path.
      */
     parse?(path: string): Params|null {
-        const result = path
+        return path
             .split('/')
             .slice(1)
             .map((v, i) =>
@@ -41,8 +41,6 @@ export class AppRoutingService {
                 || !Object.keys(param).length
                 || param[Object.keys(param)[0]] != '_')
             .reduce((o, e) => o && e ? Object.assign(o, e) : null, {});
-        console.warn(result);
-        return result;
     }
 
     /*

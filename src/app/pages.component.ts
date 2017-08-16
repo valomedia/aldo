@@ -12,18 +12,8 @@ import {showGraphApiError} from './graph-api-error.component';
 
 @Component({
     selector: 'pages',
-    template: `
-        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
-        <md-nav-list>
-            <a
-                    md-list-item
-                    *ngFor='let page of pages'
-                    [appLink]='{page: page.id}'>
-                {{page.name}}
-            </a>
-        </md-nav-list>
-    `,
-    styleUrls: ['dist/pages.component.css']
+    templateUrl: './_pages.component.html',
+    styleUrls: ['./pages.component.css']
 })
 export class PagesComponent implements OnInit {
     constructor(

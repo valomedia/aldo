@@ -13,13 +13,8 @@ import {Comment} from './comment';
 
 @Component({
     selector: 'comments',
-    template: `
-        <md-card *ngFor='let comment of _comments'>
-            <comment [comment]='comment'></comment>
-        </md-card>
-        <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
-    `,
-    styleUrls: ['dist/comments.component.css']
+    templateUrl: './_comments.component.html',
+    styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
     constructor(private mdSnackBar: MdSnackBar) {}

@@ -1,0 +1,6 @@
+<!-- HTML template for the CommentsComponent -->
+<md-card *ngFor='let comment of _comments'>
+    <comment [comment]='comment'></comment>
+</md-card>
+<md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
+

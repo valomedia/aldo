@@ -44,7 +44,7 @@ export interface PostType extends GraphApiObjectType {
     description?: string;
     shares?: {count: number};
     likes: {
-        data: [{name: string;}];
+        data: {name: string;}[];
         summary: {
             total_count: number;
             can_like: boolean;

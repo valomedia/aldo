@@ -14,12 +14,8 @@ import {Expandable} from './expandable';
 
 @Component({
     selector: 'endless-list',
-    template: `
-        <div>
-            <ng-content></ng-content>
-        </div>
-    `,
-    styleUrls: ['dist/endless-list.component.css']
+    templateUrl: './_endless-list.component.html',
+    styleUrls: ['./endless-list.component.css']
 })
 export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
     constructor(private elementRef: ElementRef) {}

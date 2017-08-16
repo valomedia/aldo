@@ -86,11 +86,12 @@ export class FbService {
     api(
         path: string,
         method = HttpMethod.Get,
-        params: {fields?: string[]} = {},
+        params: any = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ): Observable<GraphApiResponse<GraphApiObject>> {
         params.fields
-            && (params.fields = params.fields.map(k => k + '.summary(true)'));
+            && (params.fields
+                = params.fields.map((k: string) => k + '.summary(true)'));
         return Observable
             .fromPromise(api(path, method, params))
             .do(console.log)

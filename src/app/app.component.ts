@@ -13,21 +13,8 @@ import {PAGE, POST} from './app';
 
 @Component({
     selector: 'app',
-    template: `
-        <layout>
-            <nav app-content></nav>
-            <aside app-content>
-                <post *appRouting='POST'></post>
-                <no-detail *appRouting></no-detail>
-            </aside>
-            <main app-content>
-                <dashboard *appRouting='null; conflicts:PAGE'></dashboard>
-                <page *appRouting='PAGE'></page>
-                <not-found *appRouting></not-found>
-            </main>
-        </layout>
-    `,
-    styleUrls: ['dist/app.component.css']
+    templateUrl: './_app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
     constructor(
