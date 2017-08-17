@@ -1,6 +1,7 @@
 {
     "server": {
         "baseDir": "src",
+        "files": ["./src/**/*.{html,css,js}"],
         "routes": {"/node_modules": "node_modules"}
     },
     "reloadDebounce": 2000
