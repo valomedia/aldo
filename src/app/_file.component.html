@@ -1,0 +1,19 @@
+<!-- HTML template for the FileComponent -->
+<td-file-upload #upload>
+    <md-icon>file_upload</md-icon>
+    {{upload.files?.name}}
+    <ng-template td-file-input-label>
+        <md-icon>attach_file</md-icon>
+        Wähle eine Datei aus...
+    </ng-template>
+</td-file-upload>
+<div class='separator'>
+    <strong>oder</strong>
+</div>
+<md-input-container>
+    <input
+            mdInput
+            [(ngModel)]='link'
+            placeholder="Gib einen Link ein...">
+</md-input-container>
+

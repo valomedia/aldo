@@ -43,6 +43,7 @@ import {AppRoutingService} from './app-routing.service';
 import {AppRoutingDirective} from './app-routing.directive';
 import {DummyComponent} from './dummy.component';
 import {AppLinkDirective} from './app-link.directive';
+import {FileComponent} from './file.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -83,7 +84,8 @@ import {AppLinkDirective} from './app-link.directive';
         CommentComponent,
         AppRoutingDirective,
         DummyComponent,
-        AppLinkDirective
+        AppLinkDirective,
+        FileComponent
     ],
     bootstrap: [AppComponent],
     providers: [

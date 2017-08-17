@@ -5,6 +5,14 @@
  * This includes all styles that fit nowhere else.
  */
 
+* {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    // This is what separates the men from the boys.
+    min-width: 0;
+}
+
 a {
     text-decoration: none;
     cursor: pointer;
@@ -71,6 +79,10 @@ md-sidenav-container > * {
     height: 100vh!important;
 }
 
+md-sidenav-container .mat-sidenav-content {
+    overflow: hidden;
+}
+
 nav, aside, main {
     overflow-x: hidden;
     overflow-y: auto;
@@ -91,20 +103,29 @@ md-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
+md-tab-header .mat-tab-label-container {
+    justify-content: center;
+}
+
+md-tab-header .mat-tab-list {
+    flex-grow: 0;
+}
+
 md-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
     button, .button { color: white!important; }
 }
 
-profile .mat-card-header-text {
-    // This is what separates the men from the boys.
-    min-width: 0;
-}
-
 profile .mat-card-header-text > md-card-title {
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+td-file-upload td-file-input > div {
+    display: flex;
+}
+
+td-file-upload button {
+    flex-grow: 1;
 }
 
 video {
@@ -116,7 +137,8 @@ video {
 .app-toolbar-title,
 h1 > small > span,
 h1 > span,
-md-card-footer > * {
+md-card-footer > *,
+.separator {
     @extend .pad;
 }
 
@@ -223,10 +245,6 @@ snack-bar-container {
 
 .invisible {
     opacity: 0;
-}
-
-.mat-sidenav-content {
-    overflow: hidden;
 }
 
 .pad {
