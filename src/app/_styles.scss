@@ -8,6 +8,7 @@
 * {
     overflow: hidden;
     text-overflow: ellipsis;
+    word-wrap: break-word;
 
     // This is what separates the men from the boys.
     min-width: 0;
@@ -46,6 +47,18 @@ button, .button {
 
 img {
     vertical-align: top;
+}
+
+md-card-content {
+    p {
+        text-overflow: clip;
+    }
+
+    p::after {
+        content: '––––––––––';
+        visibility: hidden;
+        white-space: nowrap;
+    }
 }
 
 md-card-footer {
