@@ -89,9 +89,19 @@ export class Post extends GraphApiObject {
 
     /*
      * Get the text to display for this Post.
+     *
+     * This will return the message attached to the Post, or, in absence of 
+     * that, the text of the story for the Post.  To work around a Facebook 
+     * issue, this will return the text of a pseudo-story, if the story is not 
+     * set and the Post has a Video attached.  If there is no message and no 
+     * story to tell, this will return an empty string.
      */
     get text() {
-        return this.message || this.story;
+        return this.message
+            || this.story
+            || this.contentType == PostContentType.video
+            && this.from.name + " hat ein neues Video hinzugefügt."
+            || '';
     }
 
     /*

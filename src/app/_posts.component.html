@@ -3,9 +3,7 @@
     <md-card>
         <img *ngIf='post.picture' md-card-image [src]='post.picture'>
         <profile [profile]='post.from'></profile>
-        <md-card-content *ngIf='post.text'>
-            {{post.text}}
-        </md-card-content>
+        <md-card-content>{{post.text}}</md-card-content>
         <md-card-footer>
             <div>
                 <p>
