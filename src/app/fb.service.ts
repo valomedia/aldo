@@ -32,6 +32,16 @@ export enum LoginStatus {
     unknown
 };
 
+/*
+ * The details for a logged in session.
+ */
+interface AuthResponse {
+    accessToken: string;
+    expiresIn: string;
+    signedRequest: string;
+    userID: string;
+}
+
 declare var FB: {
     init: (params: any) => void;
     api: (
