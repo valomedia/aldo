@@ -1,19 +1,37 @@
 <!-- HTML template for the FileComponent -->
-<td-file-upload #upload>
-    <md-icon>file_upload</md-icon>
-    {{upload.files?.name}}
-    <ng-template td-file-input-label>
+<td-file-input
+        [(ngModel)]='file'
+        [color]='file && (error ? WARN : PRIMARY)'
+        [accept]='accept'
+        (click)='file = null'>
+    <span *ngIf='file'>
+        <span *ngIf='error'>
+            <md-icon>error</md-icon>
+            Die Datei ist zu groß!
+        </span>
+        <span *ngIf='!error'>
+            <md-icon>done</md-icon>
+            {{file.name}}
+        </span>
+    </span>
+    <span *ngIf='!file'>
         <md-icon>attach_file</md-icon>
         Wähle eine Datei aus...
-    </ng-template>
-</td-file-upload>
+    </span>
+</td-file-input>
 <div class='separator'>
     <strong>oder</strong>
 </div>
 <md-input-container>
-    <input
-            mdInput
-            [(ngModel)]='link'
-            placeholder="Gib einen Link ein...">
+    <!--
+        Can you believe Angular has no way to validate an url?
+
+        Validating a url in pure html: 1 line.
+        Validating one with @angular/material: 20 lines.
+        Fun, right?  And naturally Angular is incompatible with HTML validation.
+
+        –.–
+    -->
+    <input mdInput [(ngModel)]='link' placeholder="Füge einen Link ein...">
 </md-input-container>
 

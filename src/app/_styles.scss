@@ -6,7 +6,6 @@
  */
 
 * {
-    overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
 
@@ -41,8 +40,20 @@ body {
 }
 
 button, .button {
+    @extend .truncate;
+
     margin: 6px 8px!important;
     padding: 0 8px!important;
+}
+
+file {
+    td-file-input button {
+        flex-grow: 1;
+    }
+
+    td-file-input > div {
+        display: flex;
+    }
 }
 
 img {
@@ -120,12 +131,14 @@ md-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
-md-tab-header .mat-tab-label-container {
-    justify-content: center;
-}
+md-tab-header {
+    .mat-tab-label-container {
+        justify-content: center;
+    }
 
-md-tab-header .mat-tab-list {
-    flex-grow: 0;
+    .mat-tab-list {
+        flex-grow: 0;
+    }
 }
 
 md-toolbar {
@@ -134,15 +147,24 @@ md-toolbar {
 }
 
 profile .mat-card-header-text > md-card-title {
-    white-space: nowrap;
+    @extend .truncate;
 }
 
-td-file-upload td-file-input > div {
-    display: flex;
+snack-bar-container {
+    color: white;
 }
 
-td-file-upload button {
-    flex-grow: 1;
+td-file-upload {
+    button {
+        margin: 0!important;
+    }
+
+    .td-file-upload-cancel {
+        overflow: visible;
+        width: 0!important;
+        padding: 0!important;
+        flex-grow: 0;
+    }
 }
 
 video {
@@ -172,10 +194,6 @@ md-card-footer > *,
 
 [md-button] {
     text-transform: uppercase;
-}
-
-snack-bar-container {
-    color: white;
 }
 
 .app-action {
@@ -289,6 +307,11 @@ snack-bar-container {
 
 .text-warn {
     color: $warn-bg;
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .wrap {

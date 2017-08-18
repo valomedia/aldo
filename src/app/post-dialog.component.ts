@@ -1,8 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 
+import {Observable} from 'rxjs/Observable';
+
 import {Page, ContentType} from './page';
 import {PageService} from './page.service';
+import {Ressource} from './app';
 
 @Component({
     selector: 'post-dialog',
@@ -35,23 +38,35 @@ export class PostDialogComponent {
     /*
      * Photo url entered by the user.
      */
-    photo = '';
+    photo?: Ressource;
 
     /*
      * Video url entered by the user.
      */
-    video = '';
+    video?: Ressource;
+
+    /*
+     * Get the uri of the attachment to be published, if any.
+     */
+    get ressource(): Ressource|null {
+        return this[ContentType[this.contentType].toLowerCase()];
+    }
 
     /*
      * Post to a given String to this Page.
      */
     post() {
+        // TODO FIXME
+        if (typeof this.ressource != 'string') {
+            return alert('Not implemented');
+        }
+
         this.mdDialogRef.close(
             this.pageService.postMsg(
                 this.page,
                 this.text,
                 this.contentType,
-                this[ContentType[this.contentType].toLowerCase()]));
+                this.ressource));
     }
 }
 

@@ -6,9 +6,10 @@
                 mdInput
                 mdTextareaAutosize
                 [(ngModel)]='text'
-                placeholder="Schreib etwas..."></textarea>
+                placeholder="Schreib etwas...">
+        </textarea>
     </md-input-container>
-    <md-tab-group [(selectedIndex)]='contentType'>
+    <md-tab-group [(selectedIndex)]='contentType' dynamicHeight>
         <md-tab>
             <ng-template md-tab-label>
                 <md-icon>insert_link</md-icon>
@@ -26,24 +27,22 @@
                 <md-icon>insert_photo</md-icon>
                 Bild hinzufügen
             </ng-template>
-            <md-input-container>
-                <input
-                        mdInput
-                        [(ngModel)]='photo'
-                        placeholder="Link zum Bild...">
-            </md-input-container>
+            <file
+                    [(ressource)]='photo'
+                    [fileSizeLimit]='10 * 1024 * 1024'
+                    accept='image/*'>
+            </file>
         </md-tab>
         <md-tab>
             <ng-template md-tab-label>
                 <md-icon>movie</md-icon>
                 Video hinzufügen
             </ng-template>
-            <md-input-container>
-                <input
-                        mdInput
-                        [(ngModel)]='video'
-                        placeholder="Link zum Video...">
-            </md-input-container>
+            <file
+                    [(ressource)]='video'
+                    [fileSizeLimit]='1 * 1024 * 1024 * 1024'
+                    accept='video/*'>
+            </file>
         </md-tab>
     </md-tab-group>
 </md-dialog-content>
@@ -51,6 +50,7 @@
     <button
             *ngIf='page'
             md-button
+            [disabled]='!ressource'
             (click)='post()'
             color='primary'>
         Post erstellen
@@ -63,3 +63,4 @@
         <md-icon>cancel</md-icon>
     </button>
 </md-dialog-actions>
+

@@ -30,6 +30,40 @@ conf.fb.sdkUrl = '//connect.facebook.net/de_DE/sdk/debug.js';
 // Calculate Facebook GraphAPI base url for direct requests withouth the jsSDK.
 conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
 
+// Supported video filetypes, not yet used.
+conf.fb.videoFormats = [
+    '3g2',
+    '3gp',
+    '3gpp',
+    'asf',
+    'avi',
+    'dat',
+    'divx',
+    'dv',
+    'f4v',
+    'flv',
+    'gif',
+    'm2ts',
+    'm4v',
+    'mkv',
+    'mod',
+    'mov',
+    'mp4',
+    'mpe',
+    'mpeg',
+    'mpeg4',
+    'mpg',
+    'mts',
+    'nsv',
+    'ogm',
+    'ogv',
+    'qt',
+    'tod',
+    'ts',
+    'vob',
+    'wmv'
+];
+
 // Set up the retry button.
 window.onload = function() {
 
