@@ -23,6 +23,15 @@ export enum HttpMethod {
     Delete
 };
 
+/*
+ * The login statuses a user can have.
+ */
+export enum LoginStatus {
+    connected,
+    not_authorized,
+    unknown
+};
+
 declare var FB: {
     init: (params: any) => void;
     api: (
