@@ -26,30 +26,64 @@ export enum HttpMethod {
 /*
  * The login statuses a user can have.
  */
-export enum LoginStatus {
+enum LoginStatus {
     connected,
     not_authorized,
     unknown
 };
 
 /*
+ * Useless interface, because Facebook.
+ */
+enum AuthType {
+    rerequest
+}
+
+/*
  * The details for a logged in session.
  */
-interface AuthResponse {
+export interface AuthResponse {
     accessToken: string;
     expiresIn: string;
     signedRequest: string;
     userID: string;
+    grantedScopes?: string;
 }
 
+/*
+ * A full login state.
+ */
+interface Session {
+    status: LoginStatus;
+    authResponse: AuthResponse;
+}
+
+/*
+ * Facebook's SDK for JavaScript.
+ */
 declare var FB: {
+    // Core methods.
     init: (params: any) => void;
     api: (
         path: string,
         method: string,
         params: any,
-        callback: (response: any) => void) => void;
-    ui: (params: any, callback: (response: any) => void) => void;
+        cb: (response: any) => void) => void;
+    ui: (params: any, cb: (response: any) => void) => void;
+
+    // Facebook login methods.
+    getLoginStatus: (cb: (Session) => void) => void;
+    login: (
+        cb?: (Session) => void,
+        opts?: {
+            auth_type?: AuthType,
+            scope?: string,
+            return_scopes?: boolean,
+            enable_profile_selector?: boolean,
+            profile_selector_ids: string
+        }) => void;
+    logout: (cb: (Session) => void) => void;
+    getAuthResponse: () => AuthResponse|null;
 };
 
 let cache = {};
