@@ -4,66 +4,6 @@
  * Bootstrap script.
  */
 
-var conf = this.conf || {};
-
-// Inject permissions into Aldo config.
-conf.perms = {
-    manage_pages: {
-        required: true,
-        desc: "Zugriff auf deine Seiten erlauben",
-    },
-    publish_pages: {
-        required: true,
-        desc: "Im Namen deiner Seiten posten",
-        msg: "Für deine Seiten posten, liken und kommentieren."
-    },
-    pages_show_list: {
-        required: true,
-        desc: "Eine Liste mit deinen Seiten anzeigen",
-        mgs: "Deine Seiten anzeigen, damit du eine auswählen kannst."
-    }
-}
-
-// Path to the Facebook GraphAPI JavaScript SDK.
-conf.fb.sdkUrl = '//connect.facebook.net/de_DE/sdk/debug.js';
-
-// Calculate Facebook GraphAPI base url for direct requests withouth the jsSDK.
-conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
-
-// Supported video filetypes, not yet used.
-conf.fb.videoFormats = [
-    '3g2',
-    '3gp',
-    '3gpp',
-    'asf',
-    'avi',
-    'dat',
-    'divx',
-    'dv',
-    'f4v',
-    'flv',
-    'gif',
-    'm2ts',
-    'm4v',
-    'mkv',
-    'mod',
-    'mov',
-    'mp4',
-    'mpe',
-    'mpeg',
-    'mpeg4',
-    'mpg',
-    'mts',
-    'nsv',
-    'ogm',
-    'ogv',
-    'qt',
-    'tod',
-    'ts',
-    'vob',
-    'wmv'
-];
-
 // Set up the retry button.
 window.onload = function() {
 

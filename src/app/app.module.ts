@@ -44,6 +44,7 @@ import {AppRoutingDirective} from './app-routing.directive';
 import {DummyComponent} from './dummy.component';
 import {AppLinkDirective} from './app-link.directive';
 import {FileComponent} from './file.component';
+import {ConfService} from './conf.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -99,7 +100,8 @@ import {FileComponent} from './file.component';
         },
         VideoService,
         CommentService,
-        AppRoutingService
+        AppRoutingService,
+        ConfService
     ],
     entryComponents: [
         PostDialogComponent,
