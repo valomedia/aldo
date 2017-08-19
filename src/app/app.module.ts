@@ -46,6 +46,7 @@ import {AppLinkDirective} from './app-link.directive';
 import {FileComponent} from './file.component';
 import {ConfService} from './conf.service';
 import {AppService} from './app.service';
+import {UtilService} from './util.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -103,7 +104,8 @@ import {AppService} from './app.service';
         CommentService,
         AppRoutingService,
         ConfService,
-        AppService
+        AppService,
+        UtilService
     ],
     entryComponents: [
         PostDialogComponent,
