@@ -1,7 +1,7 @@
 <!-- HTML template for the FileComponent -->
 <td-file-input
         [(ngModel)]='file'
-        [color]='file && (error ? WARN : PRIMARY)'
+        [color]='file && (error ? appService.WARN : appService.PRIMARY)'
         [accept]='accept'
         (click)='file = null'>
     <span *ngIf='file'>

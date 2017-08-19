@@ -6,7 +6,7 @@ import 'rxjs/add/observable/of';
 
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
-import {PAGE, POST} from './app';
+import {AppService} from './app.service';
 
 /*
  * The main Component of Aldo.
@@ -21,10 +21,8 @@ export class AppComponent implements OnInit {
     constructor(
         private applicationRef: ApplicationRef,
         private fbService: FbService,
-        private appRoutingService: AppRoutingService) {}
-
-    private PAGE = PAGE;
-    private POST = POST;
+        private appRoutingService: AppRoutingService,
+        private appService: AppService) {}
 
     /*
      * Displayed in the main toolbar.

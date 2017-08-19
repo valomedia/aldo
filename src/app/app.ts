@@ -1,19 +1,10 @@
 
 /*
- * Things that are useful throughout the app.
+ * A few type aliases, that do not fit anywhere else.
  */
 
 /*
- * To get rid of these irritating extra quote marks.
- */
-export const PAGE = 'page';
-export const POST = 'post';
-export const PRIMARY = 'primary';
-export const ACCENT = 'accent';
-export const WARN = 'warn';
-
-/*
- * A few useful type aliases.
+ * A Ressource to be uploaded, either as a File, or as an url.
  */
 export type Ressource = string|File;
 

@@ -9,7 +9,8 @@ import {
 
 import {TdFileInputComponent} from '@covalent/core';
 
-import {PRIMARY, WARN, Ressource} from './app';
+import {Ressource} from './app';
+import {AppService} from './app.service';
 
 /*
  * The Component used to select a file.
@@ -24,8 +25,8 @@ import {PRIMARY, WARN, Ressource} from './app';
     styleUrls: ['./file.component.css']
 })
 export class FileComponent {
-    private PRIMARY = PRIMARY;
-    private WARN = WARN;
+    constructor(private appService: AppService) {}
+
     private _link = '';
     private _ressource?: Ressource|null;
     private _file?: File;
