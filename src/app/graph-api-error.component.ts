@@ -39,10 +39,12 @@ export function showGraphApiError(
     mdSnackBar: MdSnackBar,
     graphApiError: GraphApiError
 ) {
-    if (document.getElementsByTagName('graph-api-error').length) { return; }
-    let mdSnackBarRef = mdSnackBar.openFromComponent(GraphApiErrorComponent);
-    mdSnackBarRef.instance.graphApiError = graphApiError;
-    mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+    if (!document.getElementsByTagName('graph-api-error').length) {
+        const mdSnackBarRef = mdSnackBar.openFromComponent(
+            GraphApiErrorComponent);
+        mdSnackBarRef.instance.graphApiError = graphApiError;
+        mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+    }
     return graphApiError;
 }
 
