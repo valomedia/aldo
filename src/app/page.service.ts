@@ -25,7 +25,7 @@ export class PageService {
             path,
             HttpMethod.Get,
             {fields: Object.keys(DUMMY_PAGE_TYPE)},
-            Page);
+            Page) as Observable<Page>;
     }
 
     /*

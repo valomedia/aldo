@@ -28,7 +28,7 @@ export class CommentService {
                 {fields: Object.keys(DUMMY_COMMENT_TYPE)},
                 Comment)
             .first()
-            .toPromise();
+            .toPromise() as Promise<Comment>;
     }
 
     /*
@@ -43,7 +43,7 @@ export class CommentService {
             id + '/comments',
             HttpMethod.Get,
             {fields: Object.keys(DUMMY_COMMENT_TYPE)},
-            Comment);
+            Comment) as Observable<GraphApiResponse<Comment>>;
     }
 }
 

@@ -33,7 +33,7 @@ export class PostService {
                 include_hidden: includeHidden,
                 is_published: isPublished
             },
-            Post);
+            Post) as Observable<GraphApiResponse<Post>>;
     }
 
     /*
@@ -47,7 +47,7 @@ export class PostService {
                 {fields: Object.keys(DUMMY_POST_TYPE)},
                     Post)
             .first()
-            .toPromise();
+            .toPromise() as Promise<Post>;
     }
 
     /*

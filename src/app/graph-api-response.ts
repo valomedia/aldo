@@ -40,7 +40,7 @@ export class GraphApiResponse<T> extends Expandable<T> {
     /*
      * Filler, to make the typechecker happy.
      */
-    next() {
+    next(): Observable<Expandable<T>> {
         return Observable.empty();
     }
 }

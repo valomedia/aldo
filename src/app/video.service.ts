@@ -25,7 +25,7 @@ export class VideoService {
                 {fields: Object.keys(DUMMY_VIDEO_TYPE)},
                 Video)
             .first()
-            .toPromise();
+            .toPromise() as Promise<Video>;
     }
 }
 
