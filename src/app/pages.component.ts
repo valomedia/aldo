@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {MdSnackBar} from '@angular/material';
 
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
+import {showGraphApiError} from './graph-api-error.component';
 
 /*
  * The Component showing the list of pages.
@@ -11,39 +13,43 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'pages',
     template: `
-        <div>
-            <h2>Seiten</h2>
-            <ul class='pages'>
-                <a *ngFor='let page of pages' routerLink='/page/{{page.id}}'>
-                    <li>
-                        <span class='badge'>{{page.fan_count}}</span>
-                        {{page.name}}
-                    </li>
-                </a>
-            </ul>
-        </div>
-        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
-    `
+        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
+        <md-nav-list>
+            <a
+                    md-list-item
+                    *ngFor='let page of pages'
+                    [appLink]='{page: page.id}'>
+                {{page.name}}
+            </a>
+        </md-nav-list>
+    `,
+    styleUrls: ['dist/pages.component.css']
 })
 export class PagesComponent implements OnInit {
-    constructor(private pageService: PageService) {};
+    constructor(
+        private pageService: PageService,
+        private mdSnackBar: MdSnackBar) {};
+
+    loaded = false;
 
     /*
      * All pages of the user.
      */
-    pages: Page[] = [];
+    pages: Page[];
 
     /*
-     * The error, if an error occurs.
+     * The error that occured, if any.
      */
     graphApiError: GraphApiError;
 
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
+            .toArray()
+            .finally(() => this.loaded = true)
             .subscribe(
-                page => this.pages.push(page),
-                err => this.graphApiError = err);
+                pages => this.pages = pages,
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 

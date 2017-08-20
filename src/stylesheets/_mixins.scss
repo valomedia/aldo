@@ -1,0 +1,22 @@
+
+/*
+ * Mixins used throughout.
+ *
+ * This defines @mixin-rules used in multiple stylesheets.  This is imported in 
+ * all stylesheets, so importing it should not automatically generate any CSS.
+ */
+
+@mixin box-sizing($x) {
+    -webkit-box-sizing: $x;
+    -moz-box-sizing: $x;
+    -ms-box-sizing: $x;
+    box-sizing: $x;
+}
+
+@mixin transform($x) {
+    -webkit-transform: $x;
+    -moz-transform: $x;
+    -ms-transform: $x;
+    transform: $x;
+}
+

@@ -5,118 +5,208 @@
  * This includes all styles that fit nowhere else.
  */
 
-*, *:after, *:before {
-    @include box-sizing(border-box);
-}
-
-[class*='col-'] {
-    float: left;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-[class*='col-']:last-of-type {
-    padding-right: 0;
-}
-
 a {
     text-decoration: none;
+    cursor: pointer;
+}
+
+blockquote {
+    margin-left: 18px;
+    padding-left: 18px;
+    border-left: 4px solid $primary-bg;
+}
+
+blockquote.accent {
+    border-left-color: $accent-bg;
 }
 
 body {
-    color: $body-fg;
-    background-color: $body-bg;
-}
-
-button {
-    @include shade($primary-palette, $primary-medium-shade);
-    margin-top: 20px;
-    font-family: Arial;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-}
-
-button.warn {
-    @include shade($warn-palette, $warn-medium-shade);
-}
-
-button:hover {
-    @include shade($primary-palette, $primary-dark-shade);
-}
-
-button.warn:hover {
-    @include shade($warn-palette, $warn-dark-shade);
-}
-
-button:disabled {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: auto;
-}
-
-button.warn:disabled {
-    @include shade($warn-palette, $warn-light-shade);
-}
-
-h1 {
-    @include shade($primary-palette, $primary-medium-shade);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
-    padding: 1em;
-}
-
-h2 {
-    font-size: 2em;
-}
-
-h3 {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-h4 {
-    position: relative;
-}
-
-input {
-    height: 2em;
-    font-size: 1em;
-    padding-left: .4em;
-}
-
-nav {
-    float: right;
-
-    a {
-        @include shade($accent-palette, $accent-medium-shade);
-        padding: 5px 10px;
-        text-decoration: none;
-        margin-top: 10px;
-        display: inline-block;
-        border-radius: 4px;
-    }
-
-    a:hover {
-        @include shade($accent-palette, $accent-light-shade);
-    }
-}
-
-.col-1-4 {
-    width: 25%;
-}
-
-.grid {
     margin: 0;
+    color: black;
+    background-color: white;
+    word-wrap: break-word;
 }
 
-.grid-pad {
-    padding: 10px 0;
+button, .button {
+    margin: 6px 8px!important;
+    padding: 0 8px!important;
 }
 
-.grid-pad > [class*='col-']:last-of-type {
-    padding-right: 20px;
+img {
+    vertical-align: top;
+}
+
+md-dialog-actions, .app-snackbar-actions {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+md-dialog-container {
+    margin: auto;
+}
+
+md-icon {
+    vertical-align: middle;
+}
+
+md-input-container {
+    width: 100%;
+}
+
+md-sidenav-container > * {
+    display: flex!important;
+    flex-direction: column;
+    height: 100vh!important;
+}
+
+nav, aside, main {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+md-spinner {
+    margin: auto;
+}
+
+md-grid-tile {
+    @include shade($primary-palette, $primary-medium-shade);
+    cursor: pointer;
+    a { color: $primary-fg; }
+}
+
+md-grid-tile:hover {
+    @include shade($primary-palette, $primary-light-shade);
+    a { color: $primary-light-fg; }
+}
+
+md-toolbar {
+    @include shade($primary-palette, $primary-medium-shade);
+    button, .button { color: white!important; }
+}
+
+profile .mat-card-header-text {
+    // This is what separates the men from the boys.
+    min-width: 0;
+}
+
+profile .mat-card-header-text > md-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+video {
+    width: 100%;
+    object-fit: cover;
+}
+
+[app-content] > div,
+.app-toolbar-title,
+h1 > small > span,
+h1 > span,
+md-card,
+md-card-content,
+md-card-footer > * {
+    @extend .pad;
+}
+
+[app-content] {
+    margin: auto;
+    margin-top: 0;
+    max-width: 1600px;
+    width: 100%;
+}
+
+[app-content] .positioning-anchor * {
+    pointer-events: all;
+}
+
+[md-button] {
+    text-transform: uppercase;
+}
+
+snack-bar-container {
+    color: white;
+}
+
+.app-action {
+    @extend .pad;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-toolbar-filler {
+    flex: 1 1 auto;
+}
+
+.clear, page div {
+    clear: both;
+}
+
+.dummy-input {
+    height: 0;
+    opacity: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-2-cols {
+    width: 100% * 2 / 12;
+}
+
+.flex-3-cols {
+    width: 100% * 3 / 12;
+}
+
+.flex-4-cols {
+    width: 100% * 4 / 12;
+}
+
+.flex-5-cols {
+    width: 100% * 5 / 12;
+}
+
+.flex-6-cols {
+    width: 100% * 6 / 12;
+}
+
+.flex-7-cols {
+    width: 100% * 7 / 12;
+}
+
+.flex-8-cols {
+    width: 100% * 8 / 12;
+}
+
+.flex-9-cols {
+    width: 100% * 9 / 12;
+}
+
+.flex-10-cols {
+    width: 100% * 10 / 12;
 }
 
 .hidden {
@@ -127,55 +217,59 @@ nav {
     opacity: 0;
 }
 
-.pages {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-
-    li {
-        @include shade($primary-palette, $primary-medium-shade);
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        margin: .5em;
-        border-radius: 4px;
-    }
-
-    li:hover {
-        @include shade($primary-palette, $primary-dark-shade);
-        left: .1em;
-    }
-
-    .text {
-        position: relative;
-        top: -3px;
-    }
-
-    .badge {
-        @include shade($accent-palette, $accent-dark-shade);
-        display: inline-block;
-        font-size: small;
-        padding: 0.8em 0.7em;
-        left: -1px;
-        top: -4px;
-        margin-right: .8em;
-        border-radius: 4px 0 0 4px;
-    }
+.mat-sidenav-content {
+    overflow: hidden;
 }
 
-.module {
-    @include shade($primary-palette, $primary-medium-shade);
-    padding: 20px;
-    text-align: center;
-    max-height: 120px;
-    min-width: 120px;
-    border-radius: 2px;
+.pad {
+    margin: 24px;
 }
 
-.module:hover {
-    @include shade($primary-palette, $primary-light-shade);
-    cursor: pointer;
+.picture {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -24px;
+    margin-bottom: 24px;
+}
+
+.picture img {
+    width: 100%;
+}
+
+.text-accent {
+    color: $accent-bg;
+}
+
+.text-primary {
+    color: $primary-bg;
+}
+
+.text-warn {
+    color: $warn-bg;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+#aside {
+    width: 600px;
+}
+
+#displacer-target {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#displacer-target > * {
+    position: absolute;
+}
+
+#nav {
+    width: 480px;
 }
 
 #preload_content {
@@ -183,20 +277,83 @@ nav {
     margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-    .module {
-        font-size: 10px;
-        max-height: 75px;
-    }
-}
-
-@media (max-width: 1024px) {
+/*
+ * All mobile devices.
+ */
+@media (max-width: 1263px) {
     .grid {
         margin: 0;
     }
+}
 
-    .module {
-        min-width: 60px;
+/*
+ * All handsets.
+ */
+@media (max-width: 959px) and (max-height: 599px), (max-width: 599px) {
+    .pad {
+        margin: 16px;
+    }
+
+    .picture {
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-top: -16px;
+        margin-bottom: 16px;
+    }
+}
+
+/*
+ * Handsets and small tablets in portrait mode, small to medium handsets in 
+ * landscape.
+ */
+@media (max-width: 719px) {
+    #preload_content {
+        width: 95%;
+    }
+}
+
+/*
+ * Everything except the smallest devices in landscape mode and portrait mode 
+ * handsets.
+ */
+@media (min-width: 600px) {
+    #aside .back-btn {
+        display: none;
+    }
+}
+
+/*
+ * Handsets in portrait mode, small handsets in landscape mode.
+ */
+@media (max-width: 599px) {
+    #aside {
+        width: 100%;
+    }
+
+    #aside .close-btn {
+        display: none;
+    }
+}
+
+/*
+ * Everything excapt smaller portrait mode devices.
+ */
+@media (min-width: 480px) {
+    h1 > small {
+        float: right;
+    }
+
+    .mobile-only, h1 br {
+        display: none;
+    }
+}
+
+/*
+ * Small and medium handsets in portrait mode.
+ */
+@media (max-width: 479px) {
+    #nav {
+        width: 80%;
     }
 }
 

@@ -1,5 +1,22 @@
 import {NgModule} from '@angular/core';
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {
+    MdButtonModule,
+    MdCheckboxModule,
+    MdToolbarModule,
+    MdSidenavModule,
+    MdListModule,
+    MdGridListModule,
+    MdMenuModule,
+    MdSlideToggleModule,
+    MdProgressSpinnerModule,
+    MdDialogModule,
+    MdSnackBarModule,
+    MdIconModule,
+    MdTooltipModule,
+    MdInputModule,
+    MdTabsModule,
+    MdCardModule
+} from '@angular/material';
 
 /*
  * The root module for the material modules.
@@ -8,11 +25,39 @@ import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 @NgModule({
     imports: [
         MdButtonModule,
-        MdCheckboxModule
+        MdCheckboxModule,
+        MdToolbarModule,
+        MdSidenavModule,
+        MdListModule,
+        MdGridListModule,
+        MdMenuModule,
+        MdSlideToggleModule,
+        MdProgressSpinnerModule,
+        MdDialogModule,
+        MdSnackBarModule,
+        MdIconModule,
+        MdTooltipModule,
+        MdInputModule,
+        MdTabsModule,
+        MdCardModule
     ],
     exports: [
         MdButtonModule,
-        MdCheckboxModule
+        MdCheckboxModule,
+        MdToolbarModule,
+        MdSidenavModule,
+        MdListModule,
+        MdGridListModule,
+        MdMenuModule,
+        MdSlideToggleModule,
+        MdProgressSpinnerModule,
+        MdDialogModule,
+        MdSnackBarModule,
+        MdIconModule,
+        MdTooltipModule,
+        MdInputModule,
+        MdTabsModule,
+        MdCardModule
     ]
 })
 export class AppUxModule {}

@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the ProfileComponent.
+ *
+ * This is a style locally applied to ProfileComponent.  All styles specific to 
+ * the ProfileComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _profile.component partial, to keep things easier to restructure.
+ */
+
+@import 'mixins';
+@import 'colors';
+@import '_profile.component';
+

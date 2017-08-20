@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {MdSnackBar} from '@angular/material';
+
+import 'rxjs/add/operator/toArray';
 
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
+import {AppUxService} from './app-ux.service';
+import {showGraphApiError} from './graph-api-error.component';
 
 /*
  * The Component showing the dashboard.
@@ -11,43 +16,47 @@ import {GraphApiError} from './graph-api-error';
 @Component({
     selector: 'dashboard',
     template: `
-        <h2>Dashboard</h2>
-        <h3>Deine Seiten mit den meisten Likes</h3>
-        <div class='grid grid-pad'>
-            <a
-                    *ngFor='let page of biggestPages'
-                    routerLink='/page/{{page.id}}'
-                    class='col-1-4'>
-                <div class='module page'>
-                    <h4>{{page.name}}</h4>
-                </div>
-            </a>
-        </div>
-        <graph-api-error [graphApiError]='graphApiError'></graph-api-error>
-    `
+        <h1>Dashboard</h1>
+        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
+        <md-grid-list
+                [cols]='appUxService.cols / 3 | ceil'
+                [gutterSize]='appUxService.gutterSize'
+                rowHeight='2:1'>
+            <md-grid-tile
+                    *ngFor='let page of pages'
+                    [appLink]='{page: page.id}'>
+                {{page.name}}
+            </md-grid-tile>
+        </md-grid-list>
+    `,
+    styleUrls: ['dist/dashboard.component.css']
 })
 export class DashboardComponent {
-    constructor(private pageService: PageService) {}
+    constructor(
+        private pageService: PageService,
+        private appUxService: AppUxService,
+        private mdSnackBar: MdSnackBar) {}
+
+    loaded = false;
 
     /*
-     * The four pages with the most likes.
+     * All pages the user has access to.
      */
-    biggestPages: Page[] = [];
+    pages: Page[];
 
     /*
-     * The error, if an error occurs.
+     * The error that occured, if any.
      */
     graphApiError: GraphApiError;
 
     ngOnInit() {
         this.pageService
-            .getPages()
+            .pages()
+            .toArray()
+            .finally(() => this.loaded = true)
             .subscribe(
-                page => this.biggestPages = this.biggestPages
-                    .concat([page])
-                    .sort((a,b) => b.fan_count - a.fan_count)
-                    .slice(0, 4),
-                err => this.graphApiError = err);
+                pages => this.pages = pages,
+                err => showGraphApiError(this.mdSnackBar, err));
     }
 }
 

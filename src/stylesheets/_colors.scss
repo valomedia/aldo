@@ -115,7 +115,6 @@ $warn-light-shade: 50;
 $warn-dark-shade: 900;
 
 // The actual background colors, for easy access.
-$body-bg: black;
 $primary-bg: map-get($primary-palette, $primary-medium-shade);
 $primary-light-bg: map-get($primary-palette, $primary-light-shade);
 $primary-dark-bg: map-get($primary-palette, $primary-dark-shade);
@@ -127,7 +126,6 @@ $warn-light-bg: map-get($warn-palette, $warn-light-shade);
 $warn-dark-bg: mag-get($warn-palette, $warn-dark-shade);
 
 // The actual foreground colors, for easy access.
-$body-fg: rgba(white, 0.87);
 $primary-fg: map-get(
     map-get($primary-palette, contrast),
     $primary-medium-shade);
@@ -158,14 +156,14 @@ $warn-dark-bg: map-get(
 
 // Set foreground and background from a palette and shade.
 @mixin shade($palette, $shade) {
-    color: map-get(map-get($palette, contrast), $shade);
-    background-color: map-get($palette, $shade);
+    color: map-get(map-get($palette, contrast), $shade) !important;
+    background-color: map-get($palette, $shade) !important;
 }
 
 // Settings for @angular/material.
 @mixin colors() {
     @include angular-material-theme(
-        mat-dark-theme(
+        mat-light-theme(
             mat-palette(
                 $primary-palette,
                 $primary-medium-shade,
@@ -181,5 +179,25 @@ $warn-dark-bg: map-get(
                 $warn-medium-shade,
                 $warn-light-shade,
                 $warn-dark-shade)));
+
+    .dark {
+        @include angular-material-theme(
+            mat-dark-theme(
+                mat-palette(
+                    $primary-palette,
+                    $primary-medium-shade,
+                    $primary-light-shade,
+                    $primary-dark-shade),
+                mat-palette(
+                    $accent-palette,
+                    $accent-medium-shade,
+                    $accent-light-shade,
+                    $accent-dark-shade),
+                mat-palette(
+                    $warn-palette,
+                    $warn-medium-shade,
+                    $warn-light-shade,
+                    $warn-dark-shade)));
+    }
 }
 

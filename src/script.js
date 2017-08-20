@@ -1,7 +1,10 @@
+'use strict';
 
 /*
  * Bootstrap script.
  */
+
+var conf = this.conf || {};
 
 // Inject permissions into Aldo config.
 conf.perms = {
@@ -21,11 +24,56 @@ conf.perms = {
     }
 }
 
+// Path to the Facebook GraphAPI JavaScript SDK.
+conf.fb.sdkUrl = '//connect.facebook.net/de_DE/sdk/debug.js';
+
+// Calculate Facebook GraphAPI base url for direct requests withouth the jsSDK.
+conf.fb.apiUrl = 'https://graph.facebook.com/' + conf.fb.version;
+
 // Set up the retry button.
 window.onload = function() {
+
+    // Remove the loader.
+    var fadeLoader = function() {
+        document.getElementById('preloader').className = 'fade';
+
+        setTimeout(function() {
+            document.getElementById('preloader').className = 'fade invisible';
+        }, 500);
+
+        setTimeout(function() {
+            document.getElementById('preloader').className = 'hidden';
+        }, 1000);
+    }
+
+    // JavaScript is working, replace the no_script notice with the preloader.
+    document.getElementById('preloader').className = '';
+    document.getElementById('no_script').className = '';
+    document.getElementById('login_notice').className = '';
+    document.getElementById('retry_auth_btn').className = '';
+
+    // Arm the reload button.
     document.getElementById('retry_auth_btn').onclick = function() {
         window.location.reload();
     };
+
+    // Check if the device is supported.
+    if (window.screen.width < 400 || window.screen.height < 400) {
+        document.getElementById('login_issue').classList.add('hidden');
+        document.getElementById('fatal_error').classList.remove('hidden');
+        document.getElementById('screen_too_small').classList.remove('hidden');
+        fadeLoader();
+        return;
+    }
+
+    // Load the FBJSSDK.
+    var e = document.createElement('script');
+    e.src = conf.fb.sdkUrl;
+    document.body.appendChild(e);
+
+    // There is no way to tell when the Facebook-popup is actually loaded, so we 
+    // just give it plenty of time, before fading the loading screen.
+    setTimeout(fadeLoader, 3000);
 };
 
 /*
@@ -36,10 +84,10 @@ window.onload = function() {
 window.fbAsyncInit = function() {
     // Initialize the FacebookSDK with the correct parameters for Aldo.
     FB.init({
-        appId: conf.fbAppID,
+        appId: conf.fb.appID,
         autoLogAppEvents: true,
         xfbml: false,
-        version: 'v2.9'
+        version: conf.fb.version
     });
     FB.AppEvents.logPageView();
 
@@ -108,25 +156,4 @@ window.fbAsyncInit = function() {
         }
     }, {scope: Object.keys(conf.perms)});
 };
-
-// Initialize FacebookSDK and start Aldo.
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = '//connect.facebook.net/de_DE/sdk/debug.js';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-// Remove the loader.
-setTimeout(function() {
-    document.getElementById('preloader').className = 'fade';
-}, 2000);
-setTimeout(function() {
-    document.getElementById('preloader').className = 'fade invisible';
-}, 2250);
-setTimeout(function() {
-    document.getElementById('preloader').className = 'hidden';
-}, 2500);
 

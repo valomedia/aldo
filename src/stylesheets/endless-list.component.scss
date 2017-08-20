@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the EndlessListComponent.
+ *
+ * This is a style locally applied to EndlessListComponent.  All styles specific 
+ * to the EndlessListComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _endless-list.component partial, to keep things easier to restructure.
+ */
+
+@import 'mixins';
+@import 'colors';
+@import '_endless-list.component';
+
