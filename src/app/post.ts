@@ -7,8 +7,8 @@ import {
 } from './graph-api-object';
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
-import {FbService} from './fb.service';
 import {CommentService} from './comment.service';
+import {UtilService} from './util.service';
 
 /*
  * Classes related to Facebook posts.
@@ -64,16 +64,14 @@ export class Post extends GraphApiObject {
             to: (kwargs.to || []).map(profileType => new Profile(profileType))
         };
         super(kwargs);
-        const reflectiveInjector = ReflectiveInjector
-            .resolveAndCreate([
-                CommentService,
-                VideoService,
-                FbService
-            ]);
-        this.videoService = reflectiveInjector.get(VideoService);
-        this.commentService = reflectiveInjector.get(CommentService);
+        this.utilService = ReflectiveInjector
+            .resolveAndCreate([UtilService])
+            .get(UtilService);
+        this.videoService = this.utilService.inject(VideoService);
+        this.commentService = this.utilService.inject(CommentService);
     }
 
+    private utilService: UtilService;
     private videoService: VideoService;
     private commentService: CommentService;
 
