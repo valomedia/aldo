@@ -8,3 +8,8 @@
  */
 export type Ressource = string|File;
 
+/*
+ * A JSON primitive.
+ */
+export type Primitive = null|boolean|number|string;
+

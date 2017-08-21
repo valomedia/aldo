@@ -21,7 +21,7 @@ export class GraphApiErrorComponent implements OnInit {
     mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
 
     ngOnInit() {
-        console.error(this.graphApiError);
+        console.error("Error encountered:", this.graphApiError);
     }
 
     /*

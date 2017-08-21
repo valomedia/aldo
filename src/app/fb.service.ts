@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/publishReplay';
 
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse, GraphApiResponseType} from './graph-api-response';
 import {GraphApiObject, GraphApiObjectType} from './graph-api-object';
+import {ConfService} from './conf.service';
+import {Primitive} from './app';
 
 /*
  * The Service providing the Facebook API.
@@ -72,9 +77,9 @@ declare var FB: {
     ui: (params: any, cb: (response: any) => void) => void;
 
     // Facebook login methods.
-    getLoginStatus: (cb: (Session) => void) => void;
+    getLoginStatus: (cb: (res: Session) => void) => void;
     login: (
-        cb?: (Session) => void,
+        cb?: (res: Session) => void,
         opts?: {
             auth_type?: AuthType,
             scope?: string,
@@ -82,10 +87,15 @@ declare var FB: {
             enable_profile_selector?: boolean,
             profile_selector_ids: string
         }) => void;
-    logout: (cb: (Session) => void) => void;
+    logout: (cb: (res: Session) => void) => void;
     getAuthResponse: () => AuthResponse|null;
 };
 
+/*
+ * The request cache.
+ *
+ * Might turn this into a middleware at some point.
+ */
 let cache = {};
 
 /*
@@ -95,22 +105,19 @@ let cache = {};
  * instead of accepting a callback.
  */
 function api(path: string, method: HttpMethod, params: any): Promise<any> {
-    // ID for cacheing.
-    const id = path + ':' + method + ':' + btoa(JSON.stringify(params));
-
-    return cache[id] || (cache[id] = new Promise((resolve, reject) =>
+    return new Promise((resolve, reject) =>
         FB.api(
             path,
             HttpMethod[method],
             params,
-            (res) =>
-                res.error
-                    ? reject(new GraphApiError(res.error))
-                    : resolve(res))));
+            (res) => res.error
+                ? reject(new GraphApiError(res.error))
+                : resolve(res)));
 }
 
 @Injectable()
 export class FbService {
+    constructor(private http: Http, private confService: ConfService) {}
 
     /*
      * Clear the cache.
@@ -140,36 +147,94 @@ export class FbService {
     api(
         path: string,
         method = HttpMethod.Get,
-        params: any = {},
+        params: {[id: string]: Primitive|Primitive[]|File} = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ): Observable<GraphApiResponse<GraphApiObject>> {
-        params.fields
-            && (params.fields
-                = params.fields.map((k: string) => k + '.summary(true)'));
-        return Observable
-            .fromPromise(api(path, method, params))
-            .do(console.log)
+        // ID for cacheing.
+        const id = path + ':' + btoa(JSON.stringify(params));
+
+        if (cache[id]) { return cache[id]; }
+
+        const result = this.http
+            .post(
+                this.confService.fb[
+                    Object
+                        .keys(params)
+                        .map(k => params[k])
+                        .filter(v => v instanceof File)
+                        .map((f: File) => f.type)
+                        .filter(type => type.split('/')[0] == 'video')
+                        .length
+                        ? 'apiUrl'
+                        : 'videoUploadUrl'
+                ]
+                    + '/'
+                    + path,
+                Object
+                    .keys(params)
+                    .map(k => [
+                        params[k] instanceof File ? 'source' : k,
+                        params[k]
+                    ])
+                    .concat([[
+                        'fields',
+                        (params['fields'] as string[] || [])
+                            .map(field => field + '.summary(true)')
+                    ]] as [string, Primitive|Primitive[]|File][])
+                    .map(([k, v]: [string, Primitive|Primitive[]|File]):
+                        [string, Primitive|File] => [
+                            k,
+                            v instanceof Array
+                                ? (v as Primitive[]).join(',')
+                                : (v as Primitive|File)
+                        ])
+                    .concat([[
+                        'method',
+                        HttpMethod[method].toUpperCase()
+                    ]] as [string, Primitive|File][])
+                    .filter(([_, v]) => v)
+                    .map(([k, v]: [string, Primitive|File]) => [
+                        k,
+                        v instanceof File ? v : '' + v
+                    ])
+                    .concat([[
+                        'access_token',
+                        params['access_token']
+                            || FB.getAuthResponse().accessToken
+                    ]] as [string, string|File][])
+                    .map(x => console.log(x) || x)
+                    .reduce(
+                        (a, e) => (a.set as any)(...e) || a,
+                        new FormData()))
+            .catch(err => Observable.of(err))
+            .map(res => res.status ? res.json() : {error: {code: 1}})
+            .do(body => {
+                console[body.error ? 'warn' : 'log']('GraphAPI:', body);
+                if (body.error) { throw new GraphApiError(body.error); }
+            })
             .map((res: {data?: any}): GraphApiResponseType<any> =>
                 (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
+            .publishReplay(1)
+            .refCount()
             .map(res => ({
                 ...res,
-                data: res.data.map(i =>
-                    T ? new T(i) : i)
+                data: res.data.map(e => T ? new T(e) : e)
             }))
-            .map(res =>
-                new GraphApiResponse(
-                    res,
-                    () =>
-                        res.paging && res.paging.next
-                            ? this.api(
-                                path,
-                                method,
-                                {
-                                    ...params,
-                                    after: res.paging.cursors.after
-                                },
-                                T)
-                            : Observable.empty()));
+            .first()
+            .map(res => new GraphApiResponse(
+                res,
+                () => res.paging && res.paging.next
+                    ? this.api(
+                        path,
+                        method,
+                        {
+                            ...params,
+                            after: res.paging.cursors.after
+                        },
+                        T)
+                    : Observable.empty()));
+        if (method == HttpMethod.Get) { cache[id] = result; }
+        return result;
     }
 
     /*

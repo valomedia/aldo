@@ -56,11 +56,6 @@ export class PostDialogComponent {
      * Post to a given String to this Page.
      */
     post() {
-        // TODO FIXME
-        if (typeof this.ressource != 'string') {
-            return alert('Not implemented');
-        }
-
         this.mdDialogRef.close(
             this.pageService.postMsg(
                 this.page,
