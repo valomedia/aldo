@@ -5,16 +5,13 @@ import {Location} from '@angular/common';
 import 'rxjs/add/operator/publishBehavior';
 import 'rxjs/add/operator/map';
 
+import {PARAMS} from './app-routing';
+
 /*
  * The service providing routing for the app.
  *
  * This suits my usecase better than Angular's router.
  */
-
-/*
- * The route parameter names in the order the parameters are encoded in the url.
- */
-export const PARAMS = ['page', 'post'];
 
 @Injectable()
 export class AppRoutingService {
