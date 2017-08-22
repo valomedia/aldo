@@ -5,9 +5,7 @@
         [cols]='appUxService.cols / 3 | ceil'
         [gutterSize]='appUxService.gutterSize'
         rowHeight='2:1'>
-    <md-grid-tile
-            *ngFor='let page of pages'
-            [appLink]='{page: page.id}'>
+    <md-grid-tile *ngFor='let page of pages' [appLink]='{profile: page.id}'>
         {{page.name}}
     </md-grid-tile>
 </md-grid-list>

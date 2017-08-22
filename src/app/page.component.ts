@@ -19,6 +19,7 @@ import {Post} from './post';
 import {GraphApiResponse} from './graph-api-response';
 import {AppRoutingComponent} from './app-routing.component';
 import {AppRoutingService} from './app-routing.service';
+import {AppService} from './app.service';
 
 /*
  * The Component showing a single page in detail.
@@ -36,6 +37,7 @@ export class PageComponent extends AppRoutingComponent {
         private mdSnackBar: MdSnackBar,
         private appUxService: AppUxService,
         private postService: PostService,
+        private appService: AppService,
         appRoutingService: AppRoutingService
     ) {
         super(appRoutingService);
@@ -72,7 +74,8 @@ export class PageComponent extends AppRoutingComponent {
     @Input()
     set params(params: Params) {
         this._loaded = this.loaded;
-        Observable.fromPromise(this.pageService.page(params['page']))
+        Observable
+            .fromPromise(this.pageService.page(params[this.appService.PROFILE]))
             .finally(() => this._loaded = true)
             .subscribe(
                 (page: Page) => {

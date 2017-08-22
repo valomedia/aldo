@@ -17,6 +17,7 @@ import {GraphApiResponse} from './graph-api-response';
 import {Comment} from './comment';
 import {AppRoutingComponent} from './app-routing.component';
 import {AppRoutingService} from './app-routing.service';
+import {AppService} from './app.service';
 
 /*
  * The Component showing a single post in detail.
@@ -32,6 +33,7 @@ export class PostComponent extends AppRoutingComponent {
         private postService: PostService,
         private mdSnackBar: MdSnackBar,
         private videoService: VideoService,
+        private appService: AppService,
         appRoutingService: AppRoutingService
     ) {
         super(appRoutingService);
@@ -65,7 +67,8 @@ export class PostComponent extends AppRoutingComponent {
     @Input()
     set params(params: Params) {
         this._loaded = this.loaded;
-        Observable.fromPromise(this.postService.post(params['post']))
+        Observable
+            .fromPromise(this.postService.post(params[this.appService.POST]))
             .finally(() => this._loaded = true)
             .subscribe(
                 (post: Post) => {
