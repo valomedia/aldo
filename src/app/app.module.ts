@@ -47,6 +47,7 @@ import {FileComponent} from './file.component';
 import {ConfService} from './conf.service';
 import {AppService} from './app.service';
 import {UtilService} from './util.service';
+import {ProfileComponent} from './profile.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -88,7 +89,8 @@ import {UtilService} from './util.service';
         AppRoutingDirective,
         DummyComponent,
         AppLinkDirective,
-        FileComponent
+        FileComponent,
+        ProfileComponent
     ],
     bootstrap: [AppComponent],
     providers: [

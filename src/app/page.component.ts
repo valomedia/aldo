@@ -5,11 +5,9 @@ import {MdDialog, MdSnackBar} from '@angular/material';
 import 'rxjs/add/operator/concatAll';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/do';
 
 import {Page} from './page';
-import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
 import {PostDialogComponent} from './post-dialog.component';
 import {showGraphApiError} from './graph-api-error.component';
@@ -17,8 +15,6 @@ import {AppUxService} from './app-ux.service';
 import {PostService} from './post.service';
 import {Post} from './post';
 import {GraphApiResponse} from './graph-api-response';
-import {AppRoutingComponent} from './app-routing.component';
-import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
 
 /*
@@ -30,23 +26,15 @@ import {AppService} from './app.service';
     templateUrl: './_page.component.html',
     styleUrls: ['./page.component.css']
 })
-export class PageComponent extends AppRoutingComponent {
+export class PageComponent {
     constructor(
-        private pageService: PageService,
         private mdDialog: MdDialog,
         private mdSnackBar: MdSnackBar,
         private appUxService: AppUxService,
         private postService: PostService,
-        private appService: AppService,
-        appRoutingService: AppRoutingService
-    ) {
-        super(appRoutingService);
-    }
+        private appService: AppService) {}
 
-    /*
-     * The Page currently shown.
-     */
-    page: Page;
+    private _page: Page;
 
     /*
      * Posts by this Page.
@@ -63,31 +51,21 @@ export class PageComponent extends AppRoutingComponent {
      */
     newPosts = new Subject<Post>();
 
-    /*
-     * Whether the component is still loading.
-     */
-    private _loaded: boolean;
-
     @Input()
     loaded: boolean;
 
+    /*
+     * The Page currently shown.
+     */
     @Input()
-    set params(params: Params) {
-        this._loaded = this.loaded;
-        Observable
-            .fromPromise(this.pageService.page(params[this.appService.PAGE]))
-            .finally(() => this._loaded = true)
-            .subscribe(
-                (page: Page) => {
-                    this.page = page;
-                    this.posts = page.posts;
-                    this.tagged = page
-                        .tagged
-                        .concatMap((posts: GraphApiResponse<Post>) =>
-                            posts.expanded);
-                },
-                (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+    set page(page: Page) {
+        this._page = page;
+        this.posts = page.posts;
+        this.tagged = page.tagged.concatMap(
+            (posts: GraphApiResponse<Post>) => posts.expanded);
+    }
+    get page() {
+        return this._page;
     }
 
     /*
