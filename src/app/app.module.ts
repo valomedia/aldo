@@ -26,7 +26,7 @@ import {CustomRouteReuseStrategy} from './custom-route-reuse-strategy';
 import {MissingFeatureComponent} from './missing-feature.component';
 import {DisplacerComponent} from './displacer.component';
 import {DisplacerPortalDirective} from './displacer-portal.directive';
-import {ProfileComponent} from './profile.component';
+import {ProfileCardComponent} from './profile-card.component';
 import {PostComponent} from './post.component';
 import {LayoutComponent} from './layout.component';
 import {NavComponent} from './nav.component';
@@ -74,7 +74,7 @@ import {UtilService} from './util.service';
         MissingFeatureComponent,
         DisplacerComponent,
         DisplacerPortalDirective,
-        ProfileComponent,
+        ProfileCardComponent,
         PostComponent,
         LayoutComponent,
         NavComponent,

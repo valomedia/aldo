@@ -7,11 +7,11 @@ import {Profile} from './profile';
  */
 
 @Component({
-    selector: 'profile',
-    templateUrl: './_profile.component.html',
-    styleUrls: ['./profile.component.css']
+    selector: 'profile-card',
+    templateUrl: './_profile-card.component.html',
+    styleUrls: ['./profile-card.component.css']
 })
-export class ProfileComponent {
+export class ProfileCardComponent {
     @Input()
     profile: Profile;
 }

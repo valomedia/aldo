@@ -1,8 +1,7 @@
 <!-- HTML template for the PostsComponent -->
 <a *ngFor='let post of _posts' [appLink]='{post: post.id}'>
-    <md-card>
+    <profile-card [profile]='post.from'>
         <img *ngIf='post.picture' md-card-image [src]='post.picture'>
-        <profile [profile]='post.from'></profile>
         <md-card-content>
             <p>{{post.text}}</p>
         </md-card-content>
@@ -34,7 +33,7 @@
                 </p>
             </div>
         </md-card-footer>
-    </md-card>
+    </profile-card>
 </a>
 <md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
 
