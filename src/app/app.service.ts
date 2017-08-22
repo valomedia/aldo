@@ -6,8 +6,12 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AppService {
-    PAGE = 'profile';
     PROFILE = 'profile'
+    PAGE = 'profile';
+    USER = 'profile';
+    GROUP = 'profile';
+    EVENT = 'profile';
+    APPLICATON = 'profile';
     POST = 'post';
     PRIMARY = 'primary';
     ACCENT = 'accent';

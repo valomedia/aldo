@@ -75,7 +75,7 @@ export class PageComponent extends AppRoutingComponent {
     set params(params: Params) {
         this._loaded = this.loaded;
         Observable
-            .fromPromise(this.pageService.page(params[this.appService.PROFILE]))
+            .fromPromise(this.pageService.page(params[this.appService.PAGE]))
             .finally(() => this._loaded = true)
             .subscribe(
                 (page: Page) => {
