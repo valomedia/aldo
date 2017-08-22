@@ -27,7 +27,7 @@ declare var FB: {
     api: (
         path: string,
         method: string,
-        params: any,
+        params: {[id: string]: any},
         callback: (response: any) => void) => void;
     ui: (params: any, callback: (response: any) => void) => void;
 };
@@ -40,7 +40,11 @@ let cache = {};
  * This function wraps FB.api() to make it typesafe.  It also returns a Promise, 
  * instead of accepting a callback.
  */
-function api(path: string, method: HttpMethod, params: any): Promise<any> {
+function api(
+    path: string,
+     method: HttpMethod,
+     params: {[id: string]: any}
+): Promise<any> {
     // ID for cacheing.
     const id = path + ':' + method + ':' + btoa(JSON.stringify(params));
 
@@ -86,11 +90,12 @@ export class FbService {
     api(
         path: string,
         method = HttpMethod.Get,
-        params: any = {},
+        params: {[id: string]: any} = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ): Observable<GraphApiResponse<GraphApiObject>> {
         params.fields
-            && (params.fields = params.fields.map(k => k + '.summary(true)'));
+            && (params.fields = (params.fields as string[])
+                .map(k => k + '.summary(true)'));
         return Observable
             .fromPromise(api(path, method, params))
             .do(console.log)
@@ -129,7 +134,7 @@ export class FbService {
     call(
         path: string,
         method = HttpMethod.Get,
-        params = {},
+        params: {[id: string]: any} = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ) {
         return this.api(path, method, params, T).concatMap(res => res.expanded);
