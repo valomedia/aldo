@@ -8,6 +8,7 @@ import 'rxjs/add/operator/first';
 import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
+import {Ressource} from './app';
 
 /*
  * The Service providing the Pages.
@@ -49,7 +50,7 @@ export class PageService {
             page: Page,
             msg: string,
             contentType: ContentType,
-            link: string
+            link: Ressource
     ) {
         let result;
         switch (+contentType) {
