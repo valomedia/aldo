@@ -99,7 +99,7 @@ export class PageComponent extends AppRoutingComponent {
         mdDialogRef
             .afterClosed()
             .filter(Boolean)
-            .do(() => 
+            .do(() =>
                 this.mdSnackBar.open(
                     "Post wird erstellt...",
                     "",

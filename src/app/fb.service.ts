@@ -202,7 +202,6 @@ export class FbService {
                         params['access_token']
                             || FB.getAuthResponse().accessToken
                     ]] as [string, string|File][])
-                    .map(x => console.log(x) || x)
                     .reduce(
                         (a, e) => (a.set as any)(...e) || a,
                         new FormData()))
