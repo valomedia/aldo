@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 
+import {PARAMS} from './app-routing';
+
 /*
  * The Service providing useful global constants.
  */
 
 @Injectable()
 export class AppService {
+    PARAMS = PARAMS;
     PROFILE = 'profile'
     PAGE = 'profile';
     USER = 'profile';

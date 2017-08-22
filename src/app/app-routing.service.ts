@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import 'rxjs/add/operator/publishBehavior';
 import 'rxjs/add/operator/map';
 
-import {PARAMS} from './app-routing';
+import {AppService} from './app.service';
 
 /*
  * The service providing routing for the app.
@@ -17,7 +17,8 @@ import {PARAMS} from './app-routing';
 export class AppRoutingService {
     constructor(
         private router: Router,
-        private location: Location) {}
+        private location: Location,
+        private appService: AppService) {}
 
     events = this.router
         .events
@@ -33,8 +34,9 @@ export class AppRoutingService {
         return path
             .split('/')
             .slice(1)
-            .map((v, i) =>
-                PARAMS[i] ? (v ? {[PARAMS[i]]: v} : {}) : null)
+            .map((v, i) => this.appService.PARAMS[i]
+                    ? (v ? {[this.appService.PARAMS[i]]: v} : {})
+                    : null)
             .filter(param => !param
                 || !Object.keys(param).length
                 || param[Object.keys(param)[0]] != '_')
@@ -57,7 +59,7 @@ export class AppRoutingService {
     set params(params: Params|null) {
         this.router.navigateByUrl(
             params
-                ? PARAMS
+                ? this.appService.PARAMS
                     .map(k =>
                         (params.hasOwnProperty(k) ? params[k] : this.params[k])
                             || '_')
@@ -75,7 +77,7 @@ export class AppRoutingService {
     refresh() {
         const params = this.params;
         this.router.navigateByUrl(
-            Array(PARAMS.length + 1).join('/_'),
+            Array(this.appService.PARAMS.length + 1).join('/_'),
             {skipLocationChange: true});
         setTimeout(() => this.params = params);
     }
