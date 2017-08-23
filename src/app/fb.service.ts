@@ -245,7 +245,7 @@ export class FbService {
      * of type T, whose constructor needs to be supplied as the magic last 
      * parameter, if none as provided the Object will be passed as parsed.
      */
-    call(
+    fetch(
         path: string,
         method = HttpMethod.Get,
         params = {},

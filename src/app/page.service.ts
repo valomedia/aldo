@@ -22,7 +22,7 @@ export class PageService {
      * Perform a GET-request for a Page on a given path.
      */
     get(path: string): Observable<Page> {
-        return this.fbService.call(
+        return this.fbService.fetch(
             path,
             HttpMethod.Get,
             {fields: Object.keys(DUMMY_PAGE_TYPE)},
@@ -55,7 +55,7 @@ export class PageService {
         let result;
         switch (+contentType) {
             case ContentType.Link:
-                result = this.fbService.call(
+                result = this.fbService.fetch(
                     page.id.toString() + '/feed',
                     HttpMethod.Post,
                     {
@@ -65,7 +65,7 @@ export class PageService {
                     });
                 break;
             case ContentType.Photo:
-                result = this.fbService.call(
+                result = this.fbService.fetch(
                     page.id.toString() + '/photos',
                     HttpMethod.Post,
                     {
@@ -75,7 +75,7 @@ export class PageService {
                     });
                 break;
            case ContentType.Video:
-                result = this.fbService.call(
+                result = this.fbService.fetch(
                     page.id.toString() + '/videos',
                     HttpMethod.Post,
                     {

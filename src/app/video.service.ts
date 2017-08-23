@@ -19,7 +19,7 @@ export class VideoService {
      */
     video(id: string): Promise<Video> {
         return this.fbService
-            .call(
+            .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_VIDEO_TYPE)},

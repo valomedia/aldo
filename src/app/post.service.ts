@@ -41,7 +41,7 @@ export class PostService {
      */
     post(id: string): Promise<Post> {
         return this.fbService
-            .call(
+            .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_POST_TYPE)},

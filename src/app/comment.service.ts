@@ -22,7 +22,7 @@ export class CommentService {
      */
     comment(id: string): Promise<Comment> {
         return this.fbService
-            .call(
+            .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_COMMENT_TYPE)},
