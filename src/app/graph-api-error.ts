@@ -152,48 +152,48 @@ export class GraphApiError {
      * Resolve the error codes to a class of error.
      */
     get errorClass() {
-        if (this.error_subcode == 458) {
+        if (this.error_subcode === 458) {
             return GraphApiErrorType.Registration;
         }
-        if (this.error_subcode == 459 || this.error_subcode == 464) {
+        if (this.error_subcode === 459 || this.error_subcode == 464) {
             return GraphApiErrorType.Account;
         }
-        if (this.error_subcode == 460) {
+        if (this.error_subcode === 460) {
             return GraphApiErrorType.Password;
         }
-        if (this.code == 1) {
+        if (this.code === 1) {
             return GraphApiErrorType.Connection;
         }
-        if (this.code == 2) {
+        if (this.code === 2) {
             return GraphApiErrorType.Facebook;
         }
-        if (this.code == 4 || this.code == 17 || this.code == 341) {
+        if (this.code === 4 || this.code == 17 || this.code == 341) {
             return GraphApiErrorType.Overload;
         }
-        if (this.code == 10 || this.code < 300 && this.code >= 200) {
+        if (this.code === 10 || this.code < 300 && this.code >= 200) {
             return GraphApiErrorType.Permission;
         }
-        if (this.code == 32) {
+        if (this.code === 32) {
             return GraphApiErrorType.Rate;
         }
-        if (this.code == 368) {
+        if (this.code === 368) {
             return GraphApiErrorType.Blocked;
         }
-        if (this.code == 506) {
+        if (this.code === 506) {
             return GraphApiErrorType.Duplicate;
         }
-        if (this.code == 803) {
+        if (this.code === 803) {
             return GraphApiErrorType.Name;
         }
-        if (this.code == 1609005) {
+        if (this.code === 1609005) {
             return GraphApiErrorType.DeadLink;
         }
-        if (this.error_subcode == 463
-            || this.error_subcode == 467
-            || this.code == 102
-            || this.code == 190
+        if (this.error_subcode === 463
+            || this.error_subcode === 467
+            || this.code === 102
+            || this.code === 190
             || this.code >= 200 && this.code < 300
-            || this.type == 'OAuthException'
+            || this.type === 'OAuthException'
         ) {
             return GraphApiErrorType.Session;
         }

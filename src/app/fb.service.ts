@@ -163,7 +163,7 @@ export class FbService {
                         .map(k => params[k])
                         .filter(v => v instanceof File)
                         .map((f: File) => f.type)
-                        .filter(type => type.split('/')[0] == 'video')
+                        .filter(type => type.split('/')[0] === 'video')
                         .length
                         ? 'apiUrl'
                         : 'videoUploadUrl'
@@ -232,7 +232,7 @@ export class FbService {
                         },
                         T)
                     : Observable.empty()));
-        if (method == HttpMethod.Get) { cache[id] = result; }
+        if (method === HttpMethod.Get) { cache[id] = result; }
         return result;
     }
 

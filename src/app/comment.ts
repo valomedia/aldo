@@ -81,7 +81,7 @@ export class Comment extends GraphApiObject {
      */
     get video() {
         return this.attachment
-            && this.attachment.type == 'video_inline'
+            && this.attachment.type === 'video_inline'
             && this.videoService.video(this.attachment.target.id);
     }
 

@@ -39,7 +39,7 @@ export class AppRoutingService {
                     : null)
             .filter(param => !param
                 || !Object.keys(param).length
-                || param[Object.keys(param)[0]] != '_')
+                || param[Object.keys(param)[0]] !== '_')
             .reduce((o, e) => o && e ? Object.assign(o, e) : null, {});
     }
 

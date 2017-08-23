@@ -97,7 +97,7 @@ export class Post extends GraphApiObject {
     get text() {
         return this.message
             || this.story
-            || this.contentType == PostContentType.video
+            || this.contentType === PostContentType.video
             && this.from.name + " hat ein neues Video hinzugefügt."
             || '';
     }
@@ -134,7 +134,7 @@ export class Post extends GraphApiObject {
      */
     get video() {
         return this.object_id
-            && this.contentType == PostContentType.video
+            && this.contentType === PostContentType.video
             && this.videoService.video(this.object_id);
     }
 
