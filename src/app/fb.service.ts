@@ -148,7 +148,7 @@ export class FbService {
         path: string,
         method = HttpMethod.Get,
         params: {[id: string]: Primitive|Primitive[]|File} = {},
-        T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
+        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
     ): Observable<GraphApiResponse<GraphApiObject>> {
         // ID for cacheing.
         const id = path + ':' + btoa(JSON.stringify(params));
@@ -249,7 +249,7 @@ export class FbService {
         path: string,
         method = HttpMethod.Get,
         params = {},
-        T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
+        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
     ) {
         return this.api(path, method, params, T).concatMap(res => res.expanded);
     }
