@@ -159,6 +159,7 @@ export class FbService {
         path: string,
         params: FbApiParams
     ) {
+        console.log('GrapAPI request:', path, params);
         return this.http
             .post(
                 this.confService.fb[
@@ -221,7 +222,9 @@ export class FbService {
             .catch(err => Observable.of(err))
             .map(res => res.status ? res.json() : {error: {code: 1}})
             .do(body => {
-                console[body.error ? 'warn' : 'log']('GraphAPI:', body);
+                console[body.error ? 'warn' : 'log'](
+                    'GraphAPI response:',
+                    body);
                 if (body.error) { throw new GraphApiError(body.error); }
             })
             .publishReplay(1)
