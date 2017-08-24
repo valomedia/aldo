@@ -11,7 +11,16 @@
  */
 export interface GraphApiObjectType {
     id: string;
-}
+    metadata?: {
+        fields: [{
+            name: string;
+            description: string;
+            type: string;
+        }];
+        type: string;
+        connections: {[id: string]: string};
+    };
+};
 
 /*
  * The common base of the internal representation of GraphAPI-objects.
@@ -20,8 +29,8 @@ export class GraphApiObject {
     constructor(kwargs: GraphApiObjectType) {
         Object.assign(this, kwargs);
     }
-}
-export interface GraphApiObject extends GraphApiObjectType {}
+};
+export interface GraphApiObject extends GraphApiObjectType {};
 
 /*
  * The simplest valid GraphApiObject.
@@ -29,6 +38,6 @@ export interface GraphApiObject extends GraphApiObjectType {}
  * This exists, so the child classes can use it to build their dummy constants.
  */
 export const DUMMY_GRAPH_API_OBJECT_TYPE: GraphApiObjectType = {
-    id: '',
+    id: ''
 };
 
