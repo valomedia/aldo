@@ -64,6 +64,17 @@ interface Session {
 }
 
 /*
+ * The parameters for a call to the GraphAPI.
+ */
+interface FbApiParams {
+    [id: string]: Primitive|Primitive[]|File
+    method?: string,
+    access_token?: string,
+    fields?: string[],
+    source?: File
+}
+
+/*
  * Facebook's SDK for JavaScript.
  */
 declare var FB: {
@@ -89,6 +100,7 @@ declare var FB: {
         }) => void;
     logout: (cb: (res: Session) => void) => void;
     getAuthResponse: () => AuthResponse|null;
+    getAccessToken: () => string|null;
 };
 
 /*
@@ -121,6 +133,8 @@ export class FbService {
 
     /*
      * Clear the cache.
+     *
+     * Clear the cache keeping only entries for the provided paths.
      */
     clearCache(keep: string[] = []) {
         for (
@@ -135,105 +149,143 @@ export class FbService {
     }
 
     /*
-     * Low-level API access.
+     * Internal request handler.
      *
-     * This function makes the API more useable, by normalizing the result to 
-     * GraphApiResponseType and turning it into a much more workable 
-     * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
-     * provided as the magic last parameter, if none as provided the Object will 
-     * be passed as parsed.  This will automatically fetch a summary for every 
-     * field.
+     * This will make the actual request.  The parameters will be minimally 
+     * preprocessed by turning Primitives and Primitive[]s into strings, 
+     * filtering nulls and moving Files to the source field.
      */
-    api(
+    private _call(
         path: string,
-        method = HttpMethod.Get,
-        params: {[id: string]: Primitive|Primitive[]|File} = {},
-        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
-    ): Observable<GraphApiResponse<GraphApiObject>> {
-        // ID for cacheing.
-        const id = path + ':' + btoa(JSON.stringify(params));
-
-        if (cache[id]) { return cache[id]; }
-
-        const result = this.http
+        params: FbApiParams
+    ) {
+        return this.http
             .post(
                 this.confService.fb[
-                    Object
-                        .keys(params)
-                        .map(k => params[k])
-                        .filter(v => v instanceof File)
-                        .map((f: File) => f.type)
-                        .filter(type => type.split('/')[0] === 'video')
-                        .length
-                        ? 'apiUrl'
-                        : 'videoUploadUrl'
+                    params.source
+                        && params.source.type.split('/')[0] === 'video'
+                        ? 'videoUploadUrl'
+                        : 'apiUrl'
                 ]
                     + '/'
                     + path,
                 Object
                     .keys(params)
-                    .map(k => [
-                        params[k] instanceof File ? 'source' : k,
-                        params[k]
+                    .map((k): [string, Primitive|File] => [
+                        k,
+                        params[k] instanceof Array
+                            ? (params[k] as Primitive[]).join(',')
+                            : params[k] as Primitive|File
                     ])
-                    .concat([[
-                        'fields',
-                        (params['fields'] as string[] || [])
-                            .map(field => field + '.summary(true)')
-                    ]] as [string, Primitive|Primitive[]|File][])
-                    .map(([k, v]: [string, Primitive|Primitive[]|File]):
-                        [string, Primitive|File] => [
-                            k,
-                            v instanceof Array
-                                ? (v as Primitive[]).join(',')
-                                : (v as Primitive|File)
-                        ])
-                    .concat([[
-                        'method',
-                        HttpMethod[method].toUpperCase()
-                    ]] as [string, Primitive|File][])
-                    .filter(([_, v]) => v)
-                    .map(([k, v]: [string, Primitive|File]) => [
+                    .filter(([_, v]) => v !== null && v !== undefined)
+                    .map(([k, v]): [string, string|File] => [
                         k,
                         v instanceof File ? v : '' + v
                     ])
-                    .concat([[
-                        'access_token',
-                        params['access_token']
-                            || FB.getAuthResponse().accessToken
-                    ]] as [string, string|File][])
+                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
                     .reduce(
                         (a, e) => (a.set as any)(...e) || a,
-                        new FormData()))
+                        new FormData()));
+    }
+
+    /*
+     * Low-level API access.
+     *
+     * This will return all results from the API as-is, but will apply cacheing 
+     * and preprocess the parameters, moving File params to the source key, 
+     * filtering out null values and turning booleans and numbers and Arrays 
+     * into strings.
+     */
+    call(
+        path: string,
+        method = HttpMethod.Get,
+        params: FbApiParams = {}
+    ) {
+        // Check the cache.
+        const id = path + ':' + btoa(JSON.stringify(params));
+        if (cache[id]) { return cache[id]; }
+
+        const result = this._call(
+            path,
+            {
+                ...params,
+                fields: (params.fields || [])
+                    .map(field => field + '.summary(true)'),
+                method: HttpMethod[method].toUpperCase(),
+                access_token: params.access_token || FB.getAccessToken(),
+                source: Object
+                    .keys(params)
+                    .map(k => params[k])
+                    .filter(v => v instanceof File)[0] as File
+            })
             .catch(err => Observable.of(err))
             .map(res => res.status ? res.json() : {error: {code: 1}})
             .do(body => {
                 console[body.error ? 'warn' : 'log']('GraphAPI:', body);
                 if (body.error) { throw new GraphApiError(body.error); }
             })
-            .map((res: {data?: any}): GraphApiResponseType<any> =>
-                (res.data ? res : {data: [res]}) as GraphApiResponseType<any>)
             .publishReplay(1)
             .refCount()
-            .map(res => ({
-                ...res,
-                data: res.data.map(e => T ? new T(e) : e)
-            }))
-            .first()
-            .map(res => new GraphApiResponse(
-                res,
-                () => res.paging && res.paging.next
-                    ? this.api(
-                        path,
-                        method,
-                        {
-                            ...params,
-                            after: res.paging.cursors.after
-                        },
-                        T)
-                    : Observable.empty()));
+            .first();
+
         if (method === HttpMethod.Get) { cache[id] = result; }
         return result;
+    }
+
+    /*
+     * Lower-level API access.
+     *
+     * This function makes the API more useable, by normalizing the result to 
+     * GraphApiResponseType and turning it into a much more workable 
+     * Observable<GraphApiResponse<T>>.  The constructor for T needs to be 
+     * provided as the magic last parameter, if none as provided the Object will 
+     * be passed as parsed.  This will automatically fetch a summary for every 
+     * field and cache GET requests.
+     */
+    api(
+        path: string,
+        method: HttpMethod,
+        params: FbApiParams = {},
+        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
+    ): Observable<GraphApiResponse<GraphApiObject>> {
+        return this.call(path, method, params)
+            .map((res: GraphApiResponseType<GraphApiObject>|any) =>
+                new GraphApiResponse(
+                    res.data
+                        ? {
+                            ...res,
+                            data: res.data.map((e: GraphApiObjectType) =>
+                                T ? new T(e) : e)
+                        }
+                        : {data: [T ? new T(res) : res]},
+                    () => (res as GraphApiResponseType<GraphApiObject>).paging
+                        && ((res as GraphApiResponseType<GraphApiObject>)
+                            .paging as {
+                                cursors: {
+                                    before: string,
+                                    after: string
+                                },
+                                next?: string,
+                                previous?: string
+                            }).next
+                        ? this.api(
+                            path,
+                            method,
+                            {
+                                ...params,
+                                after: (res as GraphApiResponseType<GraphApiObject> as {
+                                    paging?: {
+                                        cursors: {
+                                            before: string,
+                                            after: string
+                                        },
+                                        next?: string,
+                                        previous?: string
+                                    };
+                                }).paging.cursors.after
+                            },
+                            T)
+                        : Observable.empty()));
     }
 
     /*
@@ -248,7 +300,7 @@ export class FbService {
     fetch(
         path: string,
         method = HttpMethod.Get,
-        params = {},
+        params: FbApiParams = {},
         T?: new (kwargs: GraphApiObjectType) => GraphApiObject
     ) {
         return this.api(path, method, params, T).concatMap(res => res.expanded);
