@@ -7,7 +7,7 @@ import 'rxjs/add/operator/finally';
 
 import {Profile} from './profile';
 import {Page} from './page';
-import {PageService} from './page.service';
+import {ProfileService} from './profile.service';
 import {GraphApiError} from './graph-api-error';
 import {showGraphApiError} from './graph-api-error.component';
 import {AppUxService} from './app-ux.service';
@@ -26,7 +26,7 @@ import {AppService} from './app.service';
 })
 export class ProfileComponent extends AppRoutingComponent {
     constructor(
-        protected pageService: PageService,
+        protected profileService: ProfileService,
         protected mdSnackBar: MdSnackBar,
         protected appService: AppService,
         appRoutingService: AppRoutingService
@@ -51,10 +51,11 @@ export class ProfileComponent extends AppRoutingComponent {
     set params(params: Params) {
         this._loaded = this.loaded;
         Observable
-            .fromPromise(this.pageService.page(params[this.appService.PAGE]))
+            .fromPromise(
+                this.profileService.profile(params[this.appService.PAGE]))
             .finally(() => this._loaded = true)
             .subscribe(
-                (page: Page) => this.profile = page,
+                (profile: Profile) => this.profile = profile,
                 (err: GraphApiError) =>
                     showGraphApiError(this.mdSnackBar, err));
     }
