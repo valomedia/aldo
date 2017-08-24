@@ -28,13 +28,13 @@ import {AppService} from './app.service';
 })
 export class PageComponent {
     constructor(
-        private mdDialog: MdDialog,
-        private mdSnackBar: MdSnackBar,
-        private appUxService: AppUxService,
-        private postService: PostService,
-        private appService: AppService) {}
+        protected mdDialog: MdDialog,
+        protected mdSnackBar: MdSnackBar,
+        protected appUxService: AppUxService,
+        protected postService: PostService,
+        protected appService: AppService) {}
 
-    private _page: Page;
+    protected _page: Page;
 
     /*
      * Posts by this Page.

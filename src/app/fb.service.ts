@@ -129,7 +129,7 @@ function api(path: string, method: HttpMethod, params: any): Promise<any> {
 
 @Injectable()
 export class FbService {
-    constructor(private http: Http, private confService: ConfService) {}
+    constructor(protected http: Http, protected confService: ConfService) {}
 
     /*
      * Clear the cache.
@@ -155,7 +155,7 @@ export class FbService {
      * preprocessed by turning Primitives and Primitive[]s into strings, 
      * filtering nulls and moving Files to the source field.
      */
-    private _call(
+    protected _call(
         path: string,
         params: FbApiParams
     ) {

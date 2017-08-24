@@ -19,10 +19,10 @@ import {AppService} from './app.service';
 })
 export class AppComponent implements OnInit {
     constructor(
-        private applicationRef: ApplicationRef,
-        private fbService: FbService,
-        private appRoutingService: AppRoutingService,
-        private appService: AppService) {}
+        protected applicationRef: ApplicationRef,
+        protected fbService: FbService,
+        protected appRoutingService: AppRoutingService,
+        protected appService: AppService) {}
 
     /*
      * Displayed in the main toolbar.

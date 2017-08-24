@@ -38,7 +38,7 @@ export class UtilService {
         this.videoService = this.inject(VideoService);
     }
 
-    private reflectiveInjector = ReflectiveInjector.resolveAndCreate([
+    protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
         AppService,
         AppUxService,
         CommentService,
@@ -67,14 +67,14 @@ export class UtilService {
         }
     ]);
 
-    private appService: AppService;
-    private appUxService: AppUxService;
-    private commentService: CommentService;
-    private confService: ConfService;
-    private fbService: FbService;
-    private pageService: PageService;
-    private postService: PostService;
-    private videoService: VideoService;
+    protected appService: AppService;
+    protected appUxService: AppUxService;
+    protected commentService: CommentService;
+    protected confService: ConfService;
+    protected fbService: FbService;
+    protected pageService: PageService;
+    protected postService: PostService;
+    protected videoService: VideoService;
 
     /*
      * This is madness.

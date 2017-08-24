@@ -15,7 +15,7 @@ import {GraphApiResponse} from './graph-api-response';
 
 @Injectable()
 export class PostService {
-    constructor(private fbService: FbService) {}
+    constructor(protected fbService: FbService) {}
 
     /*
      * Perform a GET-request for a Post on a given path.

@@ -20,18 +20,18 @@ import {Post} from './post';
 })
 export class PostsComponent {
     constructor(
-        private mdSnackBar: MdSnackBar,
-        private activatedRoute: ActivatedRoute) {}
+        protected mdSnackBar: MdSnackBar,
+        protected activatedRoute: ActivatedRoute) {}
 
     /*
      * All posts shown by this Component.
      */
-    private _posts: Post[];
+    protected _posts: Post[];
 
     /*
      * True if no more posts can be loaded.
      */
-    private _loaded: boolean;
+    protected _loaded: boolean;
 
     @Input()
     loaded = false;

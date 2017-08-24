@@ -16,9 +16,9 @@ import {AppService} from './app.service';
 @Injectable()
 export class AppRoutingService {
     constructor(
-        private router: Router,
-        private location: Location,
-        private appService: AppService) {}
+        protected router: Router,
+        protected location: Location,
+        protected appService: AppService) {}
 
     events = this.router
         .events

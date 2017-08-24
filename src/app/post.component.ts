@@ -30,16 +30,16 @@ import {AppService} from './app.service';
 })
 export class PostComponent extends AppRoutingComponent {
     constructor(
-        private postService: PostService,
-        private mdSnackBar: MdSnackBar,
-        private videoService: VideoService,
-        private appService: AppService,
+        protected postService: PostService,
+        protected mdSnackBar: MdSnackBar,
+        protected videoService: VideoService,
+        protected appService: AppService,
         appRoutingService: AppRoutingService
     ) {
         super(appRoutingService);
     }
 
-    private PostContentType = PostContentType;
+    protected PostContentType = PostContentType;
 
     /*
      * The Post this Component is currently showing.
@@ -59,7 +59,7 @@ export class PostComponent extends AppRoutingComponent {
     /*
      * Whether the component is still loading.
      */
-    private _loaded: boolean;
+    protected _loaded: boolean;
 
     @Input()
     loaded: boolean;

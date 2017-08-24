@@ -22,13 +22,13 @@ import {AppRoutingService} from './app-routing.service';
 @Directive({selector: '[appRouting]'})
 export class AppRoutingDirective implements OnInit {
     constructor(
-        private appRoutingService: AppRoutingService,
-        private templateRef: TemplateRef<any>,
-        private viewContainerRef: ViewContainerRef) {}
+        protected appRoutingService: AppRoutingService,
+        protected templateRef: TemplateRef<any>,
+        protected viewContainerRef: ViewContainerRef) {}
 
-    private hasView = false;
-    private _depends: string[] = [];
-    private _conflicts: string[] = [];
+    protected hasView = false;
+    protected _depends: string[] = [];
+    protected _conflicts: string[] = [];
 
     @Input()
     set appRouting(depends: string|null) {

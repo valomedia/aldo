@@ -33,10 +33,7 @@ export interface PageType extends ProfileType {
  * A Facebook page as used internally.
  */
 export class Page extends Profile {
-    private utilService: UtilService = ReflectiveInjector
-        .resolveAndCreate([UtilService])
-        .get(UtilService);
-    private postService: PostService = this.utilService.inject(PostService);
+    protected postService: PostService = this.utilService.inject(PostService);
 
     /*
      * Get the feed of Posts of this Page.

@@ -25,11 +25,11 @@ import {AppService} from './app.service';
     styleUrls: ['./file.component.css']
 })
 export class FileComponent {
-    constructor(private appService: AppService) {}
+    constructor(protected appService: AppService) {}
 
-    private _link = '';
-    private _ressource?: Ressource|null;
-    private _file?: File;
+    protected _link = '';
+    protected _ressource?: Ressource|null;
+    protected _file?: File;
 
     @Input()
     fileSizeLimit = 0;

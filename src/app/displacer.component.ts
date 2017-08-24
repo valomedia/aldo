@@ -27,14 +27,14 @@ import {DisplacerPortalDirective} from './displacer-portal.directive';
 })
 export class DisplacerComponent implements OnInit, OnDestroy, AfterViewInit {
     constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
-        private applicationRef: ApplicationRef,
-        private injector: Injector) {}
+        protected componentFactoryResolver: ComponentFactoryResolver,
+        protected applicationRef: ApplicationRef,
+        protected injector: Injector) {}
 
     @ViewChild(DisplacerPortalDirective)
-    private displacerPortalDirective: DisplacerPortalDirective;
+    protected displacerPortalDirective: DisplacerPortalDirective;
 
-    private domPortalHost: DomPortalHost;
+    protected domPortalHost: DomPortalHost;
 
     ngOnInit() {
         this.domPortalHost = new DomPortalHost(

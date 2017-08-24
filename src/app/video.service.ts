@@ -12,7 +12,7 @@ import {FbService, HttpMethod} from './fb.service';
 
 @Injectable()
 export class VideoService {
-    constructor(private fbService: FbService) {}
+    constructor(protected fbService: FbService) {}
 
     /*
      * Get a video by its id.

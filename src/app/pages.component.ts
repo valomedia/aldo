@@ -19,8 +19,8 @@ import {showGraphApiError} from './graph-api-error.component';
 })
 export class PagesComponent implements OnInit {
     constructor(
-        private pageService: PageService,
-        private mdSnackBar: MdSnackBar) {};
+        protected pageService: PageService,
+        protected mdSnackBar: MdSnackBar) {};
 
     loaded = false;
 

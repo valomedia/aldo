@@ -22,18 +22,18 @@ import {AppRoutingService} from './app-routing.service';
 })
 export class LayoutComponent implements OnInit {
     constructor(
-        private appUxService: AppUxService,
-        private title: Title,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private fbService: FbService,
-        private location: Location,
-        private appRoutingService: AppRoutingService) {}
+        protected appUxService: AppUxService,
+        protected title: Title,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected fbService: FbService,
+        protected location: Location,
+        protected appRoutingService: AppRoutingService) {}
 
     /*
      * The route parameters.
      */
-    private params: Params = {};
+    protected params: Params = {};
 
     /*
      * Whether the dark-theme is active.

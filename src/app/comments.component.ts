@@ -18,7 +18,7 @@ import {Comment} from './comment';
     styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
-    constructor(private mdSnackBar: MdSnackBar) {}
+    constructor(protected mdSnackBar: MdSnackBar) {}
 
     /*
      * All Comments shown by this Component.

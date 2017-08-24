@@ -26,9 +26,9 @@ import {AppService} from './app.service';
 })
 export class ProfileComponent extends AppRoutingComponent {
     constructor(
-        private pageService: PageService,
-        private mdSnackBar: MdSnackBar,
-        private appService: AppService,
+        protected pageService: PageService,
+        protected mdSnackBar: MdSnackBar,
+        protected appService: AppService,
         appRoutingService: AppRoutingService
     ) {
         super(appRoutingService);
@@ -42,7 +42,7 @@ export class ProfileComponent extends AppRoutingComponent {
     /*
      * Whether the Component is still loading.
      */
-    private _loaded: boolean;
+    protected _loaded: boolean;
 
     @Input()
     loaded: boolean;

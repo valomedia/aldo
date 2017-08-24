@@ -16,7 +16,7 @@ import {Ressource} from './app';
 
 @Injectable()
 export class PageService {
-    constructor(private fbService: FbService) {}
+    constructor(protected fbService: FbService) {}
 
     /*
      * Perform a GET-request for a Page on a given path.

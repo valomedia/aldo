@@ -21,9 +21,9 @@ import {showGraphApiError} from './graph-api-error.component';
 })
 export class DashboardComponent {
     constructor(
-        private pageService: PageService,
-        private appUxService: AppUxService,
-        private mdSnackBar: MdSnackBar) {}
+        protected pageService: PageService,
+        protected appUxService: AppUxService,
+        protected mdSnackBar: MdSnackBar) {}
 
     loaded = false;
 

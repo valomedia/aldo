@@ -11,6 +11,6 @@ import {Location} from '@angular/common';
     styleUrls: ['./not-found.component.css']
 })
 export class NotFoundComponent {
-    constructor(private location: Location) {}
+    constructor(protected location: Location) {}
 }
 

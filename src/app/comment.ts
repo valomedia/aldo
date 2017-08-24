@@ -57,9 +57,9 @@ export class Comment extends GraphApiObject {
         this.commentService = this.utilService.inject(CommentService);
     }
 
-    private utilService: UtilService;
-    private videoService: VideoService;
-    private commentService: CommentService;
+    protected utilService: UtilService;
+    protected videoService: VideoService;
+    protected commentService: CommentService;
 
     /*
      * The Profile that sent this Post.

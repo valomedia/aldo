@@ -15,7 +15,7 @@ import {GraphApiResponse} from './graph-api-response';
 
 @Injectable()
 export class CommentService {
-    constructor(private fbService: FbService) {}
+    constructor(protected fbService: FbService) {}
 
     /*
      * Get a Comment by its id.

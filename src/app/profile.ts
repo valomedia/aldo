@@ -22,10 +22,10 @@ export interface ProfileType extends GraphApiObjectType {
  * A Facebook profile as used internally.
  */
 export class Profile extends GraphApiObject {
-    private utilService: UtilService = ReflectiveInjector
+    protected utilService: UtilService = ReflectiveInjector
         .resolveAndCreate([UtilService])
         .get(UtilService);
-    private confService: ConfService = this.utilService.inject(ConfService);
+    protected confService: ConfService = this.utilService.inject(ConfService);
 
     /*
      * Get the url to the icon for this Profile.

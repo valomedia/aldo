@@ -21,26 +21,26 @@ import {Video} from './video';
 })
 export class CommentComponent {
     constructor(
-        private mdSnackBar: MdSnackBar,
+        protected mdSnackBar: MdSnackBar,
         @Inject(DOCUMENT)
-        private document: Document) {}
+        protected document: Document) {}
 
-    private _loaded: boolean;
+    protected _loaded: boolean;
 
     /*
      * The Comment this Component is currently displaying.
      */
-    private _comment: Comment;
+    protected _comment: Comment;
 
     /*
      * The Comments on this Comment, if any.
      */
-    private comments: Comment[];
+    protected comments: Comment[];
 
     /*
      * The Video of the Comment, if any.
      */
-    private video?: Video;
+    protected video?: Video;
 
     @ViewChild('clipboardDummy')
     clipboardDummy: ElementRef;
