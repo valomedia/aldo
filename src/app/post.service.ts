@@ -9,6 +9,8 @@ import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
 import {Page, ContentType} from './page';
+import {VideoService} from './video.service';
+import {Ressource} from './app';
 
 /*
  * The Service providing the Pages.
@@ -16,7 +18,9 @@ import {Page, ContentType} from './page';
 
 @Injectable()
 export class PostService {
-    constructor(protected fbService: FbService) {}
+    constructor(
+        protected fbService: FbService,
+        protected videoService: VideoService) {}
 
     /*
      * Perform a GET-request for a Post on a given path.
@@ -114,14 +118,7 @@ export class PostService {
                     });
                 break;
            case ContentType.Video:
-                result = this.fbService.fetch(
-                    page.id.toString() + '/videos',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        file_url: link,
-                        access_token: page.access_token
-                    });
+                result = this.videoService.create(page, link);
                 break;
         }
         return result.pluck('id').first().toPromise();
