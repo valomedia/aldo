@@ -8,7 +8,7 @@
                 <span *ngIf='profile.fan_count'>
                     <br>
                     <span
-                            mdTooltip="Likes (neue Likes)"
+                            mdTooltip="Likes"
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
@@ -16,10 +16,6 @@
                         </span>
                         <span class='text-accent'>
                             {{profile.fan_count}}
-                        </span>
-                        <span
-                                class='text-primary'>
-                            (+{{+profile.new_like_count}})
                         </span>
                     </span>
                 </span>
