@@ -19,5 +19,8 @@ export class AppService {
     PRIMARY = 'primary';
     ACCENT = 'accent';
     WARN = 'warn';
+    SIDE = 'side';
+    OVER = 'over';
+    PUSH = 'push';
 }
 

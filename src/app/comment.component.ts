@@ -1,6 +1,5 @@
 import {Component, Input, Inject, ViewChild, ElementRef} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
-import {DOCUMENT} from '@angular/common';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
@@ -9,6 +8,8 @@ import {GraphApiError} from './graph-api-error';
 import {showGraphApiError} from './graph-api-error.component';
 import {Comment} from './comment';
 import {Video} from './video';
+import {UtilService} from './util.service';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component showing the list of pages.
@@ -22,9 +23,10 @@ import {Video} from './video';
 export class CommentComponent {
     constructor(
         protected mdSnackBar: MdSnackBar,
-        @Inject(DOCUMENT)
-        protected document: Document) {}
+        protected utilService: UtilService,
+        protected appRoutingService: AppRoutingService) {}
 
+    protected params = this.appRoutingService.params;
     protected _loaded: boolean;
 
     /*
@@ -41,9 +43,6 @@ export class CommentComponent {
      * The Video of the Comment, if any.
      */
     protected video?: Video;
-
-    @ViewChild('clipboardDummy')
-    clipboardDummy: ElementRef;
 
     @Input()
     loaded: boolean;
@@ -65,15 +64,6 @@ export class CommentComponent {
                 .video
                 .then(video => this.video = video)
                 .catch(err => showGraphApiError(this.mdSnackBar, err));
-    }
-
-    /*
-     * Copy the link to this comment to the clipboard.
-     */
-    copy() {
-        this.clipboardDummy.nativeElement.select();
-        this.document.execCommand('Copy');
-        this.mdSnackBar.open("Link kopiert", undefined, {duration: 2000});
     }
 }
 

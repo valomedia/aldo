@@ -18,6 +18,8 @@ import {Comment} from './comment';
 import {AppRoutingComponent} from './app-routing.component';
 import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
+import {AppUxService} from './app-ux.service';
+import {UtilService} from './util.service';
 
 /*
  * The Component showing a single post in detail.
@@ -34,11 +36,14 @@ export class PostComponent extends AppRoutingComponent {
         protected mdSnackBar: MdSnackBar,
         protected videoService: VideoService,
         protected appService: AppService,
+        protected appUxService: AppUxService,
+        protected utilService: UtilService,
         appRoutingService: AppRoutingService
     ) {
         super(appRoutingService);
     }
 
+    protected _params;
     protected PostContentType = PostContentType;
 
     /*
@@ -67,6 +72,7 @@ export class PostComponent extends AppRoutingComponent {
     @Input()
     set params(params: Params) {
         this._loaded = this.loaded;
+        this._params = params;
         Observable
             .fromPromise(this.postService.post(params[this.appService.POST]))
             .finally(() => this._loaded = true)
@@ -86,6 +92,9 @@ export class PostComponent extends AppRoutingComponent {
                 (video: Video) => this.video = video,
                 (err: GraphApiError) =>
                     showGraphApiError(this.mdSnackBar, err));
+    }
+    get params() {
+        return this._params;
     }
 }
 

@@ -19,9 +19,11 @@
     <md-card-content *ngIf='comments.length'>
         <blockquote *ngFor='let comment of comments'>
             <p>
-                <strong>
-                    <span class='text-primary'>@</span>{{comment.from.name}}
-                </strong>
+                <a [appLink]='utilService.profileLink(comment.from.id)'>
+                    <strong>
+                        <span class='text-primary'>@</span>{{comment.from.name}}
+                    </strong>
+                </a>
                 <a
                         *ngIf='comment.attachment'
                         md-button
@@ -68,24 +70,21 @@
         </div>
     </md-card-footer>
     <md-card-actions>
-        <div class='dummy-input'>
-            <input
-                    #clipboardDummy
-                    type='text'
-                    value='https://facebook.com/{{_comment.id}}'>
-        </div>
-        <a md-button (click)='copy()'>
-            Link kopieren
-            <md-icon>insert_link</md-icon>
-        </a>
         <a
                 md-button
-                color='primary'
                 href='//facebook.com/{{_comment.id}}'
                 target='_blank'>
             Facebook öffnen
             <md-icon>open_in_browser</md-icon>
         </a>
+        <button
+                md-button
+                color='primary'
+                [disabled]='params.profile === _comment.from.id'
+                [appLink]='utilService.profileLink(_comment.from.id)'>
+            Profil zeigen
+            <md-icon>account_box</md-icon>
+        </button>
     </md-card-actions>
 </profile-card>
 

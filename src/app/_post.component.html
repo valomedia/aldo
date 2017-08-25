@@ -19,6 +19,7 @@
             {{post.from.name}}
             <br>
             <small>{{post.name}}</small>
+            <br>
         </span>
         <span>
             <span
@@ -45,6 +46,24 @@
             </span>
         </span>
     </h2>
+    <p>
+        <a
+                md-raised-button
+                target='_blank'
+                [disabled]='!post.link'
+                [href]='post.link'>
+            Anhang öffnen
+            <md-icon>attach_file</md-icon>
+        </a>
+        <button
+                md-raised-button
+                color='primary'
+                [disabled]='params.profile === post.from.id'
+                [appLink]='utilService.profileLink(post.from.id)'>
+            Profil zeigen
+            <md-icon>account_box</md-icon>
+        </button>
+    </p>
     <blockquote>
         <p>{{post.text}}</p>
     </blockquote>

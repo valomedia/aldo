@@ -36,6 +36,7 @@ export class UtilService {
         this.pageService = this.inject(PageService);
         this.postService = this.inject(PostService);
         this.videoService = this.inject(VideoService);
+        this.appService = this.inject(AppService);
     }
 
     protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
@@ -128,5 +129,17 @@ export class UtilService {
      * no framework whatsoever.
      */
     inject = this.reflectiveInjector.get.bind(this.reflectiveInjector);
+
+    /*
+     * What to link to, if the user clicks a Profile.
+     */
+    profileLink(id: string) {
+        return this.appUxService.asideMode === this.appService.SIDE
+            ? {profile: id}
+            : {
+                profile: id,
+                post: null as null
+            };
+    }
 }
 
