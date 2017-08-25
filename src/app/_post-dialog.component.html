@@ -50,7 +50,7 @@
     <button
             *ngIf='page'
             md-button
-            [disabled]='!ressource'
+            [disabled]='!ressource && !text'
             (click)='post()'
             color='primary'>
         Post erstellen
