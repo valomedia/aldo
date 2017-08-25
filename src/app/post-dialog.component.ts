@@ -4,7 +4,7 @@ import {MdDialogRef} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 
 import {Page, ContentType} from './page';
-import {PageService} from './page.service';
+import {PostService} from './post.service';
 import {Ressource} from './app';
 
 @Component({
@@ -15,7 +15,7 @@ import {Ressource} from './app';
 export class PostDialogComponent {
     constructor(
         protected mdDialogRef: MdDialogRef<Promise<string>>,
-        protected pageService: PageService) {}
+        protected postService: PostService) {}
 
     @Input()
     page: Page;
@@ -57,7 +57,7 @@ export class PostDialogComponent {
      */
     post() {
         this.mdDialogRef.close(
-            this.pageService.postMsg(
+            this.postService.create(
                 this.page,
                 this.text,
                 this.contentType,

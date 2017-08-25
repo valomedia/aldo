@@ -42,50 +42,5 @@ export class PageService {
     page(id: string) {
         return this.get(id).first().toPromise();
     }
-
-    /*
-     * Post a message as the page.
-     */
-    postMsg(
-            page: Page,
-            msg: string,
-            contentType: ContentType,
-            link: Ressource
-    ) {
-        let result;
-        switch (+contentType) {
-            case ContentType.Link:
-                result = this.fbService.fetch(
-                    page.id.toString() + '/feed',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        link: link,
-                        access_token: page.access_token
-                    });
-                break;
-            case ContentType.Photo:
-                result = this.fbService.fetch(
-                    page.id.toString() + '/photos',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        url: link,
-                        access_token: page.access_token
-                    });
-                break;
-           case ContentType.Video:
-                result = this.fbService.fetch(
-                    page.id.toString() + '/videos',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        file_url: link,
-                        access_token: page.access_token
-                    });
-                break;
-        }
-        return result.pluck('id').first().toPromise();
-    }
 }
 
