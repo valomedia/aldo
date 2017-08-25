@@ -98,7 +98,7 @@ export class PostService {
         let result;
         switch (+contentType) {
             case ContentType.Link:
-                result = this.fbService.fetch(
+                result = this.fbService.call(
                     page.id.toString() + '/feed',
                     HttpMethod.Post,
                     {
@@ -108,7 +108,7 @@ export class PostService {
                     });
                 break;
             case ContentType.Photo:
-                result = this.fbService.fetch(
+                result = this.fbService.call(
                     page.id.toString() + '/photos',
                     HttpMethod.Post,
                     {
@@ -118,7 +118,8 @@ export class PostService {
                     });
                 break;
            case ContentType.Video:
-                result = this.videoService.create(page, link);
+                result = Observable.fromPromise(
+                    this.videoService.create(page, link));
                 break;
         }
         return result.pluck('id').first().toPromise();

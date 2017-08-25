@@ -49,7 +49,7 @@ export class VideoService {
         transcode_bit_rate_bps: string;
         transcode_dimension: string;
     }> {
-        return this.fbService.fetch(
+        return this.fbService.call(
             page.id.toString() + '/videos',
             HttpMethod.Post,
             {

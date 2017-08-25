@@ -43,7 +43,7 @@ export class PostComponent extends AppRoutingComponent {
         super(appRoutingService);
     }
 
-    protected _params;
+    protected _params: Params;
     protected PostContentType = PostContentType;
 
     /*
