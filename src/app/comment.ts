@@ -18,7 +18,6 @@ import {UtilService} from './util.service';
  * A Facebook comment as returned by the Facebook API.
  */
 export interface CommentType extends GraphApiObjectType {
-    created_time: string;
     from: ProfileType;
     message: string;
     attachment?: {
@@ -67,13 +66,6 @@ export class Comment extends GraphApiObject {
     from: Profile;
 
     /*
-     * Get the time this post was created.
-     */
-    get createdTime() {
-        return new Date(this.created_time);
-    }
-
-    /*
      * Get a Promise for the Video attached to this Comment.
      *
      * If no Video is attached to the Comment, or if the Comment is not a Video 
@@ -105,7 +97,6 @@ export interface Comment extends CommentType {}
  */
 export const DUMMY_COMMENT_TYPE: CommentType = {
     ...DUMMY_GRAPH_API_OBJECT_TYPE,
-    created_time: '',
     from: DUMMY_PROFILE_TYPE,
     message: '',
     attachment: {

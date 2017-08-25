@@ -1,10 +1,6 @@
 import {ReflectiveInjector} from '@angular/core';
 
-import {
-    GraphApiObject,
-    GraphApiObjectType,
-    DUMMY_GRAPH_API_OBJECT_TYPE
-} from './graph-api-object';
+import {Story, StoryType, DUMMY_STORY_TYPE} from './story';
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
@@ -28,10 +24,9 @@ export enum PostContentType {
 /*
  * A Facebook post as returned by the Facebook API.
  */
-export interface PostType extends GraphApiObjectType {
+export interface PostType extends StoryType {
     message: string;
     story: string;
-    created_time: string;
     from: ProfileType;
     to?: ProfileType[];
     picture?: string;
@@ -56,7 +51,7 @@ export interface PostType extends GraphApiObjectType {
 /*
  * A Facebook post as used internally.
  */
-export class Post extends GraphApiObject {
+export class Post extends Story {
     constructor(kwargs: PostType) {
         kwargs = {
             ...kwargs,
@@ -103,13 +98,6 @@ export class Post extends GraphApiObject {
     }
 
     /*
-     * Get the time this post was created.
-     */
-    get createdTime() {
-        return new Date(this.created_time);
-    }
-
-    /*
      * Get a link to the picture for this post.
      *
      * This will be the picture for picture posts, the video thumbnail for video 
@@ -148,17 +136,16 @@ export class Post extends GraphApiObject {
 export interface Post extends PostType {}
 
 /*
- * The simplest valid post.
+ * The simplest valid Post.
  *
  * This exists, so the PageService can use it to check which fields to request 
  * from Facebook, thus allowing adding a field to Post without changing 
  * PageService.
  */
 export const DUMMY_POST_TYPE: PostType = {
-    ...DUMMY_GRAPH_API_OBJECT_TYPE,
+    ...DUMMY_STORY_TYPE,
     message: '',
     story: '',
-    created_time: '',
     from: DUMMY_PROFILE_TYPE,
     full_picture: '',
     object_id: '',
