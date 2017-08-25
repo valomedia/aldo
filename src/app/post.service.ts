@@ -94,7 +94,7 @@ export class PostService {
         msg?: string,
         contentType = ContentType.Link,
         link?: Ressource
-    ) {
+    ): Promise<string> {
         let result;
         switch (+contentType) {
             case ContentType.Link:
