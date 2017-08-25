@@ -10,7 +10,7 @@ import {Ressource} from './app';
 import {Page} from './page';
 
 /*
- * The Service providing the Pages.
+ * The Service providing the Videos.
  */
 
 @Injectable()
