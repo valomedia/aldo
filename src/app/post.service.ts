@@ -8,6 +8,7 @@ import {Post, DUMMY_POST_TYPE} from './post';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
+import {Page, ContentType} from './page';
 
 /*
  * The Service providing the Pages.
@@ -86,9 +87,9 @@ export class PostService {
      */
     create(
         page: Page,
-        msg: string,
-        contentType: ContentType,
-        link: Ressource
+        msg?: string,
+        contentType = ContentType.Link,
+        link?: Ressource
     ) {
         let result;
         switch (+contentType) {
