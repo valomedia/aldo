@@ -110,23 +110,6 @@ declare var FB: {
  */
 let cache = {};
 
-/*
- * API-wrapper.
- *
- * This function wraps FB.api() to make it typesafe.  It also returns a Promise, 
- * instead of accepting a callback.
- */
-function api(path: string, method: HttpMethod, params: any): Promise<any> {
-    return new Promise((resolve, reject) =>
-        FB.api(
-            path,
-            HttpMethod[method],
-            params,
-            (res) => res.error
-                ? reject(new GraphApiError(res.error))
-                : resolve(res)));
-}
-
 @Injectable()
 export class FbService {
     constructor(protected http: Http, protected confService: ConfService) {}
