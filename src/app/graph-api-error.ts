@@ -20,7 +20,11 @@ export enum GraphApiErrorType {
     DeadLink,
     Session,
     Name,
-    Rate
+    Rate,
+    VideoUploadTransient,
+    Aldo,
+    VideoUpload,
+    Abuse
 }
 
 let msgs: string[] = [];
@@ -52,6 +56,14 @@ msgs[GraphApiErrorType.Name] =
     "Überprüfe die URL auf der du dich befindest";
 msgs[GraphApiErrorType.Rate] = 
     "Mach bitte langsamer";
+msgs[GraphApiErrorType.VideoUploadTransient] = 
+    "Versuche es erneut, kontaktiere uns, wenn der Fehler weiterhin auftritt.";
+msgs[GraphApiErrorType.Aldo] = 
+    "Bitte kontaktiere den Support, damite wir das Problem beheben können.";
+msgs[GraphApiErrorType.VideoUpload] = 
+    "Konvertiere dein Video in ein anderes Format und versuche es erneut.";
+msgs[GraphApiErrorType.Abuse] = 
+    "Kontaktiere Facebook, um genauere Informationen zu erhalten.";
 
 let titles: string[] = [];
 titles[GraphApiErrorType.UnhandledError] = 
@@ -82,6 +94,14 @@ titles[GraphApiErrorType.Name] =
     "Seiten können nur über ihre ID aufgerufen werden";
 titles[GraphApiErrorType.Rate] = 
     "Das API-Limit für deine Seite ist überschritten";
+titles[GraphApiErrorType.VideoUploadTransient] = 
+    "Beim Hochladen deines Videos ist ein Fehler aufgetreten";
+titles[GraphApiErrorType.Aldo] = 
+    "Aldo hat ein Problem verursacht";
+titles[GraphApiErrorType.VideoUpload] = 
+    "Bei der Verarbeitung deines Videos ist ein Fehler aufgetreten";
+titles[GraphApiErrorType.Abuse] = 
+    "Facebooks Algorithmen haben diese aktion als Missbrauch eingestuft";
 
 /*
  * The kind of error Facebook will return on a failed call to the GraphAPI.
@@ -152,6 +172,18 @@ export class GraphApiError {
      * Resolve the error codes to a class of error.
      */
     get errorClass() {
+        if (this.code === 6001 || this.code === 356 || this.code === 390) {
+            return GraphApiErrorType.VideoUploadTransient;
+        }
+        if (this.code === 100) {
+            return GraphApiErrorType.Aldo;
+        }
+        if (this.code === 6000) {
+            return GraphApiErrorType.VideoUpload;
+        }
+        if (this.code === 389) {
+            return GraphApiErrorType.DeadLink;
+        }
         if (this.error_subcode === 458) {
             return GraphApiErrorType.Registration;
         }
