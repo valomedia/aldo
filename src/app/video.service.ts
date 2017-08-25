@@ -34,17 +34,31 @@ export class VideoService {
     /*
      * Create a new video.
      */
-    create(page: Page, link: Ressource): Promise<string> {
+    create(
+        page: Page,
+        link: Ressource,
+        description?: string
+    ): Promise<{
+        id: string;
+        upload_session_id: string;
+        video_id: string;
+        start_offset: string;
+        end_offset: string;
+        success: boolean;
+        skip_upload: boolean;
+        transcode_bit_rate_bps: string;
+        transcode_dimension: string;
+    }> {
         return this.fbService.fetch(
             page.id.toString() + '/videos',
             HttpMethod.Post,
             {
+                description: description,
                 file_url: link,
                 access_token: page.access_token
             })
-            .pluck('video_id')
             .first()
-            .toPromise() as Promise<string>;
+            .toPromise();
     }
 }
 
