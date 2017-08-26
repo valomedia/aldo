@@ -27,7 +27,6 @@ export enum PostContentType {
 export interface PostType extends StoryType {
     message: string;
     story: string;
-    from: ProfileType;
     to?: ProfileType[];
     picture?: string;
     full_picture?: string;
@@ -53,12 +52,10 @@ export interface PostType extends StoryType {
  */
 export class Post extends Story {
     constructor(kwargs: PostType) {
-        kwargs = {
+        super({
             ...kwargs,
-            from: new Profile(kwargs.from),
             to: (kwargs.to || []).map(profileType => new Profile(profileType))
-        };
-        super(kwargs);
+        } as StoryType);
         this.utilService = ReflectiveInjector
             .resolveAndCreate([UtilService])
             .get(UtilService);
@@ -146,7 +143,6 @@ export const DUMMY_POST_TYPE: PostType = {
     ...DUMMY_STORY_TYPE,
     message: '',
     story: '',
-    from: DUMMY_PROFILE_TYPE,
     full_picture: '',
     object_id: '',
     type: '',

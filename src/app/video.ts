@@ -1,4 +1,5 @@
 import {Story, StoryType, DUMMY_STORY_TYPE} from './story';
+import {Profile} from './profile';
 
 /*
  * Classes related to Facebook videos.
@@ -14,7 +15,12 @@ export interface VideoType extends StoryType {
 /*
  * A Facebook video as used internally.
  */
-export class Video extends Story {}
+export class Video extends Story {
+    /*
+     * The Profile that uploaded this Video.
+     */
+    from: Profile;
+}
 export interface Video extends VideoType {}
 
 /*

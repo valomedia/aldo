@@ -1,4 +1,5 @@
 import {Story, StoryType, DUMMY_STORY_TYPE} from './story';
+import {Profile} from './profile';
 
 /*
  * Classes related to Facebook photos.
@@ -19,7 +20,12 @@ export interface PhotoType extends StoryType {
 /*
  * A Facebook photo as used internally.
  */
-export class Photo extends Story {}
+export class Photo extends Story {
+    /*
+     * The Profile that added this Photo.
+     */
+    from: Profile;
+}
 export interface Photo extends PhotoType {}
 
 /*
@@ -35,7 +41,7 @@ export const DUMMY_PHOTO_TYPE: PhotoType = {
     images: [{
         height: 0,
         source: '',
-        widh: 0
+        width: 0
     }]
 };
 

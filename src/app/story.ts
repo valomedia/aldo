@@ -4,6 +4,8 @@ import {
     DUMMY_GRAPH_API_OBJECT_TYPE
 } from './graph-api-object';
 
+import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
+
 /*
  * Classes related to things posted to Facebook.
  */
@@ -13,6 +15,7 @@ import {
  */
 export interface StoryType extends GraphApiObjectType {
     created_time: string;
+    from: ProfileType;
     updated_time?: string;
 };
 
@@ -20,6 +23,18 @@ export interface StoryType extends GraphApiObjectType {
  * The common base of the internal representations of GraphAPI-stories.
  */
 export class Story extends GraphApiObject {
+    constructor(kwargs: StoryType) {
+        super({
+            ...kwargs,
+            from: new Profile(kwargs.from)
+        } as GraphApiObjectType);
+    }
+
+    /*
+     * The Profile that created this Story.
+     */
+    from: Profile;
+
     /*
      * Get the time this Story was created.
      */
@@ -43,6 +58,7 @@ export interface Story extends StoryType {};
  */
 export const DUMMY_STORY_TYPE: StoryType = {
     ...DUMMY_GRAPH_API_OBJECT_TYPE,
-    created_time: ''
+    created_time: '',
+    from: DUMMY_PROFILE_TYPE
 };
 
