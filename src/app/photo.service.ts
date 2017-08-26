@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/pluck';
 
 import {Photo, DUMMY_PHOTO_TYPE} from './photo';
 import {FbService, HttpMethod} from './fb.service';
@@ -36,8 +35,8 @@ export class PhotoService {
         ressource: Ressource,
         caption?: string
     ): Observable<{
-        id: string;
-        post_id: string;
+        storyId: string;
+        attachmentId: string;
     }> {
         return this.fbService.call(
             page.id.toString() + '/photos',
@@ -46,7 +45,17 @@ export class PhotoService {
                 caption: caption,
                 url: ressource,
                 access_token: page.access_token
-            });
+            })
+            .map(({
+                id,
+                post_id
+            }: {
+                id: string;
+                post_id: string;
+            }) => ({
+                storyId: post_id,
+                attachmentId: id
+            }));
     }
 }
 

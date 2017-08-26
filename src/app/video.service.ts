@@ -36,15 +36,8 @@ export class VideoService {
         ressource: Ressource,
         description?: string
     ): Observable<{
-        id: string;
-        upload_session_id: string;
-        video_id: string;
-        start_offset: string;
-        end_offset: string;
-        success: boolean;
-        skip_upload: boolean;
-        transcode_bit_rate_bps: string;
-        transcode_dimension: string;
+        storyId: string;
+        attachmentId: string;
     }> {
         return this.fbService.call(
             page.id.toString() + '/videos',
@@ -53,7 +46,17 @@ export class VideoService {
                 description: description,
                 file_url: ressource,
                 access_token: page.access_token
-            });
+            })
+            .map(({
+                id,
+                video_id
+            }: {
+                id: string;
+                video_id: string;
+            }) => ({
+                storyId: id,
+                attachmentId: video_id
+            }));
     }
 }
 
