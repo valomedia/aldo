@@ -35,7 +35,7 @@ export class PhotoService {
         ressource: Ressource,
         caption?: string
     ): Observable<{
-        storyId: string;
+        id: string;
         attachmentId: string;
     }> {
         return this.fbService.call(
@@ -53,7 +53,7 @@ export class PhotoService {
                 id: string;
                 post_id: string;
             }) => ({
-                storyId: post_id,
+                id: post_id,
                 attachmentId: id
             }));
     }

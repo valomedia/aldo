@@ -36,7 +36,7 @@ export class VideoService {
         ressource: Ressource,
         description?: string
     ): Observable<{
-        storyId: string;
+        id: string;
         attachmentId: string;
     }> {
         return this.fbService.call(
@@ -54,7 +54,7 @@ export class VideoService {
                 id: string;
                 video_id: string;
             }) => ({
-                storyId: id,
+                id: id,
                 attachmentId: video_id
             }));
     }
