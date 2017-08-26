@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
             .map(params => Object.keys(params).map(k => params[k]))
             .mergeScan(
                 ([_, last], next) => Observable.of([last, next]),
-                [[],[]],
+                [[], []],
                 1)
             .map(([last, next]) => last.filter(i => next.indexOf(i) + 1))
             .subscribe(ids => this.fbService.clearCache(ids));

@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 import {Profile} from './profile';
 
 /*
- * The Component showing image and name of a Profile in the header of a card.
+ * A card with the image and name of a Profile in its header.
  */
 
 @Component({

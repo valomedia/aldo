@@ -39,7 +39,8 @@ export class UtilService {
         this.appService = this.inject(AppService);
     }
 
-    protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
+    // TODO Make this protected again.
+    reflectiveInjector = ReflectiveInjector.resolveAndCreate([
         AppService,
         AppUxService,
         CommentService,
@@ -67,15 +68,6 @@ export class UtilService {
             useClass: BaseRequestOptions
         }
     ]);
-
-    protected appService: AppService;
-    protected appUxService: AppUxService;
-    protected commentService: CommentService;
-    protected confService: ConfService;
-    protected fbService: FbService;
-    protected pageService: PageService;
-    protected postService: PostService;
-    protected videoService: VideoService;
 
     /*
      * This is madness.
@@ -129,6 +121,15 @@ export class UtilService {
      * no framework whatsoever.
      */
     inject = this.reflectiveInjector.get.bind(this.reflectiveInjector);
+
+    protected appService: AppService;
+    protected appUxService: AppUxService;
+    protected commentService: CommentService;
+    protected confService: ConfService;
+    protected fbService: FbService;
+    protected pageService: PageService;
+    protected postService: PostService;
+    protected videoService: VideoService;
 
     /*
      * What to link to, if the user clicks a Profile.

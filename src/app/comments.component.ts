@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
 import {GraphApiError} from './graph-api-error';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 import {Comment} from './comment';
 
 /*
@@ -41,7 +41,7 @@ export class CommentsComponent {
             .finally(() => this._loaded = true)
             .subscribe(
                 comment => this._comments.push(comment),
-                err => showGraphApiError(this.mdSnackBar, err));
+                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
     }
 }
 

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/finally';
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 
 /*
  * The Component showing the list of pages.
@@ -41,7 +41,7 @@ export class PagesComponent implements OnInit {
             .finally(() => this.loaded = true)
             .subscribe(
                 pages => this.pages = pages,
-                err => showGraphApiError(this.mdSnackBar, err));
+                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
     }
 }
 

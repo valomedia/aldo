@@ -187,7 +187,7 @@ export class GraphApiError {
         if (this.error_subcode === 458) {
             return GraphApiErrorType.Registration;
         }
-        if (this.error_subcode === 459 || this.error_subcode == 464) {
+        if (this.error_subcode === 459 || this.error_subcode === 464) {
             return GraphApiErrorType.Account;
         }
         if (this.error_subcode === 460) {
@@ -199,7 +199,7 @@ export class GraphApiError {
         if (this.code === 2) {
             return GraphApiErrorType.Facebook;
         }
-        if (this.code === 4 || this.code == 17 || this.code == 341) {
+        if (this.code === 4 || this.code === 17 || this.code === 341) {
             return GraphApiErrorType.Overload;
         }
         if (this.code === 10 || this.code < 300 && this.code >= 200) {

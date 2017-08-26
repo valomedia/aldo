@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "2.5.36",
-    "@types/node": "^6.0.87",
+    "@types/node": "^6.0.88",
     "canonical-path": "0.0.2",
     "concurrently": "^3.2.0",
     "jasmine-core": "~2.4.1",
@@ -54,7 +54,7 @@
     "nodemon": "^1.11.0",
     "protractor": "~4.0.14",
     "rimraf": "^2.5.4",
-    "tslint": "^3.15.1",
+    "tslint": "^5.6.0",
     "typescript": "~2.4.0"
   },
   "repository": {}

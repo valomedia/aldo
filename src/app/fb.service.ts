@@ -132,90 +132,21 @@ export class FbService {
     }
 
     /*
-     * Internal request handler.
+     * High-level API access.
      *
-     * This will make the actual request.  The parameters will be minimally 
-     * preprocessed by turning Primitives and Primitive[]s into strings, 
-     * filtering nulls and moving Files to the source field.
+     * This will completely abstract away pagination and return an Observable, 
+     * that will observe all results at the cost of being unable to fetch the 
+     * whole set only when it turns out to be necessary.  The Observable will be 
+     * of type T, whose constructor needs to be supplied as the magic last 
+     * parameter, if none as provided the Object will be passed as parsed.
      */
-    protected _call(
-        path: string,
-        params: FbApiParams
-    ) {
-        console.log('GrapAPI request:', path, params);
-        return this.http
-            .post(
-                this.confService.fb[
-                    params.source
-                        && params.source.type.split('/')[0] === 'video'
-                        ? 'videoUploadUrl'
-                        : 'apiUrl'
-                ]
-                    + '/'
-                    + path,
-                Object
-                    .keys(params)
-                    .map((k): [string, Primitive|File] => [
-                        k,
-                        params[k] instanceof Array
-                            ? (params[k] as Primitive[]).join(',')
-                            : params[k] as Primitive|File
-                    ])
-                    .filter(([_, v]) => v !== null && v !== undefined)
-                    .map(([k, v]): [string, string|File] => [
-                        k,
-                        v instanceof File ? v : '' + v
-                    ])
-                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
-                    .reduce(
-                        (a, e) => (a.set as any)(...e) || a,
-                        new FormData()));
-    }
-
-    /*
-     * Low-level API access.
-     *
-     * This will return all results from the API as-is, but will apply cacheing 
-     * and preprocess the parameters, moving File params to the source key, 
-     * filtering out null values and turning booleans and numbers and Arrays 
-     * into strings.
-     */
-    call(
+    fetch(
         path: string,
         method = HttpMethod.Get,
-        params: FbApiParams = {}
+        params: FbApiParams = {},
+        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
     ) {
-        // Check the cache.
-        const id = path + ':' + btoa(JSON.stringify(params));
-        if (cache[id]) { return cache[id]; }
-
-        const result = this._call(
-            path,
-            {
-                ...params,
-                fields: (params.fields || [])
-                    .map(field => field + '.summary(true)'),
-                method: HttpMethod[method].toUpperCase(),
-                access_token: params.access_token || FB.getAccessToken(),
-                source: Object
-                    .keys(params)
-                    .map(k => params[k])
-                    .filter(v => v instanceof File)[0] as File
-            })
-            .catch(err => Observable.of(err))
-            .map(res => res.status ? res.json() : {error: {code: 1}})
-            .do(body => {
-                console[body.error ? 'warn' : 'log'](
-                    'GraphAPI response:',
-                    body);
-                if (body.error) { throw new GraphApiError(body.error); }
-            })
-            .publishReplay(1)
-            .refCount()
-            .first();
-
-        if (method === HttpMethod.Get) { cache[id] = result; }
-        return result;
+        return this.api(path, method, params, T).concatMap(res => res.expanded);
     }
 
     /*
@@ -275,21 +206,90 @@ export class FbService {
     }
 
     /*
-     * High-level API access.
+     * Low-level API access.
      *
-     * This will completely abstract away pagination and return an Observable, 
-     * that will observe all results at the cost of being unable to fetch the 
-     * whole set only when it turns out to be necessary.  The Observable will be 
-     * of type T, whose constructor needs to be supplied as the magic last 
-     * parameter, if none as provided the Object will be passed as parsed.
+     * This will return all results from the API as-is, but will apply cacheing 
+     * and preprocess the parameters, moving File params to the source key, 
+     * filtering out null values and turning booleans and numbers and Arrays 
+     * into strings.
      */
-    fetch(
+    call(
         path: string,
         method = HttpMethod.Get,
-        params: FbApiParams = {},
-        T?: new (kwargs: GraphApiObjectType) => GraphApiObject
+        params: FbApiParams = {}
     ) {
-        return this.api(path, method, params, T).concatMap(res => res.expanded);
+        // Check the cache.
+        const id = path + ':' + btoa(JSON.stringify(params));
+        if (cache[id]) { return cache[id]; }
+
+        const result = this._call(
+            path,
+            {
+                ...params,
+                fields: (params.fields || [])
+                    .map(field => field + '.summary(true)'),
+                method: HttpMethod[method].toUpperCase(),
+                access_token: params.access_token || FB.getAccessToken(),
+                source: Object
+                    .keys(params)
+                    .map(k => params[k])
+                    .filter(v => v instanceof File)[0] as File
+            })
+            .catch(err => Observable.of(err))
+            .map(res => res.status ? res.json() : {error: {code: 1}})
+            .do(body => {
+                console[body.error ? 'warn' : 'log'](
+                    'GraphAPI response:',
+                    body);
+                if (body.error) { throw new GraphApiError(body.error); }
+            })
+            .publishReplay(1)
+            .refCount()
+            .first();
+
+        if (method === HttpMethod.Get) { cache[id] = result; }
+        return result;
+    }
+
+    /*
+     * Internal request handler.
+     *
+     * This will make the actual request.  The parameters will be minimally 
+     * preprocessed by turning Primitives and Primitive[]s into strings, 
+     * filtering nulls and moving Files to the source field.
+     */
+    protected _call(
+        path: string,
+        params: FbApiParams
+    ) {
+        console.log('GrapAPI request:', path, params);
+        return this.http
+            .post(
+                this.confService.fb[
+                    params.source
+                        && params.source.type.split('/')[0] === 'video'
+                        ? 'videoUploadUrl'
+                        : 'apiUrl'
+                ]
+                    + '/'
+                    + path,
+                Object
+                    .keys(params)
+                    .map((k): [string, Primitive|File] => [
+                        k,
+                        params[k] instanceof Array
+                            ? (params[k] as Primitive[]).join(',')
+                            : params[k] as Primitive|File
+                    ])
+                    .filter(([_, v]) => v !== null && v !== undefined)
+                    .map(([k, v]): [string, string|File] => [
+                        k,
+                        v instanceof File ? v : '' + v
+                    ])
+                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
+                    .reduce(
+                        (a, e) => (a.set as any)(...e) || a,
+                        new FormData()));
     }
 }
 

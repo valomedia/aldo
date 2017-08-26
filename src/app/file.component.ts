@@ -27,15 +27,18 @@ import {AppService} from './app.service';
 export class FileComponent {
     constructor(protected appService: AppService) {}
 
-    protected _link = '';
-    protected _ressource?: Ressource|null;
-    protected _file?: File;
-
     @Input()
     fileSizeLimit = 0;
 
     @Input()
     accept = '';
+
+    @Output()
+    ressourceChange = new EventEmitter<Ressource|null>();
+
+    protected _link = '';
+    protected _ressource?: Ressource|null;
+    protected _file?: File;
 
     /*
      * Whether the file selected is too big.
@@ -58,8 +61,6 @@ export class FileComponent {
         this._ressource = ressource;
         this.ressourceChange.emit(this.ressource);
     }
-    @Output()
-    ressourceChange = new EventEmitter<Ressource|null>();
 
     /*
      * The link the user has added.

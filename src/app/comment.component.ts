@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
 import {GraphApiError} from './graph-api-error';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 import {Comment} from './comment';
 import {Video} from './video';
 import {UtilService} from './util.service';
@@ -26,6 +26,9 @@ export class CommentComponent {
         protected utilService: UtilService,
         protected appRoutingService: AppRoutingService) {}
 
+    @Input()
+    loaded: boolean;
+
     protected params = this.appRoutingService.params;
     protected _loaded: boolean;
 
@@ -45,9 +48,6 @@ export class CommentComponent {
     protected video?: Video;
 
     @Input()
-    loaded: boolean;
-
-    @Input()
     set comment(comment: Comment) {
         this._loaded = this.loaded;
         this.comments = [];
@@ -58,12 +58,13 @@ export class CommentComponent {
             .finally(() => this._loaded = true)
             .subscribe(
                 comment => this.comments.push(comment),
-                err => showGraphApiError(this.mdSnackBar, err));
-        comment.video
-            && comment
+                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+        if (comment.video) {
+            comment
                 .video
                 .then(video => this.video = video)
-                .catch(err => showGraphApiError(this.mdSnackBar, err));
+                .catch(err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+        }
     }
 }
 

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/do';
 import {Post} from './post';
 import {PostService} from './post.service';
 import {GraphApiError} from './graph-api-error';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 import {PostContentType} from './post';
 import {VideoService} from './video.service';
 import {Video} from './video';
@@ -43,8 +43,8 @@ export class PostComponent extends AppRoutingComponent {
         super(appRoutingService);
     }
 
-    protected _params: Params;
-    protected PostContentType = PostContentType;
+    @Input()
+    loaded: boolean;
 
     /*
      * The Post this Component is currently showing.
@@ -66,8 +66,8 @@ export class PostComponent extends AppRoutingComponent {
      */
     protected _loaded: boolean;
 
-    @Input()
-    loaded: boolean;
+    protected _params: Params;
+    protected PostContentType = PostContentType;
 
     @Input()
     set params(params: Params) {
@@ -82,7 +82,7 @@ export class PostComponent extends AppRoutingComponent {
                     this.comments = post.comments;
                 },
                 (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+                    GraphApiErrorComponent.show(this.mdSnackBar, err));
         Observable.fromPromise(this.postService.post(params['post']))
             .map(post => post.video)
             .do(this.video = null)
@@ -91,7 +91,7 @@ export class PostComponent extends AppRoutingComponent {
             .subscribe(
                 (video: Video) => this.video = video,
                 (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+                    GraphApiErrorComponent.show(this.mdSnackBar, err));
     }
     get params() {
         return this._params;

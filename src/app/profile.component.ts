@@ -9,14 +9,14 @@ import {Profile} from './profile';
 import {Page} from './page';
 import {ProfileService} from './profile.service';
 import {GraphApiError} from './graph-api-error';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 import {AppUxService} from './app-ux.service';
 import {AppRoutingComponent} from './app-routing.component';
 import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
 
 /*
- * The Component showing a single page in detail.
+ * The Component showing a single Profile in detail.
  */
 
 @Component({
@@ -34,6 +34,9 @@ export class ProfileComponent extends AppRoutingComponent {
         super(appRoutingService);
     }
 
+    @Input()
+    loaded: boolean;
+
     /*
      * The Profile currently shown.
      */
@@ -45,9 +48,6 @@ export class ProfileComponent extends AppRoutingComponent {
     protected _loaded: boolean;
 
     @Input()
-    loaded: boolean;
-
-    @Input()
     set params(params: Params) {
         this._loaded = this.loaded;
         Observable
@@ -57,7 +57,7 @@ export class ProfileComponent extends AppRoutingComponent {
             .subscribe(
                 (profile: Profile) => this.profile = profile,
                 (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+                    GraphApiErrorComponent.show(this.mdSnackBar, err));
     }
 
     /*

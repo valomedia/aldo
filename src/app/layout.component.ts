@@ -31,17 +31,17 @@ export class LayoutComponent implements OnInit {
         protected appRoutingService: AppRoutingService) {}
 
     /*
-     * The route parameters.
-     */
-    protected params: Params = {};
-
-    /*
      * Whether the dark-theme is active.
      */
     dark = false;
 
     @ViewChild('aside')
     aside: MdSidenav;
+
+    /*
+     * The route parameters.
+     */
+    protected params: Params = {};
 
     ngOnInit() {
         this.appRoutingService

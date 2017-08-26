@@ -20,6 +20,22 @@ export class GraphApiErrorComponent implements OnInit {
     @Input()
     mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
 
+    /*
+     * Show a GraphApiError and return it.
+     */
+    static show(
+        mdSnackBar: MdSnackBar,
+        graphApiError: GraphApiError
+    ) {
+        if (!document.getElementsByTagName('graph-api-error').length) {
+            const mdSnackBarRef = mdSnackBar.openFromComponent(
+                GraphApiErrorComponent);
+            mdSnackBarRef.instance.graphApiError = graphApiError;
+            mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+        }
+        return graphApiError;
+    }
+
     ngOnInit() {
         console.error("Error encountered:", this.graphApiError);
     }
@@ -30,21 +46,5 @@ export class GraphApiErrorComponent implements OnInit {
     reload() {
         location.reload();
     }
-}
-
-/*
- * Show a GraphApiError and return it.
- */
-export function showGraphApiError(
-    mdSnackBar: MdSnackBar,
-    graphApiError: GraphApiError
-) {
-    if (!document.getElementsByTagName('graph-api-error').length) {
-        const mdSnackBarRef = mdSnackBar.openFromComponent(
-            GraphApiErrorComponent);
-        mdSnackBarRef.instance.graphApiError = graphApiError;
-        mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
-    }
-    return graphApiError;
 }
 

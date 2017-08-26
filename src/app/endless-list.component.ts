@@ -23,6 +23,11 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
     constructor(protected elementRef: ElementRef) {}
 
     /*
+     * Content for the endless list.
+     */
+    output: Observable<OutType>;
+
+    /*
      * Controller for the output.
      */
     protected controller: Subject<number>;
@@ -34,11 +39,6 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
      * for another request to complete, before they can be sent.
      */
     protected inFlight: number;
-
-    /*
-     * Content for the endless list.
-     */
-    output: Observable<OutType>;
 
     @Input()
     set input(input: Observable<InType>) {
@@ -54,7 +54,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
                             .filter((bottom) =>
                                 bottom < 2 * window.innerHeight))
                     .filter(() => !this.inFlight)
-                    .concatMap(() => Observable.from([null,null]))
+                    .concatMap(() => Observable.from([null, null]))
                     .do(() => ++this.inFlight)
                     .mergeScan(
                         acc =>

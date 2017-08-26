@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 import {Page} from './page';
 import {GraphApiError} from './graph-api-error';
 import {PostDialogComponent} from './post-dialog.component';
-import {showGraphApiError} from './graph-api-error.component';
+import {GraphApiErrorComponent} from './graph-api-error.component';
 import {AppUxService} from './app-ux.service';
 import {PostService} from './post.service';
 import {Post} from './post';
@@ -18,7 +18,7 @@ import {GraphApiResponse} from './graph-api-response';
 import {AppService} from './app.service';
 
 /*
- * The Component showing a single page in detail.
+ * The Component showing a single Page in detail.
  */
 
 @Component({
@@ -33,8 +33,6 @@ export class PageComponent {
         protected appUxService: AppUxService,
         protected postService: PostService,
         protected appService: AppService) {}
-
-    protected _page: Page;
 
     /*
      * Posts by this Page.
@@ -53,6 +51,8 @@ export class PageComponent {
 
     @Input()
     loaded: boolean;
+
+    protected _page: Page;
 
     /*
      * The Page currently shown.
@@ -100,7 +100,7 @@ export class PageComponent {
             .subscribe(
                 (id: string) => window.open('//facebook.com/' + id, '_blank'),
                 (err: GraphApiError) =>
-                    showGraphApiError(this.mdSnackBar, err));
+                    GraphApiErrorComponent.show(this.mdSnackBar, err));
     }
 }
 
