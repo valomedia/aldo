@@ -4,57 +4,50 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/pluck';
 
-import {Video, DUMMY_VIDEO_TYPE} from './video';
+import {Photo, DUMMY_PHOTO_TYPE} from './photo';
 import {FbService, HttpMethod} from './fb.service';
 import {Ressource} from './app';
 import {Page} from './page';
 
 /*
- * The Service providing the Videos.
+ * The Service providing the Photos.
  */
 
 @Injectable()
-export class VideoService {
+export class PhotoService {
     constructor(protected fbService: FbService) {}
 
     /*
-     * Get a video by its id.
+     * Get a Photo by its id.
      */
-    video(id: string): Promise<Video> {
+    photo(id: string): Promise<Photo> {
         return this.fbService
             .fetch(
                 id,
                 HttpMethod.Get,
-                {fields: Object.keys(DUMMY_VIDEO_TYPE)},
-                Video)
+                {fields: Object.keys(DUMMY_PHOTO_TYPE)},
+                Photo)
             .first()
-            .toPromise() as Promise<Video>;
+            .toPromise() as Promise<Photo>;
     }
 
     /*
-     * Create a new video.
+     * Create a new Photo on a Page.
      */
     create(
         page: Page,
         ressource: Ressource,
-        description?: string
+        caption?: string
     ): Promise<{
         id: string;
-        upload_session_id: string;
-        video_id: string;
-        start_offset: string;
-        end_offset: string;
-        success: boolean;
-        skip_upload: boolean;
-        transcode_bit_rate_bps: string;
-        transcode_dimension: string;
+        post_id: string;
     }> {
         return this.fbService.call(
-            page.id.toString() + '/videos',
+            page.id.toString() + '/photos',
             HttpMethod.Post,
             {
-                description: description,
-                file_url: ressource,
+                caption: caption,
+                url: ressource,
                 access_token: page.access_token
             })
             .first()

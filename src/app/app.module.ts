@@ -49,6 +49,7 @@ import {AppService} from './app.service';
 import {UtilService} from './util.service';
 import {ProfileComponent} from './profile.component';
 import {ProfileService} from './profile.service';
+import {PhotoService} from './photo.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -109,7 +110,8 @@ import {ProfileService} from './profile.service';
         ConfService,
         AppService,
         UtilService,
-        ProfileService
+        ProfileService,
+        PhotoService
     ],
     entryComponents: [
         PostDialogComponent,
