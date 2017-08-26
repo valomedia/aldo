@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 
-import {Post, DUMMY_POST_TYPE} from './post';
+import {Post, DUMMY_POST_TYPE, PostContentType} from './post';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
-import {Page, ContentType} from './page';
+import {Page} from './page';
 import {VideoService} from './video.service';
 import {Ressource} from './app';
 
@@ -88,12 +88,12 @@ export class PostService {
     create(
         page: Page,
         msg?: string,
-        contentType = ContentType.Link,
+        contentType = PostContentType.status,
         link?: Ressource
     ): Observable<string> {
         let result;
         switch (+contentType) {
-            case ContentType.Link:
+            case PostContentType.link:
                 result = this.fbService.call(
                     page.id.toString() + '/feed',
                     HttpMethod.Post,
@@ -103,7 +103,7 @@ export class PostService {
                         access_token: page.access_token
                     });
                 break;
-            case ContentType.Photo:
+           case PostContentType.photo:
                 result = this.fbService.call(
                     page.id.toString() + '/photos',
                     HttpMethod.Post,
@@ -113,7 +113,7 @@ export class PostService {
                         access_token: page.access_token
                     });
                 break;
-           case ContentType.Video:
+           case PostContentType.video:
                 result = this.videoService.create(page, link);
                 break;
         }

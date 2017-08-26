@@ -3,9 +3,10 @@ import {MdDialogRef} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 
-import {Page, ContentType} from './page';
+import {Page} from './page';
 import {PostService} from './post.service';
 import {Ressource} from './app';
+import {PostContentType} from './post';
 
 @Component({
     selector: 'post-dialog',
@@ -21,9 +22,9 @@ export class PostDialogComponent {
     page: Page;
 
     /*
-     * ContentType selected by the user.
+     * PostContentType selected by the user.
      */
-    contentType = ContentType.Link;
+    contentType = PostContentType.link;
 
     /*
      * Text entered by the user.
@@ -49,7 +50,7 @@ export class PostDialogComponent {
      * Get the uri of the attachment to be published, if any.
      */
     get ressource(): Ressource|null {
-        return this[ContentType[this.contentType].toLowerCase()];
+        return this[PostContentType[this.contentType]];
     }
 
     /*
@@ -62,6 +63,19 @@ export class PostDialogComponent {
                 this.text,
                 this.contentType,
                 this.ressource));
+    }
+
+    /*
+     * Set the PostContentType from the selected tab.
+     */
+    set selectedIndex(selectedIndex: number) {
+        this.contentType = PostContentType[
+            [
+                'link',
+                'photo',
+                'video'
+            ][selectedIndex]
+        ];
     }
 }
 

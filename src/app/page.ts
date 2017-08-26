@@ -9,15 +9,6 @@ import {UtilService} from './util.service';
  */
 
 /*
- * Types of content available for posting.
- */
-export enum ContentType {
-    Link,
-    Photo,
-    Video
-}
-
-/*
  * A Facebook page as returned by the Facebook API.
  */
 export interface PageType extends ProfileType {

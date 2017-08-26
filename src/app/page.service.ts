@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 
-import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
+import {Page, DUMMY_PAGE_TYPE} from './page';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {Ressource} from './app';
