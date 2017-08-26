@@ -61,7 +61,7 @@ export class PostDialogComponent {
             this.postService.create(
                 this.page,
                 this.text,
-                this.contentType,
+                this.ressource ? this.contentType : PostContentType.status,
                 this.ressource));
     }
 
