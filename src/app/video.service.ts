@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/first';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 
 import {Video, DUMMY_VIDEO_TYPE} from './video';
@@ -20,15 +19,13 @@ export class VideoService {
     /*
      * Get a video by its id.
      */
-    video(id: string): Promise<Video> {
+    video(id: string): Observable<Video> {
         return this.fbService
             .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_VIDEO_TYPE)},
-                Video)
-            .first()
-            .toPromise() as Promise<Video>;
+                Video) as Observable<Video>;
     }
 
     /*
@@ -38,7 +35,7 @@ export class VideoService {
         page: Page,
         ressource: Ressource,
         description?: string
-    ): Promise<{
+    ): Observable<{
         id: string;
         upload_session_id: string;
         video_id: string;
@@ -56,9 +53,7 @@ export class VideoService {
                 description: description,
                 file_url: ressource,
                 access_token: page.access_token
-            })
-            .first()
-            .toPromise();
+            });
     }
 }
 

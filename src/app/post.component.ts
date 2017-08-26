@@ -73,8 +73,8 @@ export class PostComponent extends AppRoutingComponent {
     set params(params: Params) {
         this._loaded = this.loaded;
         this._params = params;
-        Observable
-            .fromPromise(this.postService.post(params[this.appService.POST]))
+        this.postService
+            .post(params[this.appService.POST])
             .finally(() => this._loaded = true)
             .subscribe(
                 (post: Post) => {
@@ -83,7 +83,8 @@ export class PostComponent extends AppRoutingComponent {
                 },
                 (err: GraphApiError) =>
                     GraphApiErrorComponent.show(this.mdSnackBar, err));
-        Observable.fromPromise(this.postService.post(params['post']))
+        this.postService
+            .post(params[this.appService.POST])
             .map(post => post.video)
             .do(this.video = null)
             .filter(Boolean)

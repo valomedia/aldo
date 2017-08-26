@@ -20,7 +20,7 @@ export class ProfileService {
     /*
      * Get a Profile by its ID.
      */
-    profile(id: string): Promise<Profile> {
+    profile(id: string): Observable<Profile> {
         return this.fbService
             .fetch(
                 id,
@@ -34,11 +34,9 @@ export class ProfileService {
             .mergeMap(profile => {
                 switch (profile.metadata.type) {
                     case 'page': return this.pageService.page(id);
-                    default: return Promise.resolve(profile);
+                    default: return Observable.of(profile);
                 }
-            })
-            .first()
-            .toPromise();
+            });
     }
 }
 

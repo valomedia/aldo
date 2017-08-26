@@ -66,7 +66,7 @@ export class Comment extends GraphApiObject {
     protected commentService: CommentService;
 
     /*
-     * Get a Promise for the Video attached to this Comment.
+     * Get an Observable of the Video attached to this Comment.
      *
      * If no Video is attached to the Comment, or if the Comment is not a Video 
      * Comment, this will return false.

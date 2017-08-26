@@ -53,17 +53,13 @@ export class CommentComponent {
         this.comments = [];
         this.video = null;
         this._comment = comment;
-        comment
-            .comments
-            .finally(() => this._loaded = true)
-            .subscribe(
-                comment => this.comments.push(comment),
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+        comment.comments.finally(() => this._loaded = true).subscribe(
+            comment => this.comments.push(comment),
+            err => GraphApiErrorComponent.show(this.mdSnackBar, err));
         if (comment.video) {
-            comment
-                .video
-                .then(video => this.video = video)
-                .catch(err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+            comment.video.subscribe(
+                video => this.video = video,
+                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
         }
     }
 }

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/first';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 
 import {Photo, DUMMY_PHOTO_TYPE} from './photo';
@@ -20,15 +19,13 @@ export class PhotoService {
     /*
      * Get a Photo by its id.
      */
-    photo(id: string): Promise<Photo> {
+    photo(id: string): Observable<Photo> {
         return this.fbService
             .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_PHOTO_TYPE)},
-                Photo)
-            .first()
-            .toPromise() as Promise<Photo>;
+                Photo) as Observable<Photo>;
     }
 
     /*
@@ -38,7 +35,7 @@ export class PhotoService {
         page: Page,
         ressource: Ressource,
         caption?: string
-    ): Promise<{
+    ): Observable<{
         id: string;
         post_id: string;
     }> {
@@ -49,9 +46,7 @@ export class PhotoService {
                 caption: caption,
                 url: ressource,
                 access_token: page.access_token
-            })
-            .first()
-            .toPromise();
+            });
     }
 }
 

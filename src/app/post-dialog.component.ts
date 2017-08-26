@@ -14,7 +14,7 @@ import {Ressource} from './app';
 })
 export class PostDialogComponent {
     constructor(
-        protected mdDialogRef: MdDialogRef<Promise<string>>,
+        protected mdDialogRef: MdDialogRef<Observable<string>>,
         protected postService: PostService) {}
 
     @Input()

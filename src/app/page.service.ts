@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/pluck';
-import 'rxjs/add/operator/first';
 
 import {Page, DUMMY_PAGE_TYPE, ContentType} from './page';
 import {FbService, HttpMethod} from './fb.service';
@@ -32,7 +30,7 @@ export class PageService {
     /*
      * Get all Pages of the user.
      */
-    pages(after?: string) {
+    pages() {
         return this.get('me/accounts');
     }
 
@@ -40,7 +38,7 @@ export class PageService {
      * Get a Page by its ID.
      */
     page(id: string) {
-        return this.get(id).first().toPromise();
+        return this.get(id);
     }
 }
 

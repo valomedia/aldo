@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/first';
 
 import {Post, DUMMY_POST_TYPE} from './post';
 import {FbService, HttpMethod} from './fb.service';
@@ -44,15 +42,13 @@ export class PostService {
     /*
      * Get a post by its id.
      */
-    post(id: string): Promise<Post> {
+    post(id: string): Observable<Post> {
         return this.fbService
             .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_POST_TYPE)},
-                    Post)
-            .first()
-            .toPromise() as Promise<Post>;
+                    Post) as Observable<Post>;
     }
 
     /*
@@ -94,7 +90,7 @@ export class PostService {
         msg?: string,
         contentType = ContentType.Link,
         link?: Ressource
-    ): Promise<string> {
+    ): Observable<string> {
         let result;
         switch (+contentType) {
             case ContentType.Link:
@@ -118,11 +114,10 @@ export class PostService {
                     });
                 break;
            case ContentType.Video:
-                result = Observable.fromPromise(
-                    this.videoService.create(page, link));
+                result = this.videoService.create(page, link);
                 break;
         }
-        return result.pluck('id').first().toPromise();
+        return result.pluck('id');
     }
 }
 

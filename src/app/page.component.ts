@@ -86,11 +86,9 @@ export class PageComponent {
                     "",
                     {duration: 2000}))
             .concatAll()
-            .do((id: string) =>
-                this.postService
-                    .post(id)
-                    .then(post => this.newPosts.next(post))
-                    .catch(err => this.newPosts.error(err)))
+            .do((id: string) => this.postService.post(id).subscribe(
+                post => this.newPosts.next(post),
+                err => this.newPosts.error(err)))
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})

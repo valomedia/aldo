@@ -50,9 +50,8 @@ export class ProfileComponent extends AppRoutingComponent {
     @Input()
     set params(params: Params) {
         this._loaded = this.loaded;
-        Observable
-            .fromPromise(
-                this.profileService.profile(params[this.appService.PAGE]))
+        this.profileService
+            .profile(params[this.appService.PAGE])
             .finally(() => this._loaded = true)
             .subscribe(
                 (profile: Profile) => this.profile = profile,
