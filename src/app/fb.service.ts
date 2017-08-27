@@ -164,7 +164,14 @@ export class FbService {
         params: FbApiParams = {},
         T?: new (kwargs: GraphApiObjectType) => GraphApiObject
     ): Observable<GraphApiResponse<GraphApiObject>> {
-        return this.call(path, method, params)
+        return this.call(
+            path,
+            method,
+            {
+                ...params,
+                fields: (params.fields || [])
+                    .map(field => field + '.summary(true)')
+            })
             .map((res: GraphApiResponseType<GraphApiObject>|any) =>
                 new GraphApiResponse(
                     res.data
@@ -225,8 +232,6 @@ export class FbService {
             path,
             {
                 ...params,
-                fields: (params.fields || [])
-                    .map(field => field + '.summary(true)'),
                 method: HttpMethod[method].toUpperCase(),
                 access_token: params.access_token || FB.getAccessToken(),
                 source: Object
