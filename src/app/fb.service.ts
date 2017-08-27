@@ -82,7 +82,7 @@ declare var FB: {
     api: (
         path: string,
         method: string,
-        params: any,
+        params: {[id: string]: any},
         cb: (response: any) => void) => void;
     ui: (params: any, cb: (response: any) => void) => void;
 
