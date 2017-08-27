@@ -12,7 +12,6 @@ import {
     BaseRequestOptions
 } from '@angular/http';
 
-import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
 import {AppUxService} from './app-ux.service';
 import {CommentService} from './comment.service';
@@ -21,6 +20,8 @@ import {FbService} from './fb.service';
 import {PageService} from './page.service';
 import {PostService} from './post.service';
 import {VideoService} from './video.service';
+import {ProfileService} from './profile.service';
+import {PhotoService} from './photo.service';
 
 /*
  * Service providing some useful functions, that don't belong anywhere else.
@@ -37,6 +38,8 @@ export class UtilService {
         this.postService = this.inject(PostService);
         this.videoService = this.inject(VideoService);
         this.appService = this.inject(AppService);
+        this.profileService = this.inject(ProfileService);
+        this.photoService = this.inject(PhotoService);
     }
 
     // TODO Make this protected again.
@@ -66,7 +69,9 @@ export class UtilService {
         {
             provide: RequestOptions,
             useClass: BaseRequestOptions
-        }
+        },
+        ProfileService,
+        PhotoService
     ]);
 
     /*
@@ -130,6 +135,8 @@ export class UtilService {
     protected pageService: PageService;
     protected postService: PostService;
     protected videoService: VideoService;
+    protected profileService: ProfileService;
+    protected photoService: PhotoService;
 
     /*
      * What to link to, if the user clicks a Profile.

@@ -9,6 +9,7 @@ import {GraphApiResponse} from './graph-api-response';
 import {Page} from './page';
 import {VideoService} from './video.service';
 import {Ressource} from './app';
+import {PhotoService} from './photo.service';
 
 /*
  * The Service providing the Pages.
@@ -18,7 +19,8 @@ import {Ressource} from './app';
 export class PostService {
     constructor(
         protected fbService: FbService,
-        protected videoService: VideoService) {}
+        protected videoService: VideoService,
+        protected photoService: PhotoService) {}
 
     /*
      * Perform a GET-request for a Post on a given path.
@@ -104,14 +106,7 @@ export class PostService {
                     });
                 break;
            case PostContentType.photo:
-                result = this.fbService.call(
-                    page.id.toString() + '/photos',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        url: link,
-                        access_token: page.access_token
-                    });
+                result = this.photoService.create(page, link);
                 break;
            case PostContentType.video:
                 result = this.videoService.create(page, link);
