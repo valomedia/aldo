@@ -102,16 +102,16 @@ declare var FB: {
     getAccessToken: () => string|null;
 };
 
-/*
- * The request cache.
- *
- * Might turn this into a middleware at some point.
- */
-let cache = {};
-
 @Injectable()
 export class FbService {
     constructor(protected http: Http, protected confService: ConfService) {}
+
+    /*
+     * The request cache.
+     *
+     * TODO Turn this into a middleware when switching to HttpClient.
+     */
+    private static cache: {[id: string]: any} = {};
 
     /*
      * Clear the cache.
@@ -121,12 +121,12 @@ export class FbService {
     clearCache(keep: string[] = []) {
         for (
             const i of Object
-                .keys(cache)
+                .keys(FbService.cache)
                 .map(k => [k.split(/[\/:]/)[0], k])
                 .filter(([id, _]) => !(keep.indexOf(id) + 1))
                 .map(([_, k]) => k)
         ) {
-            delete cache[i];
+            delete FbService.cache[i];
         }
     }
 
@@ -219,7 +219,7 @@ export class FbService {
     ) {
         // Check the cache.
         const id = path + ':' + btoa(JSON.stringify(params));
-        if (cache[id]) { return cache[id]; }
+        if (FbService.cache[id]) { return FbService.cache[id]; }
 
         const result = this._call(
             path,
@@ -246,7 +246,7 @@ export class FbService {
             .refCount()
             .first();
 
-        if (method === HttpMethod.Get) { cache[id] = result; }
+        if (method === HttpMethod.Get) { FbService.cache[id] = result; }
         return result;
     }
 
