@@ -72,7 +72,7 @@ declare var FB: {
     api: (
         path: string,
         method: string,
-        params: any,
+        params: {[id: string]: any},
         cb: (response: any) => void) => void;
     ui: (params: any, cb: (response: any) => void) => void;
 
@@ -104,7 +104,11 @@ let cache = {};
  * This function wraps FB.api() to make it typesafe.  It also returns a Promise, 
  * instead of accepting a callback.
  */
-function api(path: string, method: HttpMethod, params: any): Promise<any> {
+function api(
+    path: string,
+    method: HttpMethod,
+    params: {[id:string]: any}
+): Promise<any> {
     return new Promise((resolve, reject) =>
         FB.api(
             path,
@@ -248,7 +252,7 @@ export class FbService {
     call(
         path: string,
         method = HttpMethod.Get,
-        params = {},
+        params: {[id: string]: any} = {},
         T: new (kwargs: GraphApiObjectType) => GraphApiObject = null
     ) {
         return this.api(path, method, params, T).concatMap(res => res.expanded);
