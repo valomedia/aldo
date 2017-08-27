@@ -72,14 +72,15 @@ export class AppRoutingService {
      * Refresh all routed Components.
      *
      * This will browse to a bogus route and back, to force all routed 
-     * Components being rebuilt.
+     * Components being rebuilt.  Optionally a list of parameter names may be 
+     * passed to refresh only those parameters.
      */
-    refresh() {
-        const params = this.params;
-        this.router.navigateByUrl(
-            Array(this.appService.PARAMS.length + 1).join('/_'),
-            {skipLocationChange: true});
-        setTimeout(() => this.params = params);
+    refresh(params = this.appService.PARAMS) {
+        const url = this.location.path();
+        this.params = params
+            .map(k => ({[k]: null}))
+            .reduce((o, e) => Object.assign(o, e), [])
+        setTimeout(() => this.router.navigateByUrl(url));
     }
 }
 

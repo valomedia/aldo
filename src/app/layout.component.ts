@@ -10,6 +10,7 @@ import 'rxjs/add/operator/do';
 import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
+import {AppService} from './app.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -28,7 +29,8 @@ export class LayoutComponent implements OnInit {
         protected router: Router,
         protected fbService: FbService,
         protected location: Location,
-        protected appRoutingService: AppRoutingService) {}
+        protected appRoutingService: AppRoutingService,
+        protected appService: AppService) {}
 
     /*
      * Whether the dark-theme is active.

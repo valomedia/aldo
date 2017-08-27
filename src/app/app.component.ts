@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
                 [[], []],
                 1)
             .map(([last, next]) => last.filter(i => next.indexOf(i) + 1))
-            .subscribe(ids => this.fbService.clearCache(ids));
+            .subscribe(ids => this.fbService.clearCache([], ids));
     }
 
     @HostListener('window:resize')

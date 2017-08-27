@@ -116,14 +116,20 @@ export class FbService {
     /*
      * Clear the cache.
      *
-     * Clear the cache keeping only entries for the provided paths.
+     * Optionally two lists of strings may be provided, the first is a black 
+     * list, the second one is a white list.  All items, where the first part of 
+     * the path appears in the black list will be cleared.  Then, if there is 
+     * a white list, all items whete the first part of the path does not appear 
+     * in the white list will be cleared.
      */
-    clearCache(keep: string[] = []) {
+    clearCache(blackList: string[] = [], whiteList: string[] = []) {
         for (
             const i of Object
                 .keys(FbService.cache)
                 .map(k => [k.split(/[\/:]/)[0], k])
-                .filter(([id, _]) => !(keep.indexOf(id) + 1))
+                .filter(([id]) => blackList.indexOf(id) + 1
+                    || (whiteList.length || !blackList.length)
+                    && !(whiteList.indexOf(id) + 1))
                 .map(([_, k]) => k)
         ) {
             delete FbService.cache[i];
