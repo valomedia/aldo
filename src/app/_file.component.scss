@@ -1,0 +1,18 @@
+
+/*
+ * Styling partial for the FileComponent.
+ *
+ * This contains style directives locally applied to the FileComponent.
+ */
+
+:host {
+    display: flex;
+    align-items: center;
+}
+
+:host > *:first-child, :host > *:last-child {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+

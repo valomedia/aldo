@@ -7,8 +7,8 @@ import {
 } from './graph-api-object';
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
-import {FbService} from './fb.service';
 import {CommentService} from './comment.service';
+import {UtilService} from './util.service';
 
 /*
  * Classes related to Facebook posts.
@@ -44,7 +44,7 @@ export interface PostType extends GraphApiObjectType {
     description?: string;
     shares?: {count: number};
     likes: {
-        data: [{name: string;}];
+        data: {name: string;}[];
         summary: {
             total_count: number;
             can_like: boolean;
@@ -64,16 +64,14 @@ export class Post extends GraphApiObject {
             to: (kwargs.to || []).map(profileType => new Profile(profileType))
         };
         super(kwargs);
-        const reflectiveInjector = ReflectiveInjector
-            .resolveAndCreate([
-                CommentService,
-                VideoService,
-                FbService
-            ]);
-        this.videoService = reflectiveInjector.get(VideoService);
-        this.commentService = reflectiveInjector.get(CommentService);
+        this.utilService = ReflectiveInjector
+            .resolveAndCreate([UtilService])
+            .get(UtilService);
+        this.videoService = this.utilService.inject(VideoService);
+        this.commentService = this.utilService.inject(CommentService);
     }
 
+    private utilService: UtilService;
     private videoService: VideoService;
     private commentService: CommentService;
 
@@ -89,9 +87,19 @@ export class Post extends GraphApiObject {
 
     /*
      * Get the text to display for this Post.
+     *
+     * This will return the message attached to the Post, or, in absence of 
+     * that, the text of the story for the Post.  To work around a Facebook 
+     * issue, this will return the text of a pseudo-story, if the story is not 
+     * set and the Post has a Video attached.  If there is no message and no 
+     * story to tell, this will return an empty string.
      */
     get text() {
-        return this.message || this.story;
+        return this.message
+            || this.story
+            || this.contentType == PostContentType.video
+            && this.from.name + " hat ein neues Video hinzugefügt."
+            || '';
     }
 
     /*

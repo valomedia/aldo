@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/finally';
 
 import {Page} from './page';
 import {PageService} from './page.service';
@@ -15,21 +16,8 @@ import {showGraphApiError} from './graph-api-error.component';
 
 @Component({
     selector: 'dashboard',
-    template: `
-        <h1>Dashboard</h1>
-        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
-        <md-grid-list
-                [cols]='appUxService.cols / 3 | ceil'
-                [gutterSize]='appUxService.gutterSize'
-                rowHeight='2:1'>
-            <md-grid-tile
-                    *ngFor='let page of pages'
-                    [appLink]='{page: page.id}'>
-                {{page.name}}
-            </md-grid-tile>
-        </md-grid-list>
-    `,
-    styleUrls: ['dist/dashboard.component.css']
+    templateUrl: './_dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
     constructor(

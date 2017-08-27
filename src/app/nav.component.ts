@@ -6,12 +6,8 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'nav',
-    template: `
-        <div>
-            <pages></pages>
-        </div>
-    `,
-    styleUrls: ['dist/nav.component.css']
+    templateUrl: './_nav.component.html',
+    styleUrls: ['./nav.component.css']
 })
 export class NavComponent {}
 

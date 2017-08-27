@@ -96,13 +96,13 @@ export class GraphApiError {
         error_user_msg = '',
         fbtrace_id
     }: {
-        message: string,
+        message?: string,
         type?: string,
         code: number,
         error_subcode?: number,
         error_user_title?: string,
         error_user_msg?: string,
-        fbtrace_id: string
+        fbtrace_id?: string
     }) {
         this.message = message;
         this.type = type;

@@ -2,10 +2,11 @@ import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
 
 import 'rxjs/add/operator/mergeScan';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
-import {PAGE, POST} from './app';
+import {AppService} from './app.service';
 
 /*
  * The main Component of Aldo.
@@ -13,30 +14,15 @@ import {PAGE, POST} from './app';
 
 @Component({
     selector: 'app',
-    template: `
-        <layout>
-            <nav app-content></nav>
-            <aside app-content>
-                <post *appRouting='POST'></post>
-                <no-detail *appRouting></no-detail>
-            </aside>
-            <main app-content>
-                <dashboard *appRouting='null; conflicts:PAGE'></dashboard>
-                <page *appRouting='PAGE'></page>
-                <not-found *appRouting></not-found>
-            </main>
-        </layout>
-    `,
-    styleUrls: ['dist/app.component.css']
+    templateUrl: './_app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
     constructor(
         private applicationRef: ApplicationRef,
         private fbService: FbService,
-        private appRoutingService: AppRoutingService) {}
-
-    private PAGE = PAGE;
-    private POST = POST;
+        private appRoutingService: AppRoutingService,
+        private appService: AppService) {}
 
     /*
      * Displayed in the main toolbar.

@@ -2,7 +2,7 @@ import {ReflectiveInjector} from '@angular/core';
 
 import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
-import {FbService} from './fb.service';
+import {UtilService} from './util.service';
 
 /*
  * Classes related to handling Facebook pages.
@@ -33,9 +33,10 @@ export interface PageType extends ProfileType {
  * A Facebook page as used internally.
  */
 export class Page extends Profile {
-    private postService: PostService = ReflectiveInjector
-        .resolveAndCreate([PostService, FbService])
-        .get(PostService);
+    private utilService: UtilService = ReflectiveInjector
+        .resolveAndCreate([UtilService])
+        .get(UtilService);
+    private postService: PostService = this.utilService.inject(PostService);
 
     /*
      * Get the feed of Posts of this Page.
