@@ -16,6 +16,8 @@ import {PostService} from './post.service';
 import {Post} from './post';
 import {GraphApiResponse} from './graph-api-response';
 import {AppService} from './app.service';
+import {FbService} from './fb.service';
+import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component showing a single Page in detail.
@@ -32,7 +34,9 @@ export class PageComponent {
         protected mdSnackBar: MdSnackBar,
         protected appUxService: AppUxService,
         protected postService: PostService,
-        protected appService: AppService) {}
+        protected appService: AppService,
+        protected fbService: FbService,
+        protected appRoutingService: AppRoutingService) {}
 
     /*
      * Posts by this Page.
@@ -86,9 +90,8 @@ export class PageComponent {
                     "",
                     {duration: 2000}))
             .concatAll()
-            .do((id: string) => this.postService.post(id).subscribe(
-                post => this.newPosts.next(post),
-                err => { throw err; }))
+            .do(this.fbService.clearCache.bind(this.fbService))
+            .do(this.appRoutingService.refresh.bind(this.appRoutingService))
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})

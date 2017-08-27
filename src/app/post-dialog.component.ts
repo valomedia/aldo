@@ -18,6 +18,12 @@ export class PostDialogComponent {
         protected mdDialogRef: MdDialogRef<Observable<string>>,
         protected postService: PostService) {}
 
+    protected static tabs = [
+        PostContentType.link,
+        PostContentType.photo,
+        PostContentType.video
+    ];
+
     @Input()
     page: Page;
 
@@ -68,14 +74,11 @@ export class PostDialogComponent {
     /*
      * Set the PostContentType from the selected tab.
      */
+    get selectedIndex() {
+        return PostDialogComponent.tabs.indexOf(this.contentType);
+    }
     set selectedIndex(selectedIndex: number) {
-        this.contentType = PostContentType[
-            [
-                'link',
-                'photo',
-                'video'
-            ][selectedIndex]
-        ];
+        this.contentType = PostDialogComponent.tabs[selectedIndex];
     }
 }
 

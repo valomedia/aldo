@@ -91,28 +91,30 @@ export class PostService {
         page: Page,
         msg?: string,
         contentType = PostContentType.status,
-        link?: Ressource
+        ressource?: Ressource
     ): Observable<string> {
-        let result;
-        switch (+contentType) {
-            case PostContentType.link:
-                result = this.fbService.call(
-                    page.id.toString() + '/feed',
-                    HttpMethod.Post,
-                    {
-                        message: msg,
-                        link: link,
-                        access_token: page.access_token
-                    });
-                break;
-           case PostContentType.photo:
-                result = this.photoService.create(page, link);
-                break;
-           case PostContentType.video:
-                result = this.videoService.create(page, link);
-                break;
-        }
-        return result.pluck('id');
+        return [
+            this._create,
+            this._create,
+            this.photoService.create,
+            this.videoService.create
+        ][contentType].bind(this)(page, ressource, msg);
+    }
+
+    protected _create(
+        page: Page,
+        link: Ressource,
+        message: string
+    ): Observable<string> {
+        return this.fbService.call(
+            page.id.toString() + '/feed',
+            HttpMethod.Post,
+            {
+                message: message,
+                link: link,
+                access_token: page.access_token
+            })
+            .pluck('id');
     }
 }
 

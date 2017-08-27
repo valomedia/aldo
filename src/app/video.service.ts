@@ -35,28 +35,16 @@ export class VideoService {
         page: Page,
         ressource: Ressource,
         description?: string
-    ): Observable<{
-        id: string;
-        attachmentId: string;
-    }> {
+    ): Observable<string> {
         return this.fbService.call(
             page.id.toString() + '/videos',
             HttpMethod.Post,
             {
                 description: description,
                 file_url: ressource,
-                access_token: page.access_token
+                access_token: page.access_token,
             })
-            .map(({
-                id,
-                video_id
-            }: {
-                id: string;
-                video_id: string;
-            }) => ({
-                id: id,
-                attachmentId: video_id
-            }));
+            .pluck('id');
     }
 }
 

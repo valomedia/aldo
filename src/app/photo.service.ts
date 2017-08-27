@@ -34,10 +34,7 @@ export class PhotoService {
         page: Page,
         ressource: Ressource,
         caption?: string
-    ): Observable<{
-        id: string;
-        attachmentId: string;
-    }> {
+    ): Observable<string> {
         return this.fbService.call(
             page.id.toString() + '/photos',
             HttpMethod.Post,
@@ -46,16 +43,7 @@ export class PhotoService {
                 url: ressource,
                 access_token: page.access_token
             })
-            .map(({
-                id,
-                post_id
-            }: {
-                id: string;
-                post_id: string;
-            }) => ({
-                id: post_id,
-                attachmentId: id
-            }));
+            .pluck('id');
     }
 }
 
