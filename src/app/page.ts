@@ -18,6 +18,12 @@ export interface PageType extends ProfileType {
     overall_star_rating: number;
     rating_count: number;
     talking_about_count: number;
+    likes: {
+        data: [{
+            name: string;
+            id: string;
+        }];
+    };
 };
 
 /*
@@ -63,6 +69,12 @@ export const DUMMY_PAGE_TYPE: PageType = {
     new_like_count: 0,
     overall_star_rating: 0,
     rating_count: 0,
-    talking_about_count: 0
+    talking_about_count: 0,
+    likes: {
+        data: [{
+            name: '',
+            id: ''
+        }]
+    }
 };
 
