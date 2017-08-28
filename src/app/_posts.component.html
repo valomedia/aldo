@@ -9,7 +9,7 @@
             <div>
                 <p>
                     <span
-                            mdTooltip="Likes"
+                            [mdTooltip]='post.likeTooltip'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
@@ -20,7 +20,7 @@
                         </span>
                     </span>
                     <span
-                            mdTooltip="Shares"
+                            [mdTooltip]='post.shareTooltip'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>

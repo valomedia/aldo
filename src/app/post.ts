@@ -129,6 +129,50 @@ export class Post extends Story {
     get comments() {
         return this.commentService.comments(this.id);
     }
+
+    /*
+     * Tooltip showing detail on the post likes.
+     */
+    get likeTooltip() {
+        if (this.likes.data.length) {
+            return this.likes
+                    .data
+                    .map(profile => profile.name)
+                    .slice(0, -1)
+                    .join(', ')
+                + (this.likes.summary.total_count - this.likes.data.length
+                    ? ", "
+                    + this.likes.data.slice(-1)[0].name
+                    + " und "
+                    + (this.likes.summary.total_count - this.likes.data.length)
+                    + (this.likes.summary.total_count
+                        - this.likes.data.length
+                        - 1
+                        ? " weiteren Nutzern"
+                        : " weiterem Nutzer")
+                    : (this.likes.data.length === 1 ? '' : " und ")
+                    + this.likes.data.slice(-1)[0].name)
+                + " gefällt das";
+        } else {
+            return (this.likes.summary.total_count === 1
+                    ? "Einem Nutzer"
+                    : this.likes.summary.total_count
+                    + " Nutzern")
+                + " gefällt das";
+        }
+    }
+
+    /*
+     * Tooltip for the shares.
+     */
+    get shareTooltip() {
+        if (!this.shares) { return "Niemand hat diesen Post geteilt"; }
+        return ''
+            + this.shares.count
+            + " Nutzer "
+            + (this.shares.count === 1 ? "hat" : "haben")
+            + " diesen Post geteilt";
+    }
 }
 export interface Post extends PostType {}
 

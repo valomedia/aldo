@@ -8,7 +8,7 @@
                 <span *ngIf='profile.fan_count'>
                     <br>
                     <span
-                            [mdTooltip]='likeTooltip(profile)'
+                            [mdTooltip]='profile.likeTooltip'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
@@ -22,7 +22,7 @@
                 <span *ngIf='profile.talking_about_count'>
                     <br>
                     <span
-                            mdTooltip="Nutzer, die über die Seite reden"
+                            [mdTooltip]='profile.talkingAboutTooltip'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
@@ -36,7 +36,7 @@
                 <span *ngIf='profile.overall_star_rating'>
                     <br>
                     <span
-                            mdTooltip="Bewertung (Anzahl Bewertungen)"
+                            [mdTooltip]='profile.ratingTooltip'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>

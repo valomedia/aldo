@@ -47,7 +47,7 @@
         <div>
             <p>
                 <span
-                        mdTooltip="Likes"
+                        [mdTooltip]='_comment.likeTooltip'
                         mdTooltipShowDelay='1500'
                         mdTooltipHideDelay='1500'>
                     <span class='text-primary'>
@@ -58,7 +58,7 @@
                     </span>
                 </span>
                 <span
-                        mdTooltip="Antworten"
+                        [mdTooltip]='_comment.replyTooltip'
                         mdTooltipShowDelay='1500'
                         mdTooltipHideDelay='1500'>
                     <span class='text-primary'>

@@ -66,27 +66,5 @@ export class ProfileComponent extends AppRoutingComponent {
     get isPage() {
         return this.profile instanceof Page;
     }
-
-    /*
-     * Tooltip showing detail on the page likes.
-     */
-    likeTooltip(page: Page) {
-        if (page.likes) {
-            return page.likes.data.map(page => page.name).join(', ')
-                + (page.fan_count - page.likes.data.length
-                    ? " und "
-                    + (page.fan_count - page.likes.data.length)
-                    + (page.fan_count - page.likes.data.length - 1
-                            ? " weiteren Nutzern"
-                            : " weiterem Nutzer")
-                    : '')
-                + " gefällt diese Seite";
-        } else {
-            return (page.fan_count !== 1
-                    ? '' + page.fan_count + " Nutzern"
-                    : "Einem Nutzer")
-                + " gefällt diese Seite";
-        }
-    }
 }
 

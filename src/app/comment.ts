@@ -37,6 +37,17 @@ export interface CommentType extends GraphApiObjectType {
     };
     like_count: number;
     comment_count: number;
+    likes: {
+        data: {
+            name: string;
+            id: string;
+        }[];
+        summary: {
+            total_count: number;
+            can_like: boolean;
+            has_liked: boolean;
+        }
+    }
 }
 
 /*
@@ -85,6 +96,45 @@ export class Comment extends GraphApiObject {
             .comments(this.id)
             .concatMap(res => res.expanded);
     }
+
+    /*
+     * Tooltip showing detail on the comment likes.
+     */
+    get likeTooltip() {
+        if (this.likes.data.length) {
+            return this.likes
+                    .data
+                    .map(profile => profile.name)
+                    .slice(0, -1)
+                    .join(', ')
+                + (this.like_count - this.likes.data.length
+                    ? ", "
+                    + this.likes.data.slice(-1)[0].name
+                    + " und "
+                    + (this.like_count - this.likes.data.length)
+                    + (this.like_count - this.likes.data.length - 1
+                        ? " weiteren Nutzern"
+                        : " weiterem Nutzer")
+                    : (this.likes.data.length === 1 ? '' : " und ")
+                    + this.likes.data.slice(-1)[0].name)
+                + " gefällt das";
+        } else {
+            return (this.like_count === 1
+                    ? "Einem Nutzer"
+                    : this.like_count
+                    + " Nutzern")
+                + " gefällt das";
+        }
+    }
+
+    /*
+     * Tooltip for the reply count.
+     */
+    get replyTooltip() {
+        return "Dieser Kommentar hat "
+            + this.comment_count
+            + (this.comment_count === 1 ? " Antwort" : " Antworten");
+    }
 }
 export interface Comment extends CommentType {}
 
@@ -115,6 +165,17 @@ export const DUMMY_COMMENT_TYPE: CommentType = {
         url: ''
     },
     like_count: 0,
-    comment_count: 0
+    comment_count: 0,
+    likes: {
+        data: [{
+            name: '',
+            id: ''
+        }],
+        summary: {
+            total_count: 0,
+            can_like: false,
+            has_liked: false
+        }
+    }
 };
 
