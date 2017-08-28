@@ -8,7 +8,7 @@
                 <span *ngIf='profile.fan_count'>
                     <br>
                     <span
-                            mdTooltip="Likes"
+                            [mdTooltip]='likeTooltip(profile)'
                             mdTooltipShowDelay='1500'
                             mdTooltipHideDelay='1500'>
                         <span class='text-primary'>
