@@ -33,7 +33,6 @@
                         mdTooltip="Neu laden"
                         mdTooltipShowDelay='1500'
                         mdTooltipHideDelay='1500'
-                        (click)='fbService.clearCache([params.post])'
                         (click)='appRoutingService.refresh([appService.POST])'>
                     <md-icon>refresh</md-icon>
                 </button>
@@ -78,7 +77,6 @@
                     mdTooltip="Neu laden"
                     mdTooltipShowDelay='1500'
                     mdTooltipHideDelay='1500'
-                    (click)='fbService.clearCache([params.profile])'
                     (click)='appRoutingService.refresh([appService.PROFILE])'>
                 <md-icon>refresh</md-icon>
             </button>

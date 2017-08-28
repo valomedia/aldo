@@ -63,6 +63,7 @@ export class AppRoutingDirective implements OnInit {
         // Handle regular Components.
         this.appRoutingService
             .events
+            .map(() => this.appRoutingService.params)
             .filter(() => !!this._depends.length || !!this._conflicts.length)
             .map(params => !!params
                 && this._depends
@@ -76,6 +77,7 @@ export class AppRoutingDirective implements OnInit {
         // Handle fallback Components.
         this.appRoutingService
             .events
+            .map(() => this.appRoutingService.params)
             .filter(() => !this._depends.length && !this._conflicts.length)
             .map(Boolean)
             .subscribe(valid => valid ? this.hide() : this.show());

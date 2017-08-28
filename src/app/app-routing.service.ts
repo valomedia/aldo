@@ -4,6 +4,8 @@ import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/publishBehavior';
 import 'rxjs/add/operator/map';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 
 import {AppService} from './app.service';
 
@@ -18,19 +20,38 @@ export class AppRoutingService {
     constructor(
         protected router: Router,
         protected location: Location,
-        protected appService: AppService) {}
+        protected appService: AppService
+    ) {
+        this.router
+            .events
+            .filter(event => event instanceof NavigationEnd)
+            .map((event: NavigationEnd) => this.parse(event.url))
+            .mergeScan(
+                ([_, last], next) => Observable.of([last || {}, next]),
+                [{}, {}],
+                1)
+            .map(([last, next]) => next
+                ? Object
+                    .keys(next)
+                    .filter(k => last[k] !== next[k])
+                    .map(k => ({[k]: next[k]}))
+                    .reduce((o, e) => Object.assign(o, e), {})
+                : null)
+            .skip(1)
+            .subscribe(this.events);
+    }
 
-    events = this.router
-        .events
-        .filter(event => event instanceof NavigationEnd)
-        .map((event: NavigationEnd) => this.parse(event.url))
-        .publishBehavior(this.params)
-        .refCount();
+    /*
+     * This will emit the set of Params that has changed on each NavigationEnd.
+     *
+     * If the user navigates to an invalid route, this will emit null.
+     */
+    events = new BehaviorSubject<Params>(this.params);
 
     /*
      * Parse the parameters from a path.
      */
-    parse?(path: string): Params|null {
+    parse(path: string): Params|null {
         return path
             .split('/')
             .slice(1)
@@ -44,7 +65,9 @@ export class AppRoutingService {
     }
 
     /*
-     * Get the current route parameters.
+     * Get the current route Params.
+     *
+     * This will null if the route is invalid.
      */
     get params(): Params|null {
         return this.parse(this.location.path());
@@ -69,18 +92,16 @@ export class AppRoutingService {
     }
 
     /*
-     * Refresh all routed Components.
+     * Trigger a soft reload.
      *
-     * This will browse to a bogus route and back, to force all routed 
-     * Components being rebuilt.  Optionally a list of parameter names may be 
-     * passed to refresh only those parameters.
+     * This will refresh the Params, triggering routed components to be rebuilt.  
+     * If a list of parameter names is passed, only those will be refreshed.
      */
     refresh(params = this.appService.PARAMS) {
-        const url = this.location.path();
-        this.params = params
-            .map(k => ({[k]: null}))
-            .reduce((o, e) => Object.assign(o, e), [])
-        setTimeout(() => this.router.navigateByUrl(url));
+        this.events.next(
+            params
+                .map(k => ({[k]: this.params[k]}))
+                .reduce((o, e) => Object.assign(o, e), {}));
     }
 }
 

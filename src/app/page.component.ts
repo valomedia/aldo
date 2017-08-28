@@ -90,8 +90,7 @@ export class PageComponent {
                     "",
                     {duration: 2000}))
             .concatAll()
-            .do(() => this.fbService.clearCache([this.page.id]))
-            .do(() => this.appRoutingService.refresh([this.appService.PAGE]))
+            .do(() => this.posts = this.page.posts)
             .map((id: string) =>
                 this.mdSnackBar
                     .open("Post erstellt", "Öffnen", {duration: 2000})

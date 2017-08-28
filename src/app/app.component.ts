@@ -1,4 +1,4 @@
-import {Component, ApplicationRef, HostListener, OnInit} from '@angular/core';
+import {Component, ApplicationRef, HostListener} from '@angular/core';
 
 import 'rxjs/add/operator/mergeScan';
 import {Observable} from 'rxjs/Observable';
@@ -17,7 +17,7 @@ import {AppService} from './app.service';
     templateUrl: './_app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     constructor(
         protected applicationRef: ApplicationRef,
         protected fbService: FbService,
@@ -28,19 +28,6 @@ export class AppComponent implements OnInit {
      * Displayed in the main toolbar.
      */
     title = 'Aldo';
-
-    ngOnInit() {
-        this.appRoutingService
-            .events
-            .filter(Boolean)
-            .map(params => Object.keys(params).map(k => params[k]))
-            .mergeScan(
-                ([_, last], next) => Observable.of([last, next]),
-                [[], []],
-                1)
-            .map(([last, next]) => last.filter(i => next.indexOf(i) + 1))
-            .subscribe(ids => this.fbService.clearCache([], ids));
-    }
 
     @HostListener('window:resize')
     onResize() {

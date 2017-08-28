@@ -33,9 +33,11 @@
                         target='_blank'>
                     <md-icon>attachment</md-icon>
                 </a>
-                <br>
-                {{comment.message}}<!--
-            --></p>
+                <span *ngIf='comment.message'>
+                    <br>
+                    {{comment.message}}
+                </span>
+            </p>
         </blockquote>
     </md-card-content>
     <md-card-content *ngIf='!_loaded'>

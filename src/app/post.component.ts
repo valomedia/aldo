@@ -71,10 +71,12 @@ export class PostComponent extends AppRoutingComponent {
 
     @Input()
     set params(params: Params) {
+        this._params = this.appRoutingService.params;
+
+        if (!params[this.appService.POST]) { return; }
         this._loaded = this.loaded;
-        this._params = params;
-        this.postService
-            .post(params[this.appService.POST])
+        const post = this.postService.post(params[this.appService.POST]);
+        post
             .finally(() => this._loaded = true)
             .subscribe(
                 (post: Post) => {
@@ -83,8 +85,7 @@ export class PostComponent extends AppRoutingComponent {
                 },
                 (err: GraphApiError) =>
                     GraphApiErrorComponent.show(this.mdSnackBar, err));
-        this.postService
-            .post(params[this.appService.POST])
+        post
             .map(post => post.video)
             .do(this.video = null)
             .filter(Boolean)

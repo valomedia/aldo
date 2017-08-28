@@ -49,6 +49,7 @@ export class LayoutComponent implements OnInit {
         this.appRoutingService
             .events
             .filter(Boolean)
+            .map(() => this.appRoutingService.params)
             .do(params => this.aside[params.post ? 'open' : 'close']())
             .subscribe(params => this.params = params);
     }

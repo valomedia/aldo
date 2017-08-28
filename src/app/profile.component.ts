@@ -49,9 +49,10 @@ export class ProfileComponent extends AppRoutingComponent {
 
     @Input()
     set params(params: Params) {
+        if (!params[this.appService.PROFILE]) { return; }
         this._loaded = this.loaded;
         this.profileService
-            .profile(params[this.appService.PAGE])
+            .profile(params[this.appService.PROFILE])
             .finally(() => this._loaded = true)
             .subscribe(
                 (profile: Profile) => this.profile = profile,

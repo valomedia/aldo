@@ -107,36 +107,6 @@ export class FbService {
     constructor(protected http: Http, protected confService: ConfService) {}
 
     /*
-     * The request cache.
-     *
-     * TODO Turn this into a middleware when switching to HttpClient.
-     */
-    private static cache: {[id: string]: any} = {};
-
-    /*
-     * Clear the cache.
-     *
-     * Optionally two lists of strings may be provided, the first is a black 
-     * list, the second one is a white list.  All items, where the first part of 
-     * the path appears in the black list will be cleared.  Then, if there is 
-     * a white list, all items whete the first part of the path does not appear 
-     * in the white list will be cleared.
-     */
-    clearCache(blackList: string[] = [], whiteList: string[] = []) {
-        for (
-            const i of Object
-                .keys(FbService.cache)
-                .map(k => [k.split(/[\/:]/)[0], k])
-                .filter(([id]) => blackList.indexOf(id) + 1
-                    || (whiteList.length || !blackList.length)
-                    && !(whiteList.indexOf(id) + 1))
-                .map(([_, k]) => k)
-        ) {
-            delete FbService.cache[i];
-        }
-    }
-
-    /*
      * High-level API access.
      *
      * This will completely abstract away pagination and return an Observable, 
@@ -230,11 +200,7 @@ export class FbService {
         method = HttpMethod.Get,
         params: FbApiParams = {}
     ) {
-        // Check the cache.
-        const id = path + ':' + btoa(JSON.stringify(params));
-        if (FbService.cache[id]) { return FbService.cache[id]; }
-
-        const result = this._call(
+        return this._call(
             path,
             {
                 ...params,
@@ -256,9 +222,6 @@ export class FbService {
             .publishReplay(1)
             .refCount()
             .first();
-
-        if (method === HttpMethod.Get) { FbService.cache[id] = result; }
-        return result;
     }
 
     /*
