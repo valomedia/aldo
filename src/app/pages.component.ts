@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
+import 'rxjs/add/operator/finally';
+
 import {Page} from './page';
 import {PageService} from './page.service';
 import {GraphApiError} from './graph-api-error';
@@ -12,18 +14,8 @@ import {showGraphApiError} from './graph-api-error.component';
 
 @Component({
     selector: 'pages',
-    template: `
-        <md-spinner color='accent' *ngIf='!loaded'></md-spinner>
-        <md-nav-list>
-            <a
-                    md-list-item
-                    *ngFor='let page of pages'
-                    [appLink]='{page: page.id}'>
-                {{page.name}}
-            </a>
-        </md-nav-list>
-    `,
-    styleUrls: ['dist/pages.component.css']
+    templateUrl: './_pages.component.html',
+    styleUrls: ['./pages.component.css']
 })
 export class PagesComponent implements OnInit {
     constructor(

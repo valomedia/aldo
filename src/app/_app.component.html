@@ -1,0 +1,14 @@
+<!-- HTML template for the AppComponent -->
+<layout>
+    <nav app-content></nav>
+    <aside app-content>
+        <post *appRouting='appService.POST'></post>
+        <no-detail *appRouting></no-detail>
+    </aside>
+    <main app-content>
+        <dashboard *appRouting='null; conflicts:appService.PAGE'></dashboard>
+        <page *appRouting='appService.PAGE'></page>
+        <not-found *appRouting></not-found>
+    </main>
+</layout>
+

@@ -1,0 +1,11 @@
+<!-- HTML template for the PagesComponent -->
+<md-spinner color='accent' *ngIf='!loaded'></md-spinner>
+<md-nav-list>
+    <a
+            md-list-item
+            *ngFor='let page of pages'
+            [appLink]='{page: page.id}'>
+        {{page.name}}
+    </a>
+</md-nav-list>
+

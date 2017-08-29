@@ -22,18 +22,8 @@ import {DisplacerPortalDirective} from './displacer-portal.directive';
 
 @Component({
     selector: 'displacer',
-    template: `
-        <ng-template displacer-portal>
-            <div app-content>
-                <div class='displacer-content'>
-                    <div class='positioning-anchor'>
-                        <ng-content></ng-content>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-    `,
-    styleUrls: ['dist/displacer.component.css']
+    templateUrl: './_displacer.component.html',
+    styleUrls: ['./displacer.component.css']
 })
 export class DisplacerComponent implements OnInit, OnDestroy, AfterViewInit {
     constructor(

@@ -3,17 +3,15 @@ import {Router, NavigationEnd, Params} from '@angular/router';
 import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/publishBehavior';
+import 'rxjs/add/operator/map';
+
+import {PARAMS} from './app-routing';
 
 /*
  * The service providing routing for the app.
  *
  * This suits my usecase better than Angular's router.
  */
-
-/*
- * The route parameter names in the order the parameters are encoded in the url.
- */
-export const PARAMS = ['page', 'post'];
 
 @Injectable()
 export class AppRoutingService {
@@ -32,7 +30,7 @@ export class AppRoutingService {
      * Parse the parameters from a path.
      */
     parse?(path: string): Params|null {
-        const result = path
+        return path
             .split('/')
             .slice(1)
             .map((v, i) =>
@@ -41,8 +39,6 @@ export class AppRoutingService {
                 || !Object.keys(param).length
                 || param[Object.keys(param)[0]] != '_')
             .reduce((o, e) => o && e ? Object.assign(o, e) : null, {});
-        console.warn(result);
-        return result;
     }
 
     /*

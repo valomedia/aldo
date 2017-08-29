@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import {Post, DUMMY_POST_TYPE} from './post';
 import {FbService, HttpMethod} from './fb.service';
@@ -30,10 +31,9 @@ export class PostService {
             {
                 fields: Object.keys(DUMMY_POST_TYPE),
                 include_hidden: includeHidden,
-                is_published: isPublished,
-                limit: 100
+                is_published: isPublished
             },
-            Post);
+            Post) as Observable<GraphApiResponse<Post>>;
     }
 
     /*
@@ -47,7 +47,7 @@ export class PostService {
                 {fields: Object.keys(DUMMY_POST_TYPE)},
                     Post)
             .first()
-            .toPromise();
+            .toPromise() as Promise<Post>;
     }
 
     /*

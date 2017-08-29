@@ -1,11 +1,15 @@
 
 /*
- * Things that are useful throughout the app.
+ * A few type aliases, that do not fit anywhere else.
  */
 
 /*
- * To get rid of there irritating extra quote marks in the AppRoutingDirective.
+ * A Ressource to be uploaded, either as a File, or as an url.
  */
-export const PAGE = 'page';
-export const POST = 'post';
+export type Ressource = string|File;
+
+/*
+ * A JSON primitive.
+ */
+export type Primitive = null|boolean|number|string;
 

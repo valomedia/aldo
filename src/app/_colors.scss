@@ -179,9 +179,43 @@ $warn-dark-bg: map-get(
                 $warn-medium-shade,
                 $warn-light-shade,
                 $warn-dark-shade)));
+    @include covalent-theme(
+        mat-light-theme(
+            mat-palette(
+                $primary-palette,
+                $primary-medium-shade,
+                $primary-light-shade,
+                $primary-dark-shade),
+            mat-palette(
+                $accent-palette,
+                $accent-medium-shade,
+                $accent-light-shade,
+                $accent-dark-shade),
+            mat-palette(
+                $warn-palette,
+                $warn-medium-shade,
+                $warn-light-shade,
+                $warn-dark-shade)));
 
     .dark {
         @include angular-material-theme(
+            mat-dark-theme(
+                mat-palette(
+                    $primary-palette,
+                    $primary-medium-shade,
+                    $primary-light-shade,
+                    $primary-dark-shade),
+                mat-palette(
+                    $accent-palette,
+                    $accent-medium-shade,
+                    $accent-light-shade,
+                    $accent-dark-shade),
+                mat-palette(
+                    $warn-palette,
+                    $warn-medium-shade,
+                    $warn-light-shade,
+                    $warn-dark-shade)));
+        @include covalent-theme(
             mat-dark-theme(
                 mat-palette(
                     $primary-palette,

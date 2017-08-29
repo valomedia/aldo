@@ -6,14 +6,8 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'no-detail',
-    template: `
-        <h1>Kein Post ausgewählt</h1>
-        <p>
-            Klicke auf einen Post in der Hauptansicht, um hier mehr Details 
-            zu sehen.
-        </p>
-    `,
-    styleUrls: ['dist/no-detail.component.css']
+    templateUrl: './_no-detail.component.html',
+    styleUrls: ['./no-detail.component.css']
 })
 export class NoDetailComponent {}
 

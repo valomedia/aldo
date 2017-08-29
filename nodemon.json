@@ -1,0 +1,22 @@
+{
+    "ext": "scss",
+    "exec": "npm run sass",
+    "watch": "src/app",
+    "ignore": [
+        "*.bak",
+        "*.css",
+        "*.html",
+        "*.js",
+        "*.json",
+        "*.log",
+        "*.map",
+        "*.old",
+        "*.pid",
+        "*.seed",
+        "*.ts",
+        "*~"
+    ],
+    "verbose": true,
+    "runOnChangeOnly": true
+}
+
