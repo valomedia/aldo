@@ -196,7 +196,7 @@ export const DUMMY_POST_TYPE: PostType = {
     description: '',
     shares: {count: 0},
     likes: {
-        data: [],
+        data: [] as [{name: string;}],
         summary: {
             total_count: 0,
             can_like: false,
