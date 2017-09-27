@@ -3,10 +3,10 @@ import {MdDialogRef} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 
-import {Page} from './page';
-import {PostService} from './post.service';
-import {Ressource} from './app';
-import {PostContentType} from './post';
+import {Page} from '../page';
+import {PostService} from '../post.service';
+import {Ressource} from '../app';
+import {PostContentType} from '../post';
 
 @Component({
     selector: 'post-dialog',

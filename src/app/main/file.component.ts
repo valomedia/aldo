@@ -9,8 +9,8 @@ import {
 
 import {TdFileInputComponent} from '@covalent/core';
 
-import {Ressource} from './app';
-import {AppService} from './app.service';
+import {Ressource} from '../app';
+import {AppService} from '../app.service';
 
 /*
  * The Component used to select a file.

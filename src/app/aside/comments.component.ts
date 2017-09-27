@@ -4,9 +4,9 @@ import {MdSnackBar} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
-import {GraphApiError} from './graph-api-error';
-import {GraphApiErrorComponent} from './graph-api-error.component';
-import {Comment} from './comment';
+import {GraphApiError} from '../graph-api-error';
+import {GraphApiErrorComponent} from '../graph-api-error.component';
+import {Comment} from '../comment';
 
 /*
  * The Component showing the list of pages.

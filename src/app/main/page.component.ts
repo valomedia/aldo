@@ -7,17 +7,18 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/do';
 
-import {Page} from './page';
-import {GraphApiError} from './graph-api-error';
+import {Page} from '../page';
+import {GraphApiError} from '../graph-api-error';
+import {GraphApiErrorComponent} from '../graph-api-error.component';
+import {AppUxService} from '../app-ux.service';
+import {PostService} from '../post.service';
+import {Post} from '../post';
+import {GraphApiResponse} from '../graph-api-response';
+import {AppService} from '../app.service';
+import {FbService} from '../fb.service';
+import {AppRoutingService} from '../app-routing.service';
+
 import {PostDialogComponent} from './post-dialog.component';
-import {GraphApiErrorComponent} from './graph-api-error.component';
-import {AppUxService} from './app-ux.service';
-import {PostService} from './post.service';
-import {Post} from './post';
-import {GraphApiResponse} from './graph-api-response';
-import {AppService} from './app.service';
-import {FbService} from './fb.service';
-import {AppRoutingService} from './app-routing.service';
 
 /*
  * The Component showing a single Page in detail.
