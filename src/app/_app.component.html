@@ -1,6 +1,8 @@
 <!-- HTML template for the AppComponent -->
 <layout>
-    <nav app-content></nav>
+    <nav app-content>
+        <pages></pages>
+    </nav>
     <aside app-content>
         <post *appRouting='appService.POST'></post>
         <no-detail *appRouting></no-detail>

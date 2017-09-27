@@ -9,9 +9,7 @@ import 'hammerjs';
 
 import {AppComponent} from './app.component';
 import {PageComponent} from './page.component';
-import {PagesComponent} from './pages.component';
 import {PageService} from './page.service';
-import {DashboardComponent} from './dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FbService} from './fb.service';
 import {GraphApiErrorComponent} from './graph-api-error.component';
@@ -27,13 +25,7 @@ import {MissingFeatureComponent} from './missing-feature.component';
 import {DisplacerComponent} from './displacer.component';
 import {DisplacerPortalDirective} from './displacer-portal.directive';
 import {ProfileCardComponent} from './profile-card.component';
-import {PostComponent} from './post.component';
 import {LayoutComponent} from './layout.component';
-import {NavComponent} from './nav.component';
-import {AsideComponent} from './aside.component';
-import {MainComponent} from './main.component';
-import {NotFoundComponent} from './not-found.component';
-import {NoDetailComponent} from './no-detail.component';
 import {AppContentDirective} from './app-content.directive';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
@@ -47,9 +39,20 @@ import {FileComponent} from './file.component';
 import {ConfService} from './conf.service';
 import {AppService} from './app.service';
 import {UtilService} from './util.service';
-import {ProfileComponent} from './profile.component';
 import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
+
+import {NavComponent} from './nav/nav.component';
+import {PagesComponent} from './nav/pages.component';
+
+import {AsideComponent} from './aside/aside.component';
+import {PostComponent} from './aside/post.component';
+import {NoDetailComponent} from './aside/no-detail.component';
+
+import {MainComponent} from './main/main.component';
+import {DashboardComponent} from './main/dashboard.component';
+import {ProfileComponent} from './main/profile.component';
+import {NotFoundComponent} from './main/not-found.component';
 
 /*
  * The Module definitions for AppComponent.

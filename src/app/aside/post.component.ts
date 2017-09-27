@@ -6,20 +6,20 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/do';
 
-import {Post} from './post';
-import {PostService} from './post.service';
-import {GraphApiError} from './graph-api-error';
-import {GraphApiErrorComponent} from './graph-api-error.component';
-import {PostContentType} from './post';
-import {VideoService} from './video.service';
-import {Video} from './video';
-import {GraphApiResponse} from './graph-api-response';
-import {Comment} from './comment';
-import {AppRoutingComponent} from './app-routing.component';
-import {AppRoutingService} from './app-routing.service';
-import {AppService} from './app.service';
-import {AppUxService} from './app-ux.service';
-import {UtilService} from './util.service';
+import {Post} from '../post';
+import {PostService} from '../post.service';
+import {GraphApiError} from '../graph-api-error';
+import {GraphApiErrorComponent} from '../graph-api-error.component';
+import {PostContentType} from '../post';
+import {VideoService} from '../video.service';
+import {Video} from '../video';
+import {GraphApiResponse} from '../graph-api-response';
+import {Comment} from '../comment';
+import {AppRoutingComponent} from '../app-routing.component';
+import {AppRoutingService} from '../app-routing.service';
+import {AppService} from '../app.service';
+import {AppUxService} from '../app-ux.service';
+import {UtilService} from '../util.service';
 
 /*
  * The Component showing a single post in detail.

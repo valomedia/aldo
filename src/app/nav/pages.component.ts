@@ -1,34 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {MdSnackBar} from '@angular/material';
 
-import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/finally';
 
-import {Page} from './page';
-import {PageService} from './page.service';
-import {GraphApiError} from './graph-api-error';
-import {AppUxService} from './app-ux.service';
-import {GraphApiErrorComponent} from './graph-api-error.component';
+import {Page} from '../page';
+import {PageService} from '../page.service';
+import {GraphApiError} from '../graph-api-error';
+import {GraphApiErrorComponent} from '../graph-api-error.component';
 
 /*
- * The Component showing the dashboard.
+ * The Component showing the list of pages.
  */
 
 @Component({
-    selector: 'dashboard',
-    templateUrl: './_dashboard.component.html',
-    styleUrls: ['./dashboard.component.css']
+    selector: 'pages',
+    templateUrl: './_pages.component.html',
+    styleUrls: ['./pages.component.css']
 })
-export class DashboardComponent {
+export class PagesComponent implements OnInit {
     constructor(
         protected pageService: PageService,
-        protected appUxService: AppUxService,
-        protected mdSnackBar: MdSnackBar) {}
+        protected mdSnackBar: MdSnackBar) {};
 
     loaded = false;
 
     /*
-     * All pages the user has access to.
+     * All pages of the user.
      */
     pages: Page[];
 

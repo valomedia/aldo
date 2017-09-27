@@ -5,15 +5,15 @@ import {MdSnackBar} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
-import {Profile} from './profile';
-import {Page} from './page';
-import {ProfileService} from './profile.service';
-import {GraphApiError} from './graph-api-error';
-import {GraphApiErrorComponent} from './graph-api-error.component';
-import {AppUxService} from './app-ux.service';
-import {AppRoutingComponent} from './app-routing.component';
-import {AppRoutingService} from './app-routing.service';
-import {AppService} from './app.service';
+import {Profile} from '../profile';
+import {Page} from '../page';
+import {ProfileService} from '../profile.service';
+import {GraphApiError} from '../graph-api-error';
+import {GraphApiErrorComponent} from '../graph-api-error.component';
+import {AppUxService} from '../app-ux.service';
+import {AppRoutingComponent} from '../app-routing.component';
+import {AppRoutingService} from '../app-routing.service';
+import {AppService} from '../app.service';
 
 /*
  * The Component showing a single Profile in detail.
