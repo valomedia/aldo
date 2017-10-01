@@ -1,26 +1,27 @@
 import {Injectable} from '@angular/core';
 
-import {PARAMS} from './app-routing';
-
 /*
  * The Service providing useful global constants.
+ *
+ * This may seem silly but avoids confusing double quoting in templates.
  */
 
 @Injectable()
 export class AppService {
-    PARAMS = PARAMS;
-    PROFILE = 'profile'
-    PAGE = 'profile';
-    USER = 'profile';
-    GROUP = 'profile';
-    EVENT = 'profile';
-    APPLICATON = 'profile';
-    POST = 'post';
-    PRIMARY = 'primary';
-    ACCENT = 'accent';
-    WARN = 'warn';
-    SIDE = 'side';
-    OVER = 'over';
-    PUSH = 'push';
+    readonly MASTER = 'master';
+    readonly PROFILE = 'profile';
+    readonly PAGE = 'page';
+    readonly USER = 'user';
+    readonly GROUP = 'group';
+    readonly EVENT = 'event';
+    readonly APPLICATON = 'application';
+    readonly DETAIL = 'detail';
+    readonly POST = 'post';
+    readonly PRIMARY = 'primary';
+    readonly ACCENT = 'accent';
+    readonly WARN = 'warn';
+    readonly SIDE = 'side';
+    readonly OVER = 'over';
+    readonly PUSH = 'push';
 }
 

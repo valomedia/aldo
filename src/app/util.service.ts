@@ -42,8 +42,7 @@ export class UtilService {
         this.photoService = this.inject(PhotoService);
     }
 
-    // TODO Make this protected again.
-    reflectiveInjector = ReflectiveInjector.resolveAndCreate([
+    protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
         AppService,
         AppUxService,
         CommentService,
@@ -73,6 +72,17 @@ export class UtilService {
         ProfileService,
         PhotoService
     ]);
+
+    protected appService: AppService;
+    protected appUxService: AppUxService;
+    protected commentService: CommentService;
+    protected confService: ConfService;
+    protected fbService: FbService;
+    protected pageService: PageService;
+    protected postService: PostService;
+    protected videoService: VideoService;
+    protected profileService: ProfileService;
+    protected photoService: PhotoService;
 
     /*
      * This is madness.
@@ -127,19 +137,12 @@ export class UtilService {
      */
     inject = this.reflectiveInjector.get.bind(this.reflectiveInjector);
 
-    protected appService: AppService;
-    protected appUxService: AppUxService;
-    protected commentService: CommentService;
-    protected confService: ConfService;
-    protected fbService: FbService;
-    protected pageService: PageService;
-    protected postService: PostService;
-    protected videoService: VideoService;
-    protected profileService: ProfileService;
-    protected photoService: PhotoService;
-
     /*
      * What to link to, if the user clicks a Profile.
+     *
+     * This depends on the screen size, as the detail needs to be closed when 
+     * navigating to a new MASTER if – and only if – the screen is too small to 
+     * show both at the same time.
      */
     profileLink(id: string) {
         return this.appUxService.asideMode === this.appService.SIDE

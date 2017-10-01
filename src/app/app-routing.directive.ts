@@ -31,12 +31,12 @@ export class AppRoutingDirective implements OnInit {
     protected _conflicts: string[] = [];
 
     @Input()
-    set appRouting(depends: string|null) {
+    set appRouting(depends: string|null|undefined) {
         this._depends = depends ? depends.split(/\s/) : [];
     }
 
     @Input()
-    set appRoutingConflicts(conflicts: string|null) {
+    set appRoutingConflicts(conflicts: string|null|undefined) {
         this._conflicts = conflicts ? conflicts.split(/\s/) : [];
     }
 

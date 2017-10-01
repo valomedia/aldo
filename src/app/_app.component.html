@@ -4,12 +4,12 @@
         <pages></pages>
     </nav>
     <aside app-content>
-        <post *appRouting='appService.POST'></post>
+        <detail *appRouting='appService.POST'></detail>
         <no-detail *appRouting></no-detail>
     </aside>
     <main app-content>
         <dashboard *appRouting='null; conflicts:appService.PROFILE'></dashboard>
-        <profile *appRouting='appService.PROFILE'></profile>
+        <master *appRouting='appService.PROFILE'></master>
         <not-found *appRouting></not-found>
     </main>
 </layout>

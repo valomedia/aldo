@@ -17,18 +17,6 @@ export class ProfileService {
         protected fbService: FbService,
         protected pageService: PageService) {}
 
-    /*
-     * Get a Profile by its ID.
-     */
-    profile(id: string): Observable<Profile> {
-        return this._profile(id).mergeMap(profile => {
-            switch (profile.metadata.type) {
-                case 'page': return this.pageService.page(id);
-                default: return Observable.of(profile);
-            }
-        });
-    }
-
     protected _profile(id: string): Observable<Profile> {
         return this.fbService
             .fetch(
@@ -40,6 +28,18 @@ export class ProfileService {
                 },
                 Profile)
             .map(graphApiObject => graphApiObject as Profile);
+    }
+
+    /*
+     * Get a Profile by its ID.
+     */
+    profile(id: string): Observable<Profile> {
+        return this._profile(id).mergeMap(profile => {
+            switch (profile.metadata.type) {
+                case 'page': return this.pageService.page(id);
+                default: return Observable.of(profile);
+            }
+        });
     }
 }
 

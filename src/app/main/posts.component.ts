@@ -10,7 +10,7 @@ import {GraphApiErrorComponent} from '../graph-api-error.component';
 import {Post} from '../post';
 
 /*
- * The Component showing the list of pages.
+ * The Component showing the list of posts.
  */
 
 @Component({
@@ -23,9 +23,6 @@ export class PostsComponent {
         protected mdSnackBar: MdSnackBar,
         protected activatedRoute: ActivatedRoute) {}
 
-    @Input()
-    loaded = false;
-
     /*
      * All posts shown by this Component.
      */
@@ -36,15 +33,29 @@ export class PostsComponent {
      */
     protected _loaded: boolean;
 
+    /*
+     * Whether to override the loading indicator.
+     *
+     * If the containing Component knows for a fact, that the data to be shown 
+     * is already available, it can set this flag to cause to component to never 
+     * show a spinner.  This can be helpful in situations, where the spinner 
+     * would otherwise only appear for a few milliseconds, causing an 
+     * odd-looking twitch in the application.
+     */
     @Input()
-    set posts(posts: Observable<Post>) {
-        this._posts = [];
-        this._loaded = this.loaded;
-        posts
-            .finally(() => this._loaded = true)
-            .subscribe(
-                post => this._posts.push(post),
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+    loaded = false;
+
+    @Input()
+    set posts(posts: Observable<Post>|undefined) {
+        if (posts) {
+            this._posts = [];
+            this._loaded = this.loaded;
+            posts
+                .finally(() => this._loaded = true)
+                .subscribe(
+                    post => this._posts.push(post),
+                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+        }
     }
 }
 

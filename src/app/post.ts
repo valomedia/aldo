@@ -63,6 +63,10 @@ export class Post extends Story {
         this.commentService = this.utilService.inject(CommentService);
     }
 
+    protected utilService: UtilService;
+    protected videoService: VideoService;
+    protected commentService: CommentService;
+
     /*
      * The Profile that sent this Post.
      */
@@ -72,10 +76,6 @@ export class Post extends Story {
      * Profiles mentioned or targeted in this Post.
      */
     to: Profile[];
-
-    protected utilService: UtilService;
-    protected videoService: VideoService;
-    protected commentService: CommentService;
 
     /*
      * Get the text to display for this Post.
@@ -196,7 +196,7 @@ export const DUMMY_POST_TYPE: PostType = {
     description: '',
     shares: {count: 0},
     likes: {
-        data: [] as [{name: string;}],
+        data: [] as [{ name: string; }],
         summary: {
             total_count: 0,
             can_like: false,

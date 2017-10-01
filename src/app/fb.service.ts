@@ -107,6 +107,47 @@ export class FbService {
     constructor(protected http: Http, protected confService: ConfService) {}
 
     /*
+     * Internal request handler.
+     *
+     * This will make the actual request.  The parameters will be minimally 
+     * preprocessed by turning Primitives and Primitive[]s into strings, 
+     * filtering nulls and moving Files to the source field.
+     */
+    protected _call(
+        path: string,
+        params: FbApiParams
+    ) {
+        console.log('GrapAPI request:', path, params);
+        return this.http
+            .post(
+                this.confService.fb[
+                    params.source
+                        && params.source.type.split('/')[0] === 'video'
+                        ? 'videoUploadUrl'
+                        : 'apiUrl'
+                ]
+                    + '/'
+                    + path,
+                Object
+                    .keys(params)
+                    .map((k): [string, Primitive|File] => [
+                        k,
+                        params[k] instanceof Array
+                            ? (params[k] as Primitive[]).join(',')
+                            : params[k] as Primitive|File
+                    ])
+                    .filter(([_, v]) => v !== null && v !== undefined)
+                    .map(([k, v]): [string, string|File] => [
+                        k,
+                        v instanceof File ? v : '' + v
+                    ])
+                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
+                    .reduce(
+                        (a, e) => (a.set as any)(...e) || a,
+                        new FormData()));
+    }
+
+    /*
      * High-level API access.
      *
      * This will completely abstract away pagination and return an Observable, 
@@ -222,47 +263,6 @@ export class FbService {
             .publishReplay(1)
             .refCount()
             .first();
-    }
-
-    /*
-     * Internal request handler.
-     *
-     * This will make the actual request.  The parameters will be minimally 
-     * preprocessed by turning Primitives and Primitive[]s into strings, 
-     * filtering nulls and moving Files to the source field.
-     */
-    protected _call(
-        path: string,
-        params: FbApiParams
-    ) {
-        console.log('GrapAPI request:', path, params);
-        return this.http
-            .post(
-                this.confService.fb[
-                    params.source
-                        && params.source.type.split('/')[0] === 'video'
-                        ? 'videoUploadUrl'
-                        : 'apiUrl'
-                ]
-                    + '/'
-                    + path,
-                Object
-                    .keys(params)
-                    .map((k): [string, Primitive|File] => [
-                        k,
-                        params[k] instanceof Array
-                            ? (params[k] as Primitive[]).join(',')
-                            : params[k] as Primitive|File
-                    ])
-                    .filter(([_, v]) => v !== null && v !== undefined)
-                    .map(([k, v]): [string, string|File] => [
-                        k,
-                        v instanceof File ? v : '' + v
-                    ])
-                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
-                    .reduce(
-                        (a, e) => (a.set as any)(...e) || a,
-                        new FormData()));
     }
 }
 

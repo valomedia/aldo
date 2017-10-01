@@ -1,0 +1,4 @@
+<!-- HTML template for the MasterComponent -->
+<md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
+<profile [profile]='profile | async'></profile>
+

@@ -18,7 +18,7 @@ export abstract class AppRoutingComponent implements OnInit, OnDestroy {
     protected subscription: Subscription;
 
     @Input()
-    set params(params: Params) {}
+    set params(params: Params|undefined) {}
 
     ngOnInit() {
         this.subscription = this.appRoutingService

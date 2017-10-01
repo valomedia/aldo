@@ -60,21 +60,20 @@ export class Comment extends GraphApiObject {
             from: new Profile(kwargs.from)
         };
         super(kwargs);
-        this.utilService = ReflectiveInjector
+        const utilService = ReflectiveInjector
             .resolveAndCreate([UtilService])
             .get(UtilService);
-        this.videoService = this.utilService.inject(VideoService);
-        this.commentService = this.utilService.inject(CommentService);
+        this.videoService = utilService.inject(VideoService);
+        this.commentService = utilService.inject(CommentService);
     }
+
+    protected videoService: VideoService;
+    protected commentService: CommentService;
 
     /*
      * The Profile that sent this Post.
      */
     from: Profile;
-
-    protected utilService: UtilService;
-    protected videoService: VideoService;
-    protected commentService: CommentService;
 
     /*
      * Get an Observable of the Video attached to this Comment.

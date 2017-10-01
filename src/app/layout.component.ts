@@ -33,6 +33,11 @@ export class LayoutComponent implements OnInit {
         protected appService: AppService) {}
 
     /*
+     * The route parameters.
+     */
+    protected params: Params = {};
+
+    /*
      * Whether the dark-theme is active.
      */
     dark = false;
@@ -40,17 +45,13 @@ export class LayoutComponent implements OnInit {
     @ViewChild('aside')
     aside: MdSidenav;
 
-    /*
-     * The route parameters.
-     */
-    protected params: Params = {};
-
     ngOnInit() {
         this.appRoutingService
             .events
             .filter(Boolean)
             .map(() => this.appRoutingService.params)
-            .do(params => this.aside[params.post ? 'open' : 'close']())
+            .do(params =>
+                this.aside[params[this.appService.POST] ? 'open' : 'close']())
             .subscribe(params => this.params = params);
     }
 }

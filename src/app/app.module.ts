@@ -50,6 +50,8 @@ import {UtilService} from './util.service';
 import {ProfileComponent} from './main/profile.component';
 import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
+import {DetailComponent} from './aside/detail.component';
+import {MasterComponent} from './main/master.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -92,7 +94,9 @@ import {PhotoService} from './photo.service';
         DummyComponent,
         AppLinkDirective,
         FileComponent,
-        ProfileComponent
+        ProfileComponent,
+        DetailComponent,
+        MasterComponent
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -1,0 +1,4 @@
+<!-- HTML template for the DetailComponent -->
+<md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
+<post [profileId]='params.profile' [post]='post | async'></post>
+

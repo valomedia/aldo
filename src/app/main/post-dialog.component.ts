@@ -25,7 +25,7 @@ export class PostDialogComponent {
     ];
 
     @Input()
-    page: Page;
+    page?: Page;
 
     /*
      * PostContentType selected by the user.

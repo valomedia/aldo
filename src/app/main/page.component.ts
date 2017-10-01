@@ -39,6 +39,8 @@ export class PageComponent {
         protected fbService: FbService,
         protected appRoutingService: AppRoutingService) {}
 
+    protected _page?: Page;
+
     /*
      * Posts by this Page.
      */
@@ -54,20 +56,29 @@ export class PageComponent {
      */
     newPosts = new Subject<Post>();
 
+    /*
+     * Whether to override the loading indicator.
+     *
+     * If the containing Component knows for a fact, that the data to be shown 
+     * is already available, it can set this flag to cause to component to never 
+     * show a spinner.  This can be helpful in situations, where the spinner 
+     * would otherwise only appear for a few milliseconds, causing an 
+     * odd-looking twitch in the application.
+     */
     @Input()
-    loaded: boolean;
-
-    protected _page: Page;
+    loaded = false;
 
     /*
      * The Page currently shown.
      */
     @Input()
-    set page(page: Page) {
-        this._page = page;
-        this.posts = page.posts;
-        this.tagged = page.tagged.concatMap(
-            (posts: GraphApiResponse<Post>) => posts.expanded);
+    set page(page: Page|undefined) {
+        if (page) {
+            this._page = page;
+            this.posts = page.posts;
+            this.tagged = page.tagged.concatMap(
+                (posts: GraphApiResponse<Post>) => posts.expanded);
+        }
     }
     get page() {
         return this._page;
