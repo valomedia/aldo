@@ -192,7 +192,7 @@ md-card-footer > *,
     pointer-events: all;
 }
 
-[md-button] {
+[md-button], [md-raised-button] {
     text-transform: uppercase;
 }
 
@@ -227,11 +227,6 @@ md-card-footer > *,
 
 .clear, page div {
     clear: both;
-}
-
-.dummy-input {
-    height: 0;
-    opacity: 0;
 }
 
 .flex {

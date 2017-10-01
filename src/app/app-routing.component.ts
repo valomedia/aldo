@@ -13,9 +13,9 @@ import {AppRoutingService} from './app-routing.service';
  */
 
 export abstract class AppRoutingComponent implements OnInit, OnDestroy {
-    constructor(private appRoutingService: AppRoutingService) {}
+    constructor(protected appRoutingService: AppRoutingService) {}
 
-    private subscription: Subscription;
+    protected subscription: Subscription;
 
     @Input()
     set params(params: Params) {}

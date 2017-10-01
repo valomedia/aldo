@@ -14,7 +14,7 @@ import {AppRoutingService} from './app-routing.service';
 
 @Directive({selector: '[appLink]'})
 export class AppLinkDirective {
-    constructor(private appRoutingService: AppRoutingService) {}
+    constructor(protected appRoutingService: AppRoutingService) {}
 
     @Input()
     appLink: Params|null;

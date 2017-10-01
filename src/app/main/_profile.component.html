@@ -1,0 +1,58 @@
+<!-- HTML template for the ProfileComponent -->
+<md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
+<div *ngIf='profile'>
+    <div>
+        <h1>
+            {{profile.name}}
+            <small>
+                <span *ngIf='profile.fan_count'>
+                    <br>
+                    <span
+                            [mdTooltip]='profile.likeTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>thumb_up</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{profile.fan_count}}
+                        </span>
+                    </span>
+                </span>
+                <span *ngIf='profile.talking_about_count'>
+                    <br>
+                    <span
+                            [mdTooltip]='profile.talkingAboutTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>forum</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{profile.talking_about_count}}
+                        </span>
+                    </span>
+                </span>
+                <span *ngIf='profile.overall_star_rating'>
+                    <br>
+                    <span
+                            [mdTooltip]='profile.ratingTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>star</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{profile.overall_star_rating}}
+                        </span>
+                        <span class='text-primary'>
+                            (<md-icon>people</md-icon>{{+profile.rating_count}})
+                        </span>
+                    </span>
+                </span>
+            </small>
+        </h1>
+    </div>
+    <page *ngIf='isPage' [page]='profile'></page>
+</div>
+

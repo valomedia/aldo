@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the NoDetailComponent.
+ *
+ * This is a style locally applied to NoDetailComponent.  All styles specific to 
+ * the NoDetailComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _no-detail.component partial, to keep things easier to restructure.
+ */
+
+@import '../mixins';
+@import '../colors';
+@import '_no-detail.component';
+

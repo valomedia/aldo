@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/first';
 
 import {Comment, DUMMY_COMMENT_TYPE} from './comment';
 import {FbService, HttpMethod} from './fb.service';
@@ -15,20 +13,18 @@ import {GraphApiResponse} from './graph-api-response';
 
 @Injectable()
 export class CommentService {
-    constructor(private fbService: FbService) {}
+    constructor(protected fbService: FbService) {}
 
     /*
      * Get a Comment by its id.
      */
-    comment(id: string): Promise<Comment> {
+    comment(id: string): Observable<Comment> {
         return this.fbService
-            .call(
+            .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_COMMENT_TYPE)},
-                Comment)
-            .first()
-            .toPromise() as Promise<Comment>;
+                Comment) as Observable<Comment>;
     }
 
     /*

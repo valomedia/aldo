@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the PageComponent.
+ *
+ * This is a style locally applied to PageComponent.  All styles specific to the 
+ * PageComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _page.component partial, to keep things easier to restructure.
+ */
+
+@import '../mixins';
+@import '../colors';
+@import '_page.component';
+

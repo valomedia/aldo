@@ -1,13 +1,15 @@
 <!-- HTML template for the AppComponent -->
 <layout>
-    <nav app-content></nav>
+    <nav app-content>
+        <pages></pages>
+    </nav>
     <aside app-content>
         <post *appRouting='appService.POST'></post>
         <no-detail *appRouting></no-detail>
     </aside>
     <main app-content>
-        <dashboard *appRouting='null; conflicts:appService.PAGE'></dashboard>
-        <page *appRouting='appService.PAGE'></page>
+        <dashboard *appRouting='null; conflicts:appService.PROFILE'></dashboard>
+        <profile *appRouting='appService.PROFILE'></profile>
         <not-found *appRouting></not-found>
     </main>
 </layout>

@@ -12,7 +12,6 @@ import {
     BaseRequestOptions
 } from '@angular/http';
 
-import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
 import {AppUxService} from './app-ux.service';
 import {CommentService} from './comment.service';
@@ -21,6 +20,8 @@ import {FbService} from './fb.service';
 import {PageService} from './page.service';
 import {PostService} from './post.service';
 import {VideoService} from './video.service';
+import {ProfileService} from './profile.service';
+import {PhotoService} from './photo.service';
 
 /*
  * Service providing some useful functions, that don't belong anywhere else.
@@ -36,9 +37,13 @@ export class UtilService {
         this.pageService = this.inject(PageService);
         this.postService = this.inject(PostService);
         this.videoService = this.inject(VideoService);
+        this.appService = this.inject(AppService);
+        this.profileService = this.inject(ProfileService);
+        this.photoService = this.inject(PhotoService);
     }
 
-    private reflectiveInjector = ReflectiveInjector.resolveAndCreate([
+    // TODO Make this protected again.
+    reflectiveInjector = ReflectiveInjector.resolveAndCreate([
         AppService,
         AppUxService,
         CommentService,
@@ -64,17 +69,10 @@ export class UtilService {
         {
             provide: RequestOptions,
             useClass: BaseRequestOptions
-        }
+        },
+        ProfileService,
+        PhotoService
     ]);
-
-    private appService: AppService;
-    private appUxService: AppUxService;
-    private commentService: CommentService;
-    private confService: ConfService;
-    private fbService: FbService;
-    private pageService: PageService;
-    private postService: PostService;
-    private videoService: VideoService;
 
     /*
      * This is madness.
@@ -128,5 +126,28 @@ export class UtilService {
      * no framework whatsoever.
      */
     inject = this.reflectiveInjector.get.bind(this.reflectiveInjector);
+
+    protected appService: AppService;
+    protected appUxService: AppUxService;
+    protected commentService: CommentService;
+    protected confService: ConfService;
+    protected fbService: FbService;
+    protected pageService: PageService;
+    protected postService: PostService;
+    protected videoService: VideoService;
+    protected profileService: ProfileService;
+    protected photoService: PhotoService;
+
+    /*
+     * What to link to, if the user clicks a Profile.
+     */
+    profileLink(id: string) {
+        return this.appUxService.asideMode === this.appService.SIDE
+            ? {profile: id}
+            : {
+                profile: id,
+                post: null as null
+            };
+    }
 }
 

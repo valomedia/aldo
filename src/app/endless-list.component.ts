@@ -20,12 +20,17 @@ import {Expandable} from './expandable';
     styleUrls: ['./endless-list.component.css']
 })
 export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
-    constructor(private elementRef: ElementRef) {}
+    constructor(protected elementRef: ElementRef) {}
+
+    /*
+     * Content for the endless list.
+     */
+    output: Observable<OutType>;
 
     /*
      * Controller for the output.
      */
-    private controller: Subject<number>;
+    protected controller: Subject<number>;
 
     /*
      * The number of requests, that are in flight.
@@ -33,12 +38,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
      * This includes requests already scheduled to take off, that have to wait 
      * for another request to complete, before they can be sent.
      */
-    private inFlight: number;
-
-    /*
-     * Content for the endless list.
-     */
-    output: Observable<OutType>;
+    protected inFlight: number;
 
     @Input()
     set input(input: Observable<InType>) {
@@ -54,7 +54,7 @@ export class EndlessListComponent<InType extends Expandable<OutType>, OutType> {
                             .filter((bottom) =>
                                 bottom < 2 * window.innerHeight))
                     .filter(() => !this.inFlight)
-                    .concatMap(() => Observable.from([null,null]))
+                    .concatMap(() => Observable.from([null, null]))
                     .do(() => ++this.inFlight)
                     .mergeScan(
                         acc =>

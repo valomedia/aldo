@@ -9,34 +9,28 @@ import {UtilService} from './util.service';
  */
 
 /*
- * Types of content available for posting.
- */
-export enum ContentType {
-    Link,
-    Photo,
-    Video
-}
-
-/*
  * A Facebook page as returned by the Facebook API.
  */
 export interface PageType extends ProfileType {
     access_token: string;
-    fan_count: number;
-    new_like_count: number;
-    overall_star_rating: number;
-    rating_count: number;
-    talking_about_count: number;
+    fan_count?: number;
+    new_like_count?: number;
+    overall_star_rating?: number;
+    rating_count?: number;
+    talking_about_count?: number;
+    likes?: {
+        data: {
+            name: string;
+            id: string;
+        }[];
+    };
 };
 
 /*
  * A Facebook page as used internally.
  */
 export class Page extends Profile {
-    private utilService: UtilService = ReflectiveInjector
-        .resolveAndCreate([UtilService])
-        .get(UtilService);
-    private postService: PostService = this.utilService.inject(PostService);
+    protected postService: PostService = this.utilService.inject(PostService);
 
     /*
      * Get the feed of Posts of this Page.
@@ -58,6 +52,60 @@ export class Page extends Profile {
     get tagged() {
         return this.postService.tagged(this.id);
     }
+
+    /*
+     * Tooltip showing detail on the page likes.
+     */
+    get likeTooltip() {
+        if (this.likes) {
+            return this.likes
+                    .data
+                    .slice(0, -1)
+                    .map(page => page.name)
+                    .join(', ')
+                + (this.fan_count - this.likes.data.length
+                    ? ", "
+                    + this.likes.data.slice(-1)[0].name
+                    + " und "
+                    + (this.fan_count - this.likes.data.length)
+                    + (this.fan_count - this.likes.data.length - 1
+                            ? " weiteren Nutzern"
+                            : " weiterem Nutzer")
+                    : " und "
+                    + this.likes.data.slice(-1)[0].name)
+                + " gefällt diese Seite";
+        } else {
+            return (this.fan_count !== 1
+                    ? '' + this.fan_count + " Nutzern"
+                    : "Einem Nutzer")
+                + " gefällt diese Seite";
+        }
+    }
+
+    /*
+     * Tooltip for the ratings.
+     */
+    get ratingTooltip() {
+        return ''
+            + this.rating_count
+            + " Nutzer "
+            + (this.rating_count === 1 ? "hat" : "haben")
+            + " diese Seite mit "
+            + (this.rating_count === 1 ? "" : "durchschnittlich ")
+            + this.overall_star_rating
+            + " ★ bewertet";
+    }
+
+    /*
+     * Tooltip for the number of people talking about the page.
+     */
+    get talkingAboutTooltip() {
+        return ''
+            + this.talking_about_count
+            + " Nutzer "
+            + (this.talking_about_count === 1 ? "redet" : "reden")
+            + " über diese Seite";
+    }
 }
 export interface Page extends PageType {}
 
@@ -75,6 +123,12 @@ export const DUMMY_PAGE_TYPE: PageType = {
     new_like_count: 0,
     overall_star_rating: 0,
     rating_count: 0,
-    talking_about_count: 0
+    talking_about_count: 0,
+    likes: {
+        data: [{
+            name: '',
+            id: ''
+        }]
+    }
 };
 

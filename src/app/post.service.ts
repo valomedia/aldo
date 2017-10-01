@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/first';
 
-import {Post, DUMMY_POST_TYPE} from './post';
+import {Post, DUMMY_POST_TYPE, PostContentType} from './post';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
+import {Page} from './page';
+import {VideoService} from './video.service';
+import {Ressource} from './app';
+import {PhotoService} from './photo.service';
 
 /*
  * The Service providing the Pages.
@@ -15,7 +17,10 @@ import {GraphApiResponse} from './graph-api-response';
 
 @Injectable()
 export class PostService {
-    constructor(private fbService: FbService) {}
+    constructor(
+        protected fbService: FbService,
+        protected videoService: VideoService,
+        protected photoService: PhotoService) {}
 
     /*
      * Perform a GET-request for a Post on a given path.
@@ -39,15 +44,13 @@ export class PostService {
     /*
      * Get a post by its id.
      */
-    post(id: string): Promise<Post> {
+    post(id: string): Observable<Post> {
         return this.fbService
-            .call(
+            .fetch(
                 id,
                 HttpMethod.Get,
                 {fields: Object.keys(DUMMY_POST_TYPE)},
-                    Post)
-            .first()
-            .toPromise() as Promise<Post>;
+                    Post) as Observable<Post>;
     }
 
     /*
@@ -79,6 +82,39 @@ export class PostService {
      */
     promotablePosts(id: string, isPublished?: boolean) {
         return this.get(id + '/promotable_posts', isPublished);
+    }
+
+    /*
+     * Post a message as the page.
+     */
+    create(
+        page: Page,
+        msg?: string,
+        contentType = PostContentType.status,
+        ressource?: Ressource
+    ): Observable<string> {
+        return [
+            this._create,
+            this._create,
+            this.photoService.create,
+            this.videoService.create
+        ][contentType].bind(this)(page, ressource, msg);
+    }
+
+    protected _create(
+        page: Page,
+        link: Ressource,
+        message: string
+    ): Observable<string> {
+        return this.fbService.call(
+            page.id.toString() + '/feed',
+            HttpMethod.Post,
+            {
+                message: message,
+                link: link,
+                access_token: page.access_token
+            })
+            .pluck('id');
     }
 }
 

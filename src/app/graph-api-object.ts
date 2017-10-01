@@ -7,21 +7,30 @@
  */
 
 /*
- * The common base of all objects retuned by the GraphAPI.
+ * The common base of all objects returned by the GraphAPI.
  */
 export interface GraphApiObjectType {
     id: string;
-}
+    metadata?: {
+        fields: [{
+            name: string;
+            description: string;
+            type: string;
+        }];
+        type: string;
+        connections: {[id: string]: string};
+    };
+};
 
 /*
- * The common base of the internal representation of GraphAPI-objects.
+ * The common base of the internal representations of GraphAPI-objects.
  */
 export class GraphApiObject {
     constructor(kwargs: GraphApiObjectType) {
         Object.assign(this, kwargs);
     }
-}
-export interface GraphApiObject extends GraphApiObjectType {}
+};
+export interface GraphApiObject extends GraphApiObjectType {};
 
 /*
  * The simplest valid GraphApiObject.

@@ -10,6 +10,7 @@ import 'rxjs/add/operator/do';
 import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
+import {AppService} from './app.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -22,18 +23,14 @@ import {AppRoutingService} from './app-routing.service';
 })
 export class LayoutComponent implements OnInit {
     constructor(
-        private appUxService: AppUxService,
-        private title: Title,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private fbService: FbService,
-        private location: Location,
-        private appRoutingService: AppRoutingService) {}
-
-    /*
-     * The route parameters.
-     */
-    private params: Params = {};
+        protected appUxService: AppUxService,
+        protected title: Title,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected fbService: FbService,
+        protected location: Location,
+        protected appRoutingService: AppRoutingService,
+        protected appService: AppService) {}
 
     /*
      * Whether the dark-theme is active.
@@ -43,11 +40,17 @@ export class LayoutComponent implements OnInit {
     @ViewChild('aside')
     aside: MdSidenav;
 
+    /*
+     * The route parameters.
+     */
+    protected params: Params = {};
+
     ngOnInit() {
         this.appRoutingService
             .events
             .filter(Boolean)
-            .do(params => params.post && this.aside.open())
+            .map(() => this.appRoutingService.params)
+            .do(params => this.aside[params.post ? 'open' : 'close']())
             .subscribe(params => this.params = params);
     }
 }

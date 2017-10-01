@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the PostsComponent.
+ *
+ * This is a style locally applied to PostsComponent.  All styles specific to 
+ * the PostsComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _posts.component partial, to keep things easier to restructure.
+ */
+
+@import '../mixins';
+@import '../colors';
+@import '_posts.component';
+

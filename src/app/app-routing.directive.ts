@@ -22,13 +22,13 @@ import {AppRoutingService} from './app-routing.service';
 @Directive({selector: '[appRouting]'})
 export class AppRoutingDirective implements OnInit {
     constructor(
-        private appRoutingService: AppRoutingService,
-        private templateRef: TemplateRef<any>,
-        private viewContainerRef: ViewContainerRef) {}
+        protected appRoutingService: AppRoutingService,
+        protected templateRef: TemplateRef<any>,
+        protected viewContainerRef: ViewContainerRef) {}
 
-    private hasView = false;
-    private _depends: string[] = [];
-    private _conflicts: string[] = [];
+    protected hasView = false;
+    protected _depends: string[] = [];
+    protected _conflicts: string[] = [];
 
     @Input()
     set appRouting(depends: string|null) {
@@ -63,6 +63,7 @@ export class AppRoutingDirective implements OnInit {
         // Handle regular Components.
         this.appRoutingService
             .events
+            .map(() => this.appRoutingService.params)
             .filter(() => !!this._depends.length || !!this._conflicts.length)
             .map(params => !!params
                 && this._depends
@@ -76,6 +77,7 @@ export class AppRoutingDirective implements OnInit {
         // Handle fallback Components.
         this.appRoutingService
             .events
+            .map(() => this.appRoutingService.params)
             .filter(() => !this._depends.length && !this._conflicts.length)
             .map(Boolean)
             .subscribe(valid => valid ? this.hide() : this.show());

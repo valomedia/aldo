@@ -33,8 +33,7 @@
                         mdTooltip="Neu laden"
                         mdTooltipShowDelay='1500'
                         mdTooltipHideDelay='1500'
-                        (click)='fbService.clearCache()'
-                        (click)='appRoutingService.refresh()'>
+                        (click)='appRoutingService.refresh([appService.POST])'>
                     <md-icon>refresh</md-icon>
                 </button>
                 <a
@@ -72,14 +71,13 @@
             <span class='app-toolbar-title'>{{title.getTitle()}}</span>
             <span class='app-toolbar-filler'></span>
             <button
-                    *ngIf='params.page'
+                    *ngIf='params.profile'
                     md-button
                     class='app-icon-button'
                     mdTooltip="Neu laden"
                     mdTooltipShowDelay='1500'
                     mdTooltipHideDelay='1500'
-                    (click)='fbService.clearCache()'
-                    (click)='appRoutingService.refresh()'>
+                    (click)='appRoutingService.refresh([appService.PROFILE])'>
                 <md-icon>refresh</md-icon>
             </button>
             <button
@@ -88,7 +86,7 @@
                     mdTooltip="Dashboard"
                     mdTooltipShowDelay='1500'
                     mdTooltipHideDelay='1500'
-                    [appLink]='{page: null}'>
+                    [appLink]='{profile: null}'>
                 <md-icon>dashboard</md-icon>
             </button>
             <a
@@ -97,7 +95,7 @@
                     mdTooltip="Facebook"
                     mdTooltipShowDelay='1500'
                     mdTooltipHideDelay='1500'
-                    href='//facebook.com/{{params.page}}'
+                    href='//facebook.com/{{params.profile}}'
                     target='_blank'>
                 <md-icon>open_in_browser</md-icon>
             </a>
