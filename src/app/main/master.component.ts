@@ -56,6 +56,9 @@ export class MasterComponent extends AppRoutingComponent {
      */
     profile: Observable<Profile>;
 
+    test1: Profile;
+    test2: Profile;
+
     @Input()
     set params(params: Params|undefined) {
         if (params) {
@@ -70,6 +73,8 @@ export class MasterComponent extends AppRoutingComponent {
                     null,
                     (err: GraphApiError) =>
                         GraphApiErrorComponent.show(this.mdSnackBar, err));
+            this.profile.subscribe(x => this.test1 = x);
+            this.profile.subscribe(x => this.test2 = x);
         }
     }
     get params() {

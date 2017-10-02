@@ -22,6 +22,9 @@ import {PostDialogComponent} from './post-dialog.component';
 
 /*
  * The Component showing a single Page in detail.
+ *
+ * This is only used for the Pages the user is administrating.  Other Pages will 
+ * be shown by the more general ProfileComponent.
  */
 
 @Component({
@@ -55,18 +58,6 @@ export class PageComponent {
      * New Posts written by the user since they opened this Page.
      */
     newPosts = new Subject<Post>();
-
-    /*
-     * Whether to override the loading indicator.
-     *
-     * If the containing Component knows for a fact, that the data to be shown 
-     * is already available, it can set this flag to cause to component to never 
-     * show a spinner.  This can be helpful in situations, where the spinner 
-     * would otherwise only appear for a few milliseconds, causing an 
-     * odd-looking twitch in the application.
-     */
-    @Input()
-    loaded = false;
 
     /*
      * The Page currently shown.

@@ -18,12 +18,5 @@ export class ProfileComponent {
      */
     @Input()
     profile?: Profile;
-
-    /*
-     * Whether the Component is showing a Page.
-     */
-    get isPage() {
-        return this.profile instanceof Page;
-    }
 }
 
