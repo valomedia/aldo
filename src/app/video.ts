@@ -16,6 +16,10 @@ export interface VideoType extends StoryType {
  * A Facebook video as used internally.
  */
 export class Video extends Story {
+    constructor(kwargs: VideoType) {
+        super(kwargs);
+    }
+
     /*
      * The Profile that uploaded this Video.
      */

@@ -1,8 +1,8 @@
-import {ReflectiveInjector} from '@angular/core';
-
-import {GraphApiObject, GraphApiObjectType, DUMMY_GRAPH_API_OBJECT_TYPE}
-    from './graph-api-object';
-import {UtilService} from './util.service';
+import {
+    GraphApiObject,
+    GraphApiObjectType,
+    DUMMY_GRAPH_API_OBJECT_TYPE
+} from './graph-api-object';
 import {ConfService} from './conf.service';
 
 /*
@@ -22,10 +22,13 @@ export interface ProfileType extends GraphApiObjectType {
  * A Facebook profile as used internally.
  */
 export class Profile extends GraphApiObject {
-    protected confService: ConfService = ReflectiveInjector
-        .resolveAndCreate([UtilService])
-        .get(UtilService)
-        .inject(ConfService);
+    constructor(kwargs: ProfileType) {
+        super(kwargs);
+    }
+
+    protected get confService() {
+        return this.serviceService.confService;
+    }
 
     /*
      * Get the url to the icon for this Profile.

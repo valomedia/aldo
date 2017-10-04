@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import 'hammerjs';
 
+import {ServiceService} from './service.service';
 import {AppComponent} from './app.component';
 import {PageComponent} from './main/page.component';
 import {PagesComponent} from './nav/pages.component';
@@ -100,6 +101,7 @@ import {MasterComponent} from './main/master.component';
     ],
     bootstrap: [AppComponent],
     providers: [
+        ServiceService,
         PageService,
         FbService,
         AppUxService,

@@ -1,5 +1,3 @@
-import {ReflectiveInjector} from '@angular/core';
-
 import {
     GraphApiObject,
     GraphApiObjectType,
@@ -9,6 +7,8 @@ import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
 import {UtilService} from './util.service';
+import {ProfileService} from './profile.service';
+import {ServiceService} from './service.service';
 
 /*
  * Classes related to Facebook comments.
@@ -55,20 +55,28 @@ export interface CommentType extends GraphApiObjectType {
  */
 export class Comment extends GraphApiObject {
     constructor(kwargs: CommentType) {
-        kwargs = {
-            ...kwargs,
-            from: new Profile(kwargs.from)
-        };
         super(kwargs);
-        const utilService = ReflectiveInjector
-            .resolveAndCreate([UtilService])
-            .get(UtilService);
-        this.videoService = utilService.inject(VideoService);
-        this.commentService = utilService.inject(CommentService);
+        this.from = new Profile(kwargs.from);
+        this.profileService
+            .profile(kwargs.from.id)
+            .subscribe(profile => this.from = profile);
     }
 
-    protected videoService: VideoService;
-    protected commentService: CommentService;
+    protected get utilService() {
+        return this.serviceService.utilService;
+    }
+
+    protected get videoService() {
+        return this.serviceService.videoService;
+    }
+
+    protected get commentService() {
+        return this.serviceService.commentService;
+    }
+
+    protected get profileService() {
+        return this.serviceService.profileService;
+    }
 
     /*
      * The Profile that sent this Post.
