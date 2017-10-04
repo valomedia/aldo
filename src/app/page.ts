@@ -24,6 +24,7 @@ export interface PageType extends ProfileType {
             id: string;
         }[];
     };
+    description: string;
 };
 
 /*
@@ -132,6 +133,7 @@ export const DUMMY_PAGE_TYPE: PageType = {
             name: '',
             id: ''
         }]
-    }
+    },
+    description: ''
 };
 
