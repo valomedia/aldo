@@ -112,6 +112,16 @@ export class User extends Profile {
                         < 0)
             : null;
     }
+
+    /*
+     * Get a short biography of the User.
+     *
+     * This is just an alias for the about field, since most types of Profiles 
+     * have a field called description, that has a similar purpose.
+     */
+    get description() {
+        return this.about;
+    }
 }
 export interface User extends UserType {}
 
