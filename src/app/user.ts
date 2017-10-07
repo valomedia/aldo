@@ -24,6 +24,7 @@ export interface UserType extends ProfileType {
     birthday?: string;
     gender?: string;
     location?: PageType;
+    about?: string;
 };
 
 /*
@@ -126,6 +127,7 @@ export const DUMMY_USER_TYPE: UserType = {
     age_range: { min: 21 },
     birthday: '',
     gender: '',
-    location: DUMMY_PAGE_TYPE
+    location: DUMMY_PAGE_TYPE,
+    about: ''
 };
 
