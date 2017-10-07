@@ -114,12 +114,21 @@ export class User extends Profile {
     }
 
     /*
-     * Get a short biography of the User.
+     * Get a description of the User.
      *
      * This is just an alias for the about field, since most types of Profiles 
      * have a field called description, that has a similar purpose.
      */
     get description() {
+        return this.about;
+    }
+
+    /*
+     * Get a biography of the User.
+     *
+     * This is an alias for the about field, for legacy reasons.
+     */
+    get bio() {
         return this.about;
     }
 }
