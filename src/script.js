@@ -22,7 +22,7 @@ window.onload = function() {
 
     // JavaScript is working, replace the no_script notice with the preloader.
     document.getElementById('preloader').className = '';
-    document.getElementById('no_script').className = '';
+    document.getElementById('no_script').className = 'hidden';
     document.getElementById('login_notice').className = '';
     document.getElementById('retry_auth_btn').className = '';
 
