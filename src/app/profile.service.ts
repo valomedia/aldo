@@ -7,6 +7,7 @@ import 'rxjs/add/operator/publishReplay';
 import {Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {FbService, HttpMethod} from './fb.service';
 import {PageService} from './page.service';
+import {UserService} from './user.service';
 
 /*
  * The Service providing Profiles.
@@ -16,7 +17,8 @@ import {PageService} from './page.service';
 export class ProfileService {
     constructor(
         protected fbService: FbService,
-        protected pageService: PageService) {}
+        protected pageService: PageService,
+        protected userService: UserService) {}
 
     protected _profile(id: string): Observable<Profile> {
         return this.fbService
@@ -42,6 +44,7 @@ export class ProfileService {
             .mergeMap(profile => {
                 switch (profile.metadata.type) {
                     case 'page': return this.pageService.page(id);
+                    case 'user': return this.userService.user(id);
                     default: return Observable.of(profile);
                 }
             });

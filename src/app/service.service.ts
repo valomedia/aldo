@@ -12,6 +12,7 @@ import {AppService} from './app.service';
 import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
 import {CachedHttpService} from './cached-http.service';
+import {UserService} from './user.service';
 
 /*
  * Service providing services built just-in-time, to break cyclic dependencies.
@@ -31,6 +32,7 @@ export class ServiceService {
     protected _profileService?: ProfileService;
     protected _photoService?: PhotoService;
     protected _cachedHttpService?: CachedHttpService;
+    protected _userService?: UserService;
 
     /*
      * The UtilService.
@@ -163,7 +165,19 @@ export class ServiceService {
      */
     get cachedHttpService(): CachedHttpService {
         return this._cachedHttpService
-            || (this._cachedHttpService = this.utilService.inject(CachedHttpService));
+            || (this._cachedHttpService
+                = this.utilService.inject(CachedHttpService));
+    }
+
+    /*
+     * The UserService.
+     *
+     * Gets the UserService singleton for this instance, building it, if it does 
+     * not exist yet.
+     */
+    get userService(): UserService {
+        return this._userService
+            || (this._userService = this.utilService.inject(UserService));
     }
 }
 
