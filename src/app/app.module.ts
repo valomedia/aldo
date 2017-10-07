@@ -56,6 +56,7 @@ import {MasterComponent} from './main/master.component';
 import {CachedHttpService} from './cached-http.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
+import {EventService} from './event.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -123,7 +124,8 @@ import {GroupService} from './group.service';
         PhotoService,
         CachedHttpService,
         UserService,
-        GroupService
+        GroupService,
+        EventService
     ],
     entryComponents: [
         PostDialogComponent,

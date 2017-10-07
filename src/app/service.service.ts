@@ -14,6 +14,7 @@ import {PhotoService} from './photo.service';
 import {CachedHttpService} from './cached-http.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
+import {EventService} from './event.service';
 
 /*
  * Service providing services built just-in-time, to break cyclic dependencies.
@@ -35,6 +36,7 @@ export class ServiceService {
     protected _cachedHttpService?: CachedHttpService;
     protected _userService?: UserService;
     protected _groupService?: GroupService;
+    protected _eventService?: EventService;
 
     /*
      * The UtilService.
@@ -191,6 +193,17 @@ export class ServiceService {
     get groupService(): GroupService {
         return this._groupService
             || (this._groupService = this.utilService.inject(GroupService));
+    }
+
+    /*
+     * The EventService.
+     *
+     * Gets the EventService singleton for this instance, building it, if it 
+     * does not exist yet.
+     */
+    get eventService(): EventService {
+        return this._eventService
+            || (this._eventService = this.utilService.inject(EventService));
     }
 }
 

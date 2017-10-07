@@ -25,6 +25,7 @@ import {PhotoService} from './photo.service';
 import {CachedHttpService} from './cached-http.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
+import {EventService} from './event.service';
 
 /*
  * Service providing some useful functions, that don't belong anywhere else.
@@ -46,6 +47,7 @@ export class UtilService {
         this.cachedHttpService = this.inject(CachedHttpService);
         this.userService = this.inject(UserService);
         this.groupService = this.inject(GroupService);
+        this.eventService = this.inject(EventService);
     }
 
     protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
@@ -79,7 +81,8 @@ export class UtilService {
         PhotoService,
         CachedHttpService,
         UserService,
-        GroupService
+        GroupService,
+        EventService
     ]);
 
     protected appService: AppService;
@@ -95,6 +98,7 @@ export class UtilService {
     protected cachedHttpService: CachedHttpService;
     protected userService: UserService;
     protected groupService: GroupService;
+    protected eventService: EventService;
 
     /*
      * This is madness.
