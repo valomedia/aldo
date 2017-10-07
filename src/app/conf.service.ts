@@ -30,6 +30,9 @@ declare var conf: {
         videoFormats: string[];
     };
     perms: {[name: string]: Perm};
+    app: {
+        baseDelay: number;
+    }
 }
 
 @Injectable()
@@ -44,5 +47,10 @@ export class ConfService {
      * Configuration for the permissions the app requests.
      */
     perms = conf.perms;
+
+    /*
+     * Configuration facing the user.
+     */
+    app = conf.app;
 }
 

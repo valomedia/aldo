@@ -44,10 +44,7 @@ export class ProfileService {
                     case 'page': return this.pageService.page(id);
                     default: return Observable.of(profile);
                 }
-            })
-            .publishReplay(1)
-            .refCount()
-            .first();
+            });
     }
 }
 

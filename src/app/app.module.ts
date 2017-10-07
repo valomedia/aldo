@@ -53,6 +53,7 @@ import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
 import {DetailComponent} from './aside/detail.component';
 import {MasterComponent} from './main/master.component';
+import {CachedHttpService} from './cached-http.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -117,7 +118,8 @@ import {MasterComponent} from './main/master.component';
         AppService,
         UtilService,
         ProfileService,
-        PhotoService
+        PhotoService,
+        CachedHttpService
     ],
     entryComponents: [
         PostDialogComponent,
