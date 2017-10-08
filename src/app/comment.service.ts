@@ -6,6 +6,7 @@ import {Comment, DUMMY_COMMENT_TYPE} from './comment';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiResponse} from './graph-api-response';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Comments.
@@ -23,7 +24,7 @@ export class CommentService {
             .fetch(
                 id,
                 HttpMethod.Get,
-                {fields: Object.keys(DUMMY_COMMENT_TYPE)},
+                {fields: buildFields(DUMMY_COMMENT_TYPE)},
                 Comment) as Observable<Comment>;
     }
 
@@ -38,7 +39,7 @@ export class CommentService {
         return this.fbService.api(
             id + '/comments',
             HttpMethod.Get,
-            {fields: Object.keys(DUMMY_COMMENT_TYPE)},
+            {fields: buildFields(DUMMY_COMMENT_TYPE)},
             Comment) as Observable<GraphApiResponse<Comment>>;
     }
 }

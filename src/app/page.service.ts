@@ -7,6 +7,7 @@ import {Page, DUMMY_PAGE_TYPE} from './page';
 import {FbService, HttpMethod} from './fb.service';
 import {GraphApiError} from './graph-api-error';
 import {Ressource} from './app';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Pages.
@@ -23,7 +24,7 @@ export class PageService {
         return this.fbService.fetch(
             path,
             HttpMethod.Get,
-            {fields: Object.keys(DUMMY_PAGE_TYPE)},
+            {fields: buildFields(DUMMY_PAGE_TYPE)},
             Page) as Observable<Page>;
     }
 

@@ -218,11 +218,7 @@ export class FbService {
         return this.call(
             path,
             method,
-            {
-                ...params,
-                fields: (params.fields || [])
-                    .map(field => field + '.summary(true)')
-            })
+            params)
             .map((res: GraphApiResponseType<GraphApiObject>|any) =>
                 new GraphApiResponse(
                     res.data

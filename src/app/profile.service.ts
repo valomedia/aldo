@@ -10,6 +10,7 @@ import {PageService} from './page.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
+import {buildFields} from './util';
 
 /*
  * The Service providing Profiles.
@@ -30,7 +31,7 @@ export class ProfileService {
                 id,
                 HttpMethod.Get,
                 {
-                    fields: Object.keys(DUMMY_PROFILE_TYPE),
+                    fields: buildFields(DUMMY_PROFILE_TYPE),
                     metadata: 1
                 },
                 Profile)

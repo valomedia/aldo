@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {Event, DUMMY_EVENT_TYPE} from './event';
 import {FbService, HttpMethod} from './fb.service';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Events.
@@ -20,7 +21,7 @@ export class EventService {
         return this.fbService.fetch(
             id,
             HttpMethod.Get,
-            {fields: Object.keys(DUMMY_EVENT_TYPE)},
+            {fields: buildFields(DUMMY_EVENT_TYPE)},
             Event) as Observable<Event>;
     }
 }

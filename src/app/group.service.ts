@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {Group, DUMMY_GROUP_TYPE} from './group';
 import {FbService, HttpMethod} from './fb.service';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Groups.
@@ -20,7 +21,7 @@ export class GroupService {
         return this.fbService.fetch(
             id,
             HttpMethod.Get,
-            {fields: Object.keys(DUMMY_GROUP_TYPE)},
+            {fields: buildFields(DUMMY_GROUP_TYPE)},
             Group) as Observable<Group>;
     }
 }

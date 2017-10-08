@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {User, DUMMY_USER_TYPE} from './user';
 import {FbService, HttpMethod} from './fb.service';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Users.
@@ -20,7 +21,7 @@ export class UserService {
         return this.fbService.fetch(
             id,
             HttpMethod.Get,
-            {fields: Object.keys(DUMMY_USER_TYPE)},
+            {fields: buildFields(DUMMY_USER_TYPE)},
             User) as Observable<User>;
     }
 }
