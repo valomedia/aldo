@@ -9,7 +9,7 @@ import {PostService} from './post.service';
  * A Facebook event as returned by the Facebook API.
  */
 export interface EventType extends ProfileType {
-    description: string;
+    description?: string;
 };
 
 /*

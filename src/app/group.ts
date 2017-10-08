@@ -10,7 +10,7 @@ import {PostService} from './post.service';
  */
 export interface GroupType extends ProfileType {
     icon: string;
-    description: string;
+    description?: string;
 };
 
 /*

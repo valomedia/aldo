@@ -1,9 +1,13 @@
+import {Observable} from 'rxjs/Observable';
+
 import {
     GraphApiObject,
     GraphApiObjectType,
     DUMMY_GRAPH_API_OBJECT_TYPE
 } from './graph-api-object';
 import {ConfService} from './conf.service';
+import {GraphApiResponse} from './graph-api-response';
+import {Post} from './post';
 
 /*
  * Classes related to Facebook profiles.
@@ -26,6 +30,13 @@ export class Profile extends GraphApiObject {
         super(kwargs);
     }
 
+    /*
+     * The description of this Profile.
+     *
+     * This is implemented by the subclasses.
+     */
+    description?: string;
+
     protected get confService() {
         return this.serviceService.confService;
     }
@@ -35,6 +46,15 @@ export class Profile extends GraphApiObject {
      */
     get picture() {
         return this.confService.fb.apiUrl + '/' + this.id + '/picture';
+    }
+
+    /*
+     * Get the Feed of Posts for this Profile.
+     *
+     * This is implemented by the subclasses.
+     */
+    get feed(): Observable<GraphApiResponse<Post>> {
+        return null;
     }
 }
 export interface Profile extends ProfileType {}

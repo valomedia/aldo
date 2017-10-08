@@ -23,7 +23,7 @@ export interface PageType extends ProfileType {
             id: string;
         }[];
     };
-    description: string;
+    description?: string;
 };
 
 /*
