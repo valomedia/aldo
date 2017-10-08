@@ -8,6 +8,8 @@ import {Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {FbService, HttpMethod} from './fb.service';
 import {PageService} from './page.service';
 import {UserService} from './user.service';
+import {GroupService} from './group.service';
+import {EventService} from './event.service';
 
 /*
  * The Service providing Profiles.
@@ -18,7 +20,9 @@ export class ProfileService {
     constructor(
         protected fbService: FbService,
         protected pageService: PageService,
-        protected userService: UserService) {}
+        protected userService: UserService,
+        protected groupService: GroupService,
+        protected eventService: EventService) {}
 
     protected _profile(id: string): Observable<Profile> {
         return this.fbService
@@ -45,6 +49,8 @@ export class ProfileService {
                 switch (profile.metadata.type) {
                     case 'page': return this.pageService.page(id);
                     case 'user': return this.userService.user(id);
+                    case 'group': return this.groupService.group(id);
+                    case 'event': return this.eventService.event(id);
                     default: return Observable.of(profile);
                 }
             });
