@@ -59,7 +59,7 @@ msgs[GraphApiErrorType.Rate] =
 msgs[GraphApiErrorType.VideoUploadTransient] = 
     "Versuche es erneut, kontaktiere uns, wenn der Fehler weiterhin auftritt.";
 msgs[GraphApiErrorType.Aldo] = 
-    "Bitte kontaktiere den Support, damite wir das Problem beheben können.";
+    "Bitte kontaktiere den Support, damit wir das Problem beheben können.";
 msgs[GraphApiErrorType.VideoUpload] = 
     "Konvertiere dein Video in ein anderes Format und versuche es erneut.";
 msgs[GraphApiErrorType.Abuse] = 
@@ -175,7 +175,7 @@ export class GraphApiError {
         if (this.code === 6001 || this.code === 356 || this.code === 390) {
             return GraphApiErrorType.VideoUploadTransient;
         }
-        if (this.code === 100) {
+        if (this.code === 100 || this.code === 2500) {
             return GraphApiErrorType.Aldo;
         }
         if (this.code === 6000) {
