@@ -30,4 +30,16 @@ export class AppUxService {
             ? 16
             : 24;
     }
+
+    /*
+     * Calculates the width of cards in twelths of the overall width.
+     */
+    get cardWidth() {
+        switch (this.cols) {
+            case 12: return 4;
+            case 8: return 6;
+            default: return 12;
+        }
+    }
 }
+

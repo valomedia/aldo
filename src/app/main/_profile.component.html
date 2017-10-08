@@ -55,5 +55,13 @@
             <em>{{profile.description}}</em>
         </p>
     </div>
+    <div>
+        <endless-list #posts [input]='feed'>
+            <posts
+                    [posts]='posts.output'
+                    [cols]='appUxService.cardWidth'>
+            </posts>
+        </endless-list>
+    </div>
 </div>
 
