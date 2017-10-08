@@ -66,7 +66,7 @@ md-card-content {
     }
 
     p::after {
-        content: '––––––––––';
+        content: ' ––––––––––';
         visibility: hidden;
         white-space: nowrap;
     }
