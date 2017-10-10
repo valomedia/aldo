@@ -1,5 +1,6 @@
 <!-- HTML template for the PageComponent -->
 <div *ngIf='page'>
+    <cover-photo [cover]='page.cover'></cover-photo>
     <div>
         <h1>
             {{page.name}}
@@ -51,6 +52,8 @@
                 </span>
             </small>
         </h1>
+    </div>
+    <div>
         <p *ngIf='page.description'>
             <em>{{page.description}}</em>
         </p>

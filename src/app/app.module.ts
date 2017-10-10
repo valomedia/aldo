@@ -57,6 +57,7 @@ import {CachedHttpService} from './cached-http.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
+import {CoverPhotoComponent} from './main/cover-photo.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -101,7 +102,8 @@ import {EventService} from './event.service';
         FileComponent,
         ProfileComponent,
         DetailComponent,
-        MasterComponent
+        MasterComponent,
+        CoverPhotoComponent
     ],
     bootstrap: [AppComponent],
     providers: [

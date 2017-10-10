@@ -1,6 +1,6 @@
 <!-- HTML template for the MasterComponent -->
 <md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
-<div id='master'>
+<div *ngIf='profile | async' id='master'>
     <profile
             *ngIf='!(profile | async)?.access_token'
             [profile]='profile | async'>
