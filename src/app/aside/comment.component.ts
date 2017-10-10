@@ -26,7 +26,7 @@ export class CommentComponent {
         protected utilService: UtilService,
         protected appRoutingService: AppRoutingService) {}
 
-    protected params = this.appRoutingService.params;
+    protected params = this.appRoutingService.events;
     protected _loaded = false;
 
     /*
