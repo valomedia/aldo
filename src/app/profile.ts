@@ -8,6 +8,7 @@ import {
 import {ConfService} from './conf.service';
 import {GraphApiResponse} from './graph-api-response';
 import {Post} from './post';
+import {CoverPhoto} from './cover-photo';
 
 /*
  * Classes related to Facebook profiles.
@@ -36,6 +37,13 @@ export class Profile extends GraphApiObject {
      * This is implemented by the subclasses.
      */
     description?: string;
+
+    /*
+     * The CoverPhoto of this Profile.
+     *
+     * This is implemented by the subclasses.
+     */
+    cover?: CoverPhoto;
 
     protected get confService() {
         return this.serviceService.confService;

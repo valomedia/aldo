@@ -1,5 +1,10 @@
 import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
+import {
+    CoverPhoto,
+    CoverPhotoType,
+    DUMMY_COVER_PHOTO_TYPE
+} from './cover-photo';
 
 /*
  * Classes related to handling Facebook events.
@@ -10,6 +15,7 @@ import {PostService} from './post.service';
  */
 export interface EventType extends ProfileType {
     description?: string;
+    cover?: CoverPhotoType;
 };
 
 /*
@@ -18,11 +24,17 @@ export interface EventType extends ProfileType {
 export class Event extends Profile {
     constructor(kwargs: EventType) {
         super(kwargs);
+        if (kwargs.cover) { this.cover = new CoverPhoto(kwargs.cover); }
     }
 
     protected get postService() {
         return this.serviceService.postService;
     }
+
+    /*
+     * The CoverPhoto for this Event.
+     */
+    cover?: CoverPhoto;
 
     /*
      * Get the feed of Posts of this Event.
@@ -42,6 +54,7 @@ export interface Event extends EventType {}
  */
 export const DUMMY_EVENT_TYPE: EventType = {
     ...DUMMY_PROFILE_TYPE,
-    description: ''
+    description: '',
+    cover: DUMMY_COVER_PHOTO_TYPE
 };
 

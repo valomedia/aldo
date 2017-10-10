@@ -2,6 +2,11 @@ import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
 import {Page, PageType, DUMMY_PAGE_TYPE} from './page';
 import {PageService} from './page.service';
+import {
+    CoverPhoto,
+    CoverPhotoType,
+    DUMMY_COVER_PHOTO_TYPE
+} from './cover-photo';
 
 /*
  * Classes related to handling Facebook users.
@@ -25,6 +30,7 @@ export interface UserType extends ProfileType {
     gender?: string;
     location?: PageType;
     about?: string;
+    cover?: CoverPhotoType;
 };
 
 /*
@@ -39,6 +45,7 @@ export class User extends Profile {
                 .page(kwargs.location.id)
                 .subscribe(page => this.location = page);
         }
+        if (kwargs.cover) { this.cover = new CoverPhoto(kwargs.cover); }
     }
 
     protected get postService() {
@@ -53,6 +60,11 @@ export class User extends Profile {
      * The Page for the place where the User lives.
      */
     location:  Page;
+
+    /*
+     * The CoverPhoto of this User.
+     */
+    cover?: CoverPhoto;
 
     /*
      * Get the feed of Posts of this User.
@@ -147,6 +159,7 @@ export const DUMMY_USER_TYPE: UserType = {
     birthday: '',
     gender: '',
     location: DUMMY_PAGE_TYPE,
-    about: ''
+    about: '',
+    cover: DUMMY_COVER_PHOTO_TYPE
 };
 

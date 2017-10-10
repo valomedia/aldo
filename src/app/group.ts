@@ -1,5 +1,10 @@
 import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
+import {
+    CoverPhoto,
+    CoverPhotoType,
+    DUMMY_COVER_PHOTO_TYPE
+} from './cover-photo';
 
 /*
  * Classes related to handling Facebook groups.
@@ -11,6 +16,7 @@ import {PostService} from './post.service';
 export interface GroupType extends ProfileType {
     icon: string;
     description?: string;
+    cover?: CoverPhotoType;
 };
 
 /*
@@ -19,11 +25,17 @@ export interface GroupType extends ProfileType {
 export class Group extends Profile {
     constructor(kwargs: GroupType) {
         super(kwargs);
+        if (kwargs.cover) { this.cover = new CoverPhoto(kwargs.cover); }
     }
 
     protected get postService() {
         return this.serviceService.postService;
     }
+
+    /*
+     * The CoverPhoto of this Group.
+     */
+    cover?: CoverPhoto;
 
     /*
      * Get the feed of Posts of this Group.
@@ -51,6 +63,7 @@ export interface Group extends GroupType {}
 export const DUMMY_GROUP_TYPE: GroupType = {
     ...DUMMY_PROFILE_TYPE,
     icon: '',
-    description: ''
+    description: '',
+    cover: DUMMY_COVER_PHOTO_TYPE
 };
 

@@ -2,6 +2,11 @@ import {ReflectiveInjector} from '@angular/core';
 
 import {ProfileType, Profile, DUMMY_PROFILE_TYPE} from './profile';
 import {PostService} from './post.service';
+import {
+    CoverPhoto,
+    CoverPhotoType,
+    DUMMY_COVER_PHOTO_TYPE
+} from './cover-photo';
 
 /*
  * Classes related to handling Facebook pages.
@@ -24,6 +29,7 @@ export interface PageType extends ProfileType {
         }[];
     };
     description?: string;
+    cover?: CoverPhotoType;
 };
 
 /*
@@ -32,11 +38,17 @@ export interface PageType extends ProfileType {
 export class Page extends Profile {
     constructor(kwargs: PageType) {
         super(kwargs);
+        if (kwargs.cover) { this.cover = new CoverPhoto(kwargs.cover); }
     }
 
     protected get postService() {
         return this.serviceService.postService;
     }
+
+    /*
+     * The CoverPhoto of this Page.
+     */
+    cover?: CoverPhoto;
 
     /*
      * Get the feed of Posts of this Page.
@@ -136,6 +148,7 @@ export const DUMMY_PAGE_TYPE: PageType = {
             id: ''
         }]
     },
-    description: ''
+    description: '',
+    cover: DUMMY_COVER_PHOTO_TYPE
 };
 
