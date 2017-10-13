@@ -18,6 +18,12 @@ enum AgeRange {
     MATURE
 }
 
+enum Gender {
+    M,
+    F,
+    N
+}
+
 /*
  * A Facebook user as returned by the Facebook API.
  */
@@ -59,7 +65,7 @@ export class User extends Profile {
     /*
      * The Page for the place where the User lives.
      */
-    location:  Page;
+    location: Page;
 
     /*
      * The CoverPhoto of this User.
@@ -142,6 +148,89 @@ export class User extends Profile {
      */
     get bio() {
         return this.about;
+    }
+
+    /*
+     * Get the gender of the User.
+     *
+     * This only distinguishes between male, female and other, to keep things 
+     * simple.
+     */
+    get sex() {
+        if (!this.gender) { return null; }
+        switch (this.gender) {
+            case 'male': return Gender.M;
+            case 'female': return Gender.F;
+            default: return Gender.N;
+        }
+    }
+
+    /*
+     * Tooltip for the age.
+     */
+    get ageTooltip() {
+        if (this.age) {
+            return this.age + " Jahre.";
+        }
+        if (this.ageRange) {
+            switch (+this.ageRange) {
+                case AgeRange.JUVENILE: return "14 bis 17 Jahre alt.";
+                case AgeRange.ADOLESCENT: return "Zwischen 18 und 20.";
+                case AgeRange.MATURE: return "21 oder älter.";
+            }
+        }
+        return "Alter unbekannt.";
+    }
+
+    /*
+     * Tooltip for the sex.
+     */
+    get sexTooltip() {
+        // TODO
+        // Calling everybody who identifies as neiter male, nor female trans, is 
+        // bound to get the SJWs worked up, but I can't seem to find another 
+        // word, that would be more accurate and is still common enough, that 
+        // the user can be expected to know what is meant.
+        switch (+this.sex) {
+            case Gender.M: return "männlich";
+            case Gender.F: return "weiblich";
+            case Gender.N: return "transsexuell";
+            default: return "Geschlecht unbekannt";
+        }
+    }
+
+    /*
+     * Tooltip for the location.
+     */
+    get locationTooltip() {
+        return this.location ? this.location.description : "Wohnort unbekannt";
+    }
+
+    /*
+     * The users age represented as a string.
+     */
+    get ageString() {
+        return String(
+            this.age || this.age_range ? ('' + this.age_range.min + '+') : '-');
+    }
+
+    /*
+     * The users sex represented as a string.
+     */
+    get sexString() {
+        switch (this.sex) {
+            case Gender.M: return "♂";
+            case Gender.F: return "♀";
+            case Gender.N: return "⚦";
+            default: return "⚥";
+        }
+    }
+
+    /*
+     * The users location represented as a string.
+     */
+    get locationString() {
+        return this.location ? this.location.name : '-';
     }
 }
 export interface User extends UserType {}
