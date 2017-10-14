@@ -128,7 +128,7 @@ export class Page extends Profile {
 export interface Page extends PageType {}
 
 /*
- * The simplest valid page.
+ * The simplest valid PageType.
  *
  * This exists, so the PageService can use it to check which fields to request 
  * from Facebook, thus allowing adding a field to Page without changing 

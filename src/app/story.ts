@@ -54,7 +54,7 @@ export class Story extends GraphApiObject {
         return this.updated_time ? new Date(this.updated_time) : null;
     }
 };
-export interface Story extends StoryType {};
+export interface Story extends StoryType {}
 
 /*
  * The simplest valid Story.
