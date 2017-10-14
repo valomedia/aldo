@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import 'hammerjs';
 
+import {ServiceService} from './service.service';
 import {AppComponent} from './app.component';
 import {PageComponent} from './main/page.component';
 import {PagesComponent} from './nav/pages.component';
@@ -50,6 +51,13 @@ import {UtilService} from './util.service';
 import {ProfileComponent} from './main/profile.component';
 import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
+import {DetailComponent} from './aside/detail.component';
+import {MasterComponent} from './main/master.component';
+import {CachedHttpService} from './cached-http.service';
+import {UserService} from './user.service';
+import {GroupService} from './group.service';
+import {EventService} from './event.service';
+import {CoverPhotoComponent} from './main/cover-photo.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -92,10 +100,14 @@ import {PhotoService} from './photo.service';
         DummyComponent,
         AppLinkDirective,
         FileComponent,
-        ProfileComponent
+        ProfileComponent,
+        DetailComponent,
+        MasterComponent,
+        CoverPhotoComponent
     ],
     bootstrap: [AppComponent],
     providers: [
+        ServiceService,
         PageService,
         FbService,
         AppUxService,
@@ -111,7 +123,11 @@ import {PhotoService} from './photo.service';
         AppService,
         UtilService,
         ProfileService,
-        PhotoService
+        PhotoService,
+        CachedHttpService,
+        UserService,
+        GroupService,
+        EventService
     ],
     entryComponents: [
         PostDialogComponent,

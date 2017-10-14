@@ -1,5 +1,4 @@
 <!-- HTML template for the PostComponent -->
-<md-spinner color='accent' *ngIf='!_loaded'></md-spinner>
 <div *ngIf='post'>
     <div *ngIf='post.picture' class='picture'>
         <a [href]='post.link' target='_blank'>
@@ -58,7 +57,7 @@
         <button
                 md-raised-button
                 color='primary'
-                [disabled]='params.profile === post.from.id'
+                [disabled]='profileId === post.from.id'
                 [appLink]='utilService.profileLink(post.from.id)'>
             Profil zeigen
             <md-icon>account_box</md-icon>
@@ -79,4 +78,3 @@
         <comments [comments]='commentList.output'></comments>
     </endless-list>
 </div>
-

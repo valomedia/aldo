@@ -6,6 +6,7 @@ import {Photo, DUMMY_PHOTO_TYPE} from './photo';
 import {FbService, HttpMethod} from './fb.service';
 import {Ressource} from './app';
 import {Page} from './page';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Photos.
@@ -23,7 +24,7 @@ export class PhotoService {
             .fetch(
                 id,
                 HttpMethod.Get,
-                {fields: Object.keys(DUMMY_PHOTO_TYPE)},
+                {fields: buildFields(DUMMY_PHOTO_TYPE)},
                 Photo) as Observable<Photo>;
     }
 

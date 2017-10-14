@@ -15,10 +15,10 @@ import {GraphApiError} from './graph-api-error';
 export class GraphApiErrorComponent implements OnInit {
 
     @Input()
-    graphApiError: GraphApiError;
+    graphApiError?: GraphApiError;
 
     @Input()
-    mdSnackBarRef: MdSnackBarRef<GraphApiErrorComponent>;
+    mdSnackBarRef?: MdSnackBarRef<GraphApiErrorComponent>;
 
     /*
      * Show a GraphApiError and return it.

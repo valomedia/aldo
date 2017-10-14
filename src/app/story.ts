@@ -3,8 +3,8 @@ import {
     GraphApiObjectType,
     DUMMY_GRAPH_API_OBJECT_TYPE
 } from './graph-api-object';
-
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
+import {ProfileService} from './profile.service';
 
 /*
  * Classes related to things posted to Facebook.
@@ -24,10 +24,15 @@ export interface StoryType extends GraphApiObjectType {
  */
 export class Story extends GraphApiObject {
     constructor(kwargs: StoryType) {
-        super({
-            ...kwargs,
-            from: new Profile(kwargs.from)
-        } as GraphApiObjectType);
+        super(kwargs);
+        this.from = new Profile(kwargs.from);
+        this.profileService
+            .profile(kwargs.from.id)
+            .subscribe(profile => this.from = profile);
+    }
+
+    protected get profileService() {
+        return this.serviceService.profileService;
     }
 
     /*

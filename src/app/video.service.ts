@@ -7,6 +7,7 @@ import {Video, DUMMY_VIDEO_TYPE} from './video';
 import {FbService, HttpMethod} from './fb.service';
 import {Ressource} from './app';
 import {Page} from './page';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Videos.
@@ -24,7 +25,7 @@ export class VideoService {
             .fetch(
                 id,
                 HttpMethod.Get,
-                {fields: Object.keys(DUMMY_VIDEO_TYPE)},
+                {fields: buildFields(DUMMY_VIDEO_TYPE)},
                 Video) as Observable<Video>;
     }
 

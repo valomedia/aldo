@@ -22,6 +22,10 @@ import {PostService} from './post.service';
 import {VideoService} from './video.service';
 import {ProfileService} from './profile.service';
 import {PhotoService} from './photo.service';
+import {CachedHttpService} from './cached-http.service';
+import {UserService} from './user.service';
+import {GroupService} from './group.service';
+import {EventService} from './event.service';
 
 /*
  * Service providing some useful functions, that don't belong anywhere else.
@@ -40,10 +44,13 @@ export class UtilService {
         this.appService = this.inject(AppService);
         this.profileService = this.inject(ProfileService);
         this.photoService = this.inject(PhotoService);
+        this.cachedHttpService = this.inject(CachedHttpService);
+        this.userService = this.inject(UserService);
+        this.groupService = this.inject(GroupService);
+        this.eventService = this.inject(EventService);
     }
 
-    // TODO Make this protected again.
-    reflectiveInjector = ReflectiveInjector.resolveAndCreate([
+    protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
         AppService,
         AppUxService,
         CommentService,
@@ -71,8 +78,27 @@ export class UtilService {
             useClass: BaseRequestOptions
         },
         ProfileService,
-        PhotoService
+        PhotoService,
+        CachedHttpService,
+        UserService,
+        GroupService,
+        EventService
     ]);
+
+    protected appService: AppService;
+    protected appUxService: AppUxService;
+    protected commentService: CommentService;
+    protected confService: ConfService;
+    protected fbService: FbService;
+    protected pageService: PageService;
+    protected postService: PostService;
+    protected videoService: VideoService;
+    protected profileService: ProfileService;
+    protected photoService: PhotoService;
+    protected cachedHttpService: CachedHttpService;
+    protected userService: UserService;
+    protected groupService: GroupService;
+    protected eventService: EventService;
 
     /*
      * This is madness.
@@ -127,19 +153,12 @@ export class UtilService {
      */
     inject = this.reflectiveInjector.get.bind(this.reflectiveInjector);
 
-    protected appService: AppService;
-    protected appUxService: AppUxService;
-    protected commentService: CommentService;
-    protected confService: ConfService;
-    protected fbService: FbService;
-    protected pageService: PageService;
-    protected postService: PostService;
-    protected videoService: VideoService;
-    protected profileService: ProfileService;
-    protected photoService: PhotoService;
-
     /*
      * What to link to, if the user clicks a Profile.
+     *
+     * This depends on the screen size, as the detail needs to be closed when 
+     * navigating to a new MASTER if – and only if – the screen is too small to 
+     * show both at the same time.
      */
     profileLink(id: string) {
         return this.appUxService.asideMode === this.appService.SIDE

@@ -1,10 +1,8 @@
-import {ReflectiveInjector} from '@angular/core';
-
 import {Story, StoryType, DUMMY_STORY_TYPE} from './story';
 import {Profile, ProfileType, DUMMY_PROFILE_TYPE} from './profile';
 import {VideoService} from './video.service';
 import {CommentService} from './comment.service';
-import {UtilService} from './util.service';
+import {ProfileService} from './profile.service';
 
 /*
  * Classes related to Facebook posts.
@@ -52,15 +50,25 @@ export interface PostType extends StoryType {
  */
 export class Post extends Story {
     constructor(kwargs: PostType) {
-        super({
-            ...kwargs,
-            to: (kwargs.to || []).map(profileType => new Profile(profileType))
-        } as StoryType);
-        this.utilService = ReflectiveInjector
-            .resolveAndCreate([UtilService])
-            .get(UtilService);
-        this.videoService = this.utilService.inject(VideoService);
-        this.commentService = this.utilService.inject(CommentService);
+        super(kwargs);
+        this.to = (kwargs.to || [] as Profile[])
+            .map(profileType => new Profile(profileType));
+        (kwargs.to || [] as Profile[]).map((e, i) =>
+            this.profileService
+                .profile(e.id)
+                .subscribe(profile => this.from = profile));
+    }
+
+    protected get utilService() {
+        return this.serviceService.utilService;
+    }
+
+    protected get videoService() {
+        return this.serviceService.videoService;
+    }
+
+    protected get commentService() {
+        return this.serviceService.commentService;
     }
 
     /*
@@ -72,10 +80,6 @@ export class Post extends Story {
      * Profiles mentioned or targeted in this Post.
      */
     to: Profile[];
-
-    protected utilService: UtilService;
-    protected videoService: VideoService;
-    protected commentService: CommentService;
 
     /*
      * Get the text to display for this Post.
@@ -196,7 +200,7 @@ export const DUMMY_POST_TYPE: PostType = {
     description: '',
     shares: {count: 0},
     likes: {
-        data: [] as [{name: string;}],
+        data: [] as [{ name: string; }],
         summary: {
             total_count: 0,
             can_like: false,

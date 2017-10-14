@@ -10,6 +10,7 @@ import {Page} from './page';
 import {VideoService} from './video.service';
 import {Ressource} from './app';
 import {PhotoService} from './photo.service';
+import {buildFields} from './util';
 
 /*
  * The Service providing the Pages.
@@ -21,6 +22,22 @@ export class PostService {
         protected fbService: FbService,
         protected videoService: VideoService,
         protected photoService: PhotoService) {}
+
+    protected _create(
+        page: Page,
+        link: Ressource,
+        message: string
+    ): Observable<string> {
+        return this.fbService.call(
+            page.id.toString() + '/feed',
+            HttpMethod.Post,
+            {
+                message: message,
+                link: link,
+                access_token: page.access_token
+            })
+            .pluck('id');
+    }
 
     /*
      * Perform a GET-request for a Post on a given path.
@@ -34,7 +51,7 @@ export class PostService {
             path,
             HttpMethod.Get,
             {
-                fields: Object.keys(DUMMY_POST_TYPE),
+                fields: buildFields(DUMMY_POST_TYPE),
                 include_hidden: includeHidden,
                 is_published: isPublished
             },
@@ -49,7 +66,7 @@ export class PostService {
             .fetch(
                 id,
                 HttpMethod.Get,
-                {fields: Object.keys(DUMMY_POST_TYPE)},
+                {fields: buildFields(DUMMY_POST_TYPE)},
                     Post) as Observable<Post>;
     }
 
@@ -99,22 +116,6 @@ export class PostService {
             this.photoService.create,
             this.videoService.create
         ][contentType].bind(this)(page, ressource, msg);
-    }
-
-    protected _create(
-        page: Page,
-        link: Ressource,
-        message: string
-    ): Observable<string> {
-        return this.fbService.call(
-            page.id.toString() + '/feed',
-            HttpMethod.Post,
-            {
-                message: message,
-                link: link,
-                access_token: page.access_token
-            })
-            .pluck('id');
     }
 }
 

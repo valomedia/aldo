@@ -28,20 +28,31 @@ export class CommentsComponent {
     /*
      * Whether more comments can currently be loaded.
      */
-    _loaded: boolean;
+    _loaded = false;
+
+    /*
+     * Whether to override the loading indicator.
+     *
+     * If the containing Component knows for a fact, that the data to be shown 
+     * is already available, it can set this flag to cause to component to never 
+     * show a spinner.  This can be helpful in situations, where the spinner 
+     * would otherwise only appear for a few milliseconds, causing an 
+     * odd-looking twitch in the application.
+     */
+    @Input()
+    loaded = false;
 
     @Input()
-    loaded: boolean;
-
-    @Input()
-    set comments(comments: Observable<Comment>) {
-        this._comments = [];
-        this._loaded = this.loaded;
-        comments
-            .finally(() => this._loaded = true)
-            .subscribe(
-                comment => this._comments.push(comment),
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+    set comments(comments: Observable<Comment>|undefined) {
+        if (comments) {
+            this._comments = [];
+            this._loaded = this.loaded;
+            comments
+                .finally(() => this._loaded = true)
+                .subscribe(
+                    comment => this._comments.push(comment),
+                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+        }
     }
 }
 

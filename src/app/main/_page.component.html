@@ -1,6 +1,64 @@
 <!-- HTML template for the PageComponent -->
-<md-spinner color='accent' *ngIf='!page'></md-spinner>
 <div *ngIf='page'>
+    <cover-photo [cover]='page.cover'></cover-photo>
+    <div>
+        <h1>
+            <img [src]='page.picture'>
+            {{page.name}}
+            <small>
+                <span>
+                    <br>
+                    <span
+                            [mdTooltip]='page.likeTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>thumb_up</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.fan_count || 0}}
+                        </span>
+                    </span>
+                </span>
+                <span *ngIf='page.talking_about_count'>
+                    <br>
+                    <span
+                            [mdTooltip]='page.talkingAboutTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>forum</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.talking_about_count}}
+                        </span>
+                    </span>
+                </span>
+                <span *ngIf='page.overall_star_rating'>
+                    <br>
+                    <span
+                            [mdTooltip]='page.ratingTooltip'
+                            mdTooltipShowDelay='1500'
+                            mdTooltipHideDelay='1500'>
+                        <span class='text-primary'>
+                            <md-icon>star</md-icon>
+                        </span>
+                        <span class='text-accent'>
+                            {{page.overall_star_rating}}
+                        </span>
+                        <span class='text-primary'>
+                            (<md-icon>people</md-icon>{{+page.rating_count}})
+                        </span>
+                    </span>
+                </span>
+            </small>
+        </h1>
+    </div>
+    <div>
+        <p *ngIf='page.description'>
+            <em>{{page.description}}</em>
+        </p>
+    </div>
     <displacer>
         <span class='app-action'>
             <button md-fab (click)='openPostDialog()'>
@@ -15,6 +73,7 @@
                     <md-icon>archive</md-icon>
                 </ng-template>
                 <h2>Posts auf deiner Seite</h2>
+                <md-spinner *ngIf='pending' color='accent'></md-spinner>
                 <posts [posts]='newPosts' loaded='true'></posts>
                 <endless-list #postsHandset [input]='posts'>
                     <posts [posts]='postsHandset.output'></posts>
@@ -51,6 +110,7 @@
                 <div class='flex'>
                     <div class='flex-6-cols'>
                         <h2>Posts auf deiner Seite</h2>
+                        <md-spinner *ngIf='pending' color='accent'></md-spinner>
                         <posts [posts]='newPosts' loaded='true'></posts>
                         <endless-list #postsTablet [input]='posts'>
                             <posts [posts]='postsTablet.output'></posts>
@@ -83,6 +143,7 @@
             <div class='flex'>
                 <div class='flex-4-cols'>
                     <h2>Posts auf deiner Seite</h2>
+                    <md-spinner *ngIf='pending' color='accent'></md-spinner>
                     <posts [posts]='newPosts' loaded='true'></posts>
                     <endless-list #postsDesktop [input]='posts'>
                         <posts [posts]='postsDesktop.output'></posts>
@@ -102,4 +163,3 @@
         </div>
     </div>
 </div>
-

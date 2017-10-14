@@ -1,3 +1,6 @@
+import {ReflectiveInjector} from '@angular/core';
+
+import {ServiceService} from './service.service';
 
 /*
  * Classes related to things on Facebook.
@@ -28,7 +31,12 @@ export interface GraphApiObjectType {
 export class GraphApiObject {
     constructor(kwargs: GraphApiObjectType) {
         Object.assign(this, kwargs);
+        this.serviceService = ReflectiveInjector
+            .resolveAndCreate([ServiceService])
+            .get(ServiceService);
     }
+
+    protected serviceService: ServiceService;
 };
 export interface GraphApiObject extends GraphApiObjectType {};
 

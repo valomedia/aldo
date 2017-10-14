@@ -1,19 +1,15 @@
 import {Component, Input} from '@angular/core';
-import {Params} from '@angular/router';
-import {MdSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/finally';
 
 import {Profile} from '../profile';
 import {Page} from '../page';
-import {ProfileService} from '../profile.service';
-import {GraphApiError} from '../graph-api-error';
-import {GraphApiErrorComponent} from '../graph-api-error.component';
+import {GraphApiResponse} from '../graph-api-response';
+import {Post} from '../post';
 import {AppUxService} from '../app-ux.service';
-import {AppRoutingComponent} from '../app-routing.component';
-import {AppRoutingService} from '../app-routing.service';
-import {AppService} from '../app.service';
+import {User} from '../user';
+import {Group} from '../group';
+import {Event} from '../event';
 
 /*
  * The Component showing a single Profile in detail.
@@ -24,47 +20,44 @@ import {AppService} from '../app.service';
     templateUrl: './_profile.component.html',
     styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent extends AppRoutingComponent {
-    constructor(
-        protected profileService: ProfileService,
-        protected mdSnackBar: MdSnackBar,
-        protected appService: AppService,
-        appRoutingService: AppRoutingService
-    ) {
-        super(appRoutingService);
-    }
+export class ProfileComponent {
+    constructor(protected appUxService: AppUxService) {}
 
-    @Input()
-    loaded: boolean;
+    protected _profile?: Profile;
+
+    /*
+     * Feed of this Profile, if any.
+     */
+    feed?: Observable<GraphApiResponse<Post>>;
 
     /*
      * The Profile currently shown.
      */
-    profile: Profile;
-
-    /*
-     * Whether the Component is still loading.
-     */
-    protected _loaded: boolean;
-
     @Input()
-    set params(params: Params) {
-        if (!params[this.appService.PROFILE]) { return; }
-        this._loaded = this.loaded;
-        this.profileService
-            .profile(params[this.appService.PROFILE])
-            .finally(() => this._loaded = true)
-            .subscribe(
-                (profile: Profile) => this.profile = profile,
-                (err: GraphApiError) =>
-                    GraphApiErrorComponent.show(this.mdSnackBar, err));
+    set profile(profile: Profile|undefined) {
+        if (profile) {
+            this._profile = profile;
+            this.feed = profile.feed;
+        }
+    }
+    get profile() {
+        return this._profile;
     }
 
-    /*
-     * Whether the Component is showing a Page.
-     */
     get isPage() {
         return this.profile instanceof Page;
+    }
+
+    get isUser() {
+        return this.profile instanceof User;
+    }
+
+    get isGroup() {
+        return this.profile instanceof Group;
+    }
+
+    get isEvent() {
+        return this.profile instanceof Event;
     }
 }
 

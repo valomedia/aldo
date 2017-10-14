@@ -26,16 +26,13 @@ export class CommentComponent {
         protected utilService: UtilService,
         protected appRoutingService: AppRoutingService) {}
 
-    @Input()
-    loaded: boolean;
-
-    protected params = this.appRoutingService.params;
-    protected _loaded: boolean;
+    protected params = this.appRoutingService.events;
+    protected _loaded = false;
 
     /*
      * The Comment this Component is currently displaying.
      */
-    protected _comment: Comment;
+    protected _comment?: Comment;
 
     /*
      * The Comments on this Comment, if any.
@@ -47,20 +44,37 @@ export class CommentComponent {
      */
     protected video?: Video;
 
+    /*
+     * Whether to override the loading indicator.
+     *
+     * If the containing Component knows for a fact, that the data to be shown 
+     * is already available, it can set this flag to cause to component to never 
+     * show a spinner.  This can be helpful in situations, where the spinner 
+     * would otherwise only appear for a few milliseconds, causing an 
+     * odd-looking twitch in the application.
+     */
     @Input()
-    set comment(comment: Comment) {
-        this._loaded = this.loaded;
-        this.comments = [];
-        this.video = null;
-        this._comment = comment;
-        comment.comments.finally(() => this._loaded = true).subscribe(
-            comment => this.comments.push(comment),
-            err => GraphApiErrorComponent.show(this.mdSnackBar, err));
-        if (comment.video) {
-            comment.video.subscribe(
-                video => this.video = video,
+    loaded = false;
+
+    @Input()
+    set comment(comment: Comment|undefined) {
+        if (comment) {
+            this._loaded = this.loaded;
+            this.comments = [];
+            this.video = null;
+            this._comment = comment;
+            comment.comments.finally(() => this._loaded = true).subscribe(
+                comment => this.comments.push(comment),
                 err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+            if (comment.video) {
+                comment.video.subscribe(
+                    video => this.video = video,
+                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+            }
         }
+    }
+    get comment() {
+        return this._comment;
     }
 }
 

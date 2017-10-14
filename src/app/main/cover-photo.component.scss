@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the CoverPhotoComponent.
+ *
+ * This is a style locally applied to CoverPhotoComponent.  All styles specific 
+ * to the CoverPhotoComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only. The actual rules should go into the 
+ * _cover-photo.component partial, to keep things easier to restructure.
+ */
+
+@import '../mixins';
+@import '../colors';
+@import '_cover-photo.component';
+

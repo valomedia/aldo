@@ -63,3 +63,6 @@ conf.perms.pages_show_list = {
     mgs: "Deine Seiten anzeigen, damit du eine auswählen kannst."
 };
 
+conf.app = {};
+conf.app.baseDelay = 2000;
+

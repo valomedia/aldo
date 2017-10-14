@@ -13,6 +13,7 @@ import {GraphApiResponse, GraphApiResponseType} from './graph-api-response';
 import {GraphApiObject, GraphApiObjectType} from './graph-api-object';
 import {ConfService} from './conf.service';
 import {Primitive} from './app';
+import {CachedHttpService} from './cached-http.service';
 
 /*
  * The Service providing the Facebook API.
@@ -104,7 +105,81 @@ declare var FB: {
 
 @Injectable()
 export class FbService {
-    constructor(protected http: Http, protected confService: ConfService) {}
+    constructor(
+        protected http: Http,
+        protected confService: ConfService,
+        protected cachedHttpService: CachedHttpService) {}
+
+    /*
+     * HTTP wrapper.
+     *
+     * This will pass on the request to the right handler, depending on whether 
+     * the request should be cached.  This is necessary, as TypeScript deems 
+     * (url: string, body: FormData) => Observable<Response> and
+     * (url: string, body: any) => Observable<Response> to be incompatible.
+     */
+    protected post(
+        path: string,
+        params: FormData,
+        cacheing: boolean,
+        paramIdString?: string
+    ) {
+        if (cacheing) {
+            return this.cachedHttpService
+                .post(path, params, path + '?' + paramIdString);
+        } else {
+            return this.http.post(path, params);
+        }
+    }
+
+    /*
+     * Internal request handler.
+     *
+     * This will make the actual request.  The parameters will be minimally 
+     * preprocessed by turning Primitives and Primitive[]s into strings, 
+     * filtering nulls and moving Files to the source field.
+     */
+    protected _call(path: string, params: FbApiParams, cacheing: boolean) {
+        console.log('GraphAPI request:', path, params);
+        return this.post(
+            this.confService.fb[
+                params.source
+                    && params.source.type.split('/')[0] === 'video'
+                    ? 'videoUploadUrl'
+                    : 'apiUrl'
+            ]
+                + '/'
+                + path,
+            Object
+                .keys(params)
+                .map((k): [string, Primitive|File] => [
+                    k,
+                    params[k] instanceof Array
+                        ? (params[k] as Primitive[]).join(',')
+                        : params[k] as Primitive|File
+                ])
+                .filter(([_, v]) => v !== null && v !== undefined)
+                .map(([k, v]): [string, string|File] => [
+                    k,
+                    v instanceof File ? v : '' + v
+                ])
+                .filter(([k, v]) => k === 'source' || !(v instanceof File))
+                .reduce(
+                    (a, e) => (a.set as any)(...e) || a,
+                    new FormData()),
+            cacheing
+                && ! Object.keys(params)
+                    .map(k => params[k])
+                    .filter(v => v instanceof File)
+                    .length,
+            Object
+                    .keys(params)
+                    .map(k =>
+                        encodeURIComponent(k)
+                            + '='
+                            + encodeURIComponent(JSON.stringify(params[k])))
+                    .join('&'));
+    }
 
     /*
      * High-level API access.
@@ -143,11 +218,7 @@ export class FbService {
         return this.call(
             path,
             method,
-            {
-                ...params,
-                fields: (params.fields || [])
-                    .map(field => field + '.summary(true)')
-            })
+            params)
             .map((res: GraphApiResponseType<GraphApiObject>|any) =>
                 new GraphApiResponse(
                     res.data
@@ -210,7 +281,8 @@ export class FbService {
                     .keys(params)
                     .map(k => params[k])
                     .filter(v => v instanceof File)[0] as File
-            })
+            },
+            method === HttpMethod.Get)
             .catch(err => Observable.of(err))
             .map(res => res.status ? res.json() : {error: {code: 1}})
             .do(body => {
@@ -218,51 +290,7 @@ export class FbService {
                     'GraphAPI response:',
                     body);
                 if (body.error) { throw new GraphApiError(body.error); }
-            })
-            .publishReplay(1)
-            .refCount()
-            .first();
-    }
-
-    /*
-     * Internal request handler.
-     *
-     * This will make the actual request.  The parameters will be minimally 
-     * preprocessed by turning Primitives and Primitive[]s into strings, 
-     * filtering nulls and moving Files to the source field.
-     */
-    protected _call(
-        path: string,
-        params: FbApiParams
-    ) {
-        console.log('GrapAPI request:', path, params);
-        return this.http
-            .post(
-                this.confService.fb[
-                    params.source
-                        && params.source.type.split('/')[0] === 'video'
-                        ? 'videoUploadUrl'
-                        : 'apiUrl'
-                ]
-                    + '/'
-                    + path,
-                Object
-                    .keys(params)
-                    .map((k): [string, Primitive|File] => [
-                        k,
-                        params[k] instanceof Array
-                            ? (params[k] as Primitive[]).join(',')
-                            : params[k] as Primitive|File
-                    ])
-                    .filter(([_, v]) => v !== null && v !== undefined)
-                    .map(([k, v]): [string, string|File] => [
-                        k,
-                        v instanceof File ? v : '' + v
-                    ])
-                    .filter(([k, v]) => k === 'source' || !(v instanceof File))
-                    .reduce(
-                        (a, e) => (a.set as any)(...e) || a,
-                        new FormData()));
+            });
     }
 }
 

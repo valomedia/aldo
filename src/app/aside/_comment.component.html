@@ -82,7 +82,7 @@
         <button
                 md-button
                 color='primary'
-                [disabled]='params.profile === _comment.from.id'
+                [disabled]='(params | async).profile === _comment.from.id'
                 [appLink]='utilService.profileLink(_comment.from.id)'>
             Profil zeigen
             <md-icon>account_box</md-icon>

@@ -13,6 +13,6 @@ import {Profile} from './profile';
 })
 export class ProfileCardComponent {
     @Input()
-    profile: Profile;
+    profile?: Profile;
 }
 

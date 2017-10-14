@@ -21,6 +21,10 @@ export interface PhotoType extends StoryType {
  * A Facebook photo as used internally.
  */
 export class Photo extends Story {
+    constructor(kwargs: PhotoType) {
+        super(kwargs);
+    }
+
     /*
      * The Profile that added this Photo.
      */

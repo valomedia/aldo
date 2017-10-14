@@ -17,7 +17,7 @@ export class AppLinkDirective {
     constructor(protected appRoutingService: AppRoutingService) {}
 
     @Input()
-    appLink: Params|null;
+    appLink?: Params|null;
 
     @HostListener('click')
     onClick() {
