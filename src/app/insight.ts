@@ -67,6 +67,7 @@ export interface InsightsResult extends InsightsResultType {}
  * internally.
  */
 export class Metric<T extends Value> {
+    constructor(public description: string) {}
 
     /*
      * Daily datapoint.
@@ -114,7 +115,7 @@ export class Insight {
     /*
      * The number of stories created by a Page.
      */
-    page_stories = new Metric<number>();
+    page_stories = new Metric<number>("Die Anzahl der Posts von deiner Seite.");
 
     /*
      * The number of stories about a Page's stories, by Page story type.
@@ -129,7 +130,7 @@ export class Insight {
         'question': number,
         'user post': number,
         'other': number
-    }>();
+    }>("Die Anzahl der Posts mit Bezug auf deine Seite, nach Art.");
 }
 
 /*
@@ -160,4 +161,21 @@ export const METRICS = [
     'page_stories',
     'page_stories_by_story_type'
 ]
+
+/*
+ * The types of story.
+ *
+ * This contains descriptions for the different story types.
+ */
+const STORY_TYPES = {
+    'checkin': "Nutzer, die da waren",
+    'coupon': "Eingelöste Coupons",
+    'event': "Reservierungen",
+    'fan': "Gefällt-Mir-Angaben",
+    'mention': "Erwähnungen",
+    'page post': "Posts von Seiten",
+    'question': "Beantwortete Fragen",
+    'user post': "Posts von Nutzern",
+    'other': "Andere"
+}
 
