@@ -7,6 +7,7 @@ import {
     CoverPhotoType,
     DUMMY_COVER_PHOTO_TYPE
 } from './cover-photo';
+import {InsightService} from './insight.service';
 
 /*
  * Classes related to handling Facebook pages.
@@ -43,6 +44,10 @@ export class Page extends Profile {
 
     protected get postService() {
         return this.serviceService.postService;
+    }
+
+    protected get insightService() {
+        return this.serviceService.insightService;
     }
 
     /*
@@ -123,6 +128,13 @@ export class Page extends Profile {
             + " Nutzer "
             + (this.talking_about_count === 1 ? "redet" : "reden")
             + " über diese Seite";
+    }
+
+    /*
+     * Insight for this Page.
+     */
+    get insights() {
+        return this.insightService.insight(this.id);
     }
 }
 export interface Page extends PageType {}

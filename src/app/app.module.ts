@@ -58,6 +58,7 @@ import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
 import {CoverPhotoComponent} from './main/cover-photo.component';
+import {InsightService} from './insight.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -127,7 +128,8 @@ import {CoverPhotoComponent} from './main/cover-photo.component';
         CachedHttpService,
         UserService,
         GroupService,
-        EventService
+        EventService,
+        InsightService
     ],
     entryComponents: [
         PostDialogComponent,
