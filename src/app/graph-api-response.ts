@@ -16,7 +16,7 @@ import {Expandable, ExpandableType} from './expandable';
  */
 export interface GraphApiResponseType<T> extends ExpandableType<T> {
     paging?: {
-        cursors: {
+        cursors?: {
             before: string,
             after: string
         },
