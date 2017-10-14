@@ -85,7 +85,7 @@ export class PageComponent {
     }
 
     /*
-     * Open the posting dialog.
+     * Open the PostDialogComponent.
      */
     openPostDialog() {
         const mdDialogRef = this.mdDialog.open(PostDialogComponent, {

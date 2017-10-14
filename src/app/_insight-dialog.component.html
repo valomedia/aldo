@@ -1,0 +1,17 @@
+<!-- HTML template for the InsightDialogComponent -->
+<h1 md-dialog-title>Statistiken für {{page ? page.name : "deine Seite"}}</h1>
+<md-dialog-content *ngIf='!page'>
+    <md-spinner color='accent'></md-spinner>
+</md-dialog-content>
+<md-dialog-content *ngIf='page'>
+    <missing-feature></missing-feature>
+</md-dialog-content>
+<md-dialog-actions>
+    <button
+            md-button
+            [md-dialog-close]='undefined'>
+        Schließen
+        <md-icon>cancel</md-icon>
+    </button>
+</md-dialog-actions>
+

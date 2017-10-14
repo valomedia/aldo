@@ -93,6 +93,22 @@ md-dialog-container {
     margin: auto;
 }
 
+md-dialog-container > * {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+md-dialog-container > * > * {
+    flex-shrink: 0;
+}
+
+md-dialog-container > * > md-dialog-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
 md-icon {
     vertical-align: middle;
 }

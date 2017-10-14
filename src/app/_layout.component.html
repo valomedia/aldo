@@ -81,6 +81,16 @@
                 <md-icon>refresh</md-icon>
             </button>
             <button
+                    *ngIf='page && page.insights'
+                    md-button
+                    class='app-icon-button'
+                    mdTooltip="Statistiken"
+                    mdTooltipShowDelay='1500'
+                    mdTooltipHideDelay='1500'
+                    (click)='openInsightDialog()'>
+                <md-icon>poll</md-icon>
+            </button>
+            <button
                     *ngIf='params.profile'
                     md-button
                     class='app-icon-button'

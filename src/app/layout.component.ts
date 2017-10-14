@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {MdSidenav} from '@angular/material';
+import {MdSidenav, MdSnackBar, MdDialog} from '@angular/material';
 import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
@@ -11,6 +11,12 @@ import {AppUxService} from './app-ux.service';
 import {FbService} from './fb.service';
 import {AppRoutingService} from './app-routing.service';
 import {AppService} from './app.service';
+import {ProfileService} from './profile.service';
+import {Profile} from './profile';
+import {Page} from './page';
+import {GraphApiError} from './graph-api-error';
+import {GraphApiErrorComponent} from './graph-api-error.component';
+import {InsightDialogComponent} from './insight-dialog.component';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -26,16 +32,46 @@ export class LayoutComponent implements OnInit {
         protected appUxService: AppUxService,
         protected title: Title,
         protected activatedRoute: ActivatedRoute,
-        protected router: Router,
         protected fbService: FbService,
-        protected location: Location,
         protected appRoutingService: AppRoutingService,
-        protected appService: AppService) {}
+        protected appService: AppService,
+        protected profileService: ProfileService,
+        protected mdSnackBar: MdSnackBar,
+        protected mdDialog: MdDialog) {}
+
+    protected _params: Params = {};
 
     /*
      * The route parameters.
      */
-    protected params: Params = {};
+    get params() {
+        return this._params;
+    }
+    set params(params: Params) {
+        this._params = params;
+        this.page = null;
+        if (params[this.appService.PAGE]) {
+            this.profileService
+                .profile(params[this.appService.PAGE])
+                .filter(profile => profile instanceof Page)
+                .map(profile => profile as Page)
+                .filter(page => !!page.access_token)
+                .subscribe(
+                    (page: Page) => this.page = page,
+                    (err: GraphApiError) =>
+                        GraphApiErrorComponent.show(this.mdSnackBar, err));
+        }
+    }
+
+    /*
+     * The Page currently being shown, if any.
+     *
+     * This will contain the page, that the user is currently administrating, so 
+     * the necessary tools can be shown in the toolbar.  If no Page is currently 
+     * being shown, or if the user is not an admin on the current Page, this 
+     * will be null.
+     */
+    page?: Page;
 
     /*
      * Whether the dark-theme is active.
@@ -53,6 +89,17 @@ export class LayoutComponent implements OnInit {
             .do(params =>
                 this.aside[params[this.appService.POST] ? 'open' : 'close']())
             .subscribe(params => this.params = params);
+    }
+
+    /*
+     * Open the InsightDialogComponent.
+     */
+    openInsightDialog() {
+        const mdDialogRef = this.mdDialog.open(InsightDialogComponent, {
+            width: '600px',
+            height: '400px'
+        });
+        mdDialogRef.componentInstance.page = this.page;
     }
 }
 

@@ -134,7 +134,11 @@ export class Page extends Profile {
      * Insight for this Page.
      */
     get insights() {
-        return this.insightService.insight(this.id);
+        // Return null, if the Page has not enough likes to get statistics from 
+        // Facebook.
+        return this.fan_count > 30
+            ? this.insightService.insight(this.id)
+            : null;
     }
 }
 export interface Page extends PageType {}
