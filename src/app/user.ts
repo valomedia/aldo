@@ -83,6 +83,7 @@ export class User extends Profile {
      * Get the AgeRange the User is in.
      */
     get ageRange() {
+        if (!this.age_range) { return null; }
         switch (this.age_range.min) {
             case 13:
                 if (this.age_range.max === 17) { return AgeRange.JUVENILE; }
@@ -172,14 +173,12 @@ export class User extends Profile {
         if (this.age) {
             return this.age + " Jahre.";
         }
-        if (this.ageRange) {
-            switch (+this.ageRange) {
-                case AgeRange.JUVENILE: return "14 bis 17 Jahre alt.";
-                case AgeRange.ADOLESCENT: return "Zwischen 18 und 20.";
-                case AgeRange.MATURE: return "21 oder älter.";
-            }
+        switch (this.ageRange) {
+            case AgeRange.JUVENILE: return "14 bis 17 Jahre alt.";
+            case AgeRange.ADOLESCENT: return "Zwischen 18 und 20.";
+            case AgeRange.MATURE: return "21 oder älter.";
+            default: return "Alter unbekannt.";
         }
-        return "Alter unbekannt.";
     }
 
     /*
@@ -191,7 +190,7 @@ export class User extends Profile {
         // bound to get the SJWs worked up, but I can't seem to find another 
         // word, that would be more accurate and is still common enough, that 
         // the user can be expected to know what is meant.
-        switch (+this.sex) {
+        switch (this.sex) {
             case Gender.M: return "männlich";
             case Gender.F: return "weiblich";
             case Gender.N: return "transsexuell";
@@ -222,7 +221,7 @@ export class User extends Profile {
             case Gender.M: return "♂";
             case Gender.F: return "♀";
             case Gender.N: return "⚦";
-            default: return "⚥";
+            default: return "-";
         }
     }
 
