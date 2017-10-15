@@ -1,5 +1,5 @@
 import {Component, Input, Inject, ViewChild, ElementRef} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
@@ -22,7 +22,7 @@ import {AppRoutingService} from '../app-routing.service';
 })
 export class CommentComponent {
     constructor(
-        protected mdSnackBar: MdSnackBar,
+        protected matSnackBar: MatSnackBar,
         protected utilService: UtilService,
         protected appRoutingService: AppRoutingService) {}
 
@@ -65,11 +65,11 @@ export class CommentComponent {
             this._comment = comment;
             comment.comments.finally(() => this._loaded = true).subscribe(
                 comment => this.comments.push(comment),
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                err => GraphApiErrorComponent.show(this.matSnackBar, err));
             if (comment.video) {
                 comment.video.subscribe(
                     video => this.video = video,
-                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                    err => GraphApiErrorComponent.show(this.matSnackBar, err));
             }
         }
     }

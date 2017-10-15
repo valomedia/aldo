@@ -9,11 +9,11 @@
                 <span>
                     <br>
                     <span
-                            [mdTooltip]='page.likeTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='page.likeTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>thumb_up</md-icon>
+                            <mat-icon>thumb_up</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{page.fan_count || 0}}
@@ -23,11 +23,11 @@
                 <span *ngIf='page.talking_about_count'>
                     <br>
                     <span
-                            [mdTooltip]='page.talkingAboutTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='page.talkingAboutTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>forum</md-icon>
+                            <mat-icon>forum</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{page.talking_about_count}}
@@ -37,17 +37,17 @@
                 <span *ngIf='page.overall_star_rating'>
                     <br>
                     <span
-                            [mdTooltip]='page.ratingTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='page.ratingTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>star</md-icon>
+                            <mat-icon>star</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{page.overall_star_rating}}
                         </span>
                         <span class='text-primary'>
-                            (<md-icon>people</md-icon>{{+page.rating_count}})
+                            (<mat-icon>people</mat-icon>{{+page.rating_count}})
                         </span>
                     </span>
                 </span>
@@ -61,56 +61,56 @@
     </div>
     <displacer>
         <span class='app-action'>
-            <button md-fab (click)='openPostDialog()'>
-                <md-icon>create</md-icon>
+            <button mat-fab (click)='openPostDialog()'>
+                <mat-icon>create</mat-icon>
             </button>
         </span>
     </displacer>
     <div>
-        <md-tab-group *ngIf='appUxService.cols == 4'>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>archive</md-icon>
+        <mat-tab-group *ngIf='appUxService.cols == 4'>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>archive</mat-icon>
                 </ng-template>
                 <h2>Posts auf deiner Seite</h2>
-                <md-spinner *ngIf='pending' color='accent'></md-spinner>
+                <mat-spinner *ngIf='pending' color='accent'></mat-spinner>
                 <posts [posts]='newPosts' loaded='true'></posts>
                 <endless-list #postsHandset [input]='posts'>
                     <posts [posts]='postsHandset.output'></posts>
                 </endless-list>
-            </md-tab>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>inbox</md-icon>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>inbox</mat-icon>
                 </ng-template>
                 <h2>Posts mit deiner Seite</h2>
                 <posts [posts]='tagged'></posts>
-            </md-tab>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>hourglass_full</md-icon>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>hourglass_full</mat-icon>
                 </ng-template>
                 <h2>Geplante Posts</h2>
                 <missing-feature></missing-feature>
-            </md-tab>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>drafts</md-icon>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>drafts</mat-icon>
                 </ng-template>
                 <h2>Entwürfe für Posts</h2>
                 <missing-feature></missing-feature>
-            </md-tab>
-        </md-tab-group>
-        <md-tab-group *ngIf='appUxService.cols == 8'>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>public</md-icon>
+            </mat-tab>
+        </mat-tab-group>
+        <mat-tab-group *ngIf='appUxService.cols == 8'>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>public</mat-icon>
                     Veröffentlichte Posts
                 </ng-template>
                 <div class='flex'>
                     <div class='flex-6-cols'>
                         <h2>Posts auf deiner Seite</h2>
-                        <md-spinner *ngIf='pending' color='accent'></md-spinner>
+                        <mat-spinner *ngIf='pending' color='accent'></mat-spinner>
                         <posts [posts]='newPosts' loaded='true'></posts>
                         <endless-list #postsTablet [input]='posts'>
                             <posts [posts]='postsTablet.output'></posts>
@@ -121,10 +121,10 @@
                         <posts [posts]='tagged'></posts>
                     </div>
                 </div>
-            </md-tab>
-            <md-tab>
-                <ng-template md-tab-label>
-                    <md-icon>lock</md-icon>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>lock</mat-icon>
                     Zukünftige Posts
                 </ng-template>
                 <div class='flex'>
@@ -137,13 +137,13 @@
                         <missing-feature></missing-feature>
                     </div>
                 </div>
-            </md-tab>
-        </md-tab-group>
+            </mat-tab>
+        </mat-tab-group>
         <div *ngIf='appUxService.cols == 12'>
             <div class='flex'>
                 <div class='flex-4-cols'>
                     <h2>Posts auf deiner Seite</h2>
-                    <md-spinner *ngIf='pending' color='accent'></md-spinner>
+                    <mat-spinner *ngIf='pending' color='accent'></mat-spinner>
                     <posts [posts]='newPosts' loaded='true'></posts>
                     <endless-list #postsDesktop [input]='posts'>
                         <posts [posts]='postsDesktop.output'></posts>

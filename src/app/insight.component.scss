@@ -1,0 +1,15 @@
+
+/*
+ * Styling for the InsightComponent.
+ *
+ * This is a style locally applied to the InsightComponent.  All styles specific 
+ * to the InsightComponent are loaded here.
+ *
+ * This stylesheet contains at-rules only.  The actual rules should go into the 
+ * _insight.component partial, to keep things easier to restructure.
+ */
+
+@import 'mixins';
+@import 'colors';
+@import '_insight.component';
+

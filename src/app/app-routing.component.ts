@@ -2,6 +2,7 @@ import {Input, OnInit, OnDestroy} from '@angular/core';
 import {Params} from '@angular/router';
 
 import {Subscription} from 'rxjs/Subscription';
+import 'rxjs/add/operator/filter';
 
 import {AppRoutingService} from './app-routing.service';
 

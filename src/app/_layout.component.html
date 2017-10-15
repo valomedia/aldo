@@ -1,136 +1,136 @@
 <!-- HTML template for the LayoutComponent -->
 <div [class.dark]='dark'>
-    <md-sidenav-container id='main'>
-        <md-sidenav #nav id='nav' mode='over'>
-            <md-toolbar>
+    <mat-sidenav-container id='main'>
+        <mat-sidenav #nav id='nav' mode='over'>
+            <mat-toolbar>
                 <span class='app-toolbar-title'>Seiten</span>
-            </md-toolbar>
+            </mat-toolbar>
             <div (click)='nav.close()'>
                 <ng-content select='nav'></ng-content>
             </div>
-        </md-sidenav>
-        <md-sidenav
+        </mat-sidenav>
+        <mat-sidenav
                 #aside
                 align='end'
                 id='aside'
                 [mode]='appUxService.asideMode'
-                (close-start)='appRoutingService.params = {post: null}'>
-            <md-toolbar>
+                (close)='appRoutingService.params = {post: null}'>
+            <mat-toolbar>
                 <button
-                        md-button
+                        mat-button
                         class='app-icon-button back-btn'
-                        mdTooltip="Zurück"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'
+                        matTooltip="Zurück"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
                         (click)='aside.close()'>
-                    <md-icon>arrow_back</md-icon>
+                    <mat-icon>arrow_back</mat-icon>
                 </button>
                 <span class='app-toolbar-title'>Details</span>
                 <span class='app-toolbar-filler'></span>
                 <button
-                        md-button
+                        mat-button
                         class='app-icon-button'
-                        mdTooltip="Neu laden"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'
+                        matTooltip="Neu laden"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
                         (click)='appRoutingService.refresh([appService.POST])'>
-                    <md-icon>refresh</md-icon>
+                    <mat-icon>refresh</mat-icon>
                 </button>
                 <a
-                        md-button
+                        mat-button
                         class='button app-icon-button'
-                        mdTooltip="Facebook"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'
+                        matTooltip="Facebook"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
                         href='//facebook.com/{{params.post}}'
                         target='_blank'>
-                    <md-icon>open_in_browser</md-icon>
+                    <mat-icon>open_in_browser</mat-icon>
                 </a>
                 <button
-                        md-button
+                        mat-button
                         class='app-icon-button close-btn'
-                        mdTooltip="Schließen"
-                        mdTooltipShowDelay='1500'
-                        mdTooltipHideDelay='1500'
+                        matTooltip="Schließen"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
                         (click)='aside.close()'>
-                    <md-icon>close</md-icon>
+                    <mat-icon>close</mat-icon>
                 </button>
-            </md-toolbar>
+            </mat-toolbar>
             <ng-content select='aside'></ng-content>
-        </md-sidenav>
-        <md-toolbar>
+        </mat-sidenav>
+        <mat-toolbar>
             <button
-                    md-button
+                    mat-button
                     class='app-icon-button'
-                    mdTooltip="Menü"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
+                    matTooltip="Menü"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
                     (click)='nav.open()'>
-                <md-icon>menu</md-icon>
+                <mat-icon>menu</mat-icon>
             </button>
             <span class='app-toolbar-title'>{{title.getTitle()}}</span>
             <span class='app-toolbar-filler'></span>
             <button
                     *ngIf='params.profile'
-                    md-button
+                    mat-button
                     class='app-icon-button'
-                    mdTooltip="Neu laden"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
+                    matTooltip="Neu laden"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
                     (click)='appRoutingService.refresh([appService.PROFILE])'>
-                <md-icon>refresh</md-icon>
+                <mat-icon>refresh</mat-icon>
             </button>
             <button
                     *ngIf='page && page.insights'
-                    md-button
+                    mat-button
                     class='app-icon-button'
-                    mdTooltip="Statistiken"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
+                    matTooltip="Statistiken"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
                     (click)='openInsightDialog()'>
-                <md-icon>poll</md-icon>
+                <mat-icon>poll</mat-icon>
             </button>
             <button
                     *ngIf='params.profile'
-                    md-button
+                    mat-button
                     class='app-icon-button'
-                    mdTooltip="Dashboard"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
+                    matTooltip="Dashboard"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
                     [appLink]='{master: null}'>
-                <md-icon>dashboard</md-icon>
+                <mat-icon>dashboard</mat-icon>
             </button>
             <a
-                    md-button
+                    mat-button
                     class='button app-icon-button'
-                    mdTooltip="Facebook"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
+                    matTooltip="Facebook"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
                     href='//facebook.com/{{params.profile}}'
                     target='_blank'>
-                <md-icon>open_in_browser</md-icon>
+                <mat-icon>open_in_browser</mat-icon>
             </a>
             <button
-                    md-button
+                    mat-button
                     class='app-icon-button'
-                    mdTooltip="Einstellungen"
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'
-                    [mdMenuTriggerFor]='settings'>
-                <md-icon>settings</md-icon>
+                    matTooltip="Einstellungen"
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'
+                    [matMenuTriggerFor]='settings'>
+                <mat-icon>settings</mat-icon>
             </button>
-            <md-menu #settings='mdMenu'>
-                <div md-menu-item>
-                    <md-slide-toggle [(ngModel)]='dark'>
+            <mat-menu #settings='matMenu'>
+                <div mat-menu-item>
+                    <mat-slide-toggle [(ngModel)]='dark'>
                         Dark mode
-                        <md-icon>invert_colors</md-icon>
-                    </md-slide-toggle>
+                        <mat-icon>invert_colors</mat-icon>
+                    </mat-slide-toggle>
                 </div>
-            </md-menu>
-        </md-toolbar>
+            </mat-menu>
+        </mat-toolbar>
         <div id='displacer-target'></div>
         <ng-content select='main'></ng-content>
         <router-outlet></router-outlet>
-    </md-sidenav-container>
+    </mat-sidenav-container>
 </div>
 

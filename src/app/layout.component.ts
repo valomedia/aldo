@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {MdSidenav, MdSnackBar, MdDialog} from '@angular/material';
+import {MatSidenav, MatSnackBar, MatDialog} from '@angular/material';
 import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/pluck';
@@ -36,8 +36,8 @@ export class LayoutComponent implements OnInit {
         protected appRoutingService: AppRoutingService,
         protected appService: AppService,
         protected profileService: ProfileService,
-        protected mdSnackBar: MdSnackBar,
-        protected mdDialog: MdDialog) {}
+        protected matSnackBar: MatSnackBar,
+        protected matDialog: MatDialog) {}
 
     protected _params: Params = {};
 
@@ -59,7 +59,7 @@ export class LayoutComponent implements OnInit {
                 .subscribe(
                     (page: Page) => this.page = page,
                     (err: GraphApiError) =>
-                        GraphApiErrorComponent.show(this.mdSnackBar, err));
+                        GraphApiErrorComponent.show(this.matSnackBar, err));
         }
     }
 
@@ -79,7 +79,7 @@ export class LayoutComponent implements OnInit {
     dark = false;
 
     @ViewChild('aside')
-    aside: MdSidenav;
+    aside: MatSidenav;
 
     ngOnInit() {
         this.appRoutingService
@@ -95,11 +95,15 @@ export class LayoutComponent implements OnInit {
      * Open the InsightDialogComponent.
      */
     openInsightDialog() {
-        const mdDialogRef = this.mdDialog.open(InsightDialogComponent, {
+        const matDialogRef = this.matDialog.open(InsightDialogComponent, {
             width: '600px',
             height: '400px'
         });
-        mdDialogRef.componentInstance.page = this.page;
+        matDialogRef.componentInstance.page = this.page;
+    }
+
+    log() {
+        console.warn('Boop!!!');
     }
 }
 

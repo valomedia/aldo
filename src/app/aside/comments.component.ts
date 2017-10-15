@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
@@ -18,7 +18,7 @@ import {Comment} from '../comment';
     styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
-    constructor(protected mdSnackBar: MdSnackBar) {}
+    constructor(protected matSnackBar: MatSnackBar) {}
 
     /*
      * All Comments shown by this Component.
@@ -51,7 +51,7 @@ export class CommentsComponent {
                 .finally(() => this._loaded = true)
                 .subscribe(
                     comment => this._comments.push(comment),
-                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                    err => GraphApiErrorComponent.show(this.matSnackBar, err));
         }
     }
 }

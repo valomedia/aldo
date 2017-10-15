@@ -1,30 +1,30 @@
 <!-- HTML template for the PostDialogComponent -->
-<h1 md-dialog-title>Post erstellen</h1>
-<md-dialog-content>
-    <md-input-container>
+<h1 mat-dialog-title>Post erstellen</h1>
+<mat-dialog-content>
+    <mat-input-container>
         <textarea
-                mdInput
-                mdTextareaAutosize
+                matInput
+                matTextareaAutosize
                 [(ngModel)]='text'
                 placeholder="Schreib etwas...">
         </textarea>
-    </md-input-container>
-    <md-tab-group [(selectedIndex)]='selectedIndex' dynamicHeight>
-        <md-tab>
-            <ng-template md-tab-label>
-                <md-icon>insert_link</md-icon>
+    </mat-input-container>
+    <mat-tab-group [(selectedIndex)]='selectedIndex' dynamicHeight>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>insert_link</mat-icon>
                 Link hinzufügen
             </ng-template>
-            <md-input-container>
+            <mat-input-container>
                 <input
-                        mdInput
+                        matInput
                         [(ngModel)]='link'
                         placeholder="Füge einen Link hinzu...">
-            </md-input-container>
-        </md-tab>
-        <md-tab>
-            <ng-template md-tab-label>
-                <md-icon>insert_photo</md-icon>
+            </mat-input-container>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>insert_photo</mat-icon>
                 Bild hinzufügen
             </ng-template>
             <file
@@ -32,10 +32,10 @@
                     [fileSizeLimit]='10 * 1024 * 1024'
                     accept='image/*'>
             </file>
-        </md-tab>
-        <md-tab>
-            <ng-template md-tab-label>
-                <md-icon>movie</md-icon>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>movie</mat-icon>
                 Video hinzufügen
             </ng-template>
             <file
@@ -43,24 +43,24 @@
                     [fileSizeLimit]='1 * 1024 * 1024 * 1024'
                     accept='video/*'>
             </file>
-        </md-tab>
-    </md-tab-group>
-</md-dialog-content>
-<md-dialog-actions>
+        </mat-tab>
+    </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions>
     <button
             *ngIf='page'
-            md-button
+            mat-button
             [disabled]='!ressource && !text'
             (click)='post()'
             color='primary'>
         Post erstellen
-        <md-icon>publish</md-icon>
+        <mat-icon>publish</mat-icon>
     </button>
     <button
-            md-button
-            [md-dialog-close]='undefined'>
+            mat-button
+            [mat-dialog-close]='undefined'>
         Abbrechen
-        <md-icon>cancel</md-icon>
+        <mat-icon>cancel</mat-icon>
     </button>
-</md-dialog-actions>
+</mat-dialog-actions>
 

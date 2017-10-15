@@ -1,0 +1,24 @@
+<!-- HTML template for the InsightComponent -->
+<div *ngIf='insight'>
+    <mat-table [dataSource]='insight'>
+        <ng-container matColumnDef='description'>
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef='let metric'>{{metric.description}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='day'>
+            <mat-header-cell *matHeaderCellDef>Gestern</mat-header-cell>
+            <mat-cell *matCellDef='let metric'>{{metric.day}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='week'>
+            <mat-header-cell *matHeaderCellDef>7&nbsp;Tage</mat-header-cell>
+            <mat-cell *matCellDef='let metric'>{{metric.week}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='days_28'>
+            <mat-header-cell *matHeaderCellDef>28&nbsp;Tage</mat-header-cell>
+            <mat-cell *matCellDef='let metric'>{{metric.days_28}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef='displayedColumns'></mat-header-row>
+        <mat-row *matRowDef='let row; columns: displayedColumns;'></mat-row>
+    </mat-table>
+</div>
+

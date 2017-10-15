@@ -60,6 +60,7 @@ import {EventService} from './event.service';
 import {CoverPhotoComponent} from './main/cover-photo.component';
 import {InsightService} from './insight.service';
 import {InsightDialogComponent} from './insight-dialog.component';
+import {InsightComponent} from './insight.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -106,7 +107,8 @@ import {InsightDialogComponent} from './insight-dialog.component';
         DetailComponent,
         MasterComponent,
         CoverPhotoComponent,
-        InsightDialogComponent
+        InsightDialogComponent,
+        InsightComponent
     ],
     bootstrap: [AppComponent],
     providers: [

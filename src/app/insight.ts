@@ -1,3 +1,8 @@
+import {DataSource} from '@angular/cdk/collections';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+
 import {
     GraphApiObject,
     GraphApiObjectType,
@@ -67,7 +72,9 @@ export interface InsightsResult extends InsightsResultType {}
  * internally.
  */
 export class Metric<T extends Value> {
-    constructor(public description: string) {}
+    constructor(
+        public description: string,
+        public categories?: {[key: string]: string}) {}
 
     /*
      * Daily datapoint.
@@ -105,8 +112,10 @@ export class Metric<T extends Value> {
  * formatted in a very particular way, it will not work with any set of 
  * InsightsResults.
  */
-export class Insight {
+export class Insight extends DataSource<any> {
     constructor(data: InsightsResult[]) {
+        super();
+
         for (const e of data) {
             (this[e.name] as Metric<Value>)[e.period] = e.values[0].value;
         }
@@ -115,7 +124,7 @@ export class Insight {
     /*
      * The number of stories created by a Page.
      */
-    page_stories = new Metric<number>("Die Anzahl der Posts von deiner Seite.");
+    page_stories = new Metric<number>("Posts von deiner Seite.");
 
     /*
      * The number of stories about a Page's stories, by Page story type.
@@ -130,7 +139,14 @@ export class Insight {
         'question': number,
         'user post': number,
         'other': number
-    }>("Die Anzahl der Posts mit Bezug auf deine Seite, nach Art.");
+    }>("Posts mit Bezug auf deine Seite, nach Art.", STORY_TYPES);
+
+    connect(): Observable<Metric<Value>[]> {
+        // Filter by simple Metrics, complex Metrics are not yet supported.
+        return Observable.of(METRICS.map(metric => this[metric]).filter(metric => !metric.categories));
+    }
+
+    disconnect() {}
 }
 
 /*
@@ -167,7 +183,7 @@ export const METRICS = [
  *
  * This contains descriptions for the different story types.
  */
-const STORY_TYPES = {
+export const STORY_TYPES = {
     'checkin': "Nutzer, die da waren",
     'coupon': "Eingelöste Coupons",
     'event': "Reservierungen",

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MdSnackBar, MdSnackBarRef} from '@angular/material';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material';
 
 import {GraphApiError} from './graph-api-error';
 
@@ -18,20 +18,20 @@ export class GraphApiErrorComponent implements OnInit {
     graphApiError?: GraphApiError;
 
     @Input()
-    mdSnackBarRef?: MdSnackBarRef<GraphApiErrorComponent>;
+    matSnackBarRef?: MatSnackBarRef<GraphApiErrorComponent>;
 
     /*
      * Show a GraphApiError and return it.
      */
     static show(
-        mdSnackBar: MdSnackBar,
+        matSnackBar: MatSnackBar,
         graphApiError: GraphApiError
     ) {
         if (!document.getElementsByTagName('graph-api-error').length) {
-            const mdSnackBarRef = mdSnackBar.openFromComponent(
+            const matSnackBarRef = matSnackBar.openFromComponent(
                 GraphApiErrorComponent);
-            mdSnackBarRef.instance.graphApiError = graphApiError;
-            mdSnackBarRef.instance.mdSnackBarRef = mdSnackBarRef;
+            matSnackBarRef.instance.graphApiError = graphApiError;
+            matSnackBarRef.instance.matSnackBarRef = matSnackBarRef;
         }
         return graphApiError;
     }

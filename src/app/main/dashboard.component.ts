@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/finally';
@@ -23,7 +23,7 @@ export class DashboardComponent {
     constructor(
         protected pageService: PageService,
         protected appUxService: AppUxService,
-        protected mdSnackBar: MdSnackBar) {}
+        protected matSnackBar: MatSnackBar) {}
 
     loaded = false;
 
@@ -44,7 +44,7 @@ export class DashboardComponent {
             .finally(() => this.loaded = true)
             .subscribe(
                 pages => this.pages = pages,
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                err => GraphApiErrorComponent.show(this.matSnackBar, err));
     }
 }
 

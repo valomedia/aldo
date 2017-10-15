@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -15,7 +15,7 @@ import {PostContentType} from '../post';
 })
 export class PostDialogComponent {
     constructor(
-        protected mdDialogRef: MdDialogRef<Observable<string>>,
+        protected matDialogRef: MatDialogRef<Observable<string>>,
         protected postService: PostService) {}
 
     protected static tabs = [
@@ -63,7 +63,7 @@ export class PostDialogComponent {
      * Post to a given String to this Page.
      */
     post() {
-        this.mdDialogRef.close(
+        this.matDialogRef.close(
             this.postService.create(
                 this.page,
                 this.text,

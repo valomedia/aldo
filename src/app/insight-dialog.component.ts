@@ -1,9 +1,14 @@
 import {Component, Input} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 
 import {Page} from './page';
+import {Insight} from './insight';
+
+/*
+ * The MatDialog showing the insights for a page.
+ */
 
 @Component({
     selector: 'insight-dialog',
@@ -11,9 +16,21 @@ import {Page} from './page';
     styleUrls: ['./insight-dialog.component.css']
 })
 export class InsightDialogComponent {
-    constructor(protected mdDialogRef: MdDialogRef<Observable<string>>) {}
+    constructor(protected matDialogRef: MatDialogRef<Observable<string>>) {}
+
+    protected _page?: Page;
+
+    insight?: Insight;
 
     @Input()
-    page?: Page;
+    set page(page: Page|null) {
+        if (page) {
+            this._page = page;
+            page.insights.subscribe(insight => this.insight = insight);
+        }
+    }
+    get page() {
+        return this._page;
+    }
 }
 

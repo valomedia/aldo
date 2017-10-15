@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Params} from '@angular/router';
-import {MdDialog, MdSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/concatAll';
 import {Observable} from 'rxjs/Observable';
@@ -36,8 +36,8 @@ import {PostDialogComponent} from './post-dialog.component';
 })
 export class PageComponent {
     constructor(
-        protected mdDialog: MdDialog,
-        protected mdSnackBar: MdSnackBar,
+        protected matDialog: MatDialog,
+        protected matSnackBar: MatSnackBar,
         protected appUxService: AppUxService,
         protected postService: PostService,
         protected appService: AppService,
@@ -88,16 +88,16 @@ export class PageComponent {
      * Open the PostDialogComponent.
      */
     openPostDialog() {
-        const mdDialogRef = this.mdDialog.open(PostDialogComponent, {
+        const matDialogRef = this.matDialog.open(PostDialogComponent, {
             width: '600px',
             height: '400px'
         });
-        mdDialogRef.componentInstance.page = this.page;
-        mdDialogRef
+        matDialogRef.componentInstance.page = this.page;
+        matDialogRef
             .afterClosed()
             .filter(Boolean)
             .do(() =>
-                this.mdSnackBar.open(
+                this.matSnackBar.open(
                     "Post wird erstellt...",
                     "",
                     {duration: this.confService.app.baseDelay}))
@@ -105,7 +105,7 @@ export class PageComponent {
             .do(() => this.pending++)
             .delay(this.confService.app.baseDelay)
             .map((id: string) =>
-                this.mdSnackBar
+                this.matSnackBar
                     .open(
                         "Post erstellt",
                         "Öffnen",
@@ -123,7 +123,7 @@ export class PageComponent {
             .subscribe(
                 (id: string) => window.open('//facebook.com/' + id, '_blank'),
                 (err: GraphApiError) =>
-                    GraphApiErrorComponent.show(this.mdSnackBar, err));
+                    GraphApiErrorComponent.show(this.matSnackBar, err));
     }
 }
 

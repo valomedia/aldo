@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Params} from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
@@ -21,7 +21,7 @@ import {Post} from '../post';
 })
 export class PostsComponent {
     constructor(
-        protected mdSnackBar: MdSnackBar,
+        protected matSnackBar: MatSnackBar,
         protected activatedRoute: ActivatedRoute) {}
 
     /*
@@ -72,7 +72,7 @@ export class PostsComponent {
                 .bufferCount(Math.floor(12 / this._cols))
                 .subscribe(
                     posts => posts.map((e: Post, i: number) => this._posts[i].push(e)),
-                    err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                    err => GraphApiErrorComponent.show(this.matSnackBar, err));
         }
     }
 }

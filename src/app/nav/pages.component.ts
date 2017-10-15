@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/finally';
 
@@ -20,7 +20,7 @@ import {GraphApiErrorComponent} from '../graph-api-error.component';
 export class PagesComponent implements OnInit {
     constructor(
         protected pageService: PageService,
-        protected mdSnackBar: MdSnackBar) {};
+        protected matSnackBar: MatSnackBar) {};
 
     loaded = false;
 
@@ -41,7 +41,7 @@ export class PagesComponent implements OnInit {
             .finally(() => this.loaded = true)
             .subscribe(
                 pages => this.pages = pages,
-                err => GraphApiErrorComponent.show(this.mdSnackBar, err));
+                err => GraphApiErrorComponent.show(this.matSnackBar, err));
     }
 }
 
