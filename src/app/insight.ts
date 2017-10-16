@@ -71,7 +71,7 @@ export interface InsightsResult extends InsightsResultType {}
  * This class represents a single Metric, with a single Value, as used 
  * internally.
  */
-export class Metric<T extends Value> {
+export class Metric {
     constructor(
         public description: string,
         public categories?: {[key: string]: string}) {}
@@ -82,7 +82,7 @@ export class Metric<T extends Value> {
      * Datapoint containing data for yesterday. This will always refer to the 24 
      * hours before the most recent T07:00:00+0000.
      */
-    public day?: T
+    public day?: Value
 
     /*
      * Weekly datapoint.
@@ -90,7 +90,7 @@ export class Metric<T extends Value> {
      * Datapoint containing data for the last seven days. This will always refer 
      * to the 168 hours before the most recent T07:00:00+0000.
      */
-    public week?: T
+    public week?: Value
 
     /*
      * Monthly datapoint.
@@ -98,7 +98,7 @@ export class Metric<T extends Value> {
      * Datapoint containing data for the last four weeks. This will always refer 
      * to the 672 hours before the most recent T07:00:00+0000.
      */
-    public days_28?: T
+    public days_28?: Value
 }
 
 /*
@@ -117,33 +117,35 @@ export class Insight extends DataSource<any> {
         super();
 
         for (const e of data) {
-            (this[e.name] as Metric<Value>)[e.period] = e.values[0].value;
+            (this[e.name] as Metric)[e.period] = e.values[0].value;
         }
     }
 
     /*
      * The number of stories created by a Page.
      */
-    page_stories = new Metric<number>("Posts von deiner Seite.");
+    page_stories = new Metric("Posts von deiner Seite.");
 
     /*
      * The number of stories about a Page's stories, by Page story type.
      */
-    page_stories_by_story_type = new Metric<{
-        'checkin': number,
-        'coupon': number,
-        'event': number,
-        'fan': number,
-        'mention': number,
-        'page post': number,
-        'question': number,
-        'user post': number,
-        'other': number
-    }>("Posts mit Bezug auf deine Seite, nach Art.", STORY_TYPES);
+    page_stories_by_story_type = new Metric(
+        "Posts mit Bezug auf deine Seite, nach Art.",
+        PAGE_STORY_TYPES_DESCRIPTIONS);
 
-    connect(): Observable<Metric<Value>[]> {
+    /*
+     * The number of people talking about a Page's stories, by Page story type.
+     */
+    page_storytellers_by_story_type = new Metric(
+        "Nutzer die über die Posts reden, nach Art.",
+        PAGE_STORY_TYPES_DESCRIPTIONS);
+
+    connect(): Observable<Metric[]> {
         // Filter by simple Metrics, complex Metrics are not yet supported.
-        return Observable.of(METRICS.map(metric => this[metric]).filter(metric => !metric.categories));
+        return Observable.of(
+            METRICS
+                .map(metric => this[metric])
+                .filter(metric => !metric.categories));
     }
 
     disconnect() {}
@@ -175,7 +177,8 @@ export const DUMMY_INSIGHTS_RESULT_TYPE: InsightsResultType = {
  */
 export const METRICS = [
     'page_stories',
-    'page_stories_by_story_type'
+    'page_stories_by_story_type',
+    'page_storytellers_by_story_type'
 ]
 
 /*
@@ -183,7 +186,7 @@ export const METRICS = [
  *
  * This contains descriptions for the different story types.
  */
-export const STORY_TYPES = {
+export const PAGE_STORY_TYPES_DESCRIPTIONS = {
     'checkin': "Nutzer, die da waren",
     'coupon': "Eingelöste Coupons",
     'event': "Reservierungen",
