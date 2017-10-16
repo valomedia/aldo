@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {Page} from './page';
 import {Insight} from './insight';
+import {GraphApiError} from './graph-api-error';
 
 /*
  * The MatDialog showing the insights for a page.
@@ -26,7 +27,9 @@ export class InsightDialogComponent {
     set page(page: Page|null) {
         if (page) {
             this._page = page;
-            page.insights.subscribe(insight => this.insight = insight);
+            page.insights.subscribe(
+                (insight: Insight) => this.insight = insight,
+                (err: GraphApiError) => this.matDialogRef.close(err));
         }
     }
     get page() {

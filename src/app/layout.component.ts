@@ -100,10 +100,9 @@ export class LayoutComponent implements OnInit {
             height: '400px'
         });
         matDialogRef.componentInstance.page = this.page;
-    }
-
-    log() {
-        console.warn('Boop!!!');
+        matDialogRef.afterClosed().filter(Boolean).subscribe(
+            (err: GraphApiError) =>
+                GraphApiErrorComponent.show(this.matSnackBar, err));
     }
 }
 
