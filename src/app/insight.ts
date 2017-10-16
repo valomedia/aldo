@@ -182,11 +182,81 @@ export const METRICS = [
 ]
 
 /*
- * The types of story.
+ * The sources for likes.
  *
- * This contains descriptions for the different story types.
+ * This contains descriptions for the different sources of Page likes.
+ *
+ * TODO Add descriptions.
  */
-export const PAGE_STORY_TYPES_DESCRIPTIONS = {
+const PAGE_LIKE_SOURCES_DESCRIPTIONS = {
+    'page_suggestion': "LOREM IPSUM",
+    'page_timeline': "LOREM IPSUM",
+    'ads': "LOREM IPSUM",
+    'mobile_ads': "LOREM IPSUM",
+    'registration': "LOREM IPSUM",
+    'mobile': "LOREM IPSUM",
+    'wizard_suggestion': "LOREM IPSUM",
+    'profile_connect': "LOREM IPSUM",
+    'external_connect': "LOREM IPSUM",
+    'recommended_pages': "LOREM IPSUM",
+    'favorites': "LOREM IPSUM",
+    'api': "LOREM IPSUM",
+    'page_browser': "LOREM IPSUM",
+    'mobile_page_browser': "LOREM IPSUM",
+    'hovercard': "LOREM IPSUM",
+    'search': "LOREM IPSUM",
+    'page_profile': "LOREM IPSUM",
+    'ticker': "LOREM IPSUM",
+    'like_story': "LOREM IPSUM",
+    'feed_chaining': "LOREM IPSUM",
+    'all_category_pyml': "LOREM IPSUM",
+    'page_suggestions_on_liking': "LOREM IPSUM",
+    'mobile_page_suggestions_on_liking': "LOREM IPSUM",
+    'fan_context_story': "LOREM IPSUM",
+    'sponsored_story': "LOREM IPSUM",
+    'page_invite_escape_hatch_finch': "LOREM IPSUM",
+    'page_admin_num_posts': "LOREM IPSUM",
+    'page_admin_num_posts_by_type': "LOREM IPSUM",
+    'timeline_like_chaining': "LOREM IPSUM",
+    'pagelike_adder_for_reactivated_users': "LOREM IPSUM"
+}
+
+/*
+ * The types of negative Feedback.
+ *
+ * This contains descriptions for the different types of negative feedback.
+ *
+ * TODO Add descriptions.
+ */
+const NEGATIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
+    'hide_clicks': "LOREM IPSUM",
+    'hide_all_clicks': "LOREM IPSUM",
+    'report_spam_clicks': "LOREM IPSUM",
+    'unlike_page_clicks': "LOREM IPSUM",
+}
+
+/*
+ * The types of positive Feedback.
+ *
+ * This contains descriptions for the different types of positive feedback.
+ *
+ * TODO Add descriptions.
+ */
+const POSITIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
+    'like': "LOREM IPSUM",
+    'comment': "LOREM IPSUM",
+    'link': "LOREM IPSUM",
+    'answer': "LOREM IPSUM",
+    'claim': "LOREM IPSUM",
+    'rsvp': "LOREM IPSUM"
+}
+
+/*
+ * The types of Story.
+ *
+ * This contains descriptions for the different Story types.
+ */
+const PAGE_STORY_TYPES_DESCRIPTIONS = {
     'checkin': "Nutzer, die da waren",
     'coupon': "Eingelöste Coupons",
     'event': "Reservierungen",
@@ -196,5 +266,32 @@ export const PAGE_STORY_TYPES_DESCRIPTIONS = {
     'question': "Beantwortete Fragen",
     'user post': "Posts von Nutzern",
     'other': "Andere"
+}
+
+/*
+ * The types of Page tabs.
+ *
+ * This contains descriptions for the different types of tabs.
+ *
+ * TODO Add descriptions.
+ */
+const TAB_TYPES_DESCRIPTIONS = {
+    'allactivity': "LOREM IPSUM",
+    'app': "LOREM IPSUM",
+    'info': "LOREM IPSUM",
+    'insights': "LOREM IPSUM",
+    'likes': "LOREM IPSUM",
+    'locations': "LOREM IPSUM",
+    'photos': "LOREM IPSUM",
+    'photos_albums': "LOREM IPSUM",
+    'photos_stream': "LOREM IPSUM",
+    'profile': "LOREM IPSUM",
+    'profile_info': "LOREM IPSUM",
+    'profile_likes': "LOREM IPSUM",
+    'profile_photos': "LOREM IPSUM",
+    'timeline': "LOREM IPSUM",
+    'events': "LOREM IPSUM",
+    'videos': "LOREM IPSUM",
+    'wall': "LOREM IPSUM"
 }
 
