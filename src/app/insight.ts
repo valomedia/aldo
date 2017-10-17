@@ -285,6 +285,7 @@ export const INSIGHTS = {
     // stories: "Posts",
     impressions: "Eindrücke",
     engagement: "Interaktionen",
+    // users: "Nutzerdemografie",
     views: "Views"
 }
 
@@ -408,6 +409,11 @@ export const METRICS = {
             "Die Anzahl der Personen, die eine positive Handlung vorgenommen"
                 + " haben, aufgeschlüsselt nach der Art.",
             POSITIVE_FEEDBACK_TYPES)
+    },
+    users: {
+        page_fan_adds_unique: new Metric(
+            "Neue Likes",
+            "Die Anzahl der neuen Personen, denen deine Seite gefällt.")
     },
     views: {
         page_views_total: new Metric(
