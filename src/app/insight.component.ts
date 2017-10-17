@@ -15,6 +15,6 @@ export class InsightComponent {
     @Input()
     insight?: Insight;
 
-    displayedColumns = ['description', 'day', 'week', 'days_28'];
+    displayedColumns = ['name', 'day', 'week', 'days_28'];
 }
 

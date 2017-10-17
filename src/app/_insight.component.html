@@ -1,10 +1,14 @@
 <!-- HTML template for the InsightComponent -->
 <div *ngIf='insight'>
     <mat-table [dataSource]='insight'>
-        <ng-container matColumnDef='description'>
+        <ng-container matColumnDef='name'>
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef='let metric'>
-                {{metric.description}}
+            <mat-cell
+                    *matCellDef='let metric'
+                    [matTooltip]='metric.description'
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'>
+                {{metric.name}}
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef='day'>

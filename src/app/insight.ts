@@ -73,6 +73,7 @@ export interface InsightsResult extends InsightsResultType {}
  */
 export class Metric {
     constructor(
+        public name: string,
         public description: string,
         public categories?: {[key: string]: string}) {}
 
@@ -291,52 +292,120 @@ export const INSIGHTS = {
  */
 export const METRICS = {
     stories: {
-        page_stories: new Metric("Posts von deiner Seite"),
+        page_stories: new Metric(
+            "Meldungen",
+            "Die Anzahl der generierten Meldungen zu deinem Seitenbeitrag."),
         page_stories_by_story_type: new Metric(
-            "Posts mit Bezug auf deine Seite, nach Art",
+            "Meldungen, nach Meldungsart",
+            "Die Anzahl der Meldungen zu deiner Seite nach Meldungsart.",
             PAGE_STORY_TYPES),
         page_storytellers_by_story_type: new Metric(
-            "Nutzer die über deine Posts reden, nach Art",
+            "Nutzer die darüber sprechen, nach Meldungsart",
+            "Die Anzahl der Personen, die über die Seite sprechen nach Art der"
+                + " Seitenmeldung.",
             PAGE_STORY_TYPES)
     },
     impressions: {
-        page_impressions: new Metric("Eindrücke für deinen Content"),
-        page_impressions_unique: new Metric("Erreichte Nutzer"),
-        page_impressions_paid: new Metric("Bezahlte Eindrücke"),
-        page_impressions_paid_unique: new Metric("Bezahlte Nutzer"),
-        page_impressions_organic: new Metric("Unbezahlte Eindrücke"),
-        page_impressions_organic_unique: new Metric("Unbezahlte Nutzer"),
-        page_impressions_viral: new Metric("Virale Eindrücke"),
-        page_impressions_viral_unique: new Metric("Virale Nutzer"),
+        page_impressions: new Metric(
+            "Eindrücke",
+            "Die Gesamtanzahl der Impressionen für jeglichen Content, der mit"
+                + " deiner Seite im Zusammenhang steht."),
+        page_impressions_unique: new Metric(
+            "Erreichte Nutzer",
+            "Die Anzahl der Personen, die jeglichen Content im Zusammenhang mit"
+                + " deiner Seite gesehen haben."),
+        page_impressions_paid: new Metric(
+            "Bezahlte Eindrücke",
+            "Die Anzahl der Impressionen für eine Sponsored Story oder"
+                + " Werbeanzeige, die auf deine Seite verweist."),
+        page_impressions_paid_unique: new Metric(
+            "Bezahlte Nutzer",
+            "Anzahl der Personen, die eine Sponsored Story oder Werbeanzeige zu"
+                + " deiner Seite gesehen haben."),
+        page_impressions_organic: new Metric(
+            "Unbezahlte Eindrücke",
+            "So oft wurden deine Beiträge im News Feed, Ticker oder bei"
+                + " Besuchen deiner Seite gesehen."),
+        page_impressions_organic_unique: new Metric(
+            "Unbezahlte Nutzer",
+            "Die Anzahl der Personen, die deine Seite besucht oder sie"
+                + " beziehungsweise deren Seitenbeiträge im News Feed oder"
+                + " Ticker gesehen haben."),
+        page_impressions_viral: new Metric(
+            "Virale Eindrücke",
+            "Die Anzahl der Impressionen für eine von einem Freund über deine"
+                + " Seite veröffentlichte Meldung."),
+        page_impressions_viral_unique: new Metric(
+            "Virale Nutzer",
+            "Die Anzahl der Personen, die deine Seite oder einen der Beiträge"
+                + " über eine von einem Freund veröffentlichte Meldung gesehen"
+                + " haben."),
         page_impressions_by_story_type: new Metric(
-            "Eindrücke für Content über deine Seite, nach Art",
+            "Eindrücke, nach Meldungsart",
+            "Gesamtimpressionen zu Meldungen, die von einem Freund zu deiner"
+                + " Seite veröffentlicht wurden, nach Meldungsart.",
             PAGE_STORY_TYPES),
         page_impressions_by_story_type_unique: new Metric(
-            "Erreichte Nutzer für Content über deine Seite, nach Art",
+            "Erreichte Nutzer, nach Meldungsart",
+            "Die Anzahl der Personen, die Meldungen gesesen haben, die von"
+                + " einem Freund zu deiner Seite veröffentlicht wurden, nach"
+                + " Meldungsart.",
             PAGE_STORY_TYPES)
     },
     engagement: {
-        page_engaged_users: new Metric("Mit der Seite interagierende Nutzer"),
-        page_post_engagements: new Metric("Mit Posts interagierende Nutzer"),
-        page_consumptions: new Metric("Klicks auf Content"),
-        page_consumptions_unique: new Metric("Klicks einzelner Nutzer"),
-        page_places_checkin_total: new Metric("Check-Ins"),
-        page_places_checkin_total_unique: new Metric("Check-In-Nutzer"),
-        page_places_checkin_mobile: new Metric("Check-Ins mobil"),
-        page_places_checkin_mobile_unique: new Metric("Check-In-Nutzer mobil"),
-        page_negative_feedback: new Metric("Negatives Feedback"),
-        page_negative_feedback_unique: new Metric("Negatives Feedback Nutzer"),
+        page_engaged_users: new Metric(
+            "Interagierende Nutzer",
+            "Die Anzahl der Personen, die mit deiner Seite interagiert haben."),
+        page_post_engagements: new Metric(
+            "Beitragsinteragierende Nutzer",
+            "So of wurde durch „Gefällt mir“-Angaben, Kommentare, geteilte"
+                + " Inhalte usw. mit deinen Beiträgen interagiert."),
+        page_consumptions: new Metric(
+            "Klicks",
+            "Die Anzahl der Klicks auf einen deiner Inhalte."),
+        page_consumptions_unique: new Metric(
+            "Klickende Nutzer",
+            "Die Anzahl der Personen, die einen deiner Inhalte angeklickt"
+                + " haben."),
+        page_places_checkin_total: new Metric(
+            "Check-Ins",
+            "So oft wurde dein Ort besucht."),
+        page_places_checkin_total_unique: new Metric(
+            "Check-In-Nutzer",
+            "Die Anzahl der Personen, die deinen Ort besucht haben."),
+        page_places_checkin_mobile: new Metric(
+            "Check-Ins mobil",
+            "So oft wurde dein Ort über ein Mobiltelefon besucht."),
+        page_places_checkin_mobile_unique: new Metric(
+            "Check-In-Nutzer mobil",
+            "Die Anzahl der Personen, die deinen Ort über ein Mobiltelefon"
+                + " besucht haben."),
+        page_negative_feedback: new Metric(
+            "Negatives Feedback",
+            "So oft wurde eine negative Handlung vorgenommen."),
+        page_negative_feedback_unique: new Metric(
+            "Negatives Feedback Nutzer",
+            "Die Anzahl der Personen, die eine negative Handlung vorgenommen"
+                + " haben."),
         page_negative_feedback_by_type: new Metric(
             "Negatives Feedback, nach Art",
+            "So oft wurde eine negative Handlung vorgenommen, aufgeschlüsselt"
+                + " nach Art.",
             NEGATIVE_FEEDBACK_TYPES),
         page_negative_feedback_by_type_unique: new Metric(
             "Negatives Feedback Nutzer, nach Art",
+            "Die Anzahl der Personen, die eine negative Handlung vorgenommen"
+                + " haben, aufgeschlüsselt nach der Art.",
             NEGATIVE_FEEDBACK_TYPES),
         page_positive_feedback_by_type: new Metric(
             "Positives Feedback, nach Art",
+            "So oft wurde eine positive Handlung vorgenommen, aufgeschlüsselt"
+                + " nach Art.",
             POSITIVE_FEEDBACK_TYPES),
         page_positive_feedback_by_type_unique: new Metric(
             "Positives Feedback Nutzer, nach Art",
+            "Die Anzahl der Personen, die eine positive Handlung vorgenommen"
+                + " haben, aufgeschlüsselt nach der Art.",
             POSITIVE_FEEDBACK_TYPES)
     }
 }
