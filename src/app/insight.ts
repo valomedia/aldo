@@ -279,7 +279,8 @@ const TAB_TYPES = {
  * The INSIGHTS currently supported.
  */
 export const INSIGHTS = {
-    stories: "Posts"
+    stories: "Posts",
+    impressions: "Eindrücke"
 }
 
 /*
@@ -295,6 +296,20 @@ export const METRICS = {
         page_storytellers_by_story_type: new Metric(
             "Nutzer die über deine Posts reden, nach Art",
             PAGE_STORY_TYPES)
+    },
+    impressions: {
+        page_impressions: new Metric(
+            "Eindrücke für Content deiner Seite"),
+        page_impressions_unique: new Metric(
+            "Nutzer die Content deiner Seite gesehen haben"),
+        page_impressions_paid: new Metric(
+            "Bezahlte Eindrücke"),
+        page_impressions_paid_unique: new Metric(
+            "Bezahlte Nutzer"),
+        page_impressions_organic: new Metric(
+            "Unbezahlte Eindrücke"),
+        page_impressions_organic_unique: new Metric(
+            "Unbezahlte Nutzer")
     }
 }
 
