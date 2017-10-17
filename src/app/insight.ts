@@ -282,11 +282,13 @@ const TAB_TYPES = {
  * The INSIGHTS currently supported.
  */
 export const INSIGHTS = {
-    // stories: "Posts",
+    // stories: "Meldungen",
     impressions: "Eindrücke",
-    engagement: "Interaktionen",
+    engagement: "Aktionen",
     // users: "Nutzerdemografie",
-    views: "Views"
+    views: "Views",
+    videos: "Videos",
+    posts: "Posts"
 }
 
 /*
@@ -437,6 +439,136 @@ export const METRICS = {
             "Die Anzahl der bei Facebook angemeldeten Personen, die dein"
                 + " Seitenprofil angesehen haben, aufgeschlüsselt nach Tabs.",
             TAB_TYPES)
+    },
+    videos: {
+        page_video_views: new Metric(
+            "Video-Plays",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 3 Sekunden"
+                + " angesehen."),
+        page_video_views_paid: new Metric(
+            "Bezahlte Video-Plays",
+            "So oft wurden hervorgehobene Videos deiner Seite insgesamt"
+                + " mindestens 3 Sekunden angesehen."),
+        page_video_views_organic: new Metric(
+            "Unbezahlte Video-Plays",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 3 Sekunden"
+                + " organisch angesehen."),
+        page_video_views_autoplayed: new Metric(
+            "Plays für automatisch abgespielte Videos",
+            "So oft wurden automatisch abgespielte Videos deiner Seite"
+                + " insgesamt mindestens 3 Sekunden angesehen."),
+        page_video_views_click_to_play: new Metric(
+            "Plays für bewusst abgespielte Videos",
+            "So oft wurden Videos deiner Seite insgesamt bis zum Ende oder nach"
+                + " einem Klick auf „Abspielen“ mindestens 3 Sekunden"
+                + " angesehen."),
+        page_video_views_unique: new Metric(
+            "Einzigartige Video-Plays",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 3 Sekunden"
+                + " von Einzelpersonen angesehen."),
+        page_video_repeat_views: new Metric(
+            "Video-Replays",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 3 Sekunden"
+                + " erneut abgespielt."),
+        page_video_complete_views_30s: new Metric(
+            "Vollständige Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 30 Sekunden"
+                + " angesehen."),
+        page_video_complete_views_30s_paid: new Metric(
+            "Bezahlte vollständige Video-Views",
+            "So oft wurden hervorgehobene Videos deiner Seite insgesamt"
+                + " mindestens 30 Sekunden oder bis zum Ende angesehen."),
+        page_video_complete_views_30s_organic: new Metric(
+            "Unbezahlte vollständige Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 30 Sekunden"
+                + " oder bis zum Ende organisch angesehen."),
+        page_video_complete_views_30s_autoplayed: new Metric(
+            "Vollständige Views für automatisch abgespielte Videos",
+            "So oft wurden automatisch abgespielte Videos deiner Seite"
+                + " insgesamt bis zum Ende oder mindestens 30 Sekunden"
+                + " angesehen."),
+        page_video_complete_views_30s_click_to_play: new Metric(
+            "Vollständige Views für bewusst abgespielte Videos",
+            "So oft wurden Videos deiner Seite insgesamt bis zum Ende oder nach"
+                + " einem Klick auf „Abspielen“ mindestens 30 Sekunden"
+                + " angesehen."),
+        page_video_complete_views_30s_unique: new Metric(
+            "Einzigartige vollständige Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt bis zum Ende oder"
+                + " mindestens 30 Sekunden von Einzelpersonen angesehen."),
+        page_video_complete_views_30s_repeat_views: new Metric(
+            "Wiederholte vollständige Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt bis zum Ende oder"
+                + " mindestens 30 Sekunden erneut abgespielt."),
+        page_video_views_10s: new Metric(
+            "Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 10 Sekunden"
+                + " oder fast ganz angesehen, je nachdem, was zuerst"
+                + " eingetreten ist."),
+        page_video_views_10s_paid: new Metric(
+            "Bezahlte Video-Views",
+            "So oft wurden Videos deiner Seite mit bezahlter Aktivität"
+                + " insgesamt mindestens 10 Sekunden oder fast ganz angesehen,"
+                + " je nachdem, was zuerst eingetreten ist."),
+        page_video_views_10s_organic: new Metric(
+            "Unbezahlte Video-Views",
+            "So oft wurden Videos deiner Seite ohne bezahlte Verbreitung"
+                + " insgesamt mindestens 10 Sekunden oder fast ganz angesehen,"
+                + " je nachdem, was zuerst eingetreten ist."),
+        page_video_views_10s_autoplayed: new Metric(
+            "Video-Views für automatisch abgespielte Videos",
+            "So oft wurden Videos deiner Seite automatisch abgespielt und"
+                + " insgesamt mindestens 10 Sekunden oder fast ganz angesehen,"
+                + " je nachdem, was zuerst eingetreten ist."),
+        page_video_views_10s_click_to_play: new Metric(
+            "Video-Views für manuell abgespielte Videos",
+            "So oft wurden Videos deiner Seite durch Klicken auf „Abspielen“"
+                + " und insgesamt mindestens 10 Sekunden oder fast ganz"
+                + " angesehen, je nachdem, was zuerst eingetreten ist."),
+        page_video_views_10s_unique: new Metric(
+            "Einzigartige Video-Views",
+            "So oft wurden Videos deiner Seite insgesamt mindestens 10 Sekunden"
+                + " oder fast ganz von Einzelpersonen angesehen, je nach dem,"
+                + " was zuerst eingetreten ist."),
+        page_video_views_10s_repeat: new Metric(
+            "Wiederholte Video-Views",
+            "So oft wurden Videos deiner Seite erneut mindestens 10 Sekunden"
+                + " oder fast ganz angesehen, je nachdem, was zuerst"
+                + " eingetreten ist.")
+    },
+    posts: {
+        page_posts_impressions: new Metric(
+            "Post-Eindrücke",
+            "Die Anzahl der von allen deinen Beiträgen ausgehenden"
+                + " Impressionen."),
+        page_posts_impressions_unique: new Metric(
+            "Post-Nutzer",
+            "Die Anzahl der Personen, die einen deiner Seitenbeiträge gesehen"
+                + " haben."),
+        page_posts_impressions_paid: new Metric(
+            "Bezahlte Post-Eindrücke",
+            "Die Anzahl der Impressionen für deine Seitenebeiträge in einer"
+                + " Werbeanzeige oder Sponsored Story."),
+        page_posts_impressions_paid_unique: new Metric(
+            "Bezahlte Post-Nutzer",
+            "Die Anzahl der Personen, die deine Seitenbeiträge in einer"
+                + " Werbeanzeige oder Sponsored Story gesehen haben."),
+        page_posts_impressions_organic: new Metric(
+            "Unbezahlte Post-Eindrücke",
+            "Die Anzahl der Impressionen für deine Beiträge im News Feed, in"
+                + " den Kurzmeldungen oder auf deiner Seite."),
+        page_posts_impressions_organic_unique: new Metric(
+            "Unbezahlte Post-Nutzer",
+            "Die Anzahl der Personen, die deine Seitenbeiträge im News Feed,"
+                + " Ticker oder in der Chronik deiner Seite gesehen haben."),
+        page_posts_impressions_viral: new Metric(
+            "Virale Post-Eindrücke",
+            "So oft wurden deine Beiträge über die von Freunden"
+                + " veröffentlichten Meldungen gesehen."),
+        page_posts_impressions_viral_unique: new Metric(
+            "Virale Post-Nutzer",
+            "Die Zahl der Personen, die deine Seitenbeiträge über eine Meldung"
+                + " eines Freundes oder einer Freundin gesehen haben.")
     }
 }
 
