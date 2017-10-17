@@ -284,7 +284,8 @@ const TAB_TYPES = {
 export const INSIGHTS = {
     stories: "Posts",
     impressions: "Eindrücke",
-    engagement: "Interaktionen"
+    engagement: "Interaktionen",
+    views: "Views"
 }
 
 /*
@@ -407,6 +408,29 @@ export const METRICS = {
             "Die Anzahl der Personen, die eine positive Handlung vorgenommen"
                 + " haben, aufgeschlüsselt nach der Art.",
             POSITIVE_FEEDBACK_TYPES)
+    },
+    views: {
+        page_views_total: new Metric(
+            "Views",
+            "So oft wurde das Profil deiner Seite aufgerufen."),
+        page_views_logged_in_total: new Metric(
+            "Views angemeldeter Nutzer",
+            "So oft wurde das Profil deiner Seite von Personen aufgerufen, die"
+                + " bei Facebook angemeldet waren."),
+        page_views_logged_in_unique: new Metric(
+            "Views verschiedener Nutzer",
+            "Die Anzahl der bei Facebook angemeldeten Personen, die dein"
+                + " Seitenprofil angesehen haben."),
+        page_views_by_profile_tab_total: new Metric(
+            "Views, nach Tab",
+            "Die Anzahl der Personen, die alle Tabs im Profil deiner Seite"
+                + " angesehen haben.",
+            TAB_TYPES),
+        page_views_by_profile_tab_logged_in_unique: new Metric(
+            "Views verschiedener Nutzer, nach Tab",
+            "Die Anzahl der bei Facebook angemeldeten Personen, die dein"
+                + " Seitenprofil angesehen haben, aufgeschlüsselt nach Tabs.",
+            TAB_TYPES)
     }
 }
 
