@@ -282,7 +282,8 @@ const TAB_TYPES = {
  */
 export const INSIGHTS = {
     stories: "Posts",
-    impressions: "Eindrücke"
+    impressions: "Eindrücke",
+    engagement: "Interaktionen"
 }
 
 /*
@@ -290,8 +291,7 @@ export const INSIGHTS = {
  */
 export const METRICS = {
     stories: {
-        page_stories: new Metric(
-            "Posts von deiner Seite"),
+        page_stories: new Metric("Posts von deiner Seite"),
         page_stories_by_story_type: new Metric(
             "Posts mit Bezug auf deine Seite, nach Art",
             PAGE_STORY_TYPES),
@@ -300,18 +300,44 @@ export const METRICS = {
             PAGE_STORY_TYPES)
     },
     impressions: {
-        page_impressions: new Metric(
-            "Eindrücke für Content deiner Seite"),
-        page_impressions_unique: new Metric(
-            "Nutzer die Content deiner Seite gesehen haben"),
-        page_impressions_paid: new Metric(
-            "Bezahlte Eindrücke"),
-        page_impressions_paid_unique: new Metric(
-            "Bezahlte Nutzer"),
-        page_impressions_organic: new Metric(
-            "Unbezahlte Eindrücke"),
-        page_impressions_organic_unique: new Metric(
-            "Unbezahlte Nutzer")
+        page_impressions: new Metric("Eindrücke für deinen Content"),
+        page_impressions_unique: new Metric("Erreichte Nutzer"),
+        page_impressions_paid: new Metric("Bezahlte Eindrücke"),
+        page_impressions_paid_unique: new Metric("Bezahlte Nutzer"),
+        page_impressions_organic: new Metric("Unbezahlte Eindrücke"),
+        page_impressions_organic_unique: new Metric("Unbezahlte Nutzer"),
+        page_impressions_viral: new Metric("Virale Eindrücke"),
+        page_impressions_viral_unique: new Metric("Virale Nutzer"),
+        page_impressions_by_story_type: new Metric(
+            "Eindrücke für Content über deine Seite, nach Art",
+            PAGE_STORY_TYPES),
+        page_impressions_by_story_type_unique: new Metric(
+            "Erreichte Nutzer für Content über deine Seite, nach Art",
+            PAGE_STORY_TYPES)
+    },
+    engagement: {
+        page_engaged_users: new Metric("Mit der Seite interagierende Nutzer"),
+        page_post_engagements: new Metric("Mit Posts interagierende Nutzer"),
+        page_consumptions: new Metric("Klicks auf Content"),
+        page_consumptions_unique: new Metric("Klicks einzelner Nutzer"),
+        page_places_checkin_total: new Metric("Check-Ins"),
+        page_places_checkin_total_unique: new Metric("Check-In-Nutzer"),
+        page_places_checkin_mobile: new Metric("Check-Ins mobil"),
+        page_places_checkin_mobile_unique: new Metric("Check-In-Nutzer mobil"),
+        page_negative_feedback: new Metric("Negatives Feedback"),
+        page_negative_feedback_unique: new Metric("Negatives Feedback Nutzer"),
+        page_negative_feedback_by_type: new Metric(
+            "Negatives Feedback, nach Art",
+            NEGATIVE_FEEDBACK_TYPES),
+        page_negative_feedback_by_type_unique: new Metric(
+            "Negatives Feedback Nutzer, nach Art",
+            NEGATIVE_FEEDBACK_TYPES),
+        page_positive_feedback_by_type: new Metric(
+            "Positives Feedback, nach Art",
+            POSITIVE_FEEDBACK_TYPES),
+        page_positive_feedback_by_type_unique: new Metric(
+            "Positives Feedback Nutzer, nach Art",
+            POSITIVE_FEEDBACK_TYPES)
     }
 }
 
