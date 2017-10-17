@@ -113,38 +113,27 @@ export class Metric {
  * InsightsResults.
  */
 export class Insight extends DataSource<any> {
-    constructor(data: InsightsResult[]) {
+    constructor(
+        public description: string,
+        metrics: {[key: string]: Metric},
+        data: InsightsResult[]
+    ) {
         super();
 
+        this.data = metrics;
+
         for (const e of data) {
-            (this[e.name] as Metric)[e.period] = e.values[0].value;
+            this.data[e.name][e.period] = e.values[0].value;
         }
     }
 
-    /*
-     * The number of stories created by a Page.
-     */
-    page_stories = new Metric("Posts von deiner Seite.");
-
-    /*
-     * The number of stories about a Page's stories, by Page story type.
-     */
-    page_stories_by_story_type = new Metric(
-        "Posts mit Bezug auf deine Seite, nach Art.",
-        PAGE_STORY_TYPES_DESCRIPTIONS);
-
-    /*
-     * The number of people talking about a Page's stories, by Page story type.
-     */
-    page_storytellers_by_story_type = new Metric(
-        "Nutzer die über die Posts reden, nach Art.",
-        PAGE_STORY_TYPES_DESCRIPTIONS);
+    data: {[key: string]: Metric};
 
     connect(): Observable<Metric[]> {
         // Filter by simple Metrics, complex Metrics are not yet supported.
         return Observable.of(
-            METRICS
-                .map(metric => this[metric])
+            Object.keys(this.data)
+                .map(key => this.data[key])
                 .filter(metric => !metric.categories));
     }
 
@@ -173,22 +162,13 @@ export const DUMMY_INSIGHTS_RESULT_TYPE: InsightsResultType = {
 }
 
 /*
- * The list of METRICS currently supported.
- */
-export const METRICS = [
-    'page_stories',
-    'page_stories_by_story_type',
-    'page_storytellers_by_story_type'
-]
-
-/*
  * The sources for likes.
  *
  * This contains descriptions for the different sources of Page likes.
  *
  * TODO Add descriptions.
  */
-const PAGE_LIKE_SOURCES_DESCRIPTIONS = {
+const PAGE_LIKE_SOURCES = {
     'page_suggestion': "LOREM IPSUM",
     'page_timeline': "LOREM IPSUM",
     'ads': "LOREM IPSUM",
@@ -228,7 +208,7 @@ const PAGE_LIKE_SOURCES_DESCRIPTIONS = {
  *
  * TODO Add descriptions.
  */
-const NEGATIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
+const NEGATIVE_FEEDBACK_TYPES = {
     'hide_clicks': "LOREM IPSUM",
     'hide_all_clicks': "LOREM IPSUM",
     'report_spam_clicks': "LOREM IPSUM",
@@ -242,7 +222,7 @@ const NEGATIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
  *
  * TODO Add descriptions.
  */
-const POSITIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
+const POSITIVE_FEEDBACK_TYPES = {
     'like': "LOREM IPSUM",
     'comment': "LOREM IPSUM",
     'link': "LOREM IPSUM",
@@ -256,7 +236,7 @@ const POSITIVE_FEEDBACK_TYPES_DESCRIPTIONS = {
  *
  * This contains descriptions for the different Story types.
  */
-const PAGE_STORY_TYPES_DESCRIPTIONS = {
+const PAGE_STORY_TYPES = {
     'checkin': "Nutzer, die da waren",
     'coupon': "Eingelöste Coupons",
     'event': "Reservierungen",
@@ -275,7 +255,7 @@ const PAGE_STORY_TYPES_DESCRIPTIONS = {
  *
  * TODO Add descriptions.
  */
-const TAB_TYPES_DESCRIPTIONS = {
+const TAB_TYPES = {
     'allactivity': "LOREM IPSUM",
     'app': "LOREM IPSUM",
     'info': "LOREM IPSUM",
@@ -293,5 +273,28 @@ const TAB_TYPES_DESCRIPTIONS = {
     'events': "LOREM IPSUM",
     'videos': "LOREM IPSUM",
     'wall': "LOREM IPSUM"
+}
+
+/*
+ * The INSIGHTS currently supported.
+ */
+export const INSIGHTS = {
+    stories: "Posts"
+}
+
+/*
+ * The METRICS currently supported for each Insight.
+ */
+export const METRICS = {
+    stories: {
+        page_stories: new Metric(
+            "Posts von deiner Seite"),
+        page_stories_by_story_type: new Metric(
+            "Posts mit Bezug auf deine Seite, nach Art",
+            PAGE_STORY_TYPES),
+        page_storytellers_by_story_type: new Metric(
+            "Nutzer die über deine Posts reden, nach Art",
+            PAGE_STORY_TYPES)
+    }
 }
 

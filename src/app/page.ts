@@ -137,7 +137,7 @@ export class Page extends Profile {
         // Return null, if the Page has not enough likes to get statistics from 
         // Facebook.
         return this.fan_count > 30
-            ? this.insightService.insight(this.id)
+            ? this.insightService.insights(this.id)
             : null;
     }
 }

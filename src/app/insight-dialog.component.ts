@@ -21,15 +21,20 @@ export class InsightDialogComponent {
 
     protected _page?: Page;
 
-    insight?: Insight;
+    loaded = false;
+
+    insights: Insight[] = [];
 
     @Input()
     set page(page: Page|null) {
         if (page) {
             this._page = page;
-            page.insights.subscribe(
-                (insight: Insight) => this.insight = insight,
-                (err: GraphApiError) => this.matDialogRef.close(err));
+            page
+                .insights
+                .finally(() => this.loaded = true)
+                .subscribe(
+                    (insight: Insight) => this.insights.push(insight),
+                    (err: GraphApiError) => this.matDialogRef.close(err));
         }
     }
     get page() {

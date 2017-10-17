@@ -1,5 +1,6 @@
 <!-- HTML template for the InsightComponent -->
 <div *ngIf='insight'>
+    <h3>{{insight.description}}</h3>
     <mat-table [dataSource]='insight'>
         <ng-container matColumnDef='description'>
             <mat-header-cell *matHeaderCellDef></mat-header-cell>

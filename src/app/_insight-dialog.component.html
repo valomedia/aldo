@@ -1,9 +1,9 @@
 <!-- HTML template for the InsightDialogComponent -->
 <h2 mat-dialog-title>Statistiken</h2>
-<mat-dialog-content *ngIf='!insight'>
+<mat-dialog-content *ngIf='!loaded'>
     <mat-spinner color='accent'></mat-spinner>
 </mat-dialog-content>
-<mat-dialog-content *ngIf='insight'>
+<mat-dialog-content *ngFor='let insight of insights'>
     <insight [insight]='insight'></insight>
 </mat-dialog-content>
 <mat-dialog-actions>
