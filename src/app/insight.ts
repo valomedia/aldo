@@ -282,6 +282,7 @@ const TAB_TYPES = {
  * The INSIGHTS currently supported.
  */
 export const INSIGHTS = {
+    overview: "Übersicht",
     // stories: "Meldungen",
     impressions: "Eindrücke",
     engagement: "Aktionen",
@@ -291,10 +292,7 @@ export const INSIGHTS = {
     posts: "Posts"
 }
 
-/*
- * The METRICS currently supported for each Insight.
- */
-export const METRICS = {
+const _METRICS = {
     stories: {
         page_stories: new Metric(
             "Meldungen",
@@ -570,5 +568,21 @@ export const METRICS = {
             "Die Zahl der Personen, die deine Seitenbeiträge über eine Meldung"
                 + " eines Freundes oder einer Freundin gesehen haben.")
     }
+}
+
+/*
+ * The METRICS currently supported for each Insight.
+ */
+export const METRICS = {
+    overview: {
+        page_stories: _METRICS.stories.page_stories,
+        page_impressions: _METRICS.impressions.page_impressions,
+        page_engaged_users: _METRICS.engagement.page_engaged_users,
+        page_fan_adds_unique: _METRICS.users.page_fan_adds_unique,
+        page_views_total: _METRICS.views.page_views_total,
+        page_video_views: _METRICS.videos.page_video_views,
+        page_posts_impressions: _METRICS.posts.page_posts_impressions
+    },
+    ..._METRICS
 }
 
