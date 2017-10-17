@@ -17,6 +17,7 @@ import {Page} from './page';
 import {GraphApiError} from './graph-api-error';
 import {GraphApiErrorComponent} from './graph-api-error.component';
 import {InsightDialogComponent} from './insight-dialog.component';
+import {SettingsService} from './settings.service';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -37,7 +38,8 @@ export class LayoutComponent implements OnInit {
         protected appService: AppService,
         protected profileService: ProfileService,
         protected matSnackBar: MatSnackBar,
-        protected matDialog: MatDialog) {}
+        protected matDialog: MatDialog,
+        protected settingsService: SettingsService) {}
 
     protected _params: Params = {};
 
@@ -72,11 +74,6 @@ export class LayoutComponent implements OnInit {
      * will be null.
      */
     page?: Page;
-
-    /*
-     * Whether the dark-theme is active.
-     */
-    dark = false;
 
     @ViewChild('aside')
     aside: MatSidenav;
