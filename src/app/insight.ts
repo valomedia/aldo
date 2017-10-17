@@ -134,7 +134,9 @@ export class Insight extends DataSource<any> {
         return Observable.of(
             Object.keys(this.data)
                 .map(key => this.data[key])
-                .filter(metric => !metric.categories));
+                .filter(metric =>
+                    !metric.categories && (
+                        metric.day || metric.week || metric.days_28)));
     }
 
     disconnect() {}
