@@ -1,5 +1,8 @@
 <!-- HTML template for the PostDialogComponent -->
-<h2 mat-dialog-title>Post erstellen</h2>
+<h2 mat-dialog-title>
+    <span *ngIf='page'>{{page.name}}:</span>
+    Post erstellen
+</h2>
 <mat-dialog-content>
     <mat-input-container>
         <textarea

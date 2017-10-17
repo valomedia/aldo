@@ -1,10 +1,20 @@
 <!-- HTML template for the InsightDialogComponent -->
-<h2 mat-dialog-title>Statistiken</h2>
-<mat-dialog-content *ngIf='!loaded'>
-    <mat-spinner color='accent'></mat-spinner>
-</mat-dialog-content>
-<mat-dialog-content *ngFor='let insight of insights'>
-    <insight [insight]='insight'></insight>
+<h2 mat-dialog-title>
+    <span *ngIf='page'>{{page.name}}:</span>
+    Statistiken
+</h2>
+<mat-dialog-content>
+    <div *ngIf='!loaded'>
+        <mat-spinner color='accent'></mat-spinner>
+    </div>
+    <div>
+        <mat-tab-group dynamicHeight>
+            <mat-tab *ngFor='let insight of insights'>
+                <ng-template mat-tab-label>{{insight.description}}</ng-template>
+                <insight [insight]='insight'></insight>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button
