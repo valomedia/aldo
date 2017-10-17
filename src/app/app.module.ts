@@ -61,6 +61,7 @@ import {CoverPhotoComponent} from './main/cover-photo.component';
 import {InsightService} from './insight.service';
 import {InsightDialogComponent} from './insight-dialog.component';
 import {InsightComponent} from './insight.component';
+import {SettingsService} from './settings.service';
 
 /*
  * The Module definitions for AppComponent.
@@ -133,7 +134,8 @@ import {InsightComponent} from './insight.component';
         UserService,
         GroupService,
         EventService,
-        InsightService
+        InsightService,
+        SettingsService
     ],
     entryComponents: [
         PostDialogComponent,
