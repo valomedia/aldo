@@ -282,7 +282,7 @@ const TAB_TYPES = {
  * The INSIGHTS currently supported.
  */
 export const INSIGHTS = {
-    stories: "Posts",
+    // stories: "Posts",
     impressions: "Eindrücke",
     engagement: "Interaktionen",
     views: "Views"
