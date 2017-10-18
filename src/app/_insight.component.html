@@ -12,19 +12,28 @@
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef='day'>
-            <mat-header-cell *matHeaderCellDef>Gestern</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>
+                <span class='desktop-only'>Gestern</span>
+                <span class='mobile-only'>1d</span>
+            </mat-header-cell>
             <mat-cell *matCellDef='let metric'>
                 {{metric.day || '-'}}
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef='week'>
-            <mat-header-cell *matHeaderCellDef>7&nbsp;Tage</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>
+                <span class='desktop-only'>7&nbsp;Tage</span>
+                <span class='mobile-only'>7d</span>
+            </mat-header-cell>
             <mat-cell *matCellDef='let metric'>
                 {{metric.week || '-'}}
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef='days_28'>
-            <mat-header-cell *matHeaderCellDef>28&nbsp;Tage</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>
+                <span class='desktop-only'>28&nbsp;Tage</span>
+                <span class='mobile-only'>28d</span>
+            </mat-header-cell>
             <mat-cell *matCellDef='let metric'>
                 {{metric.days_28 || '-'}}
             </mat-cell>
