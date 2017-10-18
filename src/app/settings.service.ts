@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Settings} from './settings';
+import {AppService} from './app.service';
 
 /*
  * The Service retrieving and storing the Settings.
@@ -8,7 +9,7 @@ import {Settings} from './settings';
 
 @Injectable()
 export class SettingsService {
-    constructor() {
+    constructor(protected appService: AppService) {
         if (!this.settings) { this.load(); }
     }
 
@@ -29,14 +30,17 @@ export class SettingsService {
      */
     load() {
         this.settings = new Settings(
-            JSON.parse(window.localStorage.getItem('settings')));
+            JSON.parse(
+                window.localStorage.getItem(this.appService.SETTINGS)));
     }
 
     /*
      * Save Settings to localStorage.
      */
     save() {
-        window.localStorage.setItem('settings', JSON.stringify(this.settings));
+        window.localStorage.setItem(
+            this.appService.SETTINGS,
+            JSON.stringify(this.settings));
     }
 }
 
