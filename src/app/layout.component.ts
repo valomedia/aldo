@@ -18,6 +18,7 @@ import {GraphApiError} from './graph-api-error';
 import {GraphApiErrorComponent} from './graph-api-error.component';
 import {InsightDialogComponent} from './insight-dialog.component';
 import {SettingsService} from './settings.service';
+import {SettingsDialogComponent} from './settings-dialog.component';
 
 /*
  * The Component containing the layout everything else goes into.
@@ -100,6 +101,21 @@ export class LayoutComponent implements OnInit {
         matDialogRef.afterClosed().filter(Boolean).subscribe(
             (err: GraphApiError) =>
                 GraphApiErrorComponent.show(this.matSnackBar, err));
+    }
+
+    /*
+     * Open the SettingsDialogComponent.
+     */
+    openSettingsDialog() {
+        const matDialogRef = this.matDialog.open(SettingsDialogComponent, {
+            width: '600px',
+            height: '400px'
+        });
+        matDialogRef.componentInstance.settings = this.settingsService.settings;
+        matDialogRef.afterClosed().map(Boolean).subscribe(
+            (save: boolean) => save
+                ? this.settingsService.save()
+                : this.settingsService.load());
     }
 }
 

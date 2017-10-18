@@ -62,6 +62,7 @@ import {InsightService} from './insight.service';
 import {InsightDialogComponent} from './insight-dialog.component';
 import {InsightComponent} from './insight.component';
 import {SettingsService} from './settings.service';
+import {SettingsDialogComponent} from './settings-dialog.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -109,7 +110,8 @@ import {SettingsService} from './settings.service';
         MasterComponent,
         CoverPhotoComponent,
         InsightDialogComponent,
-        InsightComponent
+        InsightComponent,
+        SettingsDialogComponent
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -140,7 +142,8 @@ import {SettingsService} from './settings.service';
     entryComponents: [
         PostDialogComponent,
         GraphApiErrorComponent,
-        InsightDialogComponent
+        InsightDialogComponent,
+        SettingsDialogComponent
     ]
 })
 export class AppModule {}

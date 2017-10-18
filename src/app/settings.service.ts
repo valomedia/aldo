@@ -32,6 +32,7 @@ export class SettingsService {
         this.settings = new Settings(
             JSON.parse(
                 window.localStorage.getItem(this.appService.SETTINGS)));
+        console.log("Loaded settings:", this.settings);
     }
 
     /*
@@ -41,6 +42,7 @@ export class SettingsService {
         window.localStorage.setItem(
             this.appService.SETTINGS,
             JSON.stringify(this.settings));
+        console.log("Saved settings:", this.settings);
     }
 }
 

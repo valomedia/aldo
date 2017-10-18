@@ -116,9 +116,10 @@
                     matTooltip="Einstellungen"
                     matTooltipShowDelay='1500'
                     matTooltipHideDelay='1500'
-                    [matMenuTriggerFor]='settings'>
+                    (click)='openSettingsDialog()'>
                 <mat-icon>settings</mat-icon>
             </button>
+            <!--
             <mat-menu #settings='matMenu'>
                 <div mat-menu-item>
                     <mat-slide-toggle
@@ -128,6 +129,7 @@
                     </mat-slide-toggle>
                 </div>
             </mat-menu>
+            -->
         </mat-toolbar>
         <div id='displacer-target'></div>
         <ng-content select='main'></ng-content>
