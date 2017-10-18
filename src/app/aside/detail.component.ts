@@ -1,6 +1,6 @@
 import {Component, Input, forwardRef} from '@angular/core';
 import {Params} from '@angular/router';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
@@ -25,7 +25,7 @@ import {AppService} from '../app.service';
 export class DetailComponent extends AppRoutingComponent {
     constructor(
         protected postService: PostService,
-        protected mdSnackBar: MdSnackBar,
+        protected matSnackBar: MatSnackBar,
         protected appService: AppService,
         appRoutingService: AppRoutingService
     ) {
@@ -69,7 +69,7 @@ export class DetailComponent extends AppRoutingComponent {
                 .subscribe(
                     null,
                     (err: GraphApiError) =>
-                        GraphApiErrorComponent.show(this.mdSnackBar, err));
+                        GraphApiErrorComponent.show(this.matSnackBar, err));
         }
     }
     get params() {

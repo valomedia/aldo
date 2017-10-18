@@ -11,11 +11,11 @@
                 <span *ngIf='profile.fan_count'>
                     <br>
                     <span
-                            [mdTooltip]='profile.likeTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.likeTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>thumb_up</md-icon>
+                            <mat-icon>thumb_up</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{profile.fan_count}}
@@ -25,11 +25,11 @@
                 <span *ngIf='profile.talking_about_count'>
                     <br>
                     <span
-                            [mdTooltip]='profile.talkingAboutTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.talkingAboutTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>forum</md-icon>
+                            <mat-icon>forum</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{profile.talking_about_count}}
@@ -39,17 +39,17 @@
                 <span *ngIf='profile.overall_star_rating'>
                     <br>
                     <span
-                            [mdTooltip]='profile.ratingTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.ratingTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         <span class='text-primary'>
-                            <md-icon>star</md-icon>
+                            <mat-icon>star</mat-icon>
                         </span>
                         <span class='text-accent'>
                             {{profile.overall_star_rating}}
                         </span>
                         <span class='text-primary'>
-                            (<md-icon>people</md-icon>{{+profile.rating_count}})
+                            (<mat-icon>people</mat-icon>{{+profile.rating_count}})
                         </span>
                     </span>
                 </span>
@@ -59,25 +59,25 @@
                     <br>
                     <span
                             class='text-accent'
-                            [mdTooltip]='profile.ageTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.ageTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         {{profile.ageString}}
                     </span>
                     <span class='text-primary'>/</span>
                     <span
                             class='text-accent'
-                            [mdTooltip]='profile.sexTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.sexTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         {{profile.sexString}}
                     </span>
                     <span class='text-primary'>/</span>
                     <span
                             class='text-accent'
-                            [mdTooltip]='profile.locationTooltip'
-                            mdTooltipShowDelay='1500'
-                            mdTooltipHideDelay='1500'>
+                            [matTooltip]='profile.locationTooltip'
+                            matTooltipShowDelay='1500'
+                            matTooltipHideDelay='1500'>
                         {{profile.locationString}}
                     </span>
                 </span>

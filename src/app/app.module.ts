@@ -58,6 +58,9 @@ import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
 import {CoverPhotoComponent} from './main/cover-photo.component';
+import {InsightService} from './insight.service';
+import {InsightDialogComponent} from './insight-dialog.component';
+import {InsightComponent} from './insight.component';
 
 /*
  * The Module definitions for AppComponent.
@@ -103,7 +106,9 @@ import {CoverPhotoComponent} from './main/cover-photo.component';
         ProfileComponent,
         DetailComponent,
         MasterComponent,
-        CoverPhotoComponent
+        CoverPhotoComponent,
+        InsightDialogComponent,
+        InsightComponent
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -127,11 +132,13 @@ import {CoverPhotoComponent} from './main/cover-photo.component';
         CachedHttpService,
         UserService,
         GroupService,
-        EventService
+        EventService,
+        InsightService
     ],
     entryComponents: [
         PostDialogComponent,
-        GraphApiErrorComponent
+        GraphApiErrorComponent,
+        InsightDialogComponent
     ]
 })
 export class AppModule {}

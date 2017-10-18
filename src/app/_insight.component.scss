@@ -1,0 +1,13 @@
+
+/*
+ * Styling partial for the InsightComponent.
+ *
+ * This contains style directives locally applied to the InsightComponent.
+ */
+
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+

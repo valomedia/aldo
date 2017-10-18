@@ -22,22 +22,22 @@
         </span>
         <span>
             <span
-                    [mdTooltip]='post.likeTooltip'
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'>
+                    [matTooltip]='post.likeTooltip'
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'>
                 <span class='text-primary'>
-                    <md-icon>thumb_up</md-icon>
+                    <mat-icon>thumb_up</mat-icon>
                 </span>
                 <span class='text-accent'>
                     {{post.likes.summary.total_count}}
                 </span>
             </span>
             <span
-                    [mdTooltip]='post.shareTooltip'
-                    mdTooltipShowDelay='1500'
-                    mdTooltipHideDelay='1500'>
+                    [matTooltip]='post.shareTooltip'
+                    matTooltipShowDelay='1500'
+                    matTooltipHideDelay='1500'>
                 <span class='text-primary'>
-                    <md-icon>share</md-icon>
+                    <mat-icon>share</mat-icon>
                 </span>
                 <span class='text-accent'>
                     {{post.shares ? post.shares.count : 0}}
@@ -47,20 +47,20 @@
     </h2>
     <p>
         <a
-                md-raised-button
+                mat-raised-button
                 target='_blank'
                 [disabled]='!post.link'
                 [href]='post.link'>
             Anhang öffnen
-            <md-icon>attach_file</md-icon>
+            <mat-icon>attach_file</mat-icon>
         </a>
         <button
-                md-raised-button
+                mat-raised-button
                 color='primary'
                 [disabled]='profileId === post.from.id'
                 [appLink]='utilService.profileLink(post.from.id)'>
             Profil zeigen
-            <md-icon>account_box</md-icon>
+            <mat-icon>account_box</mat-icon>
         </button>
     </p>
     <blockquote>

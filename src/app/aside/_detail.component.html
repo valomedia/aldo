@@ -1,5 +1,5 @@
 <!-- HTML template for the DetailComponent -->
-<md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
+<mat-spinner *ngIf='!_loaded' color='accent'></mat-spinner>
 <div id='detail'>
     <post [profileId]='params.profile' [post]='post | async'></post>
 </div>

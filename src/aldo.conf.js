@@ -50,7 +50,7 @@ conf.fb.videoFormats = [
 conf.perms = {};
 conf.perms.manage_pages = {
     required: true,
-    desc: "Zugriff auf deine Seiten erlauben",
+    desc: "Deine Seiten verwalten"
 };
 conf.perms.publish_pages = {
     required: true,
@@ -62,6 +62,16 @@ conf.perms.pages_show_list = {
     desc: "Eine Liste mit deinen Seiten anzeigen",
     mgs: "Deine Seiten anzeigen, damit du eine auswählen kannst."
 };
+conf.perms.ads_management = {
+    required: true,
+    desc: "Deine Werbekampagnen verwalten",
+    msg: "Für dich Werbekampagnen anlegen, ändern, löschen und auswerten."
+};
+conf.perms.read_insights = {
+    required: true,
+    desc: "Deine Statistiken lesen",
+    msg: "Statistiken für deine Seiten lesen, um dir diese an zu zeigen."
+}
 
 conf.app = {};
 conf.app.baseDelay = 2000;

@@ -6,23 +6,23 @@
         (click)='file = null'>
     <span *ngIf='file'>
         <span *ngIf='error'>
-            <md-icon>error</md-icon>
+            <mat-icon>error</mat-icon>
             Die Datei ist zu groß!
         </span>
         <span *ngIf='!error'>
-            <md-icon>done</md-icon>
+            <mat-icon>done</mat-icon>
             {{file.name}}
         </span>
     </span>
     <span *ngIf='!file'>
-        <md-icon>attach_file</md-icon>
+        <mat-icon>attach_file</mat-icon>
         Wähle eine Datei aus...
     </span>
 </td-file-input>
 <div class='separator'>
     <strong>oder</strong>
 </div>
-<md-input-container>
+<mat-input-container>
     <!--
         Can you believe Angular has no way to validate an url?
 
@@ -32,6 +32,6 @@
 
         –.–
     -->
-    <input mdInput [(ngModel)]='link' placeholder="Füge einen Link ein...">
-</md-input-container>
+    <input matInput [(ngModel)]='link' placeholder="Füge einen Link ein...">
+</mat-input-container>
 

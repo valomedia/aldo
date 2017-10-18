@@ -229,6 +229,9 @@ export class FbService {
                         }
                         : {data: [T ? new T(res) : res]},
                     () => (res as GraphApiResponseType<GraphApiObject>).paging
+                        && (res as GraphApiResponseType<GraphApiObject>)
+                            .paging
+                            .cursors
                         && ((res as GraphApiResponseType<GraphApiObject>)
                             .paging as {
                                 cursors: {

@@ -1,14 +1,14 @@
 <!-- HTML template for the ProfileComponent -->
-<md-card>
-    <ng-content select='[md-card-image]'></ng-content>
-    <md-card-header
+<mat-card>
+    <ng-content select='[mat-card-image]'></ng-content>
+    <mat-card-header
             *ngIf='profile'
-            [mdTooltip]='profile.name'
-            mdTooltipShowDelay='1500'
-            mdTooltipHideDelay='1500'>
-        <md-card-title>{{profile.name}}</md-card-title>
-        <img md-card-avatar src='{{profile.picture}}'>
-    </md-card-header>
+            [matTooltip]='profile.name'
+            matTooltipShowDelay='1500'
+            matTooltipHideDelay='1500'>
+        <mat-card-title>{{profile.name}}</mat-card-title>
+        <img mat-card-avatar src='{{profile.picture}}'>
+    </mat-card-header>
     <ng-content></ng-content>
-</md-card>
+</mat-card>
 

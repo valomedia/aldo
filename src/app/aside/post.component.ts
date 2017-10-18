@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -26,7 +26,7 @@ import {AppRoutingService} from '../app-routing.service';
 })
 export class PostComponent {
     constructor(
-        protected mdSnackBar: MdSnackBar,
+        protected matSnackBar: MatSnackBar,
         protected appService: AppService,
         protected appUxService: AppUxService,
         protected utilService: UtilService,
@@ -69,7 +69,7 @@ export class PostComponent {
                 post.video.subscribe(
                     (video: Video) => this.video = video,
                     (err: GraphApiError) =>
-                        GraphApiErrorComponent.show(this.mdSnackBar, err));
+                        GraphApiErrorComponent.show(this.matSnackBar, err));
             }
         }
     }

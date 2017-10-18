@@ -8,7 +8,7 @@ import {
     Injector,
     OnInit
 } from '@angular/core';
-import {DomPortalHost} from '@angular/material';
+import {DomPortalHost} from '@angular/cdk/portal';
 
 import {DisplacerPortalDirective} from './displacer-portal.directive';
 

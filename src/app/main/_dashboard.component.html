@@ -1,12 +1,12 @@
 <!-- HTML template for the DashboardComponent -->
 <h1>Dashboard</h1>
-<md-spinner color='accent' *ngIf='!loaded'></md-spinner>
-<md-grid-list
+<mat-spinner color='accent' *ngIf='!loaded'></mat-spinner>
+<mat-grid-list
         [cols]='appUxService.cols / 3 | ceil'
         [gutterSize]='appUxService.gutterSize'
         rowHeight='2:1'>
-    <md-grid-tile *ngFor='let page of pages' [appLink]='{profile: page.id}'>
+    <mat-grid-tile *ngFor='let page of pages' [appLink]='{profile: page.id}'>
         {{page.name}}
-    </md-grid-tile>
-</md-grid-list>
+    </mat-grid-tile>
+</mat-grid-list>
 

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/publishBehavior';
 import 'rxjs/add/operator/map';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/skip';
 
 import {AppRouting} from './app-routing';
 

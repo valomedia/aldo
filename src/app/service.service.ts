@@ -15,6 +15,7 @@ import {CachedHttpService} from './cached-http.service';
 import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
+import {InsightService} from './insight.service';
 
 /*
  * Service providing services built just-in-time, to break cyclic dependencies.
@@ -37,6 +38,7 @@ export class ServiceService {
     protected _userService?: UserService;
     protected _groupService?: GroupService;
     protected _eventService?: EventService;
+    protected _insightService?: InsightService;
 
     /*
      * The UtilService.
@@ -204,6 +206,17 @@ export class ServiceService {
     get eventService(): EventService {
         return this._eventService
             || (this._eventService = this.utilService.inject(EventService));
+    }
+
+    /*
+     * The InsightService.
+     *
+     * Gets the InsightService singleton for this instance, building it, if it 
+     * does not exist yet.
+     */
+    get insightService(): InsightService {
+        return this._insightService
+            || (this._insightService = this.utilService.inject(InsightService));
     }
 }
 

@@ -3,30 +3,30 @@
     <div *ngFor='let posts of _posts' class='flex-{{cols}}-cols'>
         <a *ngFor='let post of posts' [appLink]='{post: post.id}'>
             <profile-card [profile]='post.from'>
-                <img *ngIf='post.picture' md-card-image [src]='post.picture'>
-                <md-card-content>
+                <img *ngIf='post.picture' mat-card-image [src]='post.picture'>
+                <mat-card-content>
                     <p>{{post.text}}</p>
-                </md-card-content>
-                <md-card-footer>
+                </mat-card-content>
+                <mat-card-footer>
                     <div>
                         <p>
                             <span
-                                    [mdTooltip]='post.likeTooltip'
-                                    mdTooltipShowDelay='1500'
-                                    mdTooltipHideDelay='1500'>
+                                    [matTooltip]='post.likeTooltip'
+                                    matTooltipShowDelay='1500'
+                                    matTooltipHideDelay='1500'>
                                 <span class='text-primary'>
-                                    <md-icon>thumb_up</md-icon>
+                                    <mat-icon>thumb_up</mat-icon>
                                 </span>
                                 <span class='text-accent'>
                                     {{post.likes.summary.total_count}}
                                 </span>
                             </span>
                             <span
-                                    [mdTooltip]='post.shareTooltip'
-                                    mdTooltipShowDelay='1500'
-                                    mdTooltipHideDelay='1500'>
+                                    [matTooltip]='post.shareTooltip'
+                                    matTooltipShowDelay='1500'
+                                    matTooltipHideDelay='1500'>
                                 <span class='text-primary'>
-                                    <md-icon>share</md-icon>
+                                    <mat-icon>share</mat-icon>
                                 </span>
                                 <span class='text-accent'>
                                     {{post.shares ? post.shares.count : 0}}
@@ -34,10 +34,10 @@
                             </span>
                         </p>
                     </div>
-                </md-card-footer>
+                </mat-card-footer>
             </profile-card>
         </a>
     </div>
 </div>
-<md-spinner *ngIf='!_loaded' color='accent'></md-spinner>
+<mat-spinner *ngIf='!_loaded' color='accent'></mat-spinner>
 

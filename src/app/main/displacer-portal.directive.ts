@@ -1,5 +1,5 @@
 import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
-import {TemplatePortal} from '@angular/material';
+import {TemplatePortal} from '@angular/cdk/portal';
 
 /*
  * A Directive from TemplatePortal for use by the DisplacerComponent.
@@ -9,7 +9,7 @@ import {TemplatePortal} from '@angular/material';
  */
 
 @Directive({selector: '[displacer-portal]'})
-export class DisplacerPortalDirective extends TemplatePortal {
+export class DisplacerPortalDirective extends TemplatePortal<any> {
     constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
         super(templateRef, viewContainerRef);
     }

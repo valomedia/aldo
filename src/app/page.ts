@@ -7,6 +7,7 @@ import {
     CoverPhotoType,
     DUMMY_COVER_PHOTO_TYPE
 } from './cover-photo';
+import {InsightService} from './insight.service';
 
 /*
  * Classes related to handling Facebook pages.
@@ -43,6 +44,10 @@ export class Page extends Profile {
 
     protected get postService() {
         return this.serviceService.postService;
+    }
+
+    protected get insightService() {
+        return this.serviceService.insightService;
     }
 
     /*
@@ -124,11 +129,22 @@ export class Page extends Profile {
             + (this.talking_about_count === 1 ? "redet" : "reden")
             + " über diese Seite";
     }
+
+    /*
+     * Insight for this Page.
+     */
+    get insights() {
+        // Return null, if the Page has not enough likes to get statistics from 
+        // Facebook.
+        return this.fan_count > 30
+            ? this.insightService.insights(this.id)
+            : null;
+    }
 }
 export interface Page extends PageType {}
 
 /*
- * The simplest valid page.
+ * The simplest valid PageType.
  *
  * This exists, so the PageService can use it to check which fields to request 
  * from Facebook, thus allowing adding a field to Page without changing 
