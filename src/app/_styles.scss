@@ -166,6 +166,10 @@ mat-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
+mat-tab-body, .mat-tab-body-content {
+    overflow: hidden!important;
+}
+
 mat-tab-header {
     .mat-tab-label-container {
         justify-content: center;
