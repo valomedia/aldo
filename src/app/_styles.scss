@@ -72,6 +72,10 @@ mat-card {
     .mat-card-image {
         margin: 0 -24px 16px -24px!important;
         width: calc(100% + 48px)!important;
+
+        img {
+            width: 100%;
+        }
     }
 
     .mat-card-image:first-child {
