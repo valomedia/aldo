@@ -32,7 +32,12 @@ window.onload = function() {
     };
 
     // Check if the device is supported.
-    if (window.screen.width < 400 || window.screen.height < 400) {
+    if (
+        window.screen.width < 360
+            || window.screen.height < 360
+            || window.screen.width < 480
+            && window.screen.height < 480
+    ) {
         document.getElementById('login_issue').classList.add('hidden');
         document.getElementById('fatal_error').classList.remove('hidden');
         document.getElementById('screen_too_small').classList.remove('hidden');
