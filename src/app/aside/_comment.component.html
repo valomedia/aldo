@@ -53,7 +53,7 @@
         <button
                 mat-button
                 color='primary'
-                [disabled]='(params | async).profile === _comment.from.id'
+                [disabled]='showProfileButtonDisabledStatus'
                 [appLink]='utilService.profileLink(_comment.from.id)'>
             Profil zeigen
             <mat-icon>account_box</mat-icon>

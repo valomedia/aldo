@@ -49,6 +49,7 @@
     <p>
         <a
                 mat-raised-button
+                class='button'
                 target='_blank'
                 [disabled]='!post.link'
                 [href]='post.link'>
@@ -58,7 +59,7 @@
         <button
                 mat-raised-button
                 color='primary'
-                [disabled]='profileId === post.from.id'
+                [disabled]='showProfileButtonDisabledStatus'
                 [appLink]='utilService.profileLink(post.from.id)'>
             Profil zeigen
             <mat-icon>account_box</mat-icon>

@@ -1,6 +1,6 @@
 <!-- HTML template for the PostDialogComponent -->
 <h2 mat-dialog-title>
-    <span *ngIf='page'>{{page.name}}:</span>
+    <span *ngIf='page' class='desktop-only'>{{page.name}}:</span>
     Post erstellen
 </h2>
 <mat-dialog-content>
@@ -16,7 +16,7 @@
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon>insert_link</mat-icon>
-                Link hinzufügen
+                <span class='desktop-only'>Link hinzufügen</span>
             </ng-template>
             <mat-input-container>
                 <input
@@ -28,7 +28,7 @@
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon>insert_photo</mat-icon>
-                Bild hinzufügen
+                <span class='desktop-only'>Bild hinzufügen</span>
             </ng-template>
             <file
                     [(ressource)]='photo'
@@ -39,7 +39,7 @@
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon>movie</mat-icon>
-                Video hinzufügen
+                <span class='desktop-only'>Video hinzufügen</span>
             </ng-template>
             <file
                     [(ressource)]='video'
