@@ -7,7 +7,7 @@
             {{page.name}}
             <small>
                 <span>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='page.likeTooltip'
                             matTooltipShowDelay='1500'
@@ -21,7 +21,7 @@
                     </span>
                 </span>
                 <span *ngIf='page.talking_about_count'>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='page.talkingAboutTooltip'
                             matTooltipShowDelay='1500'
@@ -35,7 +35,7 @@
                     </span>
                 </span>
                 <span *ngIf='page.overall_star_rating'>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='page.ratingTooltip'
                             matTooltipShowDelay='1500'

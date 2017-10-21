@@ -207,6 +207,7 @@ video {
 .app-toolbar-title,
 h1 > small > span,
 h1 > span,
+h2 > span,
 mat-card-footer > *,
 .separator {
     @extend .pad;
@@ -431,14 +432,14 @@ mat-card-footer > *,
 }
 
 /*
- * Everything excapt smaller portrait mode devices.
+ * Everything except smaller portrait mode devices.
  */
 @media (min-width: 480px) {
     h1 > small {
         float: right;
     }
 
-    .mobile-only, h1 br {
+    .mobile-only {
         display: none;
     }
 }

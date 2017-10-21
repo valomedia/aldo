@@ -9,7 +9,7 @@
             {{profile.name}}
             <small *ngIf='isPage'>
                 <span *ngIf='profile.fan_count'>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='profile.likeTooltip'
                             matTooltipShowDelay='1500'
@@ -23,7 +23,7 @@
                     </span>
                 </span>
                 <span *ngIf='profile.talking_about_count'>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='profile.talkingAboutTooltip'
                             matTooltipShowDelay='1500'
@@ -37,7 +37,7 @@
                     </span>
                 </span>
                 <span *ngIf='profile.overall_star_rating'>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             [matTooltip]='profile.ratingTooltip'
                             matTooltipShowDelay='1500'
@@ -56,7 +56,7 @@
             </small>
             <small *ngIf='isUser'>
                 <span>
-                    <br>
+                    <br class='mobile-only'>
                     <span
                             class='text-accent'
                             [matTooltip]='profile.ageTooltip'
