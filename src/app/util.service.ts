@@ -27,6 +27,7 @@ import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
 import {InsightService} from './insight.service';
+import {SettingsService} from './settings.service';
 
 /*
  * Service providing some useful functions, that don't belong anywhere else.
@@ -50,6 +51,7 @@ export class UtilService {
         this.groupService = this.inject(GroupService);
         this.eventService = this.inject(EventService);
         this.insightService = this.inject(InsightService);
+        this.settingsService = this.inject(SettingsService);
     }
 
     protected reflectiveInjector = ReflectiveInjector.resolveAndCreate([
@@ -85,7 +87,8 @@ export class UtilService {
         UserService,
         GroupService,
         EventService,
-        InsightService
+        InsightService,
+        SettingsService
     ]);
 
     protected appService: AppService;
@@ -103,6 +106,7 @@ export class UtilService {
     protected groupService: GroupService;
     protected eventService: EventService;
     protected insightService: InsightService;
+    protected settingsService: SettingsService;
 
     /*
      * This is madness.

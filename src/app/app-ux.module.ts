@@ -16,7 +16,8 @@ import {
     MatInputModule,
     MatTabsModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
 } from '@angular/material';
 
 import {
@@ -48,7 +49,8 @@ import {
         MatCardModule,
         CovalentStepsModule,
         CovalentFileModule,
-        MatTableModule
+        MatTableModule,
+        MatExpansionModule
     ],
     exports: [
         MatButtonModule,
@@ -69,7 +71,8 @@ import {
         MatCardModule,
         CovalentStepsModule,
         CovalentFileModule,
-        MatTableModule
+        MatTableModule,
+        MatExpansionModule
     ]
 })
 export class AppUxModule {}

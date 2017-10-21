@@ -7,12 +7,13 @@
     <mat-spinner color='accent'></mat-spinner>
 </mat-dialog-content>
 <mat-dialog-content *ngIf='loaded'>
-    <mat-tab-group dynamicHeight>
-        <mat-tab *ngFor='let insight of insights'>
-            <ng-template mat-tab-label>{{insight.description}}</ng-template>
-            <insight [insight]='insight'></insight>
-        </mat-tab>
-    </mat-tab-group>
+    <mat-expansion-panel *ngFor='let insight of insights'>
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{insight.description}}</mat-panel-title>
+            <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+        <insight [insight]='insight'></insight>
+    </mat-expansion-panel>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button

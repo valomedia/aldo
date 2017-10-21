@@ -1,0 +1,27 @@
+<!-- HTML template for the SettingsDialogComponent -->
+<h2 mat-dialog-title>
+    Einstellungen
+</h2>
+<mat-dialog-content *ngIf='settings'>
+    <h3>Benutzeroberfläche</h3>
+    <mat-slide-toggle [(ngModel)]='settings.ui.dark'>
+        <mat-icon>invert_colors</mat-icon>
+        Nachtmodus
+    </mat-slide-toggle>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button
+            mat-button
+            color='primary'
+            [mat-dialog-close]='settings'>
+        Bestätigen
+        <mat-icon>done</mat-icon>
+    </button>
+    <button
+            mat-button
+            [mat-dialog-close]='undefined'>
+        Abbrechen
+        <mat-icon>cancel</mat-icon>
+    </button>
+</mat-dialog-actions>
+

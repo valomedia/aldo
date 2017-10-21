@@ -16,6 +16,7 @@ import {UserService} from './user.service';
 import {GroupService} from './group.service';
 import {EventService} from './event.service';
 import {InsightService} from './insight.service';
+import {SettingsService} from './settings.service';
 
 /*
  * Service providing services built just-in-time, to break cyclic dependencies.
@@ -39,6 +40,7 @@ export class ServiceService {
     protected _groupService?: GroupService;
     protected _eventService?: EventService;
     protected _insightService?: InsightService;
+    protected _settingsService?: SettingsService;
 
     /*
      * The UtilService.
@@ -217,6 +219,17 @@ export class ServiceService {
     get insightService(): InsightService {
         return this._insightService
             || (this._insightService = this.utilService.inject(InsightService));
+    }
+
+    /*
+     * The SettingsService.
+     *
+     * Gets the SettingsService singleton for this instance, building it, if it 
+     * does not exist yet.
+     */
+    get settingsService(): SettingsService {
+        return this._settingsService
+            || (this._settingsService = this.utilService.inject(SettingsService));
     }
 }
 

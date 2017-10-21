@@ -118,6 +118,10 @@ mat-dialog-container > * > * {
 mat-dialog-container > * > mat-dialog-content {
     flex-grow: 1;
     flex-shrink: 1;
+    margin-top: -16px!important;
+    margin-bottom: -16px!important;
+    padding-top: 16px!important;
+    padding-bottom: 16px!important;
 }
 
 mat-icon {
@@ -445,6 +449,10 @@ mat-card-footer > *,
 @media (max-width: 479px) {
     #nav {
         width: 80%;
+    }
+
+    .desktop-only {
+        display: none;
     }
 }
 

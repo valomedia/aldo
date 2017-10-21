@@ -23,5 +23,6 @@ export class AppService {
     readonly SIDE = 'side';
     readonly OVER = 'over';
     readonly PUSH = 'push';
+    readonly SETTINGS = 'settings';
 }
 

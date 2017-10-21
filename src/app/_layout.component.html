@@ -1,5 +1,5 @@
 <!-- HTML template for the LayoutComponent -->
-<div [class.dark]='dark'>
+<div [class.dark]='settingsService.settings.ui.dark'>
     <mat-sidenav-container id='main'>
         <mat-sidenav #nav id='nav' mode='over'>
             <mat-toolbar>
@@ -116,17 +116,20 @@
                     matTooltip="Einstellungen"
                     matTooltipShowDelay='1500'
                     matTooltipHideDelay='1500'
-                    [matMenuTriggerFor]='settings'>
+                    (click)='openSettingsDialog()'>
                 <mat-icon>settings</mat-icon>
             </button>
+            <!--
             <mat-menu #settings='matMenu'>
                 <div mat-menu-item>
-                    <mat-slide-toggle [(ngModel)]='dark'>
+                    <mat-slide-toggle
+                            [(ngModel)]='settingsService.settings.ui.dark'>
                         Dark mode
                         <mat-icon>invert_colors</mat-icon>
                     </mat-slide-toggle>
                 </div>
             </mat-menu>
+            -->
         </mat-toolbar>
         <div id='displacer-target'></div>
         <ng-content select='main'></ng-content>
