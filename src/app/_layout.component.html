@@ -70,66 +70,102 @@
             </button>
             <span class='app-toolbar-title'>{{title.getTitle()}}</span>
             <span class='app-toolbar-filler'></span>
-            <button
-                    *ngIf='params.profile'
-                    mat-button
-                    class='app-icon-button'
-                    matTooltip="Neu laden"
-                    matTooltipShowDelay='1500'
-                    matTooltipHideDelay='1500'
-                    (click)='appRoutingService.refresh([appService.PROFILE])'>
-                <mat-icon>refresh</mat-icon>
-            </button>
-            <button
-                    *ngIf='page && page.insights'
-                    mat-button
-                    class='app-icon-button'
-                    matTooltip="Statistiken"
-                    matTooltipShowDelay='1500'
-                    matTooltipHideDelay='1500'
-                    (click)='openInsightDialog()'>
-                <mat-icon>poll</mat-icon>
-            </button>
-            <button
-                    *ngIf='params.profile'
-                    mat-button
-                    class='app-icon-button'
-                    matTooltip="Dashboard"
-                    matTooltipShowDelay='1500'
-                    matTooltipHideDelay='1500'
-                    [appLink]='{master: null}'>
-                <mat-icon>dashboard</mat-icon>
-            </button>
-            <a
-                    mat-button
-                    class='button app-icon-button'
-                    matTooltip="Facebook"
-                    matTooltipShowDelay='1500'
-                    matTooltipHideDelay='1500'
-                    href='//facebook.com/{{params.profile}}'
-                    target='_blank'>
-                <mat-icon>open_in_browser</mat-icon>
-            </a>
-            <button
-                    mat-button
-                    class='app-icon-button'
-                    matTooltip="Einstellungen"
-                    matTooltipShowDelay='1500'
-                    matTooltipHideDelay='1500'
-                    (click)='openSettingsDialog()'>
-                <mat-icon>settings</mat-icon>
-            </button>
-            <!--
-            <mat-menu #settings='matMenu'>
-                <div mat-menu-item>
-                    <mat-slide-toggle
-                            [(ngModel)]='settingsService.settings.ui.dark'>
-                        Dark mode
-                        <mat-icon>invert_colors</mat-icon>
-                    </mat-slide-toggle>
-                </div>
+            <span class='desktop-only'>
+                <button
+                        *ngIf='params.profile'
+                        mat-button
+                        class='app-icon-button'
+                        matTooltip="Neu laden"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        (click)='refresh()'>
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button
+                        *ngIf='page && page.insights'
+                        mat-button
+                        class='app-icon-button'
+                        matTooltip="Statistiken"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        (click)='openInsightDialog()'>
+                    <mat-icon>poll</mat-icon>
+                </button>
+                <button
+                        *ngIf='params.profile'
+                        mat-button
+                        class='app-icon-button'
+                        matTooltip="Dashboard"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        [appLink]='{master: null}'>
+                    <mat-icon>dashboard</mat-icon>
+                </button>
+                <a
+                        mat-button
+                        class='button app-icon-button'
+                        matTooltip="Facebook"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        href='//facebook.com/{{params.profile}}'
+                        target='_blank'>
+                    <mat-icon>open_in_browser</mat-icon>
+                </a>
+                <button
+                        mat-button
+                        class='app-icon-button'
+                        matTooltip="Einstellungen"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        (click)='openSettingsDialog()'>
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </span>
+            <span class='mobile-only'>
+                <button
+                        mat-button
+                        class='app-icon-button'
+                        matTooltip="Menü"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        [matMenuTriggerFor]='menu'>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </span>
+            <mat-menu #menu='matMenu'>
+                <button
+                        *ngIf='params.profile'
+                        mat-menu-item
+                        (click)='refresh()'>
+                    <mat-icon>refresh</mat-icon>
+                    Neu laden
+                </button>
+                <button
+                        *ngIf='page && page.insights'
+                        mat-menu-item
+                        (click)='openInsightDialog()'>
+                    <mat-icon>poll</mat-icon>
+                    Statistiken
+                </button>
+                <button
+                        *ngIf='params.profile'
+                        mat-menu-item
+                        [appLink]='{master: null}'>
+                    <mat-icon>dashboard</mat-icon>
+                    Dashboard
+                </button>
+                <a
+                        mat-menu-item
+                        href='//facebook.com/{{params.profile}}'
+                        target='_blank'>
+                    <mat-icon>open_in_browser</mat-icon>
+                    Facebook
+                </a>
+                <button mat-menu-item (click)='openSettingsDialog()'>
+                    <mat-icon>settings</mat-icon>
+                    Einstellungen
+                </button>
             </mat-menu>
-            -->
         </mat-toolbar>
         <div id='displacer-target'></div>
         <ng-content select='main'></ng-content>

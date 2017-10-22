@@ -1,6 +1,6 @@
 <!-- HTML template for the InsightDialogComponent -->
 <h2 mat-dialog-title>
-    <span *ngIf='page'>{{page.name}}:</span>
+    <span *ngIf='page' class='desktop-only'>{{page.name}}:</span>
     Statistiken
 </h2>
 <mat-dialog-content *ngIf='!loaded'>

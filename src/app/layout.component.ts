@@ -95,7 +95,7 @@ export class LayoutComponent implements OnInit {
     openInsightDialog() {
         const matDialogRef = this.matDialog.open(InsightDialogComponent, {
             width: '600px',
-            height: '400px'
+            height: '800px'
         });
         matDialogRef.componentInstance.page = this.page;
         matDialogRef.afterClosed().filter(Boolean).subscribe(
@@ -116,6 +116,13 @@ export class LayoutComponent implements OnInit {
             (save: boolean) => save
                 ? this.settingsService.save()
                 : this.settingsService.load());
+    }
+
+    /*
+     * Refresh the contents.
+     */
+    refresh() {
+        this.appRoutingService.refresh([this.appService.PROFILE]);
     }
 }
 

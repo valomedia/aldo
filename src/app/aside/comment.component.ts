@@ -1,4 +1,5 @@
 import {Component, Input, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Params} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
@@ -10,6 +11,8 @@ import {Comment} from '../comment';
 import {Video} from '../video';
 import {UtilService} from '../util.service';
 import {AppRoutingService} from '../app-routing.service';
+import {AppService} from '../app.service';
+import {AppUxService} from '../app-ux.service';
 
 /*
  * The Component showing the list of pages.
@@ -24,9 +27,14 @@ export class CommentComponent {
     constructor(
         protected matSnackBar: MatSnackBar,
         protected utilService: UtilService,
-        protected appRoutingService: AppRoutingService) {}
+        protected appRoutingService: AppRoutingService,
+        protected appService: AppService,
+        protected appUxService: AppUxService
+    ) {
+        this.appRoutingService.events.subscribe(params => this.params = params);
+    }
 
-    protected params = this.appRoutingService.events;
+    protected params?: Params;
     protected _loaded = false;
 
     /*
@@ -75,6 +83,14 @@ export class CommentComponent {
     }
     get comment() {
         return this._comment;
+    }
+
+    /*
+     * Whether to disable the button to show the profile.
+     */
+    get showProfileButtonDisabledStatus() {
+        return this.params[this.appService.PROFILE] === this.comment.from.id
+            && this.appUxService.asideMode === 'side';
     }
 }
 

@@ -2,11 +2,10 @@
 <profile-card [profile]='_comment.from'>
     <div *ngIf='_comment.attachment' mat-card-image>
         <a *ngIf='!video' [href]='_comment.attachment.url' target='_blank'>
-            <img mat-card-image [src]='_comment.attachment.media.image.src'>
+            <img [src]='_comment.attachment.media.image.src'>
         </a>
         <video
                 *ngIf='video'
-                mat-card-image
                 controls
                 preload='metadata'
                 [poster]='_comment.attachment.media.image.src'>
@@ -54,7 +53,7 @@
         <button
                 mat-button
                 color='primary'
-                [disabled]='(params | async).profile === _comment.from.id'
+                [disabled]='showProfileButtonDisabledStatus'
                 [appLink]='utilService.profileLink(_comment.from.id)'>
             Profil zeigen
             <mat-icon>account_box</mat-icon>

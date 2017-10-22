@@ -76,5 +76,13 @@ export class PostComponent {
     get post() {
         return this._post;
     }
+
+    /*
+     * Whether to disable the button to show the profile.
+     */
+    get showProfileButtonDisabledStatus() {
+        return this.profileId === this.post.from.id
+            && this.appUxService.asideMode === 'side';
+    }
 }
 

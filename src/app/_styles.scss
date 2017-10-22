@@ -40,8 +40,6 @@ body {
 }
 
 button, .button {
-    @extend .truncate;
-
     margin: 6px 8px!important;
     padding: 0 8px!important;
 }
@@ -66,12 +64,16 @@ insight {
     }
 }
 
-mat-card {
+mat-card.mat-card {
     padding: 24px!important;
 
     .mat-card-image {
         margin: 0 -24px 16px -24px!important;
         width: calc(100% + 48px)!important;
+
+        img {
+            width: 100%;
+        }
     }
 
     .mat-card-image:first-child {
@@ -79,72 +81,69 @@ mat-card {
     }
 }
 
-mat-card-content p {
+mat-card-content.mat-card-content p {
     text-overflow: clip;
 }
 
-mat-card-footer {
+mat-card-footer.mat-card-footer {
     display: flex!important;
     justify-content: flex-end;
 }
 
-mat-card-footer > * {
+mat-card-footer.mat-card-footer > * {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
 
-mat-dialog-actions, .app-snackbar-actions {
+mat-dialog-actions.mat-dialog-actions, .app-snackbar-actions {
     padding: 12px 0;
     display: flex;
     flex-direction: row-reverse;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
 }
 
-mat-dialog-container {
+mat-dialog-container.mat-dialog-container {
     margin: auto;
+    max-width: calc(100vw - 32px);
 }
 
-mat-dialog-container > * {
+mat-dialog-container.mat-dialog-container > * {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-mat-dialog-container > * > * {
+mat-dialog-container.mat-dialog-container > * > * {
     flex-shrink: 0;
 }
 
-mat-dialog-container > * > mat-dialog-content {
+mat-dialog-container.mat-dialog-container > * > mat-dialog-content {
     flex-grow: 1;
     flex-shrink: 1;
+    max-height: none;
     margin-top: -16px!important;
     margin-bottom: -16px!important;
     padding-top: 16px!important;
     padding-bottom: 16px!important;
 }
 
-mat-icon {
+mat-icon.mat-icon {
     vertical-align: middle;
 }
 
-mat-input-container {
+mat-input-container.mat-input-container {
     width: 100%!important;
 }
 
-mat-sidenav-container > * {
+mat-sidenav-container.mat-sidenav-container > * {
     display: flex!important;
     flex-direction: column;
     height: 100vh!important;
 }
 
-mat-sidenav-container .mat-sidenav-content {
+mat-sidenav-container.mat-sidenav-container .mat-sidenav-content {
     overflow: hidden;
-}
-
-nav, aside, main {
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 mat-spinner {
@@ -162,6 +161,10 @@ mat-grid-tile:hover {
     a { color: $primary-light-fg; }
 }
 
+mat-tab-body, .mat-tab-body-content {
+    overflow: hidden!important;
+}
+
 mat-tab-header {
     .mat-tab-label-container {
         justify-content: center;
@@ -175,6 +178,11 @@ mat-tab-header {
 mat-toolbar {
     @include shade($primary-palette, $primary-medium-shade);
     button, .button { color: white!important; }
+}
+
+nav, aside, main {
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 profile .mat-card-header-text > mat-card-title {
@@ -251,6 +259,7 @@ mat-card-footer > *,
   padding: 0;
   text-align: left;
   text-decoration: none;
+  display: inline!important;
 }
 
 .app-toolbar-filler {
@@ -259,6 +268,10 @@ mat-card-footer > *,
 
 .clear, page div {
     clear: both;
+}
+
+.cdk-overlay-pane {
+    max-height: calc(100vh - 48px);
 }
 
 .flex {
@@ -307,6 +320,11 @@ mat-card-footer > *,
 
 .invisible {
     opacity: 0;
+}
+
+.mat-menu-content > button {
+    margin: 0!important;
+    padding: 0 16px!important;
 }
 
 .pad {
@@ -431,14 +449,14 @@ mat-card-footer > *,
 }
 
 /*
- * Everything excapt smaller portrait mode devices.
+ * Everything except smaller portrait mode devices.
  */
 @media (min-width: 480px) {
     h1 > small {
         float: right;
     }
 
-    .mobile-only, h1 br {
+    .mobile-only {
         display: none;
     }
 }
