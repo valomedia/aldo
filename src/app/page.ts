@@ -80,6 +80,10 @@ export class Page extends Profile {
      * Tooltip showing detail on the page likes.
      */
     get likeTooltip() {
+        // https://developers.facebook.com/docs/graph-api/reference/page/likes/ 
+        // claims that likes should contain Users that like the Page, but it 
+        // turns out it contains Pages that the Page likes instead.
+        /*
         if (this.likes) {
             return this.likes
                     .data
@@ -103,6 +107,11 @@ export class Page extends Profile {
                     : "Einem Nutzer")
                 + " gefällt diese Seite";
         }
+        */
+
+        return this.fan_count === 1
+            ? "Einem Nutzer gefällt diese Seite"
+            : '' + this.fan_count + " Nutzern gefällt diese Seite";
     }
 
     /*

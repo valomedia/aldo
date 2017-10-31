@@ -66,17 +66,28 @@
         </button>
     </p>
     <blockquote>
-        <p>{{post.text}}</p>
+        <p>
+            <span>
+                <pre>{{post.text}}</pre>
+            </span>
+        </p>
     </blockquote>
     <blockquote *ngIf='post.link' class='accent'>
         <p>
             <a [href]='post.link' target='_blank'>
-                {{post.caption || post.link}}
+                <span>
+                    <pre>{{post.caption || post.link}}</pre>
+                </span>
             </a>
         </p>
-        <p *ngIf='post.description'>{{post.description}}</p>
+        <p *ngIf='post.description'>
+            <span>
+                <pre>{{post.description}}</pre>
+            </span>
+        </p>
     </blockquote>
     <endless-list #commentList [input]='comments'>
         <comments [comments]='commentList.output'></comments>
     </endless-list>
 </div>
+

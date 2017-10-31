@@ -16,7 +16,9 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-toolbar>
-            <div (click)='appUxService.navMode === OVER && nav.close()'>
+            <div
+                    class='app-content-wrapper'
+                    (click)='appUxService.navMode === OVER && nav.close()'>
                 <ng-content select='nav'></ng-content>
             </div>
         </mat-sidenav>

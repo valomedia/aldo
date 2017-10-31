@@ -16,3 +16,16 @@
     flex-shrink: 1;
 }
 
+/*
+ * Handsets in portrait mode, small handsets in landscape mode.
+ */
+@media (max-width: 599px) {
+    :host {
+        flex-direction: column;
+    }
+
+    td-file-input {
+        width: 100%
+    }
+}
+

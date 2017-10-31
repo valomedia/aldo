@@ -13,7 +13,11 @@
         </video>
     </div>
     <mat-card-content *ngIf='_comment.message'>
-        <p>{{_comment.message}}</p>
+        <p>
+            <span>
+                <pre>{{_comment.message}}</pre>
+            </span>
+        </p>
     </mat-card-content>
     <mat-card-content *ngIf='comments.length'>
         <blockquote *ngFor='let comment of comments'>

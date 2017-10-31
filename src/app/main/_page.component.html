@@ -56,7 +56,11 @@
     </div>
     <div>
         <p *ngIf='page.description'>
-            <em>{{page.description}}</em>
+            <em>
+                <span>
+                    <pre>{{page.description}}</pre>
+                </span>
+            </em>
         </p>
     </div>
     <displacer>
