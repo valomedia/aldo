@@ -45,6 +45,34 @@ export class LayoutComponent implements OnInit {
     protected _params: Params = {};
 
     /*
+     * Shorthand for appService.SIDE.
+     *
+     * This is used in the template, because it is shorter.
+     */
+    protected SIDE = this.appService.SIDE;
+
+    /*
+     * Shorthand for appService.PUSH.
+     *
+     * This is used in the template, because it is shorter.
+     */
+    protected PUSH = this.appService.PUSH;
+
+    /*
+     * Shorthand for appService.OVER.
+     *
+     * This is used in the template, because it is shorter.
+     */
+    protected OVER = this.appService.OVER;
+
+    /*
+     * Shorthand for appService.POST.
+     *
+     * This is used in the template, because it is shorter.
+     */
+    protected POST = this.appService.POST;
+
+    /*
      * The route parameters.
      */
     get params() {
@@ -79,7 +107,11 @@ export class LayoutComponent implements OnInit {
     @ViewChild('aside')
     aside: MatSidenav;
 
+    @ViewChild('nav')
+    nav: MatSidenav;
+
     ngOnInit() {
+        if (this.appUxService.navMode === this.SIDE) { this.nav.open(); }
         this.appRoutingService
             .events
             .filter(Boolean)

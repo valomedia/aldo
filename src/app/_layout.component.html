@@ -1,11 +1,22 @@
 <!-- HTML template for the LayoutComponent -->
 <div [class.dark]='settingsService.settings.ui.dark'>
     <mat-sidenav-container id='main'>
-        <mat-sidenav #nav id='nav' mode='over'>
+        <mat-sidenav #nav id='nav' [mode]='appUxService.navMode'>
             <mat-toolbar>
                 <span class='app-toolbar-title'>Seiten</span>
+                <span class='app-toolbar-filler'></span>
+                <button
+                        *ngIf='appUxService.navMode === SIDE'
+                        mat-button
+                        class='app-icon-button close-btn'
+                        matTooltip="Schließen"
+                        matTooltipShowDelay='1500'
+                        matTooltipHideDelay='1500'
+                        (click)='nav.close()'>
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-toolbar>
-            <div (click)='nav.close()'>
+            <div (click)='appUxService.navMode === OVER && nav.close()'>
                 <ng-content select='nav'></ng-content>
             </div>
         </mat-sidenav>
@@ -17,6 +28,7 @@
                 (close)='appRoutingService.params = {post: null}'>
             <mat-toolbar>
                 <button
+                        *ngIf='appUxService.asideMode === PUSH'
                         mat-button
                         class='app-icon-button back-btn'
                         matTooltip="Zurück"
@@ -47,6 +59,7 @@
                     <mat-icon>open_in_browser</mat-icon>
                 </a>
                 <button
+                        *ngIf='appUxService.asideMode === SIDE'
                         mat-button
                         class='app-icon-button close-btn'
                         matTooltip="Schließen"

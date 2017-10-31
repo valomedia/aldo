@@ -7,16 +7,21 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AppUxService {
     /*
-     * Calculates whether the aside will show as sidebar.
+     * Calculates whether the AsideComponent will show as sidebar.
      */
-    get asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
+    get asideMode() { return window.innerWidth >= 1584 ? 'side' : 'push'; }
+
+    /*
+     * Calculates whether the NavComponent will show as sidebar.
+     */
+    get navMode() { return window.innerWidth >= 1904 ? 'side' : 'over' }
 
     /*
      * Calculates the number of columns in the layout.
      */
     get cols() {
         if (window.innerWidth < 600) { return 4; }
-        if (window.innerWidth < 840) { return 8; }
+        if (window.innerWidth < 960) { return 8; }
         return 12;
     }
 
