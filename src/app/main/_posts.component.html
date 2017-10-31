@@ -13,7 +13,20 @@
                             <span
                                     [matTooltip]='post.likeTooltip'
                                     matTooltipShowDelay='1500'
-                                    matTooltipHideDelay='1500'>
+                                    matTooltipHideDelay='1500'
+                                    class="push-10-r">
+                                <span class='text-primary'>
+                                    <mat-icon>schedule</mat-icon>
+                                </span>
+                                <span class='text-accent'>
+                                    {{post.created_time | date:'dd.MM.yyyy'}}
+                                </span>
+                            </span>
+                            <span
+                                    [matTooltip]='post.likeTooltip'
+                                    matTooltipShowDelay='1500'
+                                    matTooltipHideDelay='1500'
+                                    class="push-10-r">
                                 <span class='text-primary'>
                                     <mat-icon>thumb_up</mat-icon>
                                 </span>
