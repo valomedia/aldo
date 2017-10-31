@@ -21,7 +21,7 @@ export class AppUxService {
      */
     get cols() {
         if (window.innerWidth < 600) { return 4; }
-        if (window.innerWidth < 840) { return 8; }
+        if (window.innerWidth < 960) { return 8; }
         return 12;
     }
 
