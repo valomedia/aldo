@@ -111,6 +111,7 @@ export class LayoutComponent implements OnInit {
     nav: MatSidenav;
 
     ngOnInit() {
+        if (this.appUxService.navMode === this.SIDE) { this.nav.open(); }
         this.appRoutingService
             .events
             .filter(Boolean)
