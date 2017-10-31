@@ -9,7 +9,7 @@ export class AppUxService {
     /*
      * Calculates whether the aside will show as sidebar.
      */
-    get asideMode() { return window.innerWidth >= 1264 ? 'side' : 'push'; }
+    get asideMode() { return window.innerWidth >= 1584 ? 'side' : 'push'; }
 
     /*
      * Calculates the number of columns in the layout.
