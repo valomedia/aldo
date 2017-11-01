@@ -125,3 +125,10 @@ jspm_packages
 #
 !src/script.js
 
+###########################
+# Local build environment #
+###########################
+
+# Build scripts.
+#
+*.sh
