@@ -5,3 +5,11 @@
  * This contains style directives locally applied to the PostsComponent.
  */
 
+:host[loaded='true'] > div > div.flex {
+    flex-direction: column-reverse;
+}
+
+:host > div > div.flex {
+    flex-direction: column;
+}
+

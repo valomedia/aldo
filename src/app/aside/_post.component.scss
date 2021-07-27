@@ -21,7 +21,7 @@ h2 > *:first-child {
     margin-right: 8px;
 }
 
-h2 > *:not(*:first-child):not(*:last-child) {
+h2 > *:not(:first-child):not(:last-child) {
     flex-grow: 1;
 }
 

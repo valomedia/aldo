@@ -1,6 +1,6 @@
 <!-- HTML template for the PostsComponent -->
 <div class='flex'>
-    <div *ngFor='let posts of _posts' class='flex-{{cols}}-cols'>
+    <div *ngFor='let posts of _posts' class='flex flex-{{cols}}-cols'>
         <a *ngFor='let post of posts' [appLink]='{post: post.id}'>
             <profile-card [profile]='post.from'>
                 <img *ngIf='post.picture' mat-card-image [src]='post.picture'>

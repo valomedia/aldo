@@ -86,7 +86,11 @@
     </div>
     <div>
         <p *ngIf='profile.description'>
-            <em>{{profile.description}}</em>
+            <em>
+                <span>
+                    <pre>{{profile.description}}</pre>
+                </span>
+            </em>
         </p>
     </div>
     <div>
