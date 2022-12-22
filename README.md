@@ -2,6 +2,8 @@
 
 Collecting faces for fun and profit!
 
+**This Project is abandoned!**
+
 Aldo is the development base for a new yet-to-be named project by valo.media UG 
 (haftungsbeschränkt), whose purpose is to aid media agencies with the management 
 of their pages and advertising campaigns on Facebook.
